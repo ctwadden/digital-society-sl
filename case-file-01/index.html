@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IB Digital Society — Case File 01: Who Owns Your Face?</title>
+<style>
+:root{
+  --bg:#07131f;--navy:#0b2234;--panel:#102b40;--paper:#f2f6f9;--ink:#10212e;
+  --muted:#607382;--cyan:#62ddea;--gold:#f4ca52;--purple:#9a73d9;--green:#59c894;
+  --red:#e96f70;--line:#cad5de;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(180deg,var(--bg) 0 590px,var(--paper) 590px);font:16.5px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:white}
+header{min-height:590px;padding:54px 6vw 30px;position:relative;overflow:hidden;background:
+radial-gradient(circle at 82% 25%,rgba(98,221,234,.17),transparent 24%),
+linear-gradient(135deg,#06111b,#0c263a)}
+.grid{position:absolute;inset:0;opacity:.13;background-image:linear-gradient(#ffffff22 1px,transparent 1px),linear-gradient(90deg,#ffffff22 1px,transparent 1px);background-size:52px 52px}
+.hero{max-width:1220px;margin:auto;position:relative;z-index:2;display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
+.kicker{color:var(--gold);font-weight:950;letter-spacing:.16em;text-transform:uppercase;font-size:.8rem}
+h1{font-size:clamp(3.8rem,9vw,7.5rem);line-height:.88;letter-spacing:-.065em;margin:.25rem 0 1rem}
+h1 span{color:var(--cyan)}
+.lede{max-width:820px;color:#c9d8e3;font-size:1.13rem}
+.facewrap{height:370px;position:relative;display:grid;place-items:center}
+.face{width:250px;height:250px;border:4px solid var(--cyan);border-radius:50%;position:relative;box-shadow:0 0 50px #62ddea2a}
+.face:before,.face:after{content:"";position:absolute;left:50%;transform:translateX(-50%);border:4px solid #e9f3f8;border-color:#e9f3f8 transparent transparent transparent;border-radius:50%}
+.face:before{top:64px;width:115px;height:90px}.face:after{top:130px;width:92px;height:84px}
+.scan{position:absolute;left:25px;right:25px;top:50%;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);box-shadow:0 0 18px var(--gold)}
+.corner{position:absolute;width:68px;height:68px;border-color:var(--gold);border-style:solid}
+.c1{left:12px;top:16px;border-width:5px 0 0 5px}.c2{right:12px;top:16px;border-width:5px 5px 0 0}
+.c3{left:12px;bottom:16px;border-width:0 0 5px 5px}.c4{right:12px;bottom:16px;border-width:0 5px 5px 0}
+nav{position:sticky;top:0;z-index:20;background:#081725ee;backdrop-filter:blur(9px);border-bottom:1px solid #224157;padding:10px 5vw;display:flex;gap:15px;flex-wrap:wrap}
+nav a{color:#dce8ef;text-decoration:none;font-weight:850;font-size:.9rem}
+main{max-width:1180px;margin:auto;padding:30px 22px 80px;color:var(--ink)}
+section{margin:24px 0 42px}
+.card{background:white;border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 12px 32px rgba(20,45,63,.08)}
+.card.dark{background:linear-gradient(145deg,#0c2234,#11344c);color:white;border-color:#23506b}
+h2{font-size:2.05rem;letter-spacing:-.035em;margin:.2rem 0 .8rem}
+h3{font-size:1.25rem;margin:.1rem 0 .55rem}
+.route{display:grid;grid-template-columns:repeat(6,1fr);gap:9px}
+.route div{background:white;border:1px solid var(--line);border-radius:15px;padding:14px;min-height:130px}
+.route b{display:block;color:#0c6681;font-size:1.55rem}
+.route small{color:var(--muted)}
+.sources{display:grid;grid-template-columns:1.25fr .75fr .75fr;gap:13px}
+.source{background:white;border:1px solid var(--line);border-radius:17px;padding:18px;display:flex;flex-direction:column;border-top:6px solid var(--cyan)}
+.source.primary{border-top-color:var(--gold)}
+.source .tag{font-size:.74rem;font-weight:950;letter-spacing:.08em;text-transform:uppercase;color:#0b6a84}
+.source p{color:#536878}
+.source a,.button{display:inline-block;margin-top:auto;background:#0b2639;color:white;text-decoration:none;padding:10px 12px;border-radius:9px;font-weight:900;text-align:center}
+.challenge{background:linear-gradient(135deg,#fff6cf,#fffaf0);border:1px solid #e2ca74;border-left:6px solid var(--gold);border-radius:16px;padding:17px}
+.noanswer{background:#e9f7fa;border:1px dashed #5bbccc;border-radius:15px;padding:15px;color:#143341}
+.promptgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.prompt{background:white;border:1px solid var(--line);border-radius:16px;padding:17px}
+.prompt strong{color:#0b6b83}
+.example{background:#f5f0ff;border-left:5px solid var(--purple);border-radius:12px;padding:13px 15px}
+.concepts{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.concept{color:white;border-radius:20px;padding:22px}
+.power{background:linear-gradient(135deg,#3a2b65,#75529f)}.ethics{background:linear-gradient(135deg,#0d5c65,#168b84)}
+.concept ul{padding-left:20px}
+.resource{background:#ffffff16;border:1px solid #ffffff2c;border-radius:12px;padding:12px;margin-top:13px}
+.resource a{color:white;font-weight:900}
+.command{background:linear-gradient(135deg,#11263a,#173c59);color:white;border-radius:20px;padding:22px}
+.command .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+.command .steps div{background:#ffffff0e;border:1px solid #ffffff24;border-radius:12px;padding:12px}
+.question{background:linear-gradient(135deg,#0a2132,#12344d);color:white;border-radius:20px;padding:24px}
+.question blockquote{font-size:1.32rem;line-height:1.35;margin:15px 0;border-left:5px solid var(--gold);padding-left:16px}
+.rubric{width:100%;border-collapse:collapse;background:white}
+.rubric td,.rubric th{border:1px solid var(--line);padding:10px;vertical-align:top}.rubric th{background:#0d2b41;color:white}
+.rubric td:first-child{font-weight:950;width:82px;text-align:center}.r78{background:#e7f7ef}.r56{background:#fff6d7}.r34{background:#fbead8}.r12{background:#f8dfdf}
+footer{background:#071521;color:#a9bac8;padding:24px;text-align:center}
+@media(max-width:900px){.hero,.sources,.concepts{grid-template-columns:1fr}.route{grid-template-columns:repeat(3,1fr)}.command .steps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.route,.promptgrid,.command .steps{grid-template-columns:1fr}nav{position:relative}}
+</style>
+</head>
+<body>
+<header>
+<div class="grid"></div>
+<div class="hero">
+<div>
+<div class="kicker">IB Digital Society · Operation Get a 7 · Case File 01</div>
+<h1>WHO OWNS<br><span>YOUR FACE?</span></h1>
+<p class="lede">A real-world inquiry into facial recognition, privacy, policing, <strong>Power</strong> and <strong>Values & Ethics</strong>. This page gives you the case and the inquiry tools — <strong>not the answers</strong>.</p>
+</div>
+<div class="facewrap">
+<div class="corner c1"></div><div class="corner c2"></div><div class="corner c3"></div><div class="corner c4"></div>
+<div class="face"><div class="scan"></div></div>
+</div>
+</div>
+</header>
+
+<nav>
+<a href="#route">Route</a>
+<a href="#case">Articles</a>
+<a href="#command">Command term</a>
+<a href="#tech">Technology research</a>
+<a href="#stake">Stakeholders</a>
+<a href="#concepts">Concepts</a>
+<a href="#write">8-mark task</a>
+</nav>
+
+<main>
+
+<section id="route">
+<div class="card dark">
+<h2>What are you being tested on?</h2>
+<p>Can you move from a real case → research → stakeholder perspectives → concepts → evidence → a defended judgement?</p>
+</div>
+<div class="route">
+<div><b>01</b><strong>Read</strong><br><small>0–6 min<br>Understand the case</small></div>
+<div><b>02</b><strong>Decode command</strong><br><small>6–10 min<br>What does “to what extent” demand?</small></div>
+<div><b>03</b><strong>Research tech</strong><br><small>10–18 min<br>You find out how it works</small></div>
+<div><b>04</b><strong>Stakeholders + concepts</strong><br><small>18–30 min<br>Who? Power? Ethics?</small></div>
+<div><b>05</b><strong>Plan + write</strong><br><small>30–46 min<br>8-mark response</small></div>
+<div><b>06</b><strong>Self-audit</strong><br><small>46–50 min<br>Band + next target</small></div>
+</div>
+</section>
+
+<section id="case">
+<h2>Read the real-world case</h2>
+<div class="sources">
+<article class="source primary">
+<div class="tag">MAIN ARTICLE · FEBRUARY 19, 2026</div>
+<h3>Clearview AI loses B.C. appeal over facial-recognition privacy findings</h3>
+<p>Read this first. Identify the disagreement, the court decision, and one detail that could become evidence in your final response.</p>
+<a href="https://halifax.citynews.ca/2026/02/19/clearview-ai-loses-b-c-appeal-of-findings-over-facial-recognition-privacy-breaches/" target="_blank" rel="noopener">READ MAIN ARTICLE ↗</a>
+</article>
+<article class="source">
+<div class="tag">OFFICIAL RESEARCH SOURCE</div>
+<h3>Privacy Commissioner investigation</h3>
+<p>Use this if useful, but do not simply copy its explanation. Your job is to investigate and explain the technology in your own words.</p>
+<a href="https://www.priv.gc.ca/en/opc-actions-and-decisions/investigations/investigations-into-businesses/2021/pipeda-2021-001/" target="_blank" rel="noopener">OPEN SOURCE ↗</a>
+</article>
+<article class="source">
+<div class="tag">OFFICIAL STAKEHOLDER SOURCE</div>
+<h3>RCMP / privacy statement</h3>
+<p>Use this as one perspective if it helps your inquiry. You must still decide who the stakeholders are.</p>
+<a href="https://www.priv.gc.ca/en/opc-news/speeches-and-statements/2021/s-d_20210610/" target="_blank" rel="noopener">OPEN SOURCE ↗</a>
+</article>
+</div>
+</section>
+
+<section id="command">
+<div class="command">
+<h2 style="margin-top:0">Before you answer: decode the command term</h2>
+<p>Your question begins with <strong>TO WHAT EXTENT</strong>. Do not assume you know what that means.</p>
+<div class="steps">
+<div><strong>1 · OPEN</strong><br>Open the official IB Digital Society Guide.</div>
+<div><strong>2 · FIND</strong><br>Locate the <em>Glossary of command terms</em>.</div>
+<div><strong>3 · TRANSLATE</strong><br>Rewrite “To what extent” in your own words.</div>
+<div><strong>4 · APPLY</strong><br>Write 3–4 things your answer must do because of that command term.</div>
+</div>
+<p><a class="button" href="https://ibo.org/globalassets/new-structure/university-admission/pdfs/subject-guides/digital-society-guide.pdf" target="_blank" rel="noopener">OPEN OFFICIAL IB DIGITAL SOCIETY GUIDE ↗</a></p>
+</div>
+</section>
+
+<section id="tech">
+<h2>You must research how the technology works</h2>
+<div class="noanswer"><strong>No mechanism is provided here on purpose.</strong> “AI scans a face” is not enough. Your job is to research the digital process and explain it in 4–6 clear steps.</div>
+<div class="promptgrid">
+<article class="prompt"><strong>PROMPT 1</strong><br>What happens to an image before a system can compare a face?</article>
+<article class="prompt"><strong>PROMPT 2</strong><br>What is biometric data, a facial template, or an embedding?</article>
+<article class="prompt"><strong>PROMPT 3</strong><br>How does one face get compared with a database of other faces?</article>
+<article class="prompt"><strong>PROMPT 4</strong><br>What does a “match” mean — and where could uncertainty or error enter?</article>
+</div>
+<div class="challenge"><strong>Evidence requirement:</strong> record your exact search phrase, source title, organization/author, URL, date, why the source is credible, and one possible limitation or perspective of the source.</div>
+</section>
+
+<section id="stake">
+<h2>Stakeholders: understand the idea, then identify them yourself</h2>
+<div class="example">
+<strong>What is a stakeholder?</strong><br>
+A stakeholder is a person, group, organization, or institution that is affected by a digital system/decision or can influence what happens.<br><br>
+<strong>Example unrelated to this case:</strong> In a food-delivery app, a <em>delivery driver</em> is a stakeholder because the platform can affect the jobs they receive, their ratings, and their income.
+</div>
+<div class="promptgrid" style="margin-top:14px">
+<article class="prompt"><strong>YOUR TASK</strong><br>Identify at least THREE specific stakeholders in the Clearview / facial-recognition case.</article>
+<article class="prompt"><strong>FOR EACH ONE</strong><br>Explain: How are they affected? What do they want, gain, risk, or control?</article>
+</div>
+</section>
+
+<section id="concepts">
+<h2>Concept resources: use the lens, don’t just name it</h2>
+<div class="concepts">
+<article class="concept power">
+<h3>POWER</h3>
+<p>Power helps you investigate who can influence or control others, how power is embedded in organizations/governments, and whether power is distributed unequally.</p>
+<ul>
+<li>Who can decide?</li>
+<li>Who can collect or identify?</li>
+<li>Who can refuse?</li>
+<li>Who can challenge an error?</li>
+<li>Who can regulate whom?</li>
+</ul>
+<div class="resource">Read the official <strong>Power</strong> section in the IB Digital Society Guide.<br><a href="https://ibo.org/globalassets/new-structure/university-admission/pdfs/subject-guides/digital-society-guide.pdf" target="_blank">OPEN GUIDE ↗</a></div>
+</article>
+
+<article class="concept ethics">
+<h3>VALUES & ETHICS</h3>
+<p>Values & Ethics helps you examine distinctions such as fair/unfair, just/unjust, legal/illegal, proper/improper, and how values shape conduct, policies, rules, and laws.</p>
+<ul>
+<li>What is fair?</li>
+<li>What requires consent?</li>
+<li>Who is accountable?</li>
+<li>Is the response proportionate?</li>
+<li>Can something be legal but still ethically troubling?</li>
+</ul>
+<div class="resource">Read the official <strong>Values & Ethics</strong> section in the IB Digital Society Guide.<br><a href="https://ibo.org/globalassets/new-structure/university-admission/pdfs/subject-guides/digital-society-guide.pdf" target="_blank">OPEN GUIDE ↗</a></div>
+</article>
+</div>
+</section>
+
+<section id="write">
+<div class="question">
+<h2 style="margin-top:0">Your Paper 1-style 8-mark question</h2>
+<blockquote>To what extent should Canadian law-enforcement agencies be permitted to use facial-recognition systems built from images collected from the public internet?</blockquote>
+<p>Do your research and planning in the Google Doc template. Your final response must answer the exact question and follow what the command term requires.</p>
+</div>
+
+<div class="card" style="margin-top:18px;border-top:6px solid var(--gold)">
+<h2 style="margin-top:0">How to structure your one-page response</h2>
+<p>Aim for about <strong>one page</strong> of focused writing. This is not a strict word count; roughly <strong>350–450 words</strong> is a useful target if typed. Your answer should read like a short argument — not a list of worksheet responses.</p>
+
+<div class="promptgrid">
+<article class="prompt">
+<strong>PARAGRAPH 1 · POSITION + CONTEXT</strong>
+<ul>
+<li>Answer the question immediately.</li>
+<li>Name the Clearview / Canadian law-enforcement context.</li>
+<li>Identify the key tension.</li>
+<li>End with a provisional or conditional thesis.</li>
+</ul>
+</article>
+
+<article class="prompt">
+<strong>PARAGRAPH 2 · STRONGEST ARGUMENT</strong>
+<ul>
+<li>Make one clear claim.</li>
+<li>Use specific case/research evidence.</li>
+<li>Connect it to a stakeholder.</li>
+<li>Use Power or Values & Ethics to deepen the analysis.</li>
+<li>Explain why the evidence matters.</li>
+</ul>
+</article>
+
+<article class="prompt">
+<strong>PARAGRAPH 3 · COUNTER-ARGUMENT + WEIGHING</strong>
+<ul>
+<li>Give the strongest reasonable opposing argument.</li>
+<li>Anchor it in a stakeholder perspective.</li>
+<li>Support it with evidence.</li>
+<li>Compare the competing concerns.</li>
+<li>Decide which should carry more weight and why.</li>
+</ul>
+</article>
+
+<article class="prompt">
+<strong>PARAGRAPH 4 · JUDGEMENT</strong>
+<ul>
+<li>Return directly to “To what extent.”</li>
+<li>Make a clear supported judgement.</li>
+<li>State conditions, safeguards, limits, or circumstances.</li>
+<li>Do not simply repeat your introduction.</li>
+</ul>
+</article>
+</div>
+
+<div class="challenge" style="margin-top:14px">
+<strong>USEFUL CHECK:</strong> CLAIM → EVIDENCE → EXPLANATION → STAKEHOLDER / CONCEPT → WEIGH → LINK BACK TO THE QUESTION
+</div>
+</div>
+
+<h2>Official 8-mark band — use this after writing</h2>
+<table class="rubric">
+<tr><th>Band</th><th>Best-fit description</th></tr>
+<tr class="r78"><td>7–8</td><td>Focused and in-depth; evaluation and synthesis are consistently supported with relevant and accurate knowledge; well structured and effectively organized.</td></tr>
+<tr class="r56"><td>5–6</td><td>Adequate understanding; effective analysis supported by relevant and accurate knowledge; adequately organized.</td></tr>
+<tr class="r34"><td>3–4</td><td>Some understanding and some analysis, but it is not always sustained/effective; only partly organized.</td></tr>
+<tr class="r12"><td>1–2</td><td>Limited understanding; mostly descriptive or unsupported generalizations; limited organization.</td></tr>
+<tr><td>0</td><td>Does not reach the standard described above.</td></tr>
+</table>
+</section>
+
+</main>
+<footer>Operation Get a 7 · Case File 01 · Investigate first. Then analyse. Then defend.</footer>
+</body>
+</html>
