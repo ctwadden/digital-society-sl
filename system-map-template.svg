@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Digital society system map template</title>
+  <desc id="desc">A blank system map with technology, mechanism, evidence, stakeholders, impacts, safeguards and feedback loops.</desc>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#516274"/></marker></defs>
+  <rect width="1600" height="1000" fill="#f5f3ed"/>
+  <text x="70" y="90" font-family="Arial, sans-serif" font-size="40" font-weight="700" fill="#11263d">SYSTEM MAP · BRITISH LIBRARY CASE</text>
+  <text x="70" y="132" font-family="Arial, sans-serif" font-size="22" fill="#516274">Replace prompts with specific evidence. Label every arrow with a relationship.</text>
+  <g fill="#fff" stroke="#516274" stroke-width="3">
+    <rect x="90" y="220" width="330" height="170" rx="18"/>
+    <rect x="635" y="180" width="330" height="170" rx="18"/>
+    <rect x="1180" y="220" width="330" height="170" rx="18"/>
+    <rect x="90" y="610" width="330" height="170" rx="18"/>
+    <rect x="635" y="650" width="330" height="170" rx="18"/>
+    <rect x="1180" y="610" width="330" height="170" rx="18"/>
+  </g>
+  <g font-family="Arial, sans-serif" fill="#11263d">
+    <text x="125" y="270" font-size="26" font-weight="700">TECHNOLOGY</text><text x="125" y="315" font-size="20">What system or access</text><text x="125" y="343" font-size="20">condition matters?</text>
+    <text x="670" y="230" font-size="26" font-weight="700">HOW IT WORKS</text><text x="670" y="275" font-size="20">Describe the mechanism,</text><text x="670" y="303" font-size="20">not just the event.</text>
+    <text x="1215" y="270" font-size="26" font-weight="700">EVIDENCE</text><text x="1215" y="315" font-size="20">Attributed fact + source</text><text x="1215" y="343" font-size="20">role + confidence.</text>
+    <text x="125" y="660" font-size="26" font-weight="700">STAKEHOLDERS</text><text x="125" y="705" font-size="20">Who gains, loses, decides,</text><text x="125" y="733" font-size="20">pays or lacks access?</text>
+    <text x="670" y="700" font-size="26" font-weight="700">IMPACTS + IMPLICATIONS</text><text x="670" y="745" font-size="20">Direct effect versus</text><text x="670" y="773" font-size="20">longer-term significance.</text>
+    <text x="1215" y="660" font-size="26" font-weight="700">SAFEGUARDS + TRADE-OFFS</text><text x="1215" y="705" font-size="20">What improves? What is</text><text x="1215" y="733" font-size="20">costly, limited or displaced?</text>
+  </g>
+  <g stroke="#516274" stroke-width="4" fill="none" marker-end="url(#arrow)">
+    <path d="M420 290 C500 250 550 245 635 250"/><path d="M965 250 C1050 245 1100 260 1180 290"/>
+    <path d="M1340 390 C1390 485 1380 540 1340 610"/><path d="M1180 700 C1090 745 1040 755 965 745"/>
+    <path d="M635 745 C540 760 500 745 420 700"/><path d="M250 610 C200 515 205 470 255 390"/>
+    <path stroke-dasharray="14 10" d="M1180 645 C1010 500 650 455 420 340"/>
+  </g>
+  <text x="70" y="920" font-family="Arial, sans-serif" font-size="21" fill="#516274">Use the 3Cs beside relevant nodes: CONTENT · CONTEXT · CONCEPT. Add one counter-perspective before your judgement.</text>
+</svg>

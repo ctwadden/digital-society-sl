@@ -1,0 +1,25 @@
+CASE BRIEF · BRITISH LIBRARY CYBERATTACK
+
+Inquiry question
+How should a public knowledge institution balance open access, security, cost and transparency after a disruptive cyberattack?
+
+Verified starting facts
+- The British Library says a ransomware attack began on 28 October 2023.
+- Its incident review reports that attackers copied about 600 GB of files.
+- Core digital infrastructure was damaged, while the physical and digital collections remained secure.
+- The UK Information Commissioner's Office said in April 2025 that the incident escalated because multi-factor authentication was not enabled on an administrator account.
+- Recovery has been phased; some services returned before others.
+
+Important caution
+Do not turn these facts into a simple story of one cause or one villain. Separate what a source directly establishes from your inference. Ask whose interests each source represents and what evidence would change your judgement.
+
+Source roles to locate
+1. Institution: British Library incident review or recovery update.
+2. Regulator: Information Commissioner's Office statement.
+3. Technical public-interest authority: National Cyber Security Centre analysis.
+
+Operation 7 response chain
+TECHNOLOGY → HOW IT WORKS → EVIDENCE → STAKEHOLDERS → 3Cs → IMPACT → IMPLICATION → COUNTER-PERSPECTIVE → TRADE-OFF → QUALIFIED JUDGEMENT
+
+Teacher note
+This brief is a classroom synthesis, not a substitute for the linked primary sources on the course page. Last reviewed 8 September 2026.
