@@ -1,0 +1,106 @@
+{
+  "course_id": "IBDS",
+  "note": "Visibility controls course-home navigation, not access security. Existing URLs and public repository history remain accessible. New sprint packages must pass review before workbook URLs are added.",
+  "sections": [
+    {
+      "id": "practice-library",
+      "title": "Practice library",
+      "visible": true
+    },
+    {
+      "id": "assessment-guide",
+      "title": "How assessment works",
+      "visible": true
+    },
+    {
+      "id": "course-route",
+      "title": "Whole-course overview",
+      "visible": false
+    },
+    {
+      "id": "ia-workspace",
+      "title": "Inquiry project workspace",
+      "visible": false
+    },
+    {
+      "id": "ibds-26-s01",
+      "title": "Sprint 01 \u00b7 Mechanisms, evidence and power",
+      "visible": false
+    },
+    {
+      "id": "ibds-26-s02",
+      "title": "Sprint 02 \u00b7 Age assurance and policy judgment",
+      "visible": false
+    },
+    {
+      "id": "ibds-26-s03",
+      "title": "Sprint 03 \u00b7 Data, algorithms and recommendation",
+      "visible": false
+    },
+    {
+      "id": "ibds-26-s04",
+      "title": "Sprint 04 \u00b7 Computers, networks and privacy",
+      "visible": false
+    },
+    {
+      "id": "ibds-26-s05",
+      "title": "Sprint 05 \u00b7 AI, robots and human oversight",
+      "visible": false
+    },
+    {
+      "id": "ibds-26-s06",
+      "title": "Sprint 06 \u00b7 Media, culture and political participation",
+      "visible": false
+    },
+    {
+      "id": "ibds-26-s07",
+      "title": "Sprint 07 \u00b7 Infrastructure, environment and inequality",
+      "visible": false
+    },
+    {
+      "id": "ibds-26-s08",
+      "title": "Sprint 08 \u00b7 Practice inquiry and evidence communication",
+      "visible": false
+    },
+    {
+      "id": "ibds-26-s09",
+      "title": "Sprint 09 \u00b7 Cumulative repair and Paper 1 diagnostic",
+      "visible": false
+    },
+    {
+      "id": "ibds-26-s10",
+      "title": "Sprint 10 \u00b7 Unfamiliar sources and Paper 2 diagnostic",
+      "visible": false
+    },
+    {
+      "id": "ibds-26-s11",
+      "title": "Sprint 11 \u00b7 IA inquiry and research",
+      "visible": false
+    },
+    {
+      "id": "ibds-26-s12",
+      "title": "Sprint 12 \u00b7 IA analysis and production",
+      "visible": false
+    },
+    {
+      "id": "ibds-26-s13",
+      "title": "Sprint 13 \u00b7 IA completion and exam transfer",
+      "visible": false
+    },
+    {
+      "id": "ibds-26-s14",
+      "title": "Sprint 14 \u00b7 Paper 1 performance and Mock B",
+      "visible": false
+    },
+    {
+      "id": "ibds-26-s15",
+      "title": "Sprint 15 \u00b7 Paper 2 performance and Mock B",
+      "visible": false
+    },
+    {
+      "id": "ibds-26-s16",
+      "title": "Sprint 16 \u00b7 Readiness and targeted final repair",
+      "visible": false
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+name: DS course release
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      section:
+        description: 'Section to change (or rebuild only)'
+        required: true
+        default: rebuild-only
+        type: choice
+        options:
+          - rebuild-only
+          - practice-library
+          - assessment-guide
+          - course-route
+          - ia-workspace
+          - ibds-26-s01
+          - ibds-26-s02
+          - ibds-26-s03
+          - ibds-26-s04
+          - ibds-26-s05
+          - ibds-26-s06
+          - ibds-26-s07
+          - ibds-26-s08
+          - ibds-26-s09
+          - ibds-26-s10
+          - ibds-26-s11
+          - ibds-26-s12
+          - ibds-26-s13
+          - ibds-26-s14
+          - ibds-26-s15
+          - ibds-26-s16
+      visibility:
+        description: 'Show or hide on the student course home'
+        required: true
+        default: hide
+        type: choice
+        options:
+          - hide
+          - show
+permissions:
+  contents: read
+concurrency:
+  group: ds-course-pages
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 1
+      - name: Apply selected release change
+        if: github.event_name == 'workflow_dispatch' && inputs.section != 'rebuild-only'
+        env:
+          RELEASE_SECTION: ${{ inputs.section }}
+          RELEASE_VISIBILITY: ${{ inputs.visibility }}
+        run: python3 tools/set_release.py "$RELEASE_SECTION" "$RELEASE_VISIBILITY"
+      - name: Build and verify home
+        run: |
+          python3 tools/build_home.py
+          python3 tools/test_home.py
+      - name: Record release settings and generated home
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add course-release.json index.html
+          if ! git diff --cached --quiet; then
+            git commit -m 'Apply DS course release settings'
+            git push origin HEAD:main
+          fi
+      - name: Package published files
+        run: python3 tools/package_site.py
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+      - name: Deploy student site
+        id: deployment
+        uses: actions/deploy-pages@v4
