@@ -1,0 +1,9 @@
+task,name,days,needs_first,public_facing
+NET,New segmented network,3,,no
+IDM,Identity service with MFA,2,NET,no
+BKV,Validate backups,2,NET,no
+WEB,Public website,2,IDM,yes
+CAT,Catalogue search,3,IDM;BKV,yes
+PAY,Online payments,2,WEB,yes
+LOAN,Reader registration and loans,4,CAT,yes
+LDEP,Legal deposit intake (statutory),5,BKV,no

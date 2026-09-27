@@ -44,10 +44,11 @@
       "brief": "How can a technical failure become a public-service failure?",
       "new_learning": "Computer components, evolution, protocols, routing, web services, security and recovery trade-offs.",
       "product": "Network simulation, a source-based outage explanation and changed-service transfer.",
-      "chapter_reading": "3.3 pp. 92\u2013105; 3.4 pp. 106\u2013126; 4.4 pp. 245\u2013257; 4.6 pp. 267\u2013284; 7.1\u20137.2 pp. 380\u2013400",
+      "chapter_reading": "pp. 92\u2013103; pp. 106\u2013110; pp. 111\u2013124; pp. 69\u201371",
       "assessment_id": "ibds-26-s04-bundle",
-      "workbook_url": null,
-      "release_status": "Overview only; new workbook in production"
+      "workbook_url": "sprints/service-offline/",
+      "release_status": "Published student workbook; timed assessment Forms released separately",
+      "source_revision": "2026-09-27-sprint04-review-v5"
     },
     {
       "id": "ibds-26-s05",

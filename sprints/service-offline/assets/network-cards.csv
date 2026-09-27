@@ -1,0 +1,10 @@
+card,device,role,address,organization,where
+L,Reading-room laptop,client,10.20.0.15,Harbourview Public Library,Harbourview (library building)
+S1,Library switch,switch,,Harbourview Public Library,Harbourview (library building)
+R1,Library edge router,router,10.20.0.1 / 203.0.113.10,Harbourview Public Library,Harbourview (library building)
+R2,NorthNet ISP router,router,,NorthNet (internet service provider),Regional ISP centre
+R3,Exchange router A,router,,Internet exchange,National exchange point
+R6,Exchange router B (backup link),router,,Internet exchange,National exchange point
+R4,CloudDock hosting router,router,,CloudDock (hosting provider),Data centre in another country
+W,Catalogue web server,server,198.51.100.20,CloudDock (hosting provider),Data centre in another country
+D,NorthNet DNS resolver,dns,192.0.2.53,NorthNet (internet service provider),Regional ISP centre

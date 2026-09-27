@@ -1,0 +1,16 @@
+scenario,evidence (fabricated for teaching)
+1,"09:05 Readers: the catalogue page keeps loading, then shows “took too long to respond”."
+1,09:06 Staff can open other websites normally.
+1,09:07 IT: the name catalogue.harbourview-library.example resolves to 198.51.100.20.
+1,"09:08 IT hop log (synthetic): L → S1 → R1 → R2 → R3, then no further reply."
+1,09:10 CloudDock: server W is running with normal load and is receiving no requests from the library.
+2,13:20 Browser message: “server name could not be found” for catalogue.harbourview-library.example.
+2,13:21 IT test tool opens the page by typing the address 198.51.100.20 directly: it loads.
+2,13:22 Newly visited websites also fail by name; recently visited ones still load.
+2,13:25 NorthNet notice: “issue affecting our name-resolution service”.
+2,13:26 CloudDock: server W normal load.
+3,16:00 A city-wide school assignment is due at 17:00.
+3,16:02 Some catalogue pages load after 20+ seconds; many show “503 Service Unavailable”.
+3,16:03 The name catalogue.harbourview-library.example resolves normally.
+3,16:04 CloudDock: server W receiving about 900 requests per second; it can process about 300.
+3,16:05 A staff laptop inside the library also gets 503 some of the time.

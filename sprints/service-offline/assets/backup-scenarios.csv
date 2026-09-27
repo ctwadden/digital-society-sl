@@ -1,0 +1,4 @@
+backup,type,last_copy_day,offline,last_restore_test_days_ago,incident_day
+B1,"Online copy on the same network, updated hourly",30,no,30,30
+B2,Offline weekly copy,24,yes,420,30
+B3,Offline daily copy with monthly restore test,29,yes,12,30
