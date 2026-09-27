@@ -15,7 +15,7 @@
     {
       "id": "course-route",
       "title": "Whole-course overview",
-      "visible": false
+      "visible": true
     },
     {
       "id": "ia-workspace",
