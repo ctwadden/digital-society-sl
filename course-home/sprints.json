@@ -34,8 +34,9 @@
       "product": "Paper recommender, theme synthesis and an independently redesigned ranking rule.",
       "chapter_reading": "3.0\u20133.1 pp. 54\u201380; 3.2 pp. 81\u201391; 4.2 pp. 213\u2013227; 4.5 pp. 258\u2013266; 7.1\u20137.2 pp. 380\u2013400",
       "assessment_id": "ibds-26-s03-bundle",
-      "workbook_url": null,
-      "release_status": "Overview only; new workbook in production"
+      "workbook_url": "sprints/redesign-the-feed/",
+      "release_status": "Published student workbook; timed assessment Forms released separately",
+      "source_revision": "2026-09-28-sprint03-approved-release-v1"
     },
     {
       "id": "ibds-26-s04",
