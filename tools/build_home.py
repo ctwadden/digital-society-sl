@@ -23,7 +23,7 @@ def build(config=None):
             sections.append(f'<section class="section" id="{key}" aria-labelledby="{key}-title"><h2 id="{key}-title">{esc(title)}</h2>{content}</section>')
 
     cards = [
-        ('Source power → Criterion B', 'Independent class: compare a TED talk with an official technical source, then audit one source from your own inquiry.', 'lessons/source-power-criterion-b/', 'Independent lesson · 70 minutes'),
+        ('Four lenses → Criterion B', 'Watch one TED talk, build a study infographic, then rank your own IA sources and select a provisional top three.', 'lessons/source-power-criterion-b/', 'Independent lesson · 70 minutes'),
         ('Concepts & command terms', 'Turn a case into precise explanations, connected analysis and a reasoned evaluation. Includes guided practice and classroom criteria.', 'concepts-command-lab/', 'Two-class investigation'),
         ('Who owns your face?', 'Investigate facial recognition, power and privacy. Build an evidence-supported response to a real-world issue.', 'case-file-01/', 'Case study · Paper 1-style practice'),
         ('Social media under 16', 'Compare perspectives on an age restriction and defend a judgment about its consequences.', 'case-file-02/', 'Case study · Argument practice'),

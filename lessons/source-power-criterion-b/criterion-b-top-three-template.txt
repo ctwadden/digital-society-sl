@@ -1,0 +1,121 @@
+IB DIGITAL SOCIETY — FOUR LENSES → CRITERION B
+
+Name:
+Date:
+Current IA inquiry question:
+
+PART 1 — TED TALK + FOUR LENSES
+
+Source: Joy Buolamwini, “How to protect your rights in the age of AI,” TEDAI, October 2023.
+
+IDENTITY
+How can the system represent, classify or misrepresent a person?
+
+POWER
+Who can design, deploy, regulate or challenge the system? Who has less power?
+
+SYSTEMS
+Trace one chain: data → model → output → human/institutional decision → consequence.
+Which people, rules or organizations are also involved?
+
+VALUES & ETHICS
+Which two defensible values or rights are in tension? Explain the conflict.
+
+EVIDENCE
+One important claim:
+Timestamp or example that supports it:
+One limitation of the talk as evidence:
+One causal connection between at least two lenses:
+
+INFOGRAPHIC CHECK
+File name or Drive link:
+One fact, label or relationship I checked:
+One content or design decision I made myself:
+
+
+PART 2 — MY CURRENT IA SOURCE INVENTORY
+
+For each candidate, judge: Strong / Workable / Weak.
+
+CANDIDATE 1
+Short title / author:
+Citation or URL:
+Direct relevance:
+Credibility and currentness:
+Usable claims or evidence:
+Perspective represented / absent:
+Usefulness for later analysis:
+Risk or limitation:
+Decision — KEEP / MAYBE / DROP:
+
+CANDIDATE 2
+Short title / author:
+Citation or URL:
+Direct relevance:
+Credibility and currentness:
+Usable claims or evidence:
+Perspective represented / absent:
+Usefulness for later analysis:
+Risk or limitation:
+Decision — KEEP / MAYBE / DROP:
+
+CANDIDATE 3
+Short title / author:
+Citation or URL:
+Direct relevance:
+Credibility and currentness:
+Usable claims or evidence:
+Perspective represented / absent:
+Usefulness for later analysis:
+Risk or limitation:
+Decision — KEEP / MAYBE / DROP:
+
+ADDITIONAL CANDIDATES
+Repeat the same headings for every other serious source you have already found.
+
+
+PART 3 — MY PROVISIONAL TOP THREE
+
+SOURCE 1
+Complete source and citation:
+Strongest claim, finding or evidence for my inquiry:
+Perspective or stakeholder represented:
+Credibility basis and whether its date matters:
+Exact use in my later analysis or multimedia presentation:
+What another source must corroborate, qualify, challenge or add:
+
+SOURCE 2
+Complete source and citation:
+Strongest claim, finding or evidence for my inquiry:
+Perspective or stakeholder represented:
+Credibility basis and whether its date matters:
+Exact use in my later analysis or multimedia presentation:
+What another source must corroborate, qualify, challenge or add:
+
+SOURCE 3 — OR LEAVE OPEN AND DEFINE THE SEARCH GAP
+Complete source and citation:
+Strongest claim, finding or evidence for my inquiry:
+Perspective or stakeholder represented:
+Credibility basis and whether its date matters:
+Exact use in my later analysis or multimedia presentation:
+What another source must corroborate, qualify, challenge or add:
+
+If this slot is open, what exact evidence, expertise or perspective is missing?
+Targeted search terms:
+
+
+PART 4 — WHOLE-SET BALANCE
+
+Do all three make the same argument or represent the same perspective?
+Which important stakeholder or consequence is still missing?
+Are all three the same source type or organization type?
+Is any source only general background?
+How can the set support analysis of impacts, implications and tensions?
+
+SET VERDICT — STRONG / WORKABLE / REPLACE ONE / REBUILD SOURCE SET:
+One source I will definitely keep:
+One source I may drop or question:
+One next action:
+
+AI BOUNDARY
+Gemini may organize the four-lens study infographic from my own notes. It may not choose, summarize, rank or justify my IA sources or write Criterion B for me.
