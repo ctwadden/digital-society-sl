@@ -40,6 +40,7 @@ def build(config=None):
 
     cards = [
         ('Four lenses → Criterion B', 'Watch one TED talk, build a study infographic, then rank your own IA sources and select a provisional top three.', 'lessons/source-power-criterion-b/', 'Independent lesson · 70 minutes'),
+        ('Identity under the lens', 'Reconnect Identity with Power, Systems and Values & Ethics through guided analysis, source work and independent transfer.', 'sprints/identity-connected-concepts/', 'Sprint 2 workbook'),
         ('Concepts & command terms', 'Turn a case into precise explanations, connected analysis and a reasoned evaluation. Includes guided practice and classroom criteria.', 'concepts-command-lab/', 'Two-class investigation'),
         ('Who owns your face?', 'Investigate facial recognition, power and privacy. Build an evidence-supported response to a real-world issue.', 'case-file-01/', 'Case study · Paper 1-style practice'),
         ('Social media under 16', 'Compare perspectives on an age restriction and defend a judgment about its consequences.', 'case-file-02/', 'Case study · Argument practice'),
