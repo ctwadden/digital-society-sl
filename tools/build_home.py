@@ -14,8 +14,24 @@ def build(config=None):
     flags = {x['id']: x['visible'] for x in config['sections']}
     assert len(flags) == len(config['sections']) and set(flags) == expected, 'Unknown, missing or duplicate section'
     assert all(type(x) is bool for x in flags.values()), 'Visibility must be true or false'
-    nav = ['<a href="#start">Start here</a>']
+    nav = ['<a href="#start">Start here</a>', '<a href="#current-sprint">Current sprint</a>']
     sections = []
+
+    current = next(s for s in data['sprints'] if s['id'] == 'ibds-26-s04')
+    current_url = current['workbook_url']
+    assert current_url == 'sprints/service-offline/'
+    assert (ROOT / current_url / 'index.html').is_file()
+    sections.append(
+        '<section class="section" id="current-sprint" aria-labelledby="current-sprint-title">'
+        '<p class="eyebrow">Current sprint</p>'
+        '<h2 id="current-sprint-title">Sprint 4 · When the service goes offline</h2>'
+        '<p class="section-intro">Learn how computers and networks work, diagnose failures from evidence, and decide what a public service should restore first.</p>'
+        '<div class="card"><span class="tag">Published student workbook</span>'
+        '<h3>Continue your current sprint</h3>'
+        '<p>Open the workbook for all eleven lessons, lab assets, success criteria and released submission links.</p>'
+        f'<a class="card-link" href="{current_url}">Open Sprint 4 workbook <span aria-hidden="true">↗</span>'
+        '<span class="sr-label"> — When the service goes offline</span></a></div></section>'
+    )
 
     def add(key, title, content):
         if flags[key]:
@@ -28,7 +44,7 @@ def build(config=None):
         ('Who owns your face?', 'Investigate facial recognition, power and privacy. Build an evidence-supported response to a real-world issue.', 'case-file-01/', 'Case study · Paper 1-style practice'),
         ('Social media under 16', 'Compare perspectives on an age restriction and defend a judgment about its consequences.', 'case-file-02/', 'Case study · Argument practice'),
     ]
-    library = '<p class="section-intro">Existing practice resources. Open the task your teacher assigns; these are not the newly planned sprint workbooks.</p><div class="cards">'
+    library = '<p class="section-intro">Older practice resources. Open the task your teacher assigns; these are separate from the current Sprint 4 workbook above.</p><div class="cards">'
     for title, description, url, tag in cards:
         assert (ROOT / url / 'index.html').is_file()
         library += f'<article class="card"><span class="tag">{esc(tag)}</span><h3>{esc(title)}</h3><p>{esc(description)}</p><a class="card-link" href="{url}">Open practice <span aria-hidden="true">↗</span><span class="sr-label"> — {esc(title)}</span></a></article>'

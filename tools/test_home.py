@@ -37,4 +37,8 @@ parser=Links();parser.feed(build(all_on));assert all(a in parser.ids for a in pa
 assert 'teacher/answer-key' not in build() and 'teacher-guide' not in build()
 assert '<script' not in build(), 'Home release visibility should not depend on JavaScript'
 assert len([x for x in config['sections'] if x['id'].startswith('ibds-26-s')])==16
+home = build()
+assert 'id="current-sprint"' in home
+assert 'href="sprints/service-offline/"' in home
+assert home.index('id="current-sprint"') < home.index('id="practice-library"')
 print('PASS: 40 visibility states, invalid ID, anchors/assets, 16 canonical sprint IDs, no student-home teacher links.')
