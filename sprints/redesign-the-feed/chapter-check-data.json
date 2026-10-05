@@ -1,0 +1,47 @@
+[
+  {
+    "chapter": "3.2",
+    "title": "Algorithms and code",
+    "pages": "81–89",
+    "reading": "New reading 86–89; retrieve 81–85",
+    "day": "Thursday 8 October",
+    "lesson": "ibds-26-s03-d05",
+    "deck": "teaching-decks/02-dilemmas.html",
+    "questions": [
+      "State two characteristics that make a procedure a usable algorithm. Explain how one rules out “repeat until the result feels right”.",
+      "A synthetic booking system sets count = 0, reads durations [40, 75, 40], and adds 1 to count for each duration ≤ 45. State the final count and explain where the condition and finite loop act.",
+      "A hypothetical hiring system uses uninterrupted employment as a proxy for suitability. Explain one way a data or proxy choice could disadvantage a group, even if the rule runs consistently.",
+      "A service publishes its scoring formula but offers no explanation of an individual result or route to challenge it. Distinguish transparency from accountability in this situation."
+    ]
+  },
+  {
+    "chapter": "3.1",
+    "title": "Big data and collection",
+    "pages": "72–74",
+    "reading": "3.1H and start of 3.1I only",
+    "day": "Wednesday 7 October",
+    "lesson": "ibds-26-s03-d04",
+    "deck": "teaching-decks/03-big-data.html",
+    "questions": [
+      "Name the four Vs of big data. Explain which V concerns unreliable or incomplete records.",
+      "Dataset A contains 24 complete display-and-click records. Dataset B contains 240 click records with no record of what was displayed. For the question “Which displayed item is clicked more often?”, choose the more useful dataset and justify your choice.",
+      "An analytics report finds that clips watched late at night have longer watch times. Explain why this association alone does not establish viewers’ intentions or what caused the difference.",
+      "A fictional library proposes collecting precise location histories to recommend books. Identify one collection dilemma and one question the library should answer before collecting the data."
+    ]
+  },
+  {
+    "chapter": "4.2",
+    "title": "Business, employment and labour",
+    "pages": "213–219",
+    "reading": "4.2A–B excerpts through p. 219",
+    "day": "Friday 9 October",
+    "lesson": "ibds-26-s03-d06",
+    "deck": "teaching-decks/04-business-labour.html",
+    "questions": [
+      "A fictional bicycle retailer starts manufacturing its own frames. Name the diversification type and explain how this differs from workforce diversity.",
+      "One editor works from a fixed home office; another travels between countries while editing online. A third completes tiny paid image-labelling tasks through a platform. Distinguish these work arrangements using the chapter’s terms.",
+      "A group asks the public to contribute money for a film. Another asks the public for subtitle suggestions. Distinguish crowdfunding from crowdsourcing using these examples.",
+      "A creator’s video views increase, but the platform reports no advertising rate, eligibility, revenue share or other income data. Explain one possible economic opportunity and one conclusion about income that the evidence cannot establish."
+    ]
+  }
+]

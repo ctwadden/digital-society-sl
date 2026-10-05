@@ -1,0 +1,398 @@
+{
+  "slug": "02-dilemmas",
+  "title": "Algorithmic dilemmas: bias, judgement and accountability",
+  "scope": "3.2E · pp. 86–89; reflection p. 91",
+  "slides": [
+    {
+      "title": "A correct calculation can produce a harmful decision",
+      "lines": [
+        "Arithmetic checks whether a rule was followed",
+        "Evaluation checks whether the rule serves its purpose",
+        "The relevant people may disagree about success"
+      ],
+      "notes": "A ranking can be calculated exactly as designed and still cause problems. A system optimized for viewing time may give a viewer content they keep watching without serving their long-term interests. A hiring system may repeat a consistent rule that disadvantages applicants whose circumstances differ. We will distinguish mechanical correctness from justified decisions. The aim is to make a judgement supported by the mechanism, evidence and a clear criterion. The real TikTok case illustrates the tension, but our examples remain bounded by what the sources actually establish.",
+      "pages": "86",
+      "visual": "feed-people-concept-v2.png",
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": "Whose definition of success could differ from the platform’s?",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 1,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 86.",
+      "alt": "Conceptual AI illustration, not evidence or a real platform."
+    },
+    {
+      "title": "Replacing and supporting human judgement",
+      "lines": [
+        "Automation can apply a rule consistently at scale",
+        "Human reviewers can interpret context and exceptions",
+        "A reviewer needs authority, time and useful information"
+      ],
+      "notes": "Algorithms can reduce repetitive work and apply the same procedure across many cases. Consistency is valuable, but consistently making an unsuitable decision remains a problem. Human judgement can supply context absent from the input, yet human reviewers can also be biased. A meaningful review process requires access to the relevant information and power to overturn an output. Placing a person beside a system is insufficient if they simply accept every score. Ask who makes the final decision and what evidence they use.",
+      "pages": "86–87",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": "What would make a human review effective rather than ceremonial?",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 2,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 86–87."
+    },
+    {
+      "title": "Bias can enter at several points",
+      "lines": [
+        "Data may omit or misrepresent a group",
+        "A proxy may measure something other than the intended quality",
+        "An objective or threshold may distribute errors unevenly"
+      ],
+      "notes": "Algorithmic bias concerns systematic skew or unfairness in decisions. The textbook identifies biased or incomplete data and choices made by developers. We can examine those choices more precisely. A location variable may stand in for access to resources rather than the ability we want to measure. A target based on previous approvals can repeat past exclusion. A threshold can create different error rates across groups. More data does not automatically solve these problems if it preserves the same omissions or labels.",
+      "pages": "87",
+      "visual": "dilemmas-v2.svg",
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": "Choose a point in the system where an unfair pattern could begin.",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 3,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 87.",
+      "alt": "Teaching diagram: Bias can enter at several points. Its relationships are explained in the visible transcript."
+    },
+    {
+      "title": "Missing examples can change who succeeds",
+      "lines": [
+        "A training set contains 90 examples from Group A and 10 from B",
+        "A model’s average result may hide a weak result for B",
+        "Check performance for the people affected"
+      ],
+      "notes": "These numbers are invented to explain representation. They are not a finding about any company. Suppose a model is tested mostly on Group A. A high overall accuracy can coexist with poor performance for Group B because B contributes fewer test cases. Adding more examples from A increases the size without correcting B’s representation. A fair evaluation needs relevant data and disaggregated results, while taking care with small samples and privacy. Representation matters, but it is only one source of bias.",
+      "pages": "87",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": {
+        "categories": [
+          "Group A",
+          "Group B"
+        ],
+        "series": [
+          {
+            "name": "Invented training examples",
+            "values": [
+              90,
+              10
+            ]
+          }
+        ],
+        "unit": "Examples"
+      },
+      "prompt": null,
+      "quiz": {
+        "q": "Adding 1,000 examples from A necessarily fixes B’s omission. Is that justified?",
+        "options": [
+          "Yes, volume guarantees quality",
+          "No, the added examples may preserve the imbalance",
+          "Yes, an average always describes every group"
+        ],
+        "answer": 1,
+        "why": "The missing representation remains unless the new data or evaluation addresses it."
+      },
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 4,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 87."
+    },
+    {
+      "title": "A proxy can misrepresent the intended quality",
+      "lines": [
+        "Desired quality: reliable access to a task",
+        "Measured signal: previous completion count",
+        "Low completion may reflect limited opportunity"
+      ],
+      "notes": "Imagine a school choosing volunteers for a media event. It ranks students using the number of previous events they completed. That count is a proxy for reliability. A student who was never offered an event cannot build the same count. The rule may confuse opportunity with willingness or ability. This is a synthetic scenario. To judge the rule, we would need information about access and performance, not just the final ranking. Explain the link between the proxy and the target rather than assuming a numerical score measures the desired quality directly.",
+      "pages": "87",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": "Suggest a second signal and explain what problem it might address.",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 5,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 87."
+    },
+    {
+      "title": "A feedback loop can reinforce an early advantage",
+      "lines": [
+        "Exposure gives an item opportunities for interaction",
+        "Interactions become input for the next ranking",
+        "A low-exposure item may remain poorly measured"
+      ],
+      "notes": "If the first ranking gives one creator more exposure, that creator has more opportunities to receive views and reactions. If the next ranking uses those totals, the original advantage can grow. This is a possible feedback mechanism, not proof of unfairness in every recommender. A creator might also receive exposure because people find the work useful. We need to examine the rule and compare appropriate measures. Explain each link and identify what could interrupt the loop, such as reserving opportunities for items with little previous exposure.",
+      "pages": "87–89",
+      "visual": "feedback-v2.svg",
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": "Which link would a reserved discovery slot change?",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": "../sim/feedback-loop.html",
+      "number": 6,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 87–89.",
+      "alt": "Teaching diagram: A feedback loop can reinforce an early advantage. Its relationships are explained in the visible transcript."
+    },
+    {
+      "title": "Human judgement can erode through over-reliance",
+      "lines": [
+        "A score may seem authoritative because it is numerical",
+        "Repeated acceptance can reduce independent checking",
+        "A challenge route helps expose errors"
+      ],
+      "notes": "A teacher, moderator or employer might accept a score without asking how it was produced. Over time, that habit can reduce the use of independent judgement. The issue is how people interact with the system, not simply whether software exists. Useful safeguards include recording a reason for a consequential decision, checking cases near a threshold and allowing a person to challenge incorrect input. These are proposals to evaluate, not guarantees. Each requires staff, time and information, and may create new privacy or workload costs.",
+      "pages": "86–88",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": "Name one piece of information a reviewer needs before accepting a score.",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 7,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 86–88."
+    },
+    {
+      "title": "A black box limits explanation",
+      "lines": [
+        "Inputs and outputs may be visible",
+        "The path from input to result may remain unclear",
+        "Secrecy and model complexity can create different barriers"
+      ],
+      "notes": "A black box algorithm produces an output whose internal reasoning is difficult to understand or explain. The textbook focuses on complex learned systems. A simple rule can also be opaque to the person affected if the operator refuses to disclose it. These are different barriers. Publishing a formula may help with secrecy, but a complex model may need other explanations and testing. A black box can still produce useful predictions. The question is whether the available evidence and explanation are adequate for the consequence of the decision.",
+      "pages": "88",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": null,
+      "quiz": {
+        "q": "Which best defines a black box problem?",
+        "options": [
+          "The device has a dark casing",
+          "The decision path is difficult to understand or explain",
+          "All inputs are missing"
+        ],
+        "answer": 1,
+        "why": "The problem concerns the explanation of how the output was reached."
+      },
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 8,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 88."
+    },
+    {
+      "title": "Transparency makes parts of the decision understandable",
+      "lines": [
+        "Explain the objective and significant inputs",
+        "Show how a person can correct inaccurate data",
+        "Provide an explanation suited to the audience"
+      ],
+      "notes": "A programmer, regulator and affected student need different levels of explanation. A technical model description may be useless to someone trying to correct their record. Transparency can disclose the objective, data source, decision procedure or reasons for a particular output. It can help people contest an error. It cannot by itself establish that the objective is fair or that the system causes no harm. Ask what has been disclosed, to whom, and what action that person can take with the information.",
+      "pages": "88",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": "What would a student need to understand and challenge a library priority decision?",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 9,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 88."
+    },
+    {
+      "title": "Accountability assigns responsibility and consequences",
+      "lines": [
+        "Name who must explain the decision",
+        "Give someone authority to investigate and repair it",
+        "Check whether the repair improves the relevant outcome"
+      ],
+      "notes": "Accountability concerns responsibility for a decision and what happens when it goes wrong. A provider might explain a rule yet leave nobody responsible for correcting an unfair outcome. A review process needs a responsible decision-maker, a record of what happened and an effective route to remedy. Different organizations may share responsibility for data collection, model development and deployment. Our question is not simply who to blame. It is who can inspect, change or stop the process, and whether the affected person can obtain a meaningful response.",
+      "pages": "88",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": "How could a system be transparent while remaining weakly accountable?",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 10,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 88."
+    },
+    {
+      "title": "Real case A: a provider explains recommendations",
+      "lines": [
+        "TikTok describes interaction and video-information signals",
+        "The account presents personalization as a benefit",
+        "Its 2020 description does not reveal today’s exact weights"
+      ],
+      "notes": "This is a historical primary source from the organization operating the service. It is useful for the provider’s explanation of inputs and purpose. Its origin also matters because the provider has an interest in confidence in the service. Use the source for what it supports, not as independent proof that the system is safe or unbiased. The exact private implementation and present weights remain outside this account. Open the case file for the locator, provenance and limitations before making a broader claim.",
+      "pages": "86–89",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": "Which claim is this source useful for? Which claim needs independent evidence?",
+      "quiz": null,
+      "source": "A",
+      "mode": "case",
+      "link": "../case-file.html",
+      "number": 11,
+      "source_note": "TikTok, 18 June 2020, provider account. https://newsroom.tiktok.com/en-us/how-tiktok-recommends-videos-for-you Textbook connection: pp. 86–89."
+    },
+    {
+      "title": "Real case C: a regulator examines design risks",
+      "lines": [
+        "The European Commission issued preliminary findings in February 2026",
+        "The assessment concerns several interacting design features",
+        "The source states that the investigation’s outcome remains open"
+      ],
+      "notes": "The Commission examines risks from the design of the service, including recommendation, scrolling, autoplay and notifications. Its purpose and evidence differ from the provider’s product explanation. This can broaden an inquiry from how a feed works to whether design choices create risks. Keep the word preliminary attached to the finding. Do not attribute every effect to ranking alone or report the investigation as a final judgement. Compare what each source investigates and the evidence available to it.",
+      "pages": "86–89",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": null,
+      "quiz": {
+        "q": "What is a justified use of Source C?",
+        "options": [
+          "Report a final judgement about every recommender",
+          "Examine a dated preliminary assessment of several design features",
+          "Prove a specific creator’s loss of income"
+        ],
+        "answer": 1,
+        "why": "Its scope, provisional status and evidence constrain the claim."
+      },
+      "source": "C",
+      "mode": "case",
+      "link": null,
+      "number": 12,
+      "source_note": "European Commission, 6 February 2026, preliminary findings. https://digital-strategy.ec.europa.eu/en/news/commission-preliminarily-finds-tiktoks-addictive-design-breach-digital-services-act Textbook connection: pp. 86–89."
+    },
+    {
+      "title": "Observation, explanation and intention",
+      "lines": [
+        "Observation: a measured pattern in the results",
+        "Mechanism: an account of how a rule could produce it",
+        "Intention: a claim about an actor’s purpose"
+      ],
+      "notes": "Suppose three items receive more views than the others. That is an observation. A rule favouring previous engagement could explain how the pattern develops, but we need evidence about the rule and exposure. Claiming the operator intended to silence another creator adds a further inference. An uneven result does not establish that intention. A source describing a goal, an internal document or another suitable record may help investigate purpose. Keep these levels separate so an inquiry remains critical without exaggerating its evidence.",
+      "pages": "87–89",
+      "visual": "evidence-ladder-v2.svg",
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": "Write one observation and one possible mechanism. State what would be needed to investigate intention.",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 13,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 87–89.",
+      "alt": "Teaching diagram: Observation, explanation and intention. Its relationships are explained in the visible transcript."
+    },
+    {
+      "title": "A conditional judgement weighs an intervention",
+      "lines": [
+        "Criterion: fair access to visibility",
+        "Proposal: reserve some exposure for less-seen items",
+        "Trade-off: discovery may displace predicted relevance"
+      ],
+      "notes": "A conditional judgement states what you recommend, why and under which conditions. For example, a discovery allocation could be justified if testing shows that it improves access for less-seen creators without exposing users to unacceptable content. That proposal could reduce immediate predicted engagement and requires eligibility checks. Transparency may help evaluate it, but outcome evidence is still needed. We have modelled the structure of reasoning on a different example. Your independent response must choose evidence and weigh its own conditions.",
+      "pages": "89",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": "Name the evidence that would make you revise this recommendation.",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 14,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 89."
+    },
+    {
+      "title": "Paper 1 and Paper 2 use the same knowledge differently",
+      "lines": [
+        "Paper 1: apply knowledge to a specified situation",
+        "Paper 2: use and compare claims from supplied sources",
+        "Both require precise mechanisms and supported reasoning"
+      ],
+      "notes": "The local practice page contains original partial questions aligned to the current guide. Paper 1 practice asks you to explain or evaluate a system using the case. Paper 2 practice asks you to use sources and integrate relevant knowledge, including direct comparison where the question requires it. Naming bias or listing two sources is insufficient. Explain how the system works and what each piece of evidence supports. Today’s practice is formative. It is not a full paper or a basis for predicting a final grade.",
+      "pages": "89, 91",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": "Use a heading from this deck to plan one precise explanation and one source comparison.",
+      "quiz": null,
+      "source": "guide",
+      "mode": "teach",
+      "link": "../paper-practice.html",
+      "number": 15,
+      "source_note": "IB Digital Society guide, local April 2026 revision, sections 3.1H, 3.2A–E and 4.2A–D. Assessment authority. Textbook connection: pp. 89, 91."
+    },
+    {
+      "title": "Chapter 3.2: delayed explanation check",
+      "lines": [
+        "Explain one mechanism without notes",
+        "Apply it to a changed context",
+        "Return to the explanation you could not yet justify"
+      ],
+      "notes": "Close the deck. A community centre allocates its most visible booking slots using previous attendance. Explain how this rule could help organizers and how it could disadvantage a new group. Identify a source you would need and an intervention you would test. This changed case checks whether the knowledge transfers. After answering, return to the relevant teaching slides and correct one reasoning gap. The October 13 source synthesis and October 14 redesign give further opportunities to revisit the same chapter ideas.",
+      "pages": "86–91",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": null,
+      "quiz": {
+        "q": "What makes an evaluative conclusion stronger?",
+        "options": [
+          "A recommendation with a criterion, evidence, trade-off and condition",
+          "A claim that every algorithm is harmful",
+          "A longer list of terminology"
+        ],
+        "answer": 0,
+        "why": "A judgement should be justified and show what evidence or conditions could change it."
+      },
+      "source": "textbook",
+      "mode": "transfer",
+      "link": null,
+      "number": 16,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 86–91."
+    }
+  ]
+}

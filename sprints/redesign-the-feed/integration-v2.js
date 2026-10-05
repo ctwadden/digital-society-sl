@@ -1,0 +1,1 @@
+document.querySelectorAll('.full-source').forEach(d=>{if(d.querySelector('.lesson-v2'))d.open=true});window.addEventListener('beforeprint',()=>document.querySelectorAll('.page details:not(.support-shell)').forEach(d=>d.open=true));

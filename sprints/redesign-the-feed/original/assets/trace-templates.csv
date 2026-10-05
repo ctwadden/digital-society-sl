@@ -1,0 +1,14 @@
+table,item_id,c,m,f,n,score_E,score_D,rank_E,rank_D,note
+loopline_trace,V01,,,,,,,,,
+loopline_trace,V02,,,,,,,,,
+loopline_trace,V03,,,,,,,,,
+loopline_trace,V04,,,,,,,,,
+loopline_trace,V05,,,,,,,,,
+loopline_trace,V06,,,,,,,,,
+loopline_trace,V07,,,,,,,,,
+loopline_trace,V08,,,,,,,,,
+loopline_trace,V09,,,,,,,,,
+loopline_trace,V10,,,,,,,,,
+loop_day,day1,,,,,,,,,top three E / top three D
+loop_day,day2,,,,,,,,,top three E / top three D
+loop_day,day3,,,,,,,,,top three E / top three D

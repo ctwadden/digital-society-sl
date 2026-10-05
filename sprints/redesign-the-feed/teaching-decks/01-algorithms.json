@@ -1,0 +1,601 @@
+{
+  "slug": "01-algorithms",
+  "title": "Algorithms and code: how a rule becomes a result",
+  "scope": "3.2A–D · pp. 81–85; chapter connections pp. 90–91",
+  "slides": [
+    {
+      "title": "A feed is a sequence of decisions",
+      "lines": [
+        "Which items are available?",
+        "Which rule puts one item before another?",
+        "Which people can change that rule?"
+      ],
+      "notes": "Imagine a school media feed containing a concert, a science demonstration and a sports update. The phone shows an ordered list, but somebody has decided which information to collect and which outcomes to favour. We will begin with very small rules that we can follow ourselves. Later we will examine recommendation systems and the consequences for people. You do not need programming experience. By the end, you should be able to trace a rule, explain its result and identify a decision hidden inside it.",
+      "pages": "81",
+      "visual": "algorithm-v2.svg",
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": "Predict one input and one output of the school feed.",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 1,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 81.",
+      "alt": "Teaching diagram: A feed is a sequence of decisions. Its relationships are explained in the visible transcript."
+    },
+    {
+      "title": "An algorithm",
+      "lines": [
+        "A precise sequence of instructions for a task",
+        "Input: the information available to the rule",
+        "Output: the result produced by the instructions"
+      ],
+      "notes": "An algorithm is a procedure. Code is one way to implement that procedure. A rule for finding a book can be written in ordinary language and followed by a person, or expressed in a programming language and run by a computer. The input and output must be clear. An algorithm can have no external input, but it still produces a defined result. When explaining a system, naming an algorithm is only a start. State what information enters, what the procedure does and what comes out.",
+      "pages": "81–82",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": null,
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 2,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 81–82."
+    },
+    {
+      "title": "Characteristics of a usable algorithm",
+      "lines": [
+        "Unambiguous: each instruction has one clear meaning",
+        "Finite: the procedure eventually stops",
+        "Well defined and feasible: inputs, outputs and steps are possible"
+      ],
+      "notes": "Compare “show the best video” with “sort by completion rate, then by item ID when values tie.” The first instruction leaves best undefined. The second tells us exactly how to order the available data. A procedure also needs a stopping condition, such as reaching the end of a finite list. Feasible means that its demands fit the resources available. The textbook also describes independence from a particular programming language. These characteristics help us check whether a rule can actually be followed before judging whether its purpose is desirable.",
+      "pages": "81–82",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": "Repair “keep checking until you find a good item.” Define good and a stopping rule.",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 3,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 81–82."
+    },
+    {
+      "title": "Variables hold values",
+      "lines": [
+        "A variable is a named place for a value",
+        "Its value may change as the rule runs",
+        "A trace records those changes in order"
+      ],
+      "notes": "Use a variable called total to count available school videos. At the start total equals zero. After checking the first item, it may become one. A trace table shows the value after each instruction, so we can find the step where an error happened. A variable does not have to change every time it is used. It is called a variable because its value can vary. A literal value, such as the threshold 10, stays fixed in this example. Always identify what the variable represents and its unit.",
+      "pages": "82",
+      "visual": null,
+      "table": [
+        [
+          "Step",
+          "Instruction",
+          "total"
+        ],
+        [
+          "Start",
+          "Set total to 0",
+          "0"
+        ],
+        [
+          "Item A",
+          "Add 1",
+          "1"
+        ],
+        [
+          "Item B",
+          "Add 1",
+          "2"
+        ]
+      ],
+      "code": null,
+      "chart": null,
+      "prompt": null,
+      "quiz": {
+        "q": "Which best explains a variable?",
+        "options": [
+          "A value holder whose contents can change",
+          "A decision with two branches",
+          "A rule that repeats forever"
+        ],
+        "answer": 0,
+        "why": "A variable stores a value. Conditions test values and loops repeat instructions."
+      },
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 4,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 82."
+    },
+    {
+      "title": "Conditionals choose a branch",
+      "lines": [
+        "IF a test is true, follow one branch",
+        "ELSE, follow the other branch",
+        "The boundary value matters"
+      ],
+      "notes": "Suppose we include videos lasting at most 60 seconds. An item of exactly 60 seconds passes the condition duration less than or equal to 60. It would fail a condition duration less than 60. This tiny distinction changes an outcome for the creator. A conditional does not guess what to do. It evaluates a stated test. A missing duration needs a separate rule because missing is not the same as zero. The person designing that rule decides whether to exclude the item, request a value or treat the uncertainty in another way.",
+      "pages": "83",
+      "visual": null,
+      "table": null,
+      "code": "IF duration <= 60\n    include item\nELSE\n    exclude item",
+      "chart": null,
+      "prompt": "What happens to an item lasting exactly 60 seconds? What if duration is missing?",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 5,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 83."
+    },
+    {
+      "title": "Loops repeat a set of instructions",
+      "lines": [
+        "FOR each item, apply the same test",
+        "Update the trace after each item",
+        "Stop when the finite list ends"
+      ],
+      "notes": "A loop lets a procedure apply instructions to several records. In a for-each loop, the next record changes each time. If the procedure never moves to the next record, it may fail to terminate. A while loop repeats while a condition remains true, so its instructions must eventually change the condition or provide another exit. On paper, place your finger on the current record and move it only when the loop advances. Record a variable after each pass. This keeps the trace tied to the actual sequence.",
+      "pages": "83",
+      "visual": null,
+      "table": null,
+      "code": "total = 0\nFOR each item in the list\n    IF duration <= 60\n        total = total + 1\nOUTPUT total",
+      "chart": null,
+      "prompt": "Trace durations 30, 75 and 60. How many items pass?",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 6,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 83."
+    },
+    {
+      "title": "One procedure, several representations",
+      "lines": [
+        "Natural language explains a procedure in words",
+        "A flowchart makes sequence and branches visible",
+        "Code expresses instructions in a programming language"
+      ],
+      "notes": "Read the worked flowchart from top to bottom. The oval starts or ends the procedure, the parallelogram reads input, the diamond tests a condition and the rectangles perform actions. Arrows show sequence. Here a known numeric duration of 60 follows YES to INCLUDE, then STOP. A value of 75 follows NO to EXCLUDE, then STOP. Each representation should describe the same decisions. Natural language is accessible to people who do not code, but vague wording can hide ambiguity. A flowchart makes a branch or return to a previous test visible. Code allows a computer to execute the procedure, but syntax depends on the programming language. Pseudocode is a planning notation that resembles code without requiring one language. When translating, preserve the condition, order and stopping rule. A prettier representation is not an improvement if it changes the procedure.",
+      "pages": "83",
+      "visual": "flowchart-duration-v3.png",
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": "Trace the YES and NO paths. Which shape holds the condition? Keep the boundary identical.",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 7,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 83.",
+      "alt": "Flowchart: START, READ numeric duration, test duration <= 60. YES includes the item, NO excludes it. Both branches STOP. Oval start/stop, parallelogram input, diamond condition and rectangle process."
+    },
+    {
+      "title": "Algorithm, pseudocode and code",
+      "lines": [
+        "Algorithm: the underlying procedure",
+        "Pseudocode: a readable planning representation",
+        "Code: instructions written for a language and runtime"
+      ],
+      "notes": "The same algorithm can be implemented in several programming languages. Writing Python does not automatically make the procedure correct. Developers normally specify the task, represent the procedure, implement it and test its behaviour on ordinary and unusual inputs. Boundary and missing values matter. In Digital Society, you need enough precision to explain a mechanism. You are not required to turn every case response into a software tutorial. When a code example appears, read it line by line and connect the values to the people or objects they represent.",
+      "pages": "83–84",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": null,
+      "quiz": {
+        "q": "Which should remain the same when a rule moves from prose to code?",
+        "options": [
+          "The font",
+          "The decision logic and stopping rule",
+          "The programming language"
+        ],
+        "answer": 1,
+        "why": "A change of representation should preserve the procedure."
+      },
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 8,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 83–84."
+    },
+    {
+      "title": "Searching finds a target",
+      "lines": [
+        "Linear search checks records one at a time",
+        "Stop at the first match, or at the end",
+        "A failed search must still terminate"
+      ],
+      "notes": "Take the list B4, B1, B3, B2 and search for B3. Compare B4 with the target, then B1, then B3. The target appears after three comparisons. Searching for B9 requires all four comparisons and returns no match. This is linear search. Its work grows with the number of records inspected. Other searches use different structures or assumptions. Do not call an algorithm efficient without naming what work you are counting and what input conditions you have assumed.",
+      "pages": "84",
+      "visual": null,
+      "table": [
+        [
+          "Comparison",
+          "Record",
+          "Match B3?"
+        ],
+        [
+          "1",
+          "B4",
+          "No"
+        ],
+        [
+          "2",
+          "B1",
+          "No"
+        ],
+        [
+          "3",
+          "B3",
+          "Yes: stop"
+        ]
+      ],
+      "code": null,
+      "chart": null,
+      "prompt": "Predict the number of comparisons for B2 and for B9 before opening TraceLab.",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": "../sim/search-sort.html",
+      "number": 9,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 84."
+    },
+    {
+      "title": "Sorting changes the order",
+      "lines": [
+        "Sort arranges existing items by a stated key",
+        "Bubble sort compares adjacent values",
+        "One pass may leave part of the list unsorted"
+      ],
+      "notes": "Start with 3, 1, 2 and sort in ascending order. Compare 3 and 1, then swap them because 3 is larger. The list becomes 1, 3, 2. Compare 3 and 2 and swap again. The list becomes 1, 2, 3. In longer lists, another pass may still be needed. A stop rule can end the process after a complete pass with no swaps. Sorting does not make the data more accurate. It orders the values you supplied, including errors. State how ties and missing values are handled.",
+      "pages": "84",
+      "visual": null,
+      "table": [
+        [
+          "State",
+          "Values",
+          "Action"
+        ],
+        [
+          "Start",
+          "3, 1, 2",
+          "Compare first pair"
+        ],
+        [
+          "After swap",
+          "1, 3, 2",
+          "Compare next pair"
+        ],
+        [
+          "After swap",
+          "1, 2, 3",
+          "End this pass"
+        ]
+      ],
+      "code": null,
+      "chart": null,
+      "prompt": "Try one pass on 4, 2, 3, 1. Has the whole list finished sorting?",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 10,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 84."
+    },
+    {
+      "title": "Filtering and counting",
+      "lines": [
+        "Filter: keep records that meet a condition",
+        "Count: report how many records meet it",
+        "Sort: order records, including those a filter might remove"
+      ],
+      "notes": "Use three library records: A has 10 loans, B has 4 and C has 12. Filtering for at least 10 loans keeps A and C. Counting the matching records gives two. Sorting all records by loans gives C, A, B. These operations answer different questions. A filter can determine whose item is eligible before a ranking rule is applied. A count can become an input to a later decision. Explain the pipeline rather than using search, sort and filter as interchangeable terms.",
+      "pages": "84",
+      "visual": null,
+      "table": [
+        [
+          "Task",
+          "Output"
+        ],
+        [
+          "Filter loans >= 10",
+          "A and C"
+        ],
+        [
+          "Count matches",
+          "2 records"
+        ],
+        [
+          "Sort all, descending loans",
+          "C, A, B"
+        ]
+      ],
+      "code": null,
+      "chart": null,
+      "prompt": null,
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 11,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 84."
+    },
+    {
+      "title": "Efficiency needs a measure",
+      "lines": [
+        "Possible measures: comparisons, time or memory",
+        "Input size and assumptions affect the result",
+        "Fast execution and a fair decision are separate tests"
+      ],
+      "notes": "Efficiency concerns resources used to perform a task. A linear search can be compared by its number of comparisons on a particular list. A different search may need sorted input, which itself takes work. Timing a program also depends on hardware and implementation. A procedure can be extremely fast while excluding a group unfairly. It can be transparent while using an unsuitable objective. In a judgement, identify the relevant efficiency measure and the social criterion instead of collapsing both into “better”.",
+      "pages": "81, 84–86",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": null,
+      "quiz": {
+        "q": "A faster hiring rule excludes qualified applicants. What has speed established?",
+        "options": [
+          "That the rule is fair",
+          "An improvement in one efficiency measure",
+          "That human review is unnecessary"
+        ],
+        "answer": 1,
+        "why": "An efficiency result does not establish fairness, accuracy or an appropriate purpose."
+      },
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 12,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 81, 84–86."
+    },
+    {
+      "title": "Prioritizing turns a goal into an order",
+      "lines": [
+        "A ranking score combines chosen signals",
+        "Weights determine how strongly each signal counts",
+        "A tie-break makes equal scores reproducible"
+      ],
+      "notes": "Our invented museum feed has three items. Each has a completion rate c between zero and one and a new-topic flag m, either zero or one. We can favour familiarity or discovery by changing weights. The score is a classroom model, not an actual platform algorithm. The designer has chosen the signals, scale and goal. If two scores tie, item ID will decide their order here. That tie-break is also a design choice. A ranking is an output of these choices, not a direct measurement of quality.",
+      "pages": "85",
+      "visual": null,
+      "table": [
+        [
+          "Item",
+          "Completion c",
+          "New topic m"
+        ],
+        [
+          "M1",
+          "0.8",
+          "1"
+        ],
+        [
+          "M2",
+          "0.9",
+          "0"
+        ],
+        [
+          "M3",
+          "0.5",
+          "0"
+        ]
+      ],
+      "code": null,
+      "chart": null,
+      "prompt": "Which item should lead if discovering an unfamiliar topic is our priority?",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 13,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 85."
+    },
+    {
+      "title": "A changed objective: prediction",
+      "lines": [
+        "Rule A: score = c + 2m",
+        "Rule B: score = 3c + 0.2m",
+        "Use the same inputs to compare the rules"
+      ],
+      "notes": "Before calculating, predict which rule is more likely to lift the new-topic item. Rule A gives the flag a contribution of two, while the completion contribution can be at most one. Rule B gives completion up to three, while the flag contributes only point two. Those scales matter. Copy the inputs from the previous slide and calculate all three scores for each rule. Write your prediction before moving on. If your prediction changes, identify which term in the calculation caused it.",
+      "pages": "85",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": "Calculate M1, M2 and M3 for both rules. Record your prediction before revealing the next slide.",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "predict",
+      "link": null,
+      "number": 14,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 85."
+    },
+    {
+      "title": "A changed objective: worked result",
+      "lines": [
+        "Rule A ranks M1 first",
+        "Rule B ranks M2 first",
+        "The changed weights alter whose item receives exposure"
+      ],
+      "notes": "For Rule A, M1 scores zero point eight plus two, which equals two point eight. M2 scores zero point nine, and M3 scores zero point five. For Rule B, M1 scores two point four plus point two, or two point six. M2 scores two point seven, and M3 scores one point five. M2 overtakes M1. The arithmetic supports a conclusion about this ranking. It does not measure satisfaction, creator income or actual cultural diversity. Those consequences need further data and evidence. Explain the calculation before discussing a possible stakeholder effect.",
+      "pages": "85",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": {
+        "categories": [
+          "M1",
+          "M2",
+          "M3"
+        ],
+        "series": [
+          {
+            "name": "Rule A",
+            "values": [
+              2.8,
+              0.9,
+              0.5
+            ]
+          },
+          {
+            "name": "Rule B",
+            "values": [
+              2.6,
+              2.7,
+              1.5
+            ]
+          }
+        ],
+        "unit": "Synthetic score"
+      },
+      "prompt": "Explain why M2 overtakes M1. Name one outcome this chart cannot establish.",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "reveal",
+      "link": null,
+      "number": 15,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 85."
+    },
+    {
+      "title": "Classifying and associating",
+      "lines": [
+        "Classifying assigns records to a category",
+        "Associating identifies patterns of items occurring together",
+        "A pattern can guide a decision without proving its cause"
+      ],
+      "notes": "A priority rule could classify tickets as high, medium or low urgency. An association rule could identify that customers who buy bread also often buy soup. The first assigns a label, while the second describes a relationship in data. A shop might use that association to place items together, but the purchases could reflect weather, promotions or customer habits. The association alone does not establish that buying bread causes soup purchases. These distinctions also matter when a system predicts interests or labels a person as risky.",
+      "pages": "85",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": null,
+      "quiz": {
+        "q": "A database shows two products are often bought together. What does this support?",
+        "options": [
+          "An association in the observed data",
+          "Proof that one purchase causes the other",
+          "A guaranteed future purchase"
+        ],
+        "answer": 0,
+        "why": "Co-occurrence supports a pattern. Causal claims need more evidence."
+      },
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 16,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 85."
+    },
+    {
+      "title": "Rules and learned models",
+      "lines": [
+        "A hand-written rule specifies the calculation",
+        "A learned model uses data to adjust internal parameters",
+        "Both depend on chosen data, objectives and evaluation"
+      ],
+      "notes": "Our score formula has explicit weights that we selected. A machine-learning system can instead fit parameters to examples. A neural network is one family of learned models. You do not need its detailed mathematics this week. You do need to explain that people choose the training data, the objective and the measures used to judge success. A learned result does not escape human decisions. We return to model training in chapter 3.6. This slide establishes the connection between data, algorithms and artificial intelligence required by the chapter reflection.",
+      "pages": "85, 91",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": null,
+      "quiz": null,
+      "source": "guide",
+      "mode": "teach",
+      "link": null,
+      "number": 17,
+      "source_note": "IB Digital Society guide, local April 2026 revision, sections 3.1H, 3.2A–E and 4.2A–D. Assessment authority. Textbook connection: pp. 85, 91."
+    },
+    {
+      "title": "The complete decision pipeline",
+      "lines": [
+        "Collect and validate the input",
+        "Apply eligibility rules and calculate scores",
+        "Order results, present them and record the response"
+      ],
+      "notes": "A recommender involves several algorithms and human decisions rather than one magical rule. A system might validate records, remove ineligible items, score the remaining items, sort them and display a selection. The display creates new interactions that can be recorded for later recommendations. A software developer has to implement and test this pipeline. The model can change over time. When explaining a real system, distinguish steps established by a source from steps that you infer or propose. Our simplified model lets us practise tracing, but it does not reveal a platform’s private code.",
+      "pages": "84–85, 91",
+      "visual": "signal-map-v2.svg",
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": "Identify where a missing value could change this pipeline.",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 18,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 84–85, 91.",
+      "alt": "Teaching diagram: The complete decision pipeline. Its relationships are explained in the visible transcript."
+    },
+    {
+      "title": "Independent transfer: a library queue",
+      "lines": [
+        "A school library prioritizes reservation requests",
+        "Propose one input, one condition and a stopping rule",
+        "Explain a possible loss caused by your chosen priority"
+      ],
+      "notes": "Close your notes before trying this changed context. A library has more requests than available copies. It can favour earliest requests, longest waiting time or students whose course requires the book. Choose an objective and describe a finite rule. Do not copy the museum formula without checking whether its inputs make sense. Explain one group that might lose priority and one piece of evidence you would need to judge the result. This is practice for transfer. Your teacher will use your explanation to identify the next teaching step.",
+      "pages": "81–85",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": "Explain your proposed rule in four sentences. Keep the input, procedure, output and trade-off distinct.",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "transfer",
+      "link": null,
+      "number": 19,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 81–85."
+    },
+    {
+      "title": "Chapter 3.2: the knowledge to carry forward",
+      "lines": [
+        "Describe characteristics and components",
+        "Trace a representation and explain its use",
+        "Evaluate the decisions and dilemmas behind a result"
+      ],
+      "notes": "The first half of chapter 3.2 gives us the vocabulary and mechanisms needed for the second half. A strong answer can trace a decision using a specific input, then explain an effect for a stakeholder and judge the rule against a criterion. The next deck teaches bias, human judgement, transparency and accountability. Chapter pages 90 and 91 add HL extension activities, CAS and reflection. This SL route uses the reflection connections but does not assign the HL tasks. Return to a slide you could not explain without notes and try a new example after a delay.",
+      "pages": "81–91",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": null,
+      "quiz": {
+        "q": "Which explanation demonstrates a mechanism?",
+        "options": [
+          "Algorithms have a large impact",
+          "A larger discovery weight lifts M1, so it is displayed before M2",
+          "Platforms are powerful"
+        ],
+        "answer": 1,
+        "why": "The explanation connects a specific change in the rule to an observable output."
+      },
+      "source": "textbook",
+      "mode": "teach",
+      "link": "../paper-practice.html",
+      "number": 20,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 81–91."
+    }
+  ]
+}
