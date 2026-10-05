@@ -1,0 +1,359 @@
+[
+  {
+    "section": "2026-10-05 \u00b7 ibds-26-s03-d10",
+    "title": "Who gets to choose what you see?",
+    "img": "assets/feed-people-concept-v2.png",
+    "alt": "Conceptual AI illustration of a generic feed, creators, a reviewer and an analyst. Not a real platform or evidence of effects.",
+    "cap": "AI-generated conceptual illustration \u00b7 interpret the roles; not case evidence.",
+    "body": "<p class=\"big\">Our real case: TikTok recommendations and the EU investigation.</p><p>Your invented commission: brief a school digital-wellbeing group and student media team. Choose whether engagement or discovery deserves priority.</p><p><a href=\"case-file.html\">Open the bounded evidence</a></p>",
+    "notes": "The illustration represents creators, a viewer and people who review a system. It is conceptual, not a photograph or evidence. This week you will trace ranking, investigate how exposure produces data, and weigh creator opportunity against user risk. Your final judgement must use evidence and identify uncertainty. Monday\u2019s separate Sprint 2 retry assesses identity and data flows, not feed ranking.",
+    "task": "Without notes, identify an input, a rule and an output. Who is missing from this illustration? Who can change the objective?",
+    "quiz": null
+  },
+  {
+    "section": "2026-10-05 \u00b7 ibds-26-s03-d10",
+    "title": "From a record to a finite result",
+    "img": "assets/algorithm-v2.svg",
+    "alt": "Museum input records pass a validity condition, a finite record-processing loop and a sort with a tie-break. Missing data must have a declared policy.",
+    "cap": "Original annotated teaching schematic \u00b7 full text equivalent is in the narration.",
+    "body": "<p class=\"big\">Input \u2192 condition \u2192 loop \u2192 output.</p><p>Retrieve pp. 81\u201385. A search stops at a match or the end. A filter keeps every qualifying row. A sort orders a set using a key and tie-break.</p>",
+    "notes": "In the parallel museum model, the input is a table of exhibit records. A condition tests whether the record is usable. A loop applies a rule to each record and ends after the last. A sort orders valid records. Search, filter and sort do different jobs. Unknown visits are not measured zero visits; declare a policy before scoring.",
+    "task": "Trace one record aloud. If it fails the validity condition, which later operations are skipped?",
+    "quiz": null
+  },
+  {
+    "section": "2026-10-05 \u00b7 ibds-26-s03-d10",
+    "title": "Trace it by hand, then test it",
+    "img": "assets/algorithm-v2.svg",
+    "alt": "Museum input records pass a validity condition, a finite record-processing loop and a sort with a tie-break. Missing data must have a declared policy.",
+    "cap": "Original annotated teaching schematic \u00b7 full text equivalent is in the narration.",
+    "body": "<div class=\"embedded-lab\"><p><b>Hand first:</b> Predict the first search match, all filter matches and sorted order. Write the missing-data policy and stopping rule.</p><button class=\"launch-lab\" data-url=\"sim/search-sort.html\" data-title=\"Trace Lab\">I have a hand prediction \u2014 open Trace Lab</button><div class=\"lab-stage\"></div><p class=\"small\">Synthetic model. Keep the predicted and observed results. What does this model omit about the real case? Return to the original workbook response after comparing.</p></div>",
+    "notes": "The Trace Lab uses fictional records so you can inspect every operation. Search for a match in order, filter by a condition, and sort the qualifying results. Record your prediction before opening the model. If its result differs, locate the first record where your trace diverged. An accurate simulation trace establishes what this rule does, not what TikTok privately implements.",
+    "task": "What should you see? The same records processed under the stated rule. Stuck? Check the first condition, then the tie-break. Save the corrected trace in d10.",
+    "quiz": null
+  },
+  {
+    "section": "2026-10-05 \u00b7 ibds-26-s03-d10",
+    "title": "Unknown is a choice about evidence",
+    "img": "assets/evidence-ladder-v2.svg",
+    "alt": "Observation can support a pattern; a mechanism explanation needs a rule; claims of intent need evidence of objectives and decisions. An implication needs a supported impact and stated conditions.",
+    "cap": "Original annotated teaching schematic \u00b7 full text equivalent is in the narration.",
+    "body": "<p class=\"big\">A missing value needs a policy, not a guess.</p><p>Compare: exclude a record, flag it for review, or use a declared default. Each changes the available evidence and possibly visibility.</p>",
+    "notes": "The top row separates observation, mechanism and claims of intent or impact. A missing interaction may mean an item was never shown. Treating it as zero can disadvantage the unseen item. A default is a model assumption. You can defend a policy while admitting what information it discards. A pattern in logs does not reveal a designer\u2019s intention.",
+    "task": "A museum record has no exposure count. Which policy would you defend, and whose opportunity does it change?",
+    "quiz": {
+      "q": "What does an unknown watch value establish?",
+      "options": [
+        "The viewer disliked the item",
+        "The value was not observed in this dataset",
+        "The designer deliberately hid it"
+      ],
+      "answer": 1,
+      "why": "Neither a dislike nor an intention follows from an unknown value."
+    }
+  },
+  {
+    "section": "2026-10-05 \u00b7 ibds-26-s03-d10",
+    "title": "Keep the decision with the learner",
+    "img": "assets/signal-map-v2.svg",
+    "alt": "Interactions, video information and account settings enter ranking and filtering. An ordered feed appears. Human objectives and controls shape it; the provider description does not disclose current weights.",
+    "cap": "Original annotated teaching schematic \u00b7 full text equivalent is in the narration.",
+    "body": "<div class=\"video-card\"><div class=\"tag\">VIDEO INQUIRY \u00b7 June 2026</div><p><b>Jen Golbeck & Shalini Kantayya: algorithms and control</b></p><p>Suggested excerpt: 0:00\u20133:42; inherited metadata, preview before class. Teacher preview pending. Watch inside the planned lab time; the source card and transcript link provide the accessible alternative.</p><button class=\"launch-video\" data-url=\"https://embed.ted.com/talks/jen_golbeck_and_shalini_kantayya_how_algorithms_manipulate_you_and_how_to_fight_back\" data-title=\"Jen Golbeck & Shalini Kantayya: algorithms and control\">Load official TED player</button><div class=\"video-stage\"></div><p><a href=\"https://www.ted.com/talks/jen_golbeck_and_shalini_kantayya_how_algorithms_manipulate_you_and_how_to_fight_back\">Official page and transcript</a></p></div><p><b>Paper 1 rehearsal:</b> Outline two components used in an algorithm that ranks short videos. [6]</p>",
+    "notes": "Use the video as a perspective to question, not a markscheme. Ask which example is a mechanism claim and which is a judgement about control. The Paper 1 prompt is partial original classroom practice: outline two components with relevant detail. It does not become an official six-mark assessment. This clip can replace part of guided lab; preserve the twenty-minute independent Sprint 2 retry.",
+    "task": "Name one claim from the clip and evidence you would need to test it. Then move to the teacher-held retry after feedback.",
+    "quiz": {
+      "q": "Does the feed practice replace Monday\u2019s Sprint 2 retry?",
+      "options": [
+        "Yes, both are algorithms",
+        "No, the retry retains its identity/data-flow construct"
+      ],
+      "answer": 1,
+      "why": "The existing task ibds-26-s02-d08 remains attempt 2, /8."
+    }
+  },
+  {
+    "section": "2026-10-06 \u00b7 ibds-26-s03-d03",
+    "title": "What TikTok states \u2014 and what remains hidden",
+    "img": "assets/signal-map-v2.svg",
+    "alt": "Interactions, video information and account settings enter ranking and filtering. An ordered feed appears. Human objectives and controls shape it; the provider description does not disclose current weights.",
+    "cap": "Original annotated teaching schematic \u00b7 full text equivalent is in the narration.",
+    "body": "<p class=\"big\">Three signal groups enter a recommendation system.</p><p>Source A, 2020: interactions; video information; account/device settings. Treat this as a historical provider account, with undisclosed current weights.</p>",
+    "notes": "Read the diagram from left to right. TikTok\u2019s 2020 account describes interaction, video and device or account signals. It also describes diversification. The output is an ordered opportunity to see content, not a measurement of what every person wants. The diagram is an original schematic based on the provider account; it is not TikTok\u2019s implementation or a disclosure of 2026 parameters.",
+    "task": "Retrieve Monday\u2019s missing-data rule. Which signal might be a weak proxy for interest? Who decides that proxy is useful?",
+    "quiz": null
+  },
+  {
+    "section": "2026-10-06 \u00b7 ibds-26-s03-d03",
+    "title": "Join the right record before calculating",
+    "img": "assets/algorithm-v2.svg",
+    "alt": "Museum input records pass a validity condition, a finite record-processing loop and a sort with a tie-break. Missing data must have a declared policy.",
+    "cap": "Original annotated teaching schematic \u00b7 full text equivalent is in the narration.",
+    "body": "<p class=\"big\">Correct arithmetic cannot repair a wrong join.</p><p>Join clips to creators using creator_id, not row position. Normalize completion using the declared denominator. Check units and missing values.</p>",
+    "notes": "The Loopline tables are invented. A key connects the right creator to each clip even if rows move. A completion ratio depends on its denominator; dividing by a different quantity changes its meaning. Before weighting a feature, check its range and units. In the museum example, completion .8 means eight-tenths of the defined opportunity, not a raw eight watches.",
+    "task": "What should you see? The same creator identity after reordering rows. Stuck? Check the key, denominator and missing-data rule before the score.",
+    "quiz": null
+  },
+  {
+    "section": "2026-10-06 \u00b7 ibds-26-s03-d03",
+    "title": "A new objective can change who is first",
+    "img": null,
+    "alt": "Conceptual AI illustration of a generic feed, creators, a reviewer and an analyst. Not a real platform or evidence of effects.",
+    "cap": "Original annotated teaching schematic \u00b7 full text equivalent is in the narration.",
+    "body": "<div class=\"ranking-lab\"><p><b>Parallel museum example \u00b7 synthetic.</b> M1: completion .8, topic match 1. M2: .9, 0. M3: .5, 0.</p><p>Rule A = completion + 2 \u00d7 match. Rule B = 3 \u00d7 completion + .2 \u00d7 match.</p><label>Your predicted leader under each rule<input class=\"rank-prediction\" aria-label=\"Predicted museum leaders\" placeholder=\"A: \u2026 B: \u2026\"></label><button class=\"reveal-ranking\">I have predicted \u2014 reveal comparison</button><div class=\"rank-result\" hidden></div></div>",
+    "notes": "Calculate before revealing. Under A, M1 scores 2.8, M2 .9 and M3 .5. Under B, M1 scores 2.6, M2 2.7 and M3 1.5. The leading item changes from M1 to M2 because completion has more influence relative to topic match. This explains the operation, but does not establish visitor satisfaction or designer intent. Apply the process to your own Loopline records rather than copying these values.",
+    "task": "Which term caused the move? What remains unchanged? Return to d03 with one numerical comparison and one stakeholder consequence.",
+    "quiz": {
+      "q": "What explains the changed museum leader?",
+      "options": [
+        "M2 became more popular during the test",
+        "Completion has greater relative influence in Rule B",
+        "The model proved visitors prefer M2"
+      ],
+      "answer": 1,
+      "why": "The data stayed constant; the weighting rule changed."
+    }
+  },
+  {
+    "section": "2026-10-06 \u00b7 ibds-26-s03-d03",
+    "title": "Test a priority, not just a slider",
+    "img": "assets/signal-map-v2.svg",
+    "alt": "Interactions, video information and account settings enter ranking and filtering. An ordered feed appears. Human objectives and controls shape it; the provider description does not disclose current weights.",
+    "cap": "Original annotated teaching schematic \u00b7 full text equivalent is in the narration.",
+    "body": "<div class=\"embedded-lab\"><p><b>Hand first:</b> Choose an objective, predict one mover and keep other conditions constant. Do the paper Loopline trace before exploring this separate synthetic model.</p><button class=\"launch-lab\" data-url=\"sim/tune-the-feed.html\" data-title=\"Tune the Feed\">I have a hand prediction \u2014 open Tune the Feed</button><div class=\"lab-stage\"></div><p class=\"small\">Synthetic model. Keep the predicted and observed results. What does this model omit about the real case? Return to the original workbook response after comparing.</p></div>",
+    "notes": "Tune the Feed is a separate fictional model, not a replica of the paper Loopline table or TikTok. Change one goal or setting while preserving others. Compare which creator becomes more visible and the opportunity cost for another. If the model output differs from the paper task, check its features and rules before treating that difference as an error.",
+    "task": "Record one controlled trial. What does the simulation omit about eligibility, moderation and real people?",
+    "quiz": null
+  },
+  {
+    "section": "2026-10-06 \u00b7 ibds-26-s03-d03",
+    "title": "Explain a change through its mechanism",
+    "img": "assets/evidence-ladder-v2.svg",
+    "alt": "Observation can support a pattern; a mechanism explanation needs a rule; claims of intent need evidence of objectives and decisions. An implication needs a supported impact and stated conditions.",
+    "cap": "Original annotated teaching schematic \u00b7 full text equivalent is in the narration.",
+    "body": "<p class=\"big\">Paper 1 application [6] \u00b7 original partial practice.</p><p>Explain how changing a recommendation objective from engagement to discovery could change the visibility of creators. Use your trace and a specific stakeholder.</p>",
+    "notes": "Explanation needs an intermediate operation. State the changed rule, identify how a feature contributes differently, and connect the resulting order to a creator\u2019s opportunity to be seen. The museum example supplies a process model on a different case. Your response uses your own trace; a judgement about whether the change is worthwhile needs a justified trade-off.",
+    "task": "Use this as the 8-minute visibility discussion at the end of the lab, with d03-visibility. Then preserve the 15-minute original independent feedback-loop response. After feedback, identify one missing link.",
+    "quiz": {
+      "q": "Which move makes an explanation stronger?",
+      "options": [
+        "Name \u201calgorithm\u201d repeatedly",
+        "Connect a changed term to a rank and creator outcome"
+      ],
+      "answer": 1,
+      "why": "The intermediate operation makes the causal explanation assessable."
+    }
+  },
+  {
+    "section": "2026-10-07 \u00b7 ibds-26-s03-d04",
+    "title": "More data is not automatically better data",
+    "img": "assets/four-vs-v2.svg",
+    "alt": "Volume is amount; velocity is generation and processing speed; variety is formats and sources; veracity is quality. The 20 and 200 row examples are synthetic.",
+    "cap": "Original annotated teaching schematic \u00b7 full text equivalent is in the narration.",
+    "body": "<p class=\"big\">Review 3.1H and the start of 3.1I, pp. 72\u201374.</p><p>Choose data for a question, then judge volume, velocity, variety and veracity. Collection can already introduce skew.</p>",
+    "notes": "Volume asks how much, velocity how fast, variety what types and veracity how good. Analytics can identify patterns useful for decisions. But the process cannot fix every collection gap. A large interaction-only table omits which items had a chance to be seen. A small table with exposure and interaction can answer a narrower question more defensibly. Collection also raises necessity, consent and representation.",
+    "task": "Compare 20 clean complete records with 200 partial logs. Which is more useful for testing equal opportunity to be seen? Why?",
+    "quiz": null
+  },
+  {
+    "section": "2026-10-07 \u00b7 ibds-26-s03-d04",
+    "title": "Exposure becomes tomorrow\u2019s evidence",
+    "img": "assets/feedback-v2.svg",
+    "alt": "Exposure permits interaction; interaction becomes logged data; the ranking rule uses it for the next exposure. Unseen content lacks an equivalent opportunity. A discovery slot changes exposure.",
+    "cap": "Original annotated teaching schematic \u00b7 full text equivalent is in the narration.",
+    "body": "<div class=\"embedded-lab\"><p><b>Hand first:</b> Predict two rounds of exposure \u2192 interaction \u2192 data \u2192 ranking. Then predict what one reserved discovery slot changes.</p><button class=\"launch-lab\" data-url=\"sim/feedback-loop.html\" data-title=\"Roundtable\">I have a hand prediction \u2014 open Roundtable</button><div class=\"lab-stage\"></div><p class=\"small\">Synthetic model. Keep the predicted and observed results. What does this model omit about the real case? Return to the original workbook response after comparing.</p></div>",
+    "notes": "Read the four arrows in order. Exposure permits interaction; interaction is logged; the ranking uses those logs to select the next exposure. Unseen items lack an equivalent opportunity to accumulate evidence. The Roundtable model makes this dependency visible. A reserved discovery slot changes what can be observed, but the model does not establish long-term user benefit or actual platform behaviour.",
+    "task": "What should you see? Each round changes the next input. Stuck? Label the first arrow whose output you did not carry forward.",
+    "quiz": {
+      "q": "Why might an unseen creator stay unseen?",
+      "options": [
+        "The logs prove their work is unwanted",
+        "The rule keeps rewarding interactions that required prior exposure"
+      ],
+      "answer": 1,
+      "why": "The feedback loop can reinforce unequal opportunities to be observed."
+    }
+  },
+  {
+    "section": "2026-10-07 \u00b7 ibds-26-s03-d04",
+    "title": "Read a preliminary finding carefully",
+    "img": "assets/source-timeline-v2.svg",
+    "alt": "TikTok 2020 states how its recommendations work. The European Commission February 2026 reports a preliminary finding on addictive design, considering multiple features. Compare personalization and risk without treating dates or purposes as direct contradiction.",
+    "cap": "Original annotated teaching schematic \u00b7 full text equivalent is in the narration.",
+    "body": "<p class=\"big\">Source C: EU Commission, 6 February 2026.</p><p>The finding concerns addictive design, with personalization among several features. It is preliminary. It does not isolate the causal effect of this classroom\u2019s ranking rule.</p><p><a href=\"case-file.html#source-C\">Read C\u2019s claim, evidence and limits</a></p>",
+    "notes": "The Commission summarizes an investigation considering research, internal documents and other evidence. Compare it with the provider\u2019s earlier account on personalization and risk. One states a mechanism and safeguards; the other preliminarily assesses a design and its risks. Do not manufacture a direct contradiction from different dates and purposes, and do not turn the preliminary finding into a final ruling.",
+    "task": "Which conclusion can C support? Which claim about a single feature or an individual student exceeds it?",
+    "quiz": null
+  },
+  {
+    "section": "2026-10-07 \u00b7 ibds-26-s03-d04",
+    "title": "People perform the work behind the feed",
+    "img": "assets/platform-labour.svg",
+    "alt": "A creator makes content; a platform ranks and moderates; viewers interact; advertisers fund attention. Value and labour may cross borders. This original schematic does not measure wages.",
+    "cap": "Original annotated teaching schematic \u00b7 full text equivalent is in the narration.",
+    "body": "<p class=\"big\">Review 4.2B, pp. 217\u2013219.</p><p>Creators, moderators, annotators and platform staff do different work. Ask who controls access, terms and remedies. Source L adds a broader platform-labour perspective.</p>",
+    "notes": "A platform depends on work, including content production and moderation. Source L is a historical global platform-work summary, not a current TikTok wage study. The economic chapter distinguishes remote work, small paid tasks and platform-matched gigs. Different workers can have different employment relationships. Analyse opportunity and insecurity without assuming all creators are employees or all work is paid per view.",
+    "task": "Choose two workers. Locate their work in the system and explain one difference in control or bargaining power.",
+    "quiz": null
+  },
+  {
+    "section": "2026-10-07 \u00b7 ibds-26-s03-d04",
+    "title": "Would a discovery slot be enough?",
+    "img": "assets/feedback-v2.svg",
+    "alt": "Exposure permits interaction; interaction becomes logged data; the ranking rule uses it for the next exposure. Unseen content lacks an equivalent opportunity. A discovery slot changes exposure.",
+    "cap": "Original annotated teaching schematic \u00b7 full text equivalent is in the narration.",
+    "body": "<div class=\"video-card\"><div class=\"tag\">VIDEO INQUIRY \u00b7 March 2011</div><p><b>Eli Pariser: filter bubbles</b></p><p>Suggested excerpt: 0:45\u20134:05; historical argument, teacher preview pending. Teacher preview pending. Watch inside the planned lab time; the source card and transcript link provide the accessible alternative.</p><button class=\"launch-video\" data-url=\"https://embed.ted.com/talks/eli_pariser_beware_online_filter_bubbles\" data-title=\"Eli Pariser: filter bubbles\">Load official TED player</button><div class=\"video-stage\"></div><p><a href=\"https://www.ted.com/talks/eli_pariser_beware_online_filter_bubbles\">Official page and transcript</a></p></div>",
+    "notes": "This historical talk supplies an argument about filtering and what users fail to see. It is not a contemporary measurement of TikTok. Use the transcript if playback is unavailable. Ask whether a discovery slot addresses the mechanism you modelled, then test a counter-perspective: a user may value relevance, and a slot alone may leave other risks unchanged.",
+    "task": "Predict who benefits and who may lose from a discovery slot. Support your answer with an arrow in the loop and a limitation.",
+    "quiz": {
+      "q": "What is the legitimate role of this 2011 talk?",
+      "options": [
+        "Current proof of TikTok effects",
+        "A historical perspective to compare and test"
+      ],
+      "answer": 1,
+      "why": "Use dated arguments with their scope visible."
+    }
+  },
+  {
+    "section": "2026-10-08 \u00b7 ibds-26-s03-d05",
+    "title": "Bias, opacity and accountability differ",
+    "img": "assets/dilemmas-v2.svg",
+    "alt": "Bias concerns systematic skew, opacity concerns understanding a decision, and accountability concerns explanation, correction and responsibility. Each requires different evidence and action.",
+    "cap": "Original annotated teaching schematic \u00b7 full text equivalent is in the narration.",
+    "body": "<p class=\"big\">Review 3.2E, pp. 86\u201389 and hiring dilemmas pp. 215\u2013217.</p><p>Bias: systematic skew. Opacity: difficulty understanding a decision. Accountability: explanation, correction and responsibility.</p>",
+    "notes": "Automating a decision can improve speed and consistency while preserving a biased proxy. A hypothetical hiring rule favouring uninterrupted work histories may disadvantage people whose career paths differ. Revealing that rule improves transparency but does not establish fairness. Ask who can contest the result, what evidence is needed and who must respond. Treat textbook examples as historical accounts rather than current product claims.",
+    "task": "Classify one concern as bias, opacity or accountability, then defend the distinction.",
+    "quiz": {
+      "q": "A public rule systematically disadvantages a group. Is transparency sufficient?",
+      "options": [
+        "Yes, everyone can read it",
+        "No, the rule\u2019s outcomes still need scrutiny and remedies"
+      ],
+      "answer": 1,
+      "why": "Transparency and fairness are different questions."
+    }
+  },
+  {
+    "section": "2026-10-08 \u00b7 ibds-26-s03-d05",
+    "title": "Make the intermediate operation visible",
+    "img": "assets/algorithm-v2.svg",
+    "alt": "Museum input records pass a validity condition, a finite record-processing loop and a sort with a tie-break. Missing data must have a declared policy.",
+    "cap": "Original annotated teaching schematic \u00b7 full text equivalent is in the narration.",
+    "body": "<p class=\"big\">Paper 1 explanation uses the trace.</p><p>Input changed \u2192 operation changed \u2192 result changed \u2192 stakeholder consequence.</p><p>\u201cThe algorithm amplifies it\u201d names the result but leaves the operation unexplained.</p>",
+    "notes": "Use the museum example to practise the reasoning move. A different weight changes a feature\u2019s contribution and may change the order. A missing-data condition changes whether a record reaches the sort at all. Select the operation your own trace supports. Do not write a generic chain that claims a ranking always guarantees more income.",
+    "task": "Before the d05 paragraph, identify the exact row or arrow one sentence will explain. Keep the registered quiz /12 separate.",
+    "quiz": null
+  },
+  {
+    "section": "2026-10-08 \u00b7 ibds-26-s03-d05",
+    "title": "Build a source passport, then compare",
+    "img": "assets/source-timeline-v2.svg",
+    "alt": "TikTok 2020 states how its recommendations work. The European Commission February 2026 reports a preliminary finding on addictive design, considering multiple features. Compare personalization and risk without treating dates or purposes as direct contradiction.",
+    "cap": "Original annotated teaching schematic \u00b7 full text equivalent is in the narration.",
+    "body": "<p class=\"big\">Locate \u2192 attribute \u2192 inspect evidence \u2192 relate \u2192 limit \u2192 use.</p><p>Source A and C address personalization from different positions. Compare a shared theme; do not summarize one source and stop.</p>",
+    "notes": "A passport makes a claim traceable to a section or paragraph. Record origin, date, purpose, evidence or method, corroboration, limitation and usefulness for this inquiry. A prestigious institution is not a substitute for identifying evidence. A provider source is useful for its stated design; a regulator communication is useful for the scope and status of a finding. Their relationship needs explanation.",
+    "task": "In pairs, find one apparent agreement or disagreement. Is it about date, method, definition or values?",
+    "quiz": null
+  },
+  {
+    "section": "2026-10-08 \u00b7 ibds-26-s03-d05",
+    "title": "A pattern does not prove intent",
+    "img": "assets/evidence-ladder-v2.svg",
+    "alt": "Observation can support a pattern; a mechanism explanation needs a rule; claims of intent need evidence of objectives and decisions. An implication needs a supported impact and stated conditions.",
+    "cap": "Original annotated teaching schematic \u00b7 full text equivalent is in the narration.",
+    "body": "<p class=\"big\">Observed association \u2192 possible explanation \u2192 additional evidence.</p><p>More engagement after more exposure is consistent with several explanations. Intent requires evidence about decisions or objectives.</p>",
+    "notes": "Logs can show that two variables change together. A known rule can help explain that pattern. Claims that a designer intended a specific harm require suitable evidence beyond the correlation. Independent impact claims also require outcome data. State which layer your evidence reaches and identify the missing link rather than adding certainty.",
+    "task": "Fresh check: a music feed increases freshness weight. Explain a plausible ranking change and one claim the data cannot establish.",
+    "quiz": null
+  },
+  {
+    "section": "2026-10-08 \u00b7 ibds-26-s03-d05",
+    "title": "Write now; repair on a fresh case",
+    "img": "assets/evidence-ladder-v2.svg",
+    "alt": "Observation can support a pattern; a mechanism explanation needs a rule; claims of intent need evidence of objectives and decisions. An implication needs a supported impact and stated conditions.",
+    "cap": "Original annotated teaching schematic \u00b7 full text equivalent is in the narration.",
+    "body": "<p class=\"big\">15 minutes: original d05 independent paragraph.</p><p>Use the existing prompt and response box. Formative feedback only; no extra marks added to the registered quiz.</p><p>Extension after the week: Evaluate whether transparency alone is sufficient to address recommendation risks. [8]</p>",
+    "notes": "The independent paragraph is the current task, not another scored paper. Keep its original wording. After teacher feedback, preserve version one and practise the missing reasoning move on a new music-feed case. The eight-mark evaluation prompt is an optional later extension requiring a qualified judgement, counter-perspective and evidence; it does not add work to this class.",
+    "task": "Name your next action from feedback. Tomorrow apply it without notes before reopening the first paragraph.",
+    "quiz": {
+      "q": "What happens to this paragraph\u2019s mark?",
+      "options": [
+        "It increases Thursday\u2019s quiz to /20",
+        "It receives separate formative feedback"
+      ],
+      "answer": 1,
+      "why": "The quiz remains /12 under its existing task identity."
+    }
+  },
+  {
+    "section": "2026-10-09 \u00b7 ibds-26-s03-d06",
+    "title": "Business incentives shape a system\u2019s goals",
+    "img": "assets/business-v2.svg",
+    "alt": "Digital business includes transactions, inventory, communication and analytics. Workforce diversity differs from horizontal, vertical, concentric and conglomerate diversification; examples are conceptual.",
+    "cap": "Original annotated teaching schematic \u00b7 full text equivalent is in the narration.",
+    "body": "<p class=\"big\">Review 4.2A, pp. 213\u2013217.</p><p>Classify business operations, diversification and workforce diversity. Then ask which incentive might shape a recommendation objective.</p>",
+    "notes": "Digital business includes transactions, communication, inventory and analytics. Diversification is expansion of business activity; workforce diversity concerns representation and inclusion. The diagram gives three diversification strategies, with conglomerate as a fourth. A hypothetical platform adding a shop may add a complementary service, but you must explain the relationship. A plausible incentive is an inference until supported by evidence.",
+    "task": "Without notes, repair Thursday\u2019s missing link. Classify a creator shop and explain a possible trade-off.",
+    "quiz": null
+  },
+  {
+    "section": "2026-10-09 \u00b7 ibds-26-s03-d06",
+    "title": "Views are not a payment formula",
+    "img": "assets/revenue-v2.svg",
+    "alt": "Watch page ads pay 55 percent of net ad revenue; Shorts pay 45 percent of the allocated Creator Pool share. The 100-unit examples are synthetic and cannot predict a creator income.",
+    "cap": "Original annotated teaching schematic \u00b7 full text equivalent is in the narration.",
+    "body": "<p class=\"big\">Source Y: eligible revenue and allocation matter.</p><p>55% net Watch Page ad revenue \u2260 45% allocated Shorts Creator Pool share. The bases differ; views alone do not supply either base.</p>",
+    "notes": "Read each percentage together with its denominator. The hundred-unit arithmetic illustrates the policy, not actual creator earnings. Eligibility, allocation and revenue values matter. A higher ranking may create more opportunities to be seen, but it does not establish an increase in earnings. To test that impact, obtain appropriate revenue and eligibility evidence.",
+    "task": "A creator doubles exposure. What can you infer, what remains unresolved, and which evidence would you request?",
+    "quiz": null
+  },
+  {
+    "section": "2026-10-09 \u00b7 ibds-26-s03-d06",
+    "title": "Work, money and shared assets differ",
+    "img": "assets/work-exchanges-v2.svg",
+    "alt": "Crowdsourcing seeks ideas or work; crowdfunding seeks money; microwork and gigs involve paid tasks or services; sharing involves access to assets or services.",
+    "cap": "Original annotated teaching schematic \u00b7 full text equivalent is in the narration.",
+    "body": "<div class=\"exchange-grid\"><div><b>Crowdsourcing</b><br>Ideas or work</div><div><b>Crowdfunding</b><br>Money for a project</div><div><b>Microwork / gigs</b><br>Paid tasks / matched services</div><div><b>Sharing</b><br>Access to an asset or service</div></div><p>Review pp. 217\u2013219: remote work, security, opportunity and terms. Some relationships overlap.</p>",
+    "notes": "Classify the exchange rather than assuming every platform uses the same economy. A campaign seeking funds differs from a request for volunteers to contribute ideas. A paid translation task is work, while access to a shared camera is an asset relationship. Remote work can increase flexibility while changing security and access demands. Do not sign up for any labour platform to complete this lesson.",
+    "task": "Classify four examples from the chapter review. Compare who controls price, access and conditions.",
+    "quiz": null
+  },
+  {
+    "section": "2026-10-09 \u00b7 ibds-26-s03-d06",
+    "title": "Visibility can matter without proving every outcome",
+    "img": "assets/feed-people-concept-v2.png",
+    "alt": "Conceptual AI illustration of a generic feed, creators, a reviewer and an analyst. Not a real platform or evidence of effects.",
+    "cap": "AI-generated conceptual illustration \u00b7 interpret the roles; not case evidence.",
+    "body": "<p class=\"big\">Mechanism \u2192 supported impact \u2192 conditional implication.</p><p>More opportunities to encounter minority-language work could support expression. Whether this becomes sustained access or income remains an evidence question.</p>",
+    "notes": "Use the conceptual illustration to ask whose voices reach the viewer and whose work remains absent. A ranking change can redistribute opportunities. Its cultural importance depends on audience, language, access and sustained exposure. Select a credible counter-perspective, such as relevance or unequal benefits. Qualify your judgement with the evidence you have rather than adding unsupported numbers.",
+    "task": "In the original d06 response, choose creator income or cultural visibility. Add a supported impact, a conditional implication and the strongest challenge.",
+    "quiz": {
+      "q": "What makes an implication defensible?",
+      "options": [
+        "A large claim about all society",
+        "A supported impact connected to significance under stated conditions"
+      ],
+      "answer": 1,
+      "why": "Show the intervening relationship and evidence limit."
+    }
+  },
+  {
+    "section": "2026-10-09 \u00b7 ibds-26-s03-d06",
+    "title": "Synthesize by theme, not by source",
+    "img": "assets/source-timeline-v2.svg",
+    "alt": "TikTok 2020 states how its recommendations work. The European Commission February 2026 reports a preliminary finding on addictive design, considering multiple features. Compare personalization and risk without treating dates or purposes as direct contradiction.",
+    "cap": "Original annotated teaching schematic \u00b7 full text equivalent is in the narration.",
+    "body": "<p class=\"big\">Paper 2: A + C on personalization and risk.</p><p>[2] Identify signals. [4] Explain feedback. [6] Compare sources. [12] Evaluate using sources and knowledge \u2014 later extension.</p><p><a href=\"paper-practice.html#p2\">Open the complete questions</a></p>",
+    "notes": "Friday\u2019s comparison asks you to connect two sources on a shared theme. A\u2019s provider account describes signals and diversification; C\u2019s preliminary finding considers personalization among several design features. Explain agreement, tension and differences in evidence or scope. Use your technical knowledge to interpret the sources. The twelve-mark synthesis is a later d07 extension, not a fourth task squeezed into today.",
+    "task": "During the 30-minute inquiry, answer Q1\u2013Q3 as brief practice, prioritizing comparison. Preserve the 15-minute independent consequence chain.",
+    "quiz": {
+      "q": "Which structure supports synthesis?",
+      "options": [
+        "A whole paragraph on A, then a whole paragraph on C, with no relationship",
+        "A theme connected to both sources, interpreted with knowledge and limits"
+      ],
+      "answer": 1,
+      "why": "The relationship between sources drives synthesis."
+    }
+  }
+]

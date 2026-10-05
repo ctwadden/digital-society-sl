@@ -1,0 +1,8 @@
+# Deliverables are binary; preserve the original frozen snapshot bytes.
+*.pdf binary
+*.pptx binary
+*.png binary
+*.zip binary
+*.xlsx binary
+*.csv whitespace=cr-at-eol
+sprints/redesign-the-feed/original/** -whitespace

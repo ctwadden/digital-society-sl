@@ -1,0 +1,520 @@
+{
+  "slug": "04-business-labour",
+  "title": "Digital business and labour: incentives, opportunities and power",
+  "scope": "4.2A and working-practice parts of 4.2B · pp. 213–219",
+  "slides": [
+    {
+      "title": "Digital systems change how organizations work",
+      "lines": [
+        "Transactions create records for operations",
+        "Shared tools can coordinate people across places",
+        "Platform rules can distribute access to customers"
+      ],
+      "notes": "The economic context examines how people work and exchange goods and services. A business uses digital systems to coordinate employees, record transactions and understand demand. A platform can also decide which seller or creator a customer encounters. We will connect a system’s mechanism to opportunities and constraints for different people. A successful business outcome does not automatically mean every worker or customer benefits. This deck covers the assigned business and working-practice sections, and identifies the remainder of the economic chapter.",
+      "pages": "213",
+      "visual": "business-v2.svg",
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": "Name one decision a business can make using transaction records.",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 1,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 213.",
+      "alt": "Teaching diagram: Digital systems change how organizations work. Its relationships are explained in the visible transcript."
+    },
+    {
+      "title": "Operation and organization of a business",
+      "lines": [
+        "Shared calendars and files can coordinate a team",
+        "Databases and transaction systems record activity",
+        "Data analysis can support stock, staffing or service decisions"
+      ],
+      "notes": "Consider a school event shop. Each sale updates a transaction record. Summing sales by item can inform the next stock order. A shared calendar helps volunteers coordinate, and a shared document records decisions. The system connects information to action. The textbook describes movement towards more dynamic teams, but that is a possible organizational change rather than a universal outcome of using software. A company can adopt digital tools while retaining a strict hierarchy. Explain the specific change in the example you use.",
+      "pages": "213–214",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": null,
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 2,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 213–214."
+    },
+    {
+      "title": "Customer value and business incentives",
+      "lines": [
+        "An organization may trade immediate profit for repeat use",
+        "Advertising, subscriptions and commissions reward different outcomes",
+        "The revenue model can influence what a system optimizes"
+      ],
+      "notes": "A subscription service may value renewal, a marketplace may earn a commission on completed sales, and an advertising-funded service may gain from opportunities to show ads. These are possible incentives, not proof of the objective used by every business. A platform’s ranking choice can support one of those outcomes. Distinguish a claim about the business model from evidence about an actual ranking rule. Consider customer value, operating costs and other constraints as well as revenue.",
+      "pages": "213–214",
+      "visual": "revenue-v2.svg",
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": "Which evidence would connect a revenue model to a specific ranking choice?",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 3,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 213–214.",
+      "alt": "Teaching diagram: Customer value and business incentives. Its relationships are explained in the visible transcript."
+    },
+    {
+      "title": "Transaction data becomes a decision",
+      "lines": [
+        "An invented event shop records 12 badge sales and 4 poster sales",
+        "A stock decision can use those totals",
+        "The decision also needs context: stock, price and who attended"
+      ],
+      "notes": "These numbers are invented. Badges may have sold more because they were cheaper or available for longer. A manager might order more badges, but should check whether the poster stock ran out or whether a different audience will attend next time. The mechanism is transaction capture, aggregation, interpretation and a stock decision. The implication is conditional: if the pattern continues and the stock decision matches demand, waste may fall. Avoid turning a single descriptive total into a guaranteed forecast.",
+      "pages": "213–214",
+      "visual": null,
+      "table": [
+        [
+          "Item",
+          "Recorded sales",
+          "Question before ordering"
+        ],
+        [
+          "Badge",
+          "12",
+          "Was stock available throughout?"
+        ],
+        [
+          "Poster",
+          "4",
+          "Did price or stock limit purchases?"
+        ]
+      ],
+      "code": null,
+      "chart": null,
+      "prompt": null,
+      "quiz": {
+        "q": "What does 12 badge sales establish?",
+        "options": [
+          "A recorded past total",
+          "Guaranteed demand at the next event",
+          "The only reason customers chose badges"
+        ],
+        "answer": 0,
+        "why": "A total supports a description. Prediction and cause require more context."
+      },
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 4,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 213–214."
+    },
+    {
+      "title": "Diversification and workforce diversity",
+      "lines": [
+        "Diversification changes products, markets or the supply chain",
+        "Workforce diversity concerns the people in an organization",
+        "Inclusion concerns whether people can participate and feel respected"
+      ],
+      "notes": "The chapter uses diversity in two related but different senses. A business may diversify what it sells, and it may seek a diverse workforce. These should not be confused. An inclusive organization also examines whether people can participate effectively, rather than simply counting demographic categories. Digital recruitment can broaden access, but an unsuitable screening rule can exclude applicants. The next two slides explain the textbook’s four diversification categories using invented examples, before we return to hiring and power.",
+      "pages": "214–215",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": null,
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 5,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 214–215."
+    },
+    {
+      "title": "Horizontal and vertical diversification",
+      "lines": [
+        "Horizontal: add a complementary product or service",
+        "Vertical: take over another part of the supply or production chain",
+        "Classify the relationship, not merely the fact that a company grows"
+      ],
+      "notes": "Using the textbook’s terminology, a video platform adding a messaging service is horizontal diversification because it offers a complementary service. An online seller operating its own delivery fleet is vertical diversification because it takes over a part of its supply or delivery chain. These are invented illustrations. A firm can pursue more than one strategy, so explain which relationship a particular decision changes. Avoid memorizing a company name as if it always belongs to one category.",
+      "pages": "214",
+      "visual": null,
+      "table": [
+        [
+          "Strategy",
+          "Invented action",
+          "Relationship"
+        ],
+        [
+          "Horizontal",
+          "Video service adds messaging",
+          "Complementary service"
+        ],
+        [
+          "Vertical",
+          "Online shop runs delivery fleet",
+          "Another part of its chain"
+        ]
+      ],
+      "code": null,
+      "chart": null,
+      "prompt": null,
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 6,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 214."
+    },
+    {
+      "title": "Concentric and conglomerate diversification",
+      "lines": [
+        "Concentric: adapt an existing line for a wider audience",
+        "Conglomerate: enter an unrelated product or industry",
+        "The distinction follows the textbook’s definitions"
+      ],
+      "notes": "A platform adapting its existing service for business accounts illustrates concentric diversification in this textbook. A game company entering an unrelated agricultural business illustrates conglomerate diversification. The examples clarify the relationship rather than asserting facts about a real company. The textbook’s inquiry on page 215 repeats the word conglomerate in a prompt whose description matches concentric. Use the definitions on page 214 to resolve that printing inconsistency. In a response, justify the category by the change being made.",
+      "pages": "214–215",
+      "visual": null,
+      "table": [
+        [
+          "Strategy",
+          "Invented action",
+          "Relationship"
+        ],
+        [
+          "Concentric",
+          "Existing service adapted for business users",
+          "Wider audience"
+        ],
+        [
+          "Conglomerate",
+          "Game firm enters agriculture",
+          "Unrelated activity"
+        ]
+      ],
+      "code": null,
+      "chart": null,
+      "prompt": null,
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 7,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 214–215."
+    },
+    {
+      "title": "Hiring systems affect opportunity",
+      "lines": [
+        "A system can screen applicants quickly",
+        "Historical labels can preserve past exclusion",
+        "A relevant measure and a challenge route need evaluation"
+      ],
+      "notes": "The chapter discusses automated hiring and psychometric testing as historical examples. A psychometric survey aims to measure capabilities or behavioural characteristics. A screening system may reduce processing time, but its measures must relate to the role and work appropriately for different applicants. We do not treat the textbook’s descriptions of named vendors in 2022 as their current product specifications. For an inquiry, verify present practices and examine the evidence for validity, accessibility and unequal outcomes.",
+      "pages": "215–217",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": null,
+      "quiz": {
+        "q": "What most directly links hiring to algorithmic dilemmas?",
+        "options": [
+          "The appearance of an application page",
+          "The choice of data, labels and screening criteria",
+          "The fact that all firms use identical software"
+        ],
+        "answer": 1,
+        "why": "These decisions can influence whose application is advanced or rejected."
+      },
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 8,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 215–217."
+    },
+    {
+      "title": "A historical case needs a current check",
+      "lines": [
+        "Textbook examples establish the chapter’s original discussion",
+        "Current product details need a current primary source",
+        "The underlying dilemma can remain relevant after a product changes"
+      ],
+      "notes": "An older account of facial or voice analysis cannot establish what a hiring service offers today. We can still learn from its dilemma: whether a measured signal validly supports a consequential employment decision. Label the date, separate the general idea from the vendor claim, and seek current documentation before writing a present-tense case. Our required real cases this week use the dated provider, regulator, YouTube and ILO sources in the case file. This prevents a vivid historical example from becoming an unsupported current assertion.",
+      "pages": "216–217",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": "Rewrite a historical product claim so its date and limit remain clear.",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 9,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 216–217."
+    },
+    {
+      "title": "Working practices and office design",
+      "lines": [
+        "Digital tasks can change where and how work happens",
+        "Office design can support collaboration or quiet work",
+        "A flexible environment does not guarantee good working conditions"
+      ],
+      "notes": "The textbook describes start-ups, office design and digital working practices. A start-up is an organization in an early stage of development. Funding and product uncertainty can affect workers. Flexible spaces and shared tools can support coordination, yet open rooms can also distract people and some tasks need privacy. The historical descriptions of particular company offices are not current evidence of employee experience. Judge the arrangement against the task and the people who use it, including access, concentration and boundaries between work and personal time.",
+      "pages": "217",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": "Which task benefits from a shared space? Which needs a quiet or private space?",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 10,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 217."
+    },
+    {
+      "title": "Remote work and digital nomadism",
+      "lines": [
+        "Remote work uses networks to complete work away from a central workplace",
+        "A digital nomad works remotely while moving between locations",
+        "Connectivity, access and security can constrain that flexibility"
+      ],
+      "notes": "An employee working from home can be remote without being a digital nomad. A person travelling while completing online work may be both. The system requires suitable devices, networks, access to files and ways to coordinate. That can expand location choices, but time zones, unreliable access and data handling can introduce costs. Permission to work across borders depends on the specific setting, so a course discussion should investigate the relevant rules rather than assume freedom to work anywhere.",
+      "pages": "217–218",
+      "visual": "remote-work-v3.png",
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": "Both people work remotely. What makes the travel setting different? Explain one network dependency.",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 11,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 217–218.",
+      "alt": "Conceptual AI split scene: a worker at home and a worker at a travel location connect laptops to a shared server. Both work remotely."
+    },
+    {
+      "title": "Crowdsourcing and crowdfunding",
+      "lines": [
+        "Crowdsourcing gathers contributions, information or work",
+        "Crowdfunding gathers money for a project or cause",
+        "Both need decisions about participation and use"
+      ],
+      "notes": "A group asking people to submit designs is crowdsourcing. A group asking for donations to produce an exhibition is crowdfunding. One gathers contributions of work or information, and the other gathers money. A crowdsourced collection may contain errors or uneven perspectives, so someone still needs to evaluate it. Crowdfunding does not guarantee a project will succeed. Use a specific example and identify what is being contributed. No account creation, payment or participation in a labour platform is required for this lesson.",
+      "pages": "218–219",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": null,
+      "quiz": {
+        "q": "A class requests volunteer translations of its event guide. What is being gathered?",
+        "options": [
+          "Crowdfunding money",
+          "Crowdsourced work",
+          "A guaranteed representative sample"
+        ],
+        "answer": 1,
+        "why": "The contribution is work. Its quality and representation still need checking."
+      },
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 12,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 218–219."
+    },
+    {
+      "title": "Microwork, gig work and sharing",
+      "lines": [
+        "Microwork consists of small tasks completed for payment",
+        "Gig platforms match short-term service providers and customers",
+        "Sharing arrangements provide access to assets or services"
+      ],
+      "notes": "These categories can overlap, but they emphasize different features. Labelling individual images for payment is microwork. A platform matching a customer with someone to complete a delivery illustrates gig work. Renting access to equipment through a booking service illustrates a sharing arrangement. A creator earning advertising revenue is not automatically performing microwork. Explain the task, payment arrangement and platform’s role before drawing comparisons. Avoid assuming the same working conditions across all digital work.",
+      "pages": "219",
+      "visual": "work-exchanges-v2.svg",
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": "Classify an invented paid image-labelling task and an equipment rental. Explain the distinction.",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 13,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 219.",
+      "alt": "Teaching diagram: Microwork, gig work and sharing. Its relationships are explained in the visible transcript."
+    },
+    {
+      "title": "Platforms can mediate access to work",
+      "lines": [
+        "A platform can match a worker and a customer",
+        "Ratings and allocation rules can influence future access",
+        "Workers may have limited information or control"
+      ],
+      "notes": "A matching platform reduces the effort needed to find a customer. It may also set the conditions under which a worker appears, receives a task or challenges a rating. That changes the power relationship. A numerical rating can affect visibility without revealing the context of a complaint. These are mechanisms to investigate in a specific case rather than universal findings about every platform. Trace the information that enters the allocation and identify who can change a record or contest the result.",
+      "pages": "217–219",
+      "visual": "platform-labour.svg",
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": "Identify an opportunity for the worker and a point where the platform exercises power.",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 14,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 217–219.",
+      "alt": "Teaching diagram: Platforms can mediate access to work. Its relationships are explained in the visible transcript."
+    },
+    {
+      "title": "Employee organizations and bargaining power",
+      "lines": [
+        "Workers can organize to seek better conditions",
+        "Collective bargaining represents a group in negotiation",
+        "A worker’s status and rights depend on the actual arrangement"
+      ],
+      "notes": "The textbook explains employee organizations and collective bargaining, and raises the contrast between employment and contracted task provision. Digital coordination can help workers share information and organize. The applicable rights and benefits depend on law and the actual relationship in a particular jurisdiction. We will not label every gig worker the same way. An inquiry needs a defined place, period and source. The conceptual question is how the platform’s control and the worker’s ability to negotiate affect the distribution of benefits and risks.",
+      "pages": "219",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": "What evidence would you need before comparing a platform employee with a contracted worker?",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 15,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 219."
+    },
+    {
+      "title": "Real source Y: revenue share and creator income",
+      "lines": [
+        "YouTube describes different payment bases for Watch Page and Shorts",
+        "A revenue-share rate needs its denominator",
+        "A share rate alone does not establish a creator’s income"
+      ],
+      "notes": "The provider’s earnings overview specifies a Watch Page share of 55 percent of net advertising revenue and a Shorts share of 45 percent of the revenue allocated from the Creator Pool. Those denominators differ. Comparing the percentages alone does not show which gives a particular creator more income. Income also depends on the eligible revenue, allocation and activity. Use the exact terms and source locator in the case file. This source supports the stated payment rules, not an independent finding about earnings stability.",
+      "pages": "213–219",
+      "visual": null,
+      "table": [
+        [
+          "Module",
+          "Stated share",
+          "Base"
+        ],
+        [
+          "Watch Page ads",
+          "55%",
+          "Net advertising revenue"
+        ],
+        [
+          "Shorts",
+          "45%",
+          "Allocated Creator Pool share"
+        ]
+      ],
+      "code": null,
+      "chart": null,
+      "prompt": null,
+      "quiz": {
+        "q": "Why can’t we compare 55% and 45% as if they were the same payment?",
+        "options": [
+          "The rates use different bases",
+          "Percentages never matter",
+          "The larger number guarantees higher income"
+        ],
+        "answer": 0,
+        "why": "The denominator and allocated amount are essential to the comparison."
+      },
+      "source": "Y",
+      "mode": "teach",
+      "link": null,
+      "number": 16,
+      "source_note": "YouTube Partner earnings overview, checked 5 October 2026. https://support.google.com/youtube/answer/72902 Textbook connection: pp. 213–219."
+    },
+    {
+      "title": "Real source L: opportunities and working conditions",
+      "lines": [
+        "The ILO examines different forms of platform work",
+        "Its 2021 evidence is useful for historical context",
+        "It cannot establish a current TikTok creator’s earnings"
+      ],
+      "notes": "The ILO’s historical research summary considers platform work from a labour perspective. It helps us ask about access to work, working conditions and social protection. Its date and scope matter. Use it to frame a labour question and compare with an appropriate current case, not to calculate a creator’s present income. A source may be relevant to one part of an inquiry and insufficient for another. That is why the source passport ties usefulness to a specific claim.",
+      "pages": "217–219",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": "Which part of a creator-income inquiry could this source inform? What evidence is still needed?",
+      "quiz": null,
+      "source": "L",
+      "mode": "teach",
+      "link": "../case-file.html",
+      "number": 17,
+      "source_note": "ILO, 23 February 2021, historical research summary. https://www.ilo.org/resource/news/rapid-growth-digital-economy-calls-coherent-policy-response-0 Textbook connection: pp. 217–219."
+    },
+    {
+      "title": "An impact becomes an implication through a reasoned link",
+      "lines": [
+        "Mechanism: a rule changes visibility",
+        "Impact: a named group receives a changed opportunity",
+        "Implication: the longer-term significance depends on evidence and conditions"
+      ],
+      "notes": "Consider our invented museum feed. A discovery weight increases exposure for an unfamiliar topic. A possible immediate impact is that a new creator gains opportunities to be seen. A possible implication is a broader range of creators sustaining an audience, but that requires continued exposure and suitable income opportunities. The implication is not simply a more dramatic synonym for the impact. State the time horizon, the affected group and the conditions linking them. Your Friday response uses real evidence and must retain the limits of those sources.",
+      "pages": "213–219",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": "Build a different chain for a worker allocated fewer paid tasks. State one condition.",
+      "quiz": null,
+      "source": "textbook",
+      "mode": "teach",
+      "link": null,
+      "number": 18,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 213–219."
+    },
+    {
+      "title": "The rest of chapter 4.2 returns after this week",
+      "lines": [
+        "pp. 220–221: automation and employment",
+        "pp. 221–225: goods, services, currencies and additive manufacturing",
+        "pp. 225–227: globalization and chapter reflection"
+      ],
+      "notes": "This deck teaches all assigned explanatory material from pages 213 to 219. It does not claim to finish the whole economic chapter. The plan assigns pages 220 to 227 in the following week. Automation also returns with AI and robots in Sprint 5. Later source work and Paper 2 diagnostics revisit the economic context. Understanding needs those encounters as well as a first explanation. Before leaving, explain a business incentive, a type of platform work and a power relationship without notes. Identify the one distinction you still need to revisit.",
+      "pages": "213–227",
+      "visual": null,
+      "table": null,
+      "code": null,
+      "chart": null,
+      "prompt": null,
+      "quiz": {
+        "q": "Which route supports durable understanding?",
+        "options": [
+          "One slide pass followed by no return",
+          "Explicit teaching, guided application, independent transfer and later retrieval",
+          "Only a final assessment"
+        ],
+        "answer": 1,
+        "why": "The later encounters check and strengthen the knowledge in changed situations."
+      },
+      "source": "textbook",
+      "mode": "transfer",
+      "link": "../paper-practice.html",
+      "number": 19,
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 213–227."
+    }
+  ]
+}

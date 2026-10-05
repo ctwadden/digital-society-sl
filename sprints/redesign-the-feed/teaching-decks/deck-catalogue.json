@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "01-algorithms",
+    "title": "Algorithms and code: how a rule becomes a result",
+    "scope": "3.2A–D · pp. 81–85; chapter connections pp. 90–91",
+    "slides": 20
+  },
+  {
+    "slug": "02-dilemmas",
+    "title": "Algorithmic dilemmas: bias, judgement and accountability",
+    "scope": "3.2E · pp. 86–89; reflection p. 91",
+    "slides": 16
+  },
+  {
+    "slug": "03-big-data",
+    "title": "Big data and analytics: what the data can tell us",
+    "scope": "3.1H and the start of 3.1I · pp. 72–74",
+    "slides": 12
+  },
+  {
+    "slug": "04-business-labour",
+    "title": "Digital business and labour: incentives, opportunities and power",
+    "scope": "4.2A and working-practice parts of 4.2B · pp. 213–219",
+    "slides": 19
+  }
+]

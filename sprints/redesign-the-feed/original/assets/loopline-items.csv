@@ -1,0 +1,12 @@
+item_id,creator_id,topic,length_s,avg_watch_s,age_days
+V01,K1,cooking,40,32,5
+V02,K2,football,20,18,1
+V03,K4,science,30,21,1
+V04,K1,cooking,60,30,3
+V05,K5,music,25,20,6
+V06,K3,football,50,20,2
+V07,K6,art,40,,0
+V08,K7,science,20,15,4
+V09,K2,Football ,30,27,8
+V10,K8,language learning,45,36,2
+V11,K5,music,0,0,1

@@ -1,0 +1,61 @@
+RECORDING SCRIPT: read each slide in your own voice, one MP3 per slide.
+
+SLIDE 01 — Search is a question with a stopping rule  (save your recording as audio/week-theory/slide-01.mp3)
+A finite search must state both its match test and when it stops. If the first record matches, the search makes one comparison. Searching for an absent value inspects all records. This is not sorting.
+
+SLIDE 02 — A condition controls a loop  (save your recording as audio/week-theory/slide-02.mp3)
+For each record, check that duration is positive before deriving completion. A missing observation is different from a measured zero. Keep the error flag visible so a later calculation is not mistaken for measurement.
+
+SLIDE 03 — One sorting pass is not always a sort  (save your recording as audio/week-theory/slide-03.mp3)
+Use the museum trace only after making your own prediction. A descending adjacent-swap pass checks neighbours in order. Continue passes until no swap is needed. The trace is a simplified algorithm, not a real platform.
+
+SLIDE 04 — Explain your assumption  (save your recording as audio/week-theory/slide-04.mp3)
+A default is a human design choice. Explain whose visibility could change if a missing observation is treated as zero instead of unknown. Preserve both your first trace and correction.
+
+SLIDE 05 — A score compresses a design choice  (save your recording as audio/week-theory/slide-05.mp3)
+Completion is a derived ratio. Matching, freshness and novelty are defined features. Weights say how much each feature contributes; a score is not a direct measurement of quality or fairness.
+
+SLIDE 06 — Join records by identity  (save your recording as audio/week-theory/slide-06.mp3)
+Joining by row position can attach the wrong creator to an item. Use the key and confirm the related table. One creator may have multiple items, so item rankings and creator exposure are different summaries.
+
+SLIDE 07 — A changed priority changes the comparison  (save your recording as audio/week-theory/slide-07.mp3)
+In the different museum case, topic priority initially favours M1. Increasing completion priority allows M2 to pass it. State the changed numbers and the mechanism rather than only saying that the ranking changed.
+
+SLIDE 08 — Who gains, who loses?  (save your recording as audio/week-theory/slide-08.mp3)
+Change one weight while holding other inputs fixed to make your comparison interpretable. A creator can gain visibility while another loses a slot. More visibility does not by itself demonstrate higher income.
+
+SLIDE 09 — Exposure changes the next input  (save your recording as audio/week-theory/slide-09.mp3)
+A logged interaction can influence tomorrow’s ranking. An unshown item has no new interaction in this model. This creates a feedback loop, but the invented bonus rule does not model every real platform choice.
+
+SLIDE 10 — More is not automatically better  (save your recording as audio/week-theory/slide-10.mp3)
+A large sample with duplicates or missing context can contain more error, not more useful evidence. Check how records were collected and whose experience is missing. A small clean sample can still fail to represent a wider population.
+
+SLIDE 11 — People do platform work  (save your recording as audio/week-theory/slide-11.mp3)
+Use the platform labour diagram to locate the people who create, review or label content. The ILO source is historical evidence on digital labour platforms. Do not treat it as direct evidence about a named creator’s present income.
+
+SLIDE 12 — An intervention has a cost  (save your recording as audio/week-theory/slide-12.mp3)
+A discovery slot changes who is exposed even if the top score does not change. It may improve chances for an unseen creator while reducing immediate relevance for a viewer. Explain the trade-off conditionally.
+
+SLIDE 13 — An explanation names intermediate operations  (save your recording as audio/week-theory/slide-13.mp3)
+Trace how an objective changes processing, then connect the changed rank to a stakeholder. A causal sentence should identify the operation and result. The separate quiz remains twelve marks; your paragraph receives formative feedback.
+
+SLIDE 14 — Transparency is not fairness  (save your recording as audio/week-theory/slide-14.mp3)
+Transparency concerns understanding how a result is reached. Bias concerns systematic skew. Accountability concerns who explains and answers for decisions. These are related ideas but one does not guarantee the others.
+
+SLIDE 15 — Correlation does not establish intent  (save your recording as audio/week-theory/slide-15.mp3)
+Exposure and interaction can move together without proving deliberate manipulation. A model shows what happens under specified assumptions. Intent needs evidence about objectives or decisions, and alternative explanations must be considered.
+
+SLIDE 16 — Repair and return  (save your recording as audio/week-theory/slide-16.mp3)
+Keep your first paragraph and use feedback to repair one reasoning link. Return to the target on a changed context tomorrow. A copied correction is practice; an independent fresh explanation provides different evidence.
+
+SLIDE 17 — A source passport limits the claim  (save your recording as audio/week-theory/slide-17.mp3)
+Record a precise section and paragraph location so another reader can find your evidence. Distinguish a historical provider account from a regulator’s preliminary finding. Neither establishes every outcome you might wish to infer.
+
+SLIDE 18 — Synthesize by theme  (save your recording as audio/week-theory/slide-18.mp3)
+Compare sources on a shared theme rather than writing one paragraph per source. A historical account of intended personalization can complement later preliminary evidence on design risks. Dates, purposes and jurisdiction limit the comparison.
+
+SLIDE 19 — Income has a denominator  (save your recording as audio/week-theory/slide-19.mp3)
+YouTube states different revenue shares for Watch Page and Shorts monetization. They use different revenue bases. Views, eligibility and revenue information would be needed to explain a particular creator’s earnings.
+
+SLIDE 20 — From impact to implication  (save your recording as audio/week-theory/slide-20.mp3)
+Explain an immediate change before inferring longer-term significance. State a competing perspective and the evidence that would change your judgment. A conditional conclusion is stronger than certainty unsupported by the sources.
