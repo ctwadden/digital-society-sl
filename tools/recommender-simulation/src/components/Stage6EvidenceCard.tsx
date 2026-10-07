@@ -168,7 +168,7 @@ export const Stage6EvidenceCard: React.FC<Stage6EvidenceCardProps> = ({
               <span className="text-slate-400">Strongest Positive Gesture:</span>{' '}
               {strongestPos ? (
                 <span className="text-emerald-300 font-semibold">
-                  {INTERACTION_METAS[strongestPos.action]?.label || strongestPos.action} on &ldquo;{strongestPos.cardTitle}&rdquo; (+{INTERACTION_METAS[strongestPos.action]?.affinityImpact} affinity)
+                  {INTERACTION_METAS[strongestPos.action]?.label || strongestPos.action} on &ldquo;{strongestPos.cardTitle}&rdquo; (+{INTERACTION_METAS[strongestPos.action]?.affinityImpact} signal strength)
                 </span>
               ) : (
                 <span className="text-slate-500 italic">None</span>
@@ -178,7 +178,7 @@ export const Stage6EvidenceCard: React.FC<Stage6EvidenceCardProps> = ({
               <span className="text-slate-400">Strongest Negative Gesture:</span>{' '}
               {strongestNeg ? (
                 <span className="text-rose-300 font-semibold">
-                  {INTERACTION_METAS[strongestNeg.action]?.label || strongestNeg.action} on &ldquo;{strongestNeg.cardTitle}&rdquo; ({INTERACTION_METAS[strongestNeg.action]?.affinityImpact} affinity)
+                  {INTERACTION_METAS[strongestNeg.action]?.label || strongestNeg.action} on &ldquo;{strongestNeg.cardTitle}&rdquo; ({INTERACTION_METAS[strongestNeg.action]?.affinityImpact} signal strength)
                 </span>
               ) : (
                 <span className="text-slate-500 italic">None</span>
