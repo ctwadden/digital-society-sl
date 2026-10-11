@@ -3,28 +3,28 @@
     "slug": "01-algorithms",
     "title": "Algorithms and code: how a rule becomes a result",
     "scope": "3.2A–D · pp. 81–85; chapter connections pp. 90–91",
-    "version": "2026-10-11-v5",
-    "slides": 20
+    "version": "2026-10-11-v6",
+    "slides": 23
   },
   {
     "slug": "02-dilemmas",
     "title": "Algorithmic dilemmas: bias, judgement and accountability",
     "scope": "3.2E · pp. 86–89; reflection p. 91",
-    "version": "2026-10-11-v5",
-    "slides": 16
+    "version": "2026-10-11-v6",
+    "slides": 17
   },
   {
     "slug": "03-big-data",
-    "title": "Big data and analytics: what the data can tell us",
-    "scope": "3.1H and the start of 3.1I · pp. 72–74",
-    "version": "2026-10-11-v5",
-    "slides": 12
+    "title": "Data and data analysis: foundations, security and dilemmas",
+    "scope": "3.1A–I · supplied chapter pp. 57–80 · four teaching arcs; choose to fit prior learning",
+    "version": "2026-10-11-v6",
+    "slides": 38
   },
   {
     "slug": "04-business-labour",
     "title": "Digital business and labour: work, exchange and global connections",
     "scope": "4.2A–D · pp. 213–227 · Arc A: 213–219; Arc B: 220–227",
-    "version": "2026-10-11-v5",
-    "slides": 35
+    "version": "2026-10-11-v6",
+    "slides": 40
   }
 ]

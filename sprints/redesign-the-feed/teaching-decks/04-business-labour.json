@@ -25,7 +25,8 @@
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 213.",
       "alt": "Original AI conceptual bookshop exchange: an owner serves a customer beside digital payment and record tools. Fictional venue; not a transaction record or software screenshot.",
       "response_id": "04-business-labour-s01",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 1
     },
     {
       "title": "Operation and organization of a business",
@@ -48,7 +49,8 @@
       "number": 2,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 213–214.",
       "response_id": "04-business-labour-s02",
-      "status": "Understand"
+      "status": "Understand",
+      "_original_number": 2
     },
     {
       "title": "Customer value and business incentives",
@@ -73,7 +75,8 @@
       "alt": "Teaching diagram: Customer value and business incentives. Its relationships are explained in the visible transcript.",
       "diagram": "value-exchange",
       "response_id": "04-business-labour-s03",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 3
     },
     {
       "title": "Transaction data becomes a decision",
@@ -121,7 +124,8 @@
       "number": 4,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 213–214.",
       "response_id": "04-business-labour-s04",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 4
     },
     {
       "title": "Diversification and workforce diversity",
@@ -144,7 +148,8 @@
       "number": 5,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 214–215.",
       "response_id": "04-business-labour-s05",
-      "status": "Understand"
+      "status": "Understand",
+      "_original_number": 5
     },
     {
       "title": "Horizontal and vertical diversification",
@@ -183,7 +188,8 @@
       "number": 6,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 214.",
       "response_id": "04-business-labour-s06",
-      "status": "Understand"
+      "status": "Understand",
+      "_original_number": 6
     },
     {
       "title": "Concentric and conglomerate diversification",
@@ -222,7 +228,8 @@
       "number": 7,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 214–215.",
       "response_id": "04-business-labour-s07",
-      "status": "Understand"
+      "status": "Understand",
+      "_original_number": 7
     },
     {
       "title": "Hiring systems affect opportunity",
@@ -254,7 +261,23 @@
       "number": 8,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 215–217.",
       "response_id": "04-business-labour-s08",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 8
+    },
+    {
+      "title": "Psychometric surveys measure selected traits",
+      "pages": "215–217",
+      "status": "Understand → apply",
+      "lines": [
+        "A score needs evidence of validity for its intended hiring use."
+      ],
+      "response_id": "ibds-s03-ref-v6-psychometric",
+      "prompt": "What evidence would an employer need before using a survey score to reject an applicant? Name a candidate safeguard.",
+      "notes": "Purpose: A score needs evidence of validity for its intended hiring use. Say: Psychometric describes a measurement purpose, not proof of an accurate instrument. Ask whether it measures the relevant job skill, works for affected groups and allows accommodation or review. Expression, power and values connect through what the system treats as employability. Ask: What evidence would an employer need before using a survey score to reject an applicant? Name a candidate safeguard. Practice feedback: use the worked exhibit to check the distinction; keep the first attempt and append a correction. Secure: apply the distinction to a different venue. Partial: isolate the disputed operation and compare the two cases. Unclear: reconstruct the first worked example before retrying. Later return: next lesson, close notes and explain this distinction in a library or community-centre system. These are formative practice responses, not registered assessment items.",
+      "source_note": "Textbook layer: Hodder 2022, supplied chapter pp. 215–217. Original classroom examples are fictional. ",
+      "_exhibit": "<div class=\"contrast\"><section><p class=\"label\">Claimed measure</p><p class=\"example\">Responses used to estimate capabilities or behavioural style</p></section><section><p class=\"label\">Hiring decision</p><p class=\"example\">Employer screens candidates using a score or threshold</p></section></div><p class=\"exhibit-caption\">Textbook historical case discussion; no present-day vendor capability claim and no personal testing required.</p>",
+      "_new": true,
+      "number": 9
     },
     {
       "title": "A historical case needs a current check",
@@ -274,10 +297,11 @@
       "source": "textbook",
       "mode": "teach",
       "link": null,
-      "number": 9,
+      "number": 10,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 216–217.",
       "response_id": "04-business-labour-s09",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 9
     },
     {
       "title": "Working practices and office design",
@@ -297,10 +321,11 @@
       "source": "textbook",
       "mode": "teach",
       "link": null,
-      "number": 10,
+      "number": 11,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 217.",
       "response_id": "04-business-labour-s10",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 10
     },
     {
       "title": "Remote work and digital nomadism",
@@ -320,11 +345,12 @@
       "source": "textbook",
       "mode": "teach",
       "link": null,
-      "number": 11,
+      "number": 12,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 217–218.",
       "alt": "Conceptual AI split scene: a worker at home and a worker at a travel location connect laptops to a shared server. Both work remotely.",
       "response_id": "04-business-labour-s11",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 11
     },
     {
       "title": "Crowdsourcing and crowdfunding",
@@ -353,10 +379,11 @@
       "source": "textbook",
       "mode": "teach",
       "link": null,
-      "number": 12,
+      "number": 13,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 218–219.",
       "response_id": "04-business-labour-s12",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 12
     },
     {
       "title": "Microwork, gig work and sharing",
@@ -376,12 +403,13 @@
       "source": "textbook",
       "mode": "teach",
       "link": null,
-      "number": 13,
+      "number": 14,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 219.",
       "alt": "Teaching diagram: Microwork, gig work and sharing. Its relationships are explained in the visible transcript.",
       "diagram": "work-exchange",
       "response_id": "04-business-labour-s13",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 13
     },
     {
       "title": "Platforms can mediate access to work",
@@ -401,12 +429,13 @@
       "source": "textbook",
       "mode": "teach",
       "link": null,
-      "number": 14,
+      "number": 15,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 217–219.",
       "alt": "Teaching diagram: Platforms can mediate access to work. Its relationships are explained in the visible transcript.",
       "diagram": "platform-exchange",
       "response_id": "04-business-labour-s14",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 14
     },
     {
       "title": "Employee organizations and bargaining power",
@@ -426,10 +455,11 @@
       "source": "textbook",
       "mode": "teach",
       "link": null,
-      "number": 15,
+      "number": 16,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 219.",
       "response_id": "04-business-labour-s15",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 15
     },
     {
       "title": "Real source Y: revenue share and creator income",
@@ -474,10 +504,11 @@
       "source": "Y",
       "mode": "teach",
       "link": null,
-      "number": 16,
+      "number": 17,
       "source_note": "YouTube Partner earnings overview, checked 5 October 2026. https://support.google.com/youtube/answer/72902 Textbook connection: pp. 213–219.",
       "response_id": "04-business-labour-s16",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 16
     },
     {
       "title": "Real source L: opportunities and working conditions",
@@ -497,10 +528,11 @@
       "source": "L",
       "mode": "teach",
       "link": "../case-file.html",
-      "number": 17,
+      "number": 18,
       "source_note": "ILO, 23 February 2021, historical research summary. https://www.ilo.org/resource/news/rapid-growth-digital-economy-calls-coherent-policy-response-0 Textbook connection: pp. 217–219.",
       "response_id": "04-business-labour-s17",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 17
     },
     {
       "title": "An impact becomes an implication through a reasoned link",
@@ -520,10 +552,11 @@
       "source": "textbook",
       "mode": "teach",
       "link": null,
-      "number": 18,
+      "number": 19,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 213–219.",
       "response_id": "04-business-labour-s18",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 18
     },
     {
       "title": "Pause: explain the first business arc",
@@ -552,10 +585,11 @@
       "source": "textbook",
       "mode": "transfer",
       "link": "../paper-practice.html",
-      "number": 19,
+      "number": 20,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 213–227.",
       "response_id": "04-business-labour-s19",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 19
     },
     {
       "title": "Arc B: a task changes before a whole job disappears",
@@ -570,9 +604,10 @@
       "visual": "workshop-tasks-v5.png",
       "alt": "Original AI conceptual workshop: inventory checking and a customer conversation are distinct tasks. Fictional people and workplace; not labour research evidence.",
       "prompt": "Individually, list three tasks in a job you know. Which could be automated, and what would remain? 2 minutes.",
-      "number": 20,
+      "number": 21,
       "response_id": "04-business-labour-s20",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 20
     },
     {
       "title": "Monitoring can become a feedback loop",
@@ -586,9 +621,25 @@
       "source_note": "Hodder 2022, printed pp. 220–221. Original teaching paraphrase; synthetic examples unless a source is named.",
       "diagram": "monitoring",
       "prompt": "Draw the feedback arrow. Name an omitted circumstance that could make the same target unsuitable for two workers.",
-      "number": 21,
+      "number": 22,
       "response_id": "04-business-labour-s21",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 21
+    },
+    {
+      "title": "Gamification changes the incentive around a task",
+      "pages": "220–221",
+      "status": "Understand → apply",
+      "lines": [
+        "A points system can reward speed while overlooking another outcome."
+      ],
+      "response_id": "ibds-s03-ref-v6-gamification",
+      "prompt": "Explain a possible benefit and risk of a speed leaderboard. Propose a measurable safeguard that does not assume workers are at fault.",
+      "notes": "Purpose: A points system can reward speed while overlooking another outcome. Say: Game-like scoring can give feedback and motivation. A narrow speed target may discourage breaks or quality checks. Evaluate workload, task difficulty and safety evidence as well as throughput; do not infer actual injury rates from the demonstration. Ask: Explain a possible benefit and risk of a speed leaderboard. Propose a measurable safeguard that does not assume workers are at fault. Practice feedback: use the worked exhibit to check the distinction; keep the first attempt and append a correction. Secure: apply the distinction to a different venue. Partial: isolate the disputed operation and compare the two cases. Unclear: reconstruct the first worked example before retrying. Later return: next lesson, close notes and explain this distinction in a library or community-centre system. These are formative practice responses, not registered assessment items.",
+      "source_note": "Textbook layer: Hodder 2022, supplied chapter pp. 220–221. Original classroom examples are fictional. ",
+      "_exhibit": "<ol class=\"route\"><li><span>01</span><p>Task scan records elapsed time</p></li><li><span>02</span><p>System converts performance into points</p></li><li><span>03</span><p>Leaderboard or reward changes incentives</p></li><li><span>04</span><p>Workers adapt behaviour; check quality and conditions</p></li></ol><p class=\"exhibit-caption\">Fictional warehouse mechanism. Historical textbook statistics are not current rates.</p>",
+      "_new": true,
+      "number": 23
     },
     {
       "title": "E-commerce names the exchange, not the payment method",
@@ -623,9 +674,25 @@
         ]
       ],
       "prompt": "A customer pays a business for an online guitar lesson. Classify the exchange, then name a possible payment method.",
-      "number": 22,
+      "number": 24,
       "response_id": "04-business-labour-s22",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 22
+    },
+    {
+      "title": "E-trading changes the asset and the intermediary",
+      "pages": "221–225",
+      "status": "Understand → apply",
+      "lines": [
+        "Buying a share differs from buying a physical product."
+      ],
+      "response_id": "ibds-s03-ref-v6-etrading",
+      "prompt": "Distinguish an online book purchase from an online share purchase. Explain one role the visible app does not perform by itself.",
+      "notes": "Purpose: Buying a share differs from buying a physical product. Say: E-trading is exchange of financial products through digital systems. A platform interface does not replace market execution, clearing and settlement. Separate access from guaranteed profit. Do not teach the 2021 report’s T+2 description as a current universal rule. Ask: Distinguish an online book purchase from an online share purchase. Explain one role the visible app does not perform by itself. Practice feedback: use the worked exhibit to check the distinction; keep the first attempt and append a correction. Secure: apply the distinction to a different venue. Partial: isolate the disputed operation and compare the two cases. Unclear: reconstruct the first worked example before retrying. Later return: next lesson, close notes and explain this distinction in a library or community-centre system. These are formative practice responses, not registered assessment items.",
+      "source_note": "Textbook layer: Hodder 2022, supplied chapter pp. 221–225. Original classroom examples are fictional. ",
+      "_exhibit": "<ol class=\"route\"><li><span>01</span><p>Investor places an order in a platform</p></li><li><span>02</span><p>Broker routes for execution</p></li><li><span>03</span><p>A buyer and seller trade a financial asset</p></li><li><span>04</span><p>Clearing and settlement complete obligations</p></li></ol><p class=\"exhibit-caption\">Simplified mechanism, not investment advice or a trading exercise. Terms and rules vary by market/date.</p>",
+      "_new": true,
+      "number": 25
     },
     {
       "title": "Check: automate, trade, or pay?",
@@ -647,9 +714,10 @@
         "answer": 1,
         "why": "Classify the seller and buyer in the sale; the marketplace’s own service is a separate exchange."
       },
-      "number": 23,
+      "number": 26,
       "response_id": "04-business-labour-s23",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 23
     },
     {
       "title": "Targeted marketing connects a signal to an audience",
@@ -663,9 +731,10 @@
       "source_note": "Hodder 2022, printed pp. 222. Original teaching paraphrase; synthetic examples unless a source is named.",
       "diagram": "marketing",
       "prompt": "For the fictional advert, write one observed field, one inference and one outcome the data cannot establish.",
-      "number": 24,
+      "number": 27,
       "response_id": "04-business-labour-s24",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 24
     },
     {
       "title": "Currency and payment are different layers",
@@ -679,9 +748,10 @@
       "source_note": "Hodder 2022, printed pp. 223. Original teaching paraphrase; synthetic examples unless a source is named. Current-context source checked 11 October 2026: https://www.bankofcanada.ca/2026/02/what-is-money/",
       "diagram": "payment",
       "prompt": "Explain why an electronic payment in Canadian dollars does not by itself imply a decentralized cryptocurrency.",
-      "number": 25,
+      "number": 28,
       "response_id": "04-business-labour-s25",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 25
     },
     {
       "title": "A token record does not automatically transfer copyright",
@@ -695,9 +765,10 @@
       "source_note": "Hodder 2022, printed pp. 223. Original teaching paraphrase; synthetic examples unless a source is named. Current-context source checked 11 October 2026: https://www.wipo.int/en/web/wipo-magazine/articles/non-fungible-tokens-nfts-and-copyright-42365",
       "diagram": "token-rights",
       "prompt": "A collector buys an NFT linked to a drawing. What additional evidence would you need before saying they may print and sell that drawing?",
-      "number": 26,
+      "number": 29,
       "response_id": "04-business-labour-s26",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 26
     },
     {
       "title": "Check: identify what changed hands",
@@ -719,9 +790,10 @@
         "answer": 1,
         "why": "Electronic settlement, currency and intellectual-property rights are separate questions."
       },
-      "number": 27,
+      "number": 30,
       "response_id": "04-business-labour-s27",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 27
     },
     {
       "title": "Cashless convenience can create an access barrier",
@@ -751,9 +823,10 @@
         ]
       ],
       "prompt": "Individually, recommend a payment arrangement for the fictional market. State one criterion and what evidence could change your decision.",
-      "number": 28,
+      "number": 31,
       "response_id": "04-business-labour-s28",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 28
     },
     {
       "title": "Small purchases can add up",
@@ -767,9 +840,10 @@
       "source_note": "Hodder 2022, printed pp. 223–224. Original teaching paraphrase; synthetic examples unless a source is named.",
       "diagram": "microtransactions",
       "prompt": "A game advertises a $2 item but a user buys it twelve times. Calculate the total, then propose one way to make cumulative cost visible.",
-      "number": 29,
+      "number": 32,
       "response_id": "04-business-labour-s29",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 29
     },
     {
       "title": "From a digital model to a physical object",
@@ -785,9 +859,10 @@
       "alt": "AI conceptual technician inspecting a layer-printed bottle holder next to CAD equipment; not a verified manufacturing procedure.",
       "diagram": "manufacturing",
       "prompt": "Explain what slicing adds between the model and the printer. Name one reason a successful print may still be unsuitable.",
-      "number": 30,
+      "number": 33,
       "response_id": "04-business-labour-s30",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 30
     },
     {
       "title": "Check: a gain needs a comparison",
@@ -809,9 +884,25 @@
         "answer": 1,
         "why": "Material, energy, failures and the alternative process are still needed for an overall comparison."
       },
-      "number": 31,
+      "number": 34,
       "response_id": "04-business-labour-s31",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 31
+    },
+    {
+      "title": "GameStop: distinguish observation from a single-cause story",
+      "pages": "225",
+      "status": "Understand → apply",
+      "lines": [
+        "A regulator’s staff report qualifies the textbook’s feedback-loop account."
+      ],
+      "response_id": "ibds-s03-ref-v6-gamestop",
+      "prompt": "What can this evidence establish about digital market participation? What would you need before blaming one mechanism for the entire rise?",
+      "notes": "Purpose: A regulator’s staff report qualifies the textbook’s feedback-loop account. Say: The textbook gives a simplified account centred on Reddit and short positions. The SEC staff report discusses interacting participation, sentiment, market structure and settlement risks. Use the difference to practise qualified explanation rather than turn the case into a formula for trading. Ask: What can this evidence establish about digital market participation? What would you need before blaming one mechanism for the entire rise? Practice feedback: use the worked exhibit to check the distinction; keep the first attempt and append a correction. Secure: apply the distinction to a different venue. Partial: isolate the disputed operation and compare the two cases. Unclear: reconstruct the first worked example before retrying. Later return: next lesson, close notes and explain this distinction in a library or community-centre system. These are formative practice responses, not registered assessment items.",
+      "source_note": "Textbook layer: Hodder 2022, supplied chapter pp. 225. Original classroom examples are fictional. Historical primary source checked 11 Oct 2026: https://www.sec.gov/files/staff-report-equity-options-market-struction-conditions-early-2021.pdf",
+      "_exhibit": "<div class=\"source-spread\"><aside><strong>OCT 2021</strong><p>US SEC staff · historical analysis</p><small>Source paraphrase · read the cited original</small></aside><section><p class=\"label\">Supports this claim</p><p>January 2021 had exceptional volatility, trading volume and attention.</p><p class=\"label limitation\">Does not establish</p><p>The report does not attribute the sustained rise solely to short covering or prove every actor’s motive.</p></section></div>",
+      "_new": true,
+      "number": 35
     },
     {
       "title": "Globalization connects customers, suppliers and workers",
@@ -825,9 +916,10 @@
       "source_note": "Hodder 2022, printed pp. 225–226. Original teaching paraphrase; synthetic examples unless a source is named.",
       "diagram": "global-sourcing",
       "prompt": "Choose a fictional digital product or service. Label one customer connection and one supplier connection across borders.",
-      "number": 32,
+      "number": 36,
       "response_id": "04-business-labour-s32",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 32
     },
     {
       "title": "Location and organizational boundary are separate questions",
@@ -862,9 +954,25 @@
         ]
       ],
       "prompt": "Individually, classify a company’s own overseas studio. Explain why location alone cannot establish outsourcing.",
-      "number": 33,
+      "number": 37,
       "response_id": "04-business-labour-s33",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 33
+    },
+    {
+      "title": "Sourcing: location and who does the work",
+      "pages": "226–227",
+      "status": "Understand → apply",
+      "lines": [
+        "Location and who performs the task must be tracked separately."
+      ],
+      "response_id": "ibds-s03-ref-v6-sourcing",
+      "prompt": "A company brings production home but retains an outside contractor. Explain what changed and what did not.",
+      "notes": "Purpose: Location and who performs the task must be tracked separately. Say: Returning location does not necessarily change the contractor. Internal delivery does not require returning across a border. Nearsourcing concerns closeness to the end market. Digital tools coordinate the work, while shipping, skills and regulations still constrain it. Ask: A company brings production home but retains an outside contractor. Explain what changed and what did not. Practice feedback: use the worked exhibit to check the distinction; keep the first attempt and append a correction. Secure: apply the distinction to a different venue. Partial: isolate the disputed operation and compare the two cases. Unclear: reconstruct the first worked example before retrying. Later return: next lesson, close notes and explain this distinction in a library or community-centre system. These are formative practice responses, not registered assessment items.",
+      "source_note": "Textbook layer: Hodder 2022, supplied chapter pp. 226–227. Original classroom examples are fictional. ",
+      "_exhibit": "<div class=\"tablewrap\"><table><thead><tr><th>Decision</th><th>Meaning</th><th>Fictional change</th></tr></thead><tbody><tr><td>Reshore / inshore</td><td>Bring operation home</td><td>Production returns home</td></tr><tr><td>Nearsource</td><td>Locate near buyers</td><td>Supplier near customers</td></tr><tr><td>Insource</td><td>Use in-house staff</td><td>Internal team takes over</td></tr></tbody></table></div><p class=\"exhibit-caption\">Outsource = another organization; offshore = another country. Either can occur without the other.</p>",
+      "_new": true,
+      "number": 38
     },
     {
       "title": "A judgement compares whose costs and gains count",
@@ -877,9 +985,10 @@
       "pages": "225–227",
       "source_note": "Hodder 2022, printed pp. 225–227. Original teaching paraphrase; synthetic examples unless a source is named.",
       "prompt": "Write a four-sentence conditional recommendation for the fictional design shop: mechanism, two stakeholder perspectives, evidence limit, judgement.",
-      "number": 34,
+      "number": 39,
       "response_id": "04-business-labour-s34",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 34
     },
     {
       "title": "Retrieve, submit, correct, revisit",
@@ -902,10 +1011,11 @@
         "why": "Returning from abroad and moving work in-house are distinct changes that can occur together."
       },
       "link": "../knowledge-and-reflection.html",
-      "number": 35,
+      "number": 40,
       "response_id": "04-business-labour-s35",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 35
     }
   ],
-  "version": "2026-10-11-v5"
+  "version": "2026-10-11-v6"
 }

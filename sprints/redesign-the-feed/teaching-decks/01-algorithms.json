@@ -25,7 +25,8 @@
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 81.",
       "alt": "Original AI conceptual scene linking creators, a viewer and platform decisions. Not an actual platform or outcome study.",
       "response_id": "01-algorithms-s01",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 1
     },
     {
       "title": "An algorithm",
@@ -48,7 +49,8 @@
       "number": 2,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 81–82.",
       "response_id": "01-algorithms-s02",
-      "status": "Understand"
+      "status": "Understand",
+      "_original_number": 2
     },
     {
       "title": "Characteristics of a usable algorithm",
@@ -71,7 +73,23 @@
       "number": 3,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 81–82.",
       "response_id": "01-algorithms-s03",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 3
+    },
+    {
+      "title": "Seven characteristics make the procedure usable",
+      "pages": "81–82",
+      "status": "Understand → apply",
+      "lines": [
+        "Defined input/output and language independence are part of the contract."
+      ],
+      "response_id": "ibds-s03-ref-v6-algorithm-contract",
+      "prompt": "A rule says “repeat until the best item appears”. Identify two missing characteristics and rewrite its stopping rule.",
+      "notes": "Purpose: Defined input/output and language independence are part of the contract. Say: Name all seven rather than compressing away input, output or independence. An algorithm can have no external input yet still produce a defined result. Finite does not mean a particular small number of steps. Feasible depends on actual resources. Ask: A rule says “repeat until the best item appears”. Identify two missing characteristics and rewrite its stopping rule. Practice feedback: use the worked exhibit to check the distinction; keep the first attempt and append a correction. Secure: apply the distinction to a different venue. Partial: isolate the disputed operation and compare the two cases. Unclear: reconstruct the first worked example before retrying. Later return: next lesson, close notes and explain this distinction in a library or community-centre system. These are formative practice responses, not registered assessment items.",
+      "source_note": "Textbook layer: Hodder 2022, supplied chapter pp. 81–82. Original classroom examples are fictional. ",
+      "_exhibit": "<div class=\"tablewrap\"><table><thead><tr><th>Characteristic</th><th>Concrete test</th></tr></thead><tbody><tr><td>Unambiguous / well defined</td><td>Exact comparison, order and error route</td></tr><tr><td>Finite / feasible</td><td>Stops; fits available resources</td></tr><tr><td>Inputs / outputs / independent</td><td>Zero or more inputs, specified output, same procedure across languages</td></tr></tbody></table></div><p class=\"exhibit-caption\">The textbook lists seven characteristics. Independence means from a programming language, not from all inputs.</p>",
+      "_new": true,
+      "number": 4
     },
     {
       "title": "Variables hold values",
@@ -121,10 +139,11 @@
       "source": "textbook",
       "mode": "teach",
       "link": null,
-      "number": 4,
+      "number": 5,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 82.",
       "response_id": "01-algorithms-s04",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 4
     },
     {
       "title": "Conditionals choose a branch",
@@ -144,10 +163,11 @@
       "source": "textbook",
       "mode": "teach",
       "link": null,
-      "number": 5,
+      "number": 6,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 83.",
       "response_id": "01-algorithms-s05",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 5
     },
     {
       "title": "Loops repeat a set of instructions",
@@ -167,11 +187,12 @@
       "source": "textbook",
       "mode": "teach",
       "link": null,
-      "number": 6,
+      "number": 7,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 83.",
       "diagram": "loop-trace",
       "response_id": "01-algorithms-s06",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 6
     },
     {
       "title": "One procedure, several representations",
@@ -191,11 +212,12 @@
       "source": "textbook",
       "mode": "teach",
       "link": null,
-      "number": 7,
+      "number": 8,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 83.",
       "alt": "Flowchart: START, READ numeric duration, test duration <= 60. YES includes the item, NO excludes it. Both branches STOP. Oval start/stop, parallelogram input, diamond condition and rectangle process.",
       "response_id": "01-algorithms-s07",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 7
     },
     {
       "title": "Algorithm, pseudocode and code",
@@ -224,10 +246,11 @@
       "source": "textbook",
       "mode": "teach",
       "link": null,
-      "number": 8,
+      "number": 9,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 83–84.",
       "response_id": "01-algorithms-s08",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 8
     },
     {
       "title": "Searching finds a target",
@@ -268,10 +291,26 @@
       "source": "textbook",
       "mode": "teach",
       "link": "../sim/search-sort.html",
-      "number": 9,
+      "number": 10,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 84.",
       "response_id": "01-algorithms-s09",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 9
+    },
+    {
+      "title": "PageRank is part of a larger search system",
+      "pages": "84–85",
+      "status": "Understand → apply",
+      "lines": [
+        "Link analysis differs from searching a list for an exact match."
+      ],
+      "response_id": "ibds-s03-ref-v6-pagerank",
+      "prompt": "Explain the difference between finding a matching record and ranking relevant pages. Name one limitation of the provider account.",
+      "notes": "Purpose: Link analysis differs from searching a list for an exact match. Say: The chapter’s PageRank example illustrates search but should not imply Google runs only one algorithm. Links can provide relevance signals; many systems and context signals contribute. Our score exercise is not an implementation of Google. Ask: Explain the difference between finding a matching record and ranking relevant pages. Name one limitation of the provider account. Practice feedback: use the worked exhibit to check the distinction; keep the first attempt and append a correction. Secure: apply the distinction to a different venue. Partial: isolate the disputed operation and compare the two cases. Unclear: reconstruct the first worked example before retrying. Later return: next lesson, close notes and explain this distinction in a library or community-centre system. These are formative practice responses, not registered assessment items.",
+      "source_note": "Textbook layer: Hodder 2022, supplied chapter pp. 84–85. Original classroom examples are fictional. Current primary source checked 11 Oct 2026: https://developers.google.com/search/docs/appearance/ranking-systems-guide",
+      "_exhibit": "<div class=\"contrast\"><section><p class=\"label\">Classroom linear search</p><p class=\"example\">Check IDs until target found or list ends</p></section><section><p class=\"label\">Google Search source</p><p class=\"example\">Uses multiple ranking systems; link analysis includes evolved PageRank</p></section></div><p class=\"exhibit-caption\">Provider documentation explains the system broadly; current exact ranking weights are not public.</p>",
+      "_new": true,
+      "number": 11
     },
     {
       "title": "Sorting changes the order",
@@ -312,10 +351,11 @@
       "source": "textbook",
       "mode": "teach",
       "link": null,
-      "number": 10,
+      "number": 12,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 84. Optional demonstration: https://cs50.harvard.edu/college/2026/spring/shorts/bubble_sort/",
       "response_id": "01-algorithms-s10",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 10
     },
     {
       "title": "Filtering and counting",
@@ -352,11 +392,12 @@
       "source": "textbook",
       "mode": "teach",
       "link": null,
-      "number": 11,
+      "number": 13,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 84.",
       "diagram": "filter-sort",
       "response_id": "01-algorithms-s11",
-      "status": "Understand"
+      "status": "Understand",
+      "_original_number": 11
     },
     {
       "title": "Efficiency needs a measure",
@@ -385,10 +426,11 @@
       "source": "textbook",
       "mode": "teach",
       "link": null,
-      "number": 12,
+      "number": 14,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 81, 84–86.",
       "response_id": "01-algorithms-s12",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 12
     },
     {
       "title": "Prioritizing turns a goal into an order",
@@ -429,10 +471,11 @@
       "source": "textbook",
       "mode": "teach",
       "link": null,
-      "number": 13,
+      "number": 15,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 85.",
       "response_id": "01-algorithms-s13",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 13
     },
     {
       "title": "A changed objective: prediction",
@@ -452,10 +495,11 @@
       "source": "textbook",
       "mode": "predict",
       "link": null,
-      "number": 14,
+      "number": 16,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 85.",
       "response_id": "01-algorithms-s14",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 14
     },
     {
       "title": "A changed objective: worked result",
@@ -500,10 +544,11 @@
       "source": "textbook",
       "mode": "reveal",
       "link": null,
-      "number": 15,
+      "number": 17,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 85.",
       "response_id": "01-algorithms-s15",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 15
     },
     {
       "title": "Classifying and associating",
@@ -532,10 +577,26 @@
       "source": "textbook",
       "mode": "teach",
       "link": null,
-      "number": 16,
+      "number": 18,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 85.",
       "response_id": "01-algorithms-s16",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 16
+    },
+    {
+      "title": "An association rule has a denominator",
+      "pages": "85",
+      "status": "Understand → apply",
+      "lines": [
+        "Count co-occurrence before claiming a useful relationship."
+      ],
+      "response_id": "ibds-s03-ref-v6-association-worked",
+      "prompt": "Calculate the share of bread baskets containing soup. Explain why it cannot show that bread makes people buy soup.",
+      "notes": "Purpose: Count co-occurrence before claiming a useful relationship. Say: The denominator is baskets containing bread, not every customer. Association can inform a display or further test, but a small or selected sample limits generalization. Support/confidence calculations are enrichment; the core chapter requires explaining the association and its use. Ask: Calculate the share of bread baskets containing soup. Explain why it cannot show that bread makes people buy soup. Practice feedback: use the worked exhibit to check the distinction; keep the first attempt and append a correction. Secure: apply the distinction to a different venue. Partial: isolate the disputed operation and compare the two cases. Unclear: reconstruct the first worked example before retrying. Later return: next lesson, close notes and explain this distinction in a library or community-centre system. These are formative practice responses, not registered assessment items.",
+      "source_note": "Textbook layer: Hodder 2022, supplied chapter pp. 85. Original classroom examples are fictional. ",
+      "_exhibit": "<div class=\"tablewrap\"><table><thead><tr><th>Synthetic basket</th><th>Bread?</th><th>Soup?</th></tr></thead><tbody><tr><td>1</td><td>Yes</td><td>Yes</td></tr><tr><td>2</td><td>Yes</td><td>No</td></tr><tr><td>3</td><td>Yes</td><td>Yes</td></tr></tbody></table></div><p class=\"exhibit-caption\">Among these three bread baskets, two contain soup: 2/3. This is not a causal experiment or population estimate.</p>",
+      "_new": true,
+      "number": 19
     },
     {
       "title": "Rules and learned models",
@@ -555,10 +616,11 @@
       "source": "guide",
       "mode": "teach",
       "link": null,
-      "number": 17,
+      "number": 20,
       "source_note": "IB Digital Society guide, local April 2026 revision, sections 3.1H, 3.2A–E and 4.2A–D. Assessment authority. Textbook connection: pp. 85, 91.",
       "response_id": "01-algorithms-s17",
-      "status": "Understand"
+      "status": "Understand",
+      "_original_number": 17
     },
     {
       "title": "The complete decision pipeline",
@@ -578,12 +640,13 @@
       "source": "textbook",
       "mode": "teach",
       "link": null,
-      "number": 18,
+      "number": 21,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 84–85, 91.",
       "alt": "Teaching diagram: The complete decision pipeline. Its relationships are explained in the visible transcript.",
       "diagram": "pipeline",
       "response_id": "01-algorithms-s18",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 18
     },
     {
       "title": "Independent transfer: a library queue",
@@ -603,10 +666,11 @@
       "source": "textbook",
       "mode": "transfer",
       "link": null,
-      "number": 19,
+      "number": 22,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 81–85.",
       "response_id": "01-algorithms-s19",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 19
     },
     {
       "title": "Chapter 3.2: the knowledge to carry forward",
@@ -635,11 +699,12 @@
       "source": "textbook",
       "mode": "teach",
       "link": "../paper-practice.html",
-      "number": 20,
+      "number": 23,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 81–91.",
       "response_id": "01-algorithms-s20",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 20
     }
   ],
-  "version": "2026-10-11-v5"
+  "version": "2026-10-11-v6"
 }

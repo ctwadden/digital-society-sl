@@ -25,7 +25,8 @@
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 86.",
       "alt": "Original AI conceptual illustration: library staff listen to a patron and review a request. Fictional people and venue, not case evidence.",
       "response_id": "02-dilemmas-s01",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 1
     },
     {
       "title": "Replacing and supporting human judgement",
@@ -48,7 +49,8 @@
       "number": 2,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 86–87.",
       "response_id": "02-dilemmas-s02",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 2
     },
     {
       "title": "Bias can enter at several points",
@@ -73,7 +75,8 @@
       "alt": "Teaching diagram: Bias can enter at several points. Its relationships are explained in the visible transcript.",
       "diagram": "bias-points",
       "response_id": "02-dilemmas-s03",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 3
     },
     {
       "title": "Missing examples can change who succeeds",
@@ -120,7 +123,8 @@
       "number": 4,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 87.",
       "response_id": "02-dilemmas-s04",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 4
     },
     {
       "title": "A proxy can misrepresent the intended quality",
@@ -143,7 +147,8 @@
       "number": 5,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 87.",
       "response_id": "02-dilemmas-s05",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 5
     },
     {
       "title": "A feedback loop can reinforce an early advantage",
@@ -168,7 +173,8 @@
       "alt": "Teaching diagram: A feedback loop can reinforce an early advantage. Its relationships are explained in the visible transcript.",
       "diagram": "feedback-chain",
       "response_id": "02-dilemmas-s06",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 6
     },
     {
       "title": "Human judgement can erode through over-reliance",
@@ -191,7 +197,8 @@
       "number": 7,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 86–88.",
       "response_id": "02-dilemmas-s07",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 7
     },
     {
       "title": "A black box limits explanation",
@@ -223,7 +230,8 @@
       "number": 8,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 88.",
       "response_id": "02-dilemmas-s08",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 8
     },
     {
       "title": "Transparency makes parts of the decision understandable",
@@ -247,7 +255,8 @@
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 88.",
       "diagram": "transparency",
       "response_id": "02-dilemmas-s09",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 9
     },
     {
       "title": "Accountability assigns responsibility and consequences",
@@ -271,7 +280,23 @@
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 88.",
       "diagram": "accountability",
       "response_id": "02-dilemmas-s10",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 10
+    },
+    {
+      "title": "A case claim needs a boundary",
+      "pages": "87–89",
+      "status": "Understand → apply",
+      "lines": [
+        "Technical failure, causal explanation and real-world harm are different claims."
+      ],
+      "response_id": "ibds-s03-ref-v6-case-boundary",
+      "prompt": "Explain what extra evidence is needed to move from a measured error difference to a judgement about a specific deployment.",
+      "notes": "Purpose: Technical failure, causal explanation and real-world harm are different claims. Say: This creates a bounded case beyond the feed. Specify the task, population, image conditions and error type. A measured disparity warrants investigation; it does not alone establish the designer’s intent or every downstream outcome. Ask: Explain what extra evidence is needed to move from a measured error difference to a judgement about a specific deployment. Practice feedback: use the worked exhibit to check the distinction; keep the first attempt and append a correction. Secure: apply the distinction to a different venue. Partial: isolate the disputed operation and compare the two cases. Unclear: reconstruct the first worked example before retrying. Later return: next lesson, close notes and explain this distinction in a library or community-centre system. These are formative practice responses, not registered assessment items.",
+      "source_note": "Textbook layer: Hodder 2022, supplied chapter pp. 87–89. Original classroom examples are fictional. Historical primary evidence checked 11 Oct 2026: https://www.nist.gov/news-events/news/2019/12/nist-study-evaluates-effects-race-age-sex-face-recognition-software",
+      "_exhibit": "<div class=\"source-spread\"><aside><strong>2019</strong><p>NIST · independent technical evaluation</p><small>Source paraphrase · read the cited original</small></aside><section><p class=\"label\">Supports this claim</p><p>Demographic performance differences in tested face-recognition algorithms.</p><p class=\"label limitation\">Does not establish</p><p>Not a test of every current system; not proof of one cause or of criminal intent.</p></section></div>",
+      "_new": true,
+      "number": 11
     },
     {
       "title": "Real case A: a provider explains recommendations",
@@ -291,10 +316,11 @@
       "source": "A",
       "mode": "case",
       "link": "../case-file.html",
-      "number": 11,
+      "number": 12,
       "source_note": "TikTok, 18 June 2020, provider account. https://newsroom.tiktok.com/en-us/how-tiktok-recommends-videos-for-you Textbook connection: pp. 86–89.",
       "response_id": "02-dilemmas-s11",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 11
     },
     {
       "title": "Real case C: a regulator examines design risks",
@@ -323,10 +349,11 @@
       "source": "C",
       "mode": "case",
       "link": null,
-      "number": 12,
+      "number": 13,
       "source_note": "European Commission, 6 February 2026, preliminary findings. https://digital-strategy.ec.europa.eu/en/news/commission-preliminarily-finds-tiktoks-addictive-design-breach-digital-services-act Textbook connection: pp. 86–89.",
       "response_id": "02-dilemmas-s12",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 12
     },
     {
       "title": "Observation, explanation and intention",
@@ -346,12 +373,13 @@
       "source": "textbook",
       "mode": "teach",
       "link": null,
-      "number": 13,
+      "number": 14,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 87–89.",
       "alt": "Teaching diagram: Observation, explanation and intention. Its relationships are explained in the visible transcript.",
       "diagram": "evidence-steps",
       "response_id": "02-dilemmas-s13",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 13
     },
     {
       "title": "A conditional judgement weighs an intervention",
@@ -371,10 +399,11 @@
       "source": "textbook",
       "mode": "teach",
       "link": null,
-      "number": 14,
+      "number": 15,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 89.",
       "response_id": "02-dilemmas-s14",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 14
     },
     {
       "title": "Paper 1 and Paper 2 use the same knowledge differently",
@@ -394,10 +423,11 @@
       "source": "guide",
       "mode": "teach",
       "link": "../paper-practice.html",
-      "number": 15,
+      "number": 16,
       "source_note": "IB Digital Society guide, local April 2026 revision, sections 3.1H, 3.2A–E and 4.2A–D. Assessment authority. Textbook connection: pp. 89, 91.",
       "response_id": "02-dilemmas-s15",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 15
     },
     {
       "title": "Chapter 3.2: delayed explanation check",
@@ -426,11 +456,12 @@
       "source": "textbook",
       "mode": "transfer",
       "link": null,
-      "number": 16,
+      "number": 17,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 86–91.",
       "response_id": "02-dilemmas-s16",
-      "status": "Apply"
+      "status": "Apply",
+      "_original_number": 16
     }
   ],
-  "version": "2026-10-11-v5"
+  "version": "2026-10-11-v6"
 }

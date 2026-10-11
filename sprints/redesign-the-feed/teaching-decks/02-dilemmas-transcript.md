@@ -2,7 +2,7 @@
 
 3.2E · pp. 86–89; reflection p. 91
 
-Visual teaching edition · 2026-10-11-v5
+Chapter reference edition · 2026-10-11-v6
 
 ## 1. A correct calculation can produce a harmful decision
 
@@ -64,37 +64,43 @@ Accountability concerns responsibility for a decision and what happens when it g
 
 Source: Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 88.
 
-## 11. Real case A: a provider explains recommendations
+## 11. A case claim needs a boundary
+
+Purpose: Technical failure, causal explanation and real-world harm are different claims. Say: This creates a bounded case beyond the feed. Specify the task, population, image conditions and error type. A measured disparity warrants investigation; it does not alone establish the designer’s intent or every downstream outcome. Ask: Explain what extra evidence is needed to move from a measured error difference to a judgement about a specific deployment. Practice feedback: use the worked exhibit to check the distinction; keep the first attempt and append a correction. Secure: apply the distinction to a different venue. Partial: isolate the disputed operation and compare the two cases. Unclear: reconstruct the first worked example before retrying. Later return: next lesson, close notes and explain this distinction in a library or community-centre system. These are formative practice responses, not registered assessment items.
+
+Source: Textbook layer: Hodder 2022, supplied chapter pp. 87–89. Original classroom examples are fictional. Historical primary evidence checked 11 Oct 2026: https://www.nist.gov/news-events/news/2019/12/nist-study-evaluates-effects-race-age-sex-face-recognition-software
+
+## 12. Real case A: a provider explains recommendations
 
 This is a historical primary source from the organization operating the service. It is useful for the provider’s explanation of inputs and purpose. Its origin also matters because the provider has an interest in confidence in the service. Use the source for what it supports, not as independent proof that the system is safe or unbiased. The exact private implementation and present weights remain outside this account. Open the case file for the locator, provenance and limitations before making a broader claim.
 
 Source: TikTok, 18 June 2020, provider account. https://newsroom.tiktok.com/en-us/how-tiktok-recommends-videos-for-you Textbook connection: pp. 86–89.
 
-## 12. Real case C: a regulator examines design risks
+## 13. Real case C: a regulator examines design risks
 
 The Commission examines risks from the design of the service, including recommendation, scrolling, autoplay and notifications. Its purpose and evidence differ from the provider’s product explanation. This can broaden an inquiry from how a feed works to whether design choices create risks. Keep the word preliminary attached to the finding. Do not attribute every effect to ranking alone or report the investigation as a final judgement. Compare what each source investigates and the evidence available to it.
 
 Source: European Commission, 6 February 2026, preliminary findings. https://digital-strategy.ec.europa.eu/en/news/commission-preliminarily-finds-tiktoks-addictive-design-breach-digital-services-act Textbook connection: pp. 86–89.
 
-## 13. Observation, explanation and intention
+## 14. Observation, explanation and intention
 
 Suppose three items receive more views than the others. That is an observation. A rule favouring previous engagement could explain how the pattern develops, but we need evidence about the rule and exposure. Claiming the operator intended to silence another creator adds a further inference. An uneven result does not establish that intention. A source describing a goal, an internal document or another suitable record may help investigate purpose. Keep these levels separate so an inquiry remains critical without exaggerating its evidence.
 
 Source: Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 87–89.
 
-## 14. A conditional judgement weighs an intervention
+## 15. A conditional judgement weighs an intervention
 
 A conditional judgement states what you recommend, why and under which conditions. For example, a discovery allocation could be justified if testing shows that it improves access for less-seen creators without exposing users to unacceptable content. That proposal could reduce immediate predicted engagement and requires eligibility checks. Transparency may help evaluate it, but outcome evidence is still needed. We have modelled the structure of reasoning on a different example. Your independent response must choose evidence and weigh its own conditions.
 
 Source: Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 89.
 
-## 15. Paper 1 and Paper 2 use the same knowledge differently
+## 16. Paper 1 and Paper 2 use the same knowledge differently
 
 The local practice page contains original partial questions aligned to the current guide. Paper 1 practice asks you to explain or evaluate a system using the case. Paper 2 practice asks you to use sources and integrate relevant knowledge, including direct comparison where the question requires it. Naming bias or listing two sources is insufficient. Explain how the system works and what each piece of evidence supports. Today’s practice is formative. It is not a full paper or a basis for predicting a final grade.
 
 Source: IB Digital Society guide, local April 2026 revision, sections 3.1H, 3.2A–E and 4.2A–D. Assessment authority. Textbook connection: pp. 89, 91.
 
-## 16. Chapter 3.2: delayed explanation check
+## 17. Chapter 3.2: delayed explanation check
 
 Close the deck. A community centre allocates its most visible booking slots using previous attendance. Explain how this rule could help organizers and how it could disadvantage a new group. Identify a source you would need and an intervention you would test. This changed case checks whether the knowledge transfers. After answering, return to the relevant teaching slides and correct one reasoning gap. The October 13 source synthesis and October 14 redesign give further opportunities to revisit the same chapter ideas.
 
