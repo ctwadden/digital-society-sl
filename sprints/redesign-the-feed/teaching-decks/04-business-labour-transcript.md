@@ -2,6 +2,8 @@
 
 4.2A–D · pp. 213–227 · Arc A: 213–219; Arc B: 220–227
 
+Visual teaching edition · 2026-10-11-v5
+
 ## 1. Digital systems change how organizations work
 
 The economic context examines how people work and exchange goods and services. A business uses digital systems to coordinate employees, record transactions and understand demand. A platform can also decide which seller or creator a customer encounters. We will connect a system’s mechanism to opportunities and constraints for different people. A successful business outcome does not automatically mean every worker or customer benefits. This deck covers the assigned business and working-practice sections, and identifies the remainder of the economic chapter.

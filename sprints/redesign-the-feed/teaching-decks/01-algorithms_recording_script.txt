@@ -2,6 +2,8 @@
 
 3.2A–D · pp. 81–85; chapter connections pp. 90–91
 
+Visual teaching edition · 2026-10-11-v5
+
 ## 1. A feed is a sequence of decisions
 
 Imagine a school media feed containing a concert, a science demonstration and a sports update. The phone shows an ordered list, but somebody has decided which information to collect and which outcomes to favour. We will begin with very small rules that we can follow ourselves. Later we will examine recommendation systems and the consequences for people. You do not need programming experience. By the end, you should be able to trace a rule, explain its result and identify a decision hidden inside it.
@@ -58,9 +60,9 @@ Source: Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed
 
 ## 10. Sorting changes the order
 
-Start with 3, 1, 2 and sort in ascending order. Compare 3 and 1, then swap them because 3 is larger. The list becomes 1, 3, 2. Compare 3 and 2 and swap again. The list becomes 1, 2, 3. In longer lists, another pass may still be needed. A stop rule can end the process after a complete pass with no swaps. Sorting does not make the data more accurate. It orders the values you supplied, including errors. State how ties and missing values are handled.
+Start with 3, 1, 2 and sort in ascending order. Compare 3 and 1, then swap them because 3 is larger. The list becomes 1, 3, 2. Compare 3 and 2 and swap again. The list becomes 1, 2, 3. In longer lists, another pass may still be needed. A stop rule can end the process after a complete pass with no swaps. Sorting does not make the data more accurate. It orders the values you supplied, including errors. State how ties and missing values are handled. Optional verified visual demonstration: Bubble Sort, Doug Lloyd / Harvard CS50, original 2017 short linked from the Spring 2026 course. Watch 1:41–3:08 for one adjacent-comparison pass; stop before the next pass. First predict whether swapping 5 and 2 finishes sorting. Observe which pair is compared and whether the swap counter changes. After the clip, explain why a pass can end with an unsorted prefix. The official player and English captions loaded and playback was checked on 11 October 2026; school filtering is not tested. Static fallback: the three-row worked trace on this slide, followed by the 4,2,3,1 practice list.
 
-Source: Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 84.
+Source: Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 84. Optional demonstration: https://cs50.harvard.edu/college/2026/spring/shorts/bubble_sort/
 
 ## 11. Filtering and counting
 

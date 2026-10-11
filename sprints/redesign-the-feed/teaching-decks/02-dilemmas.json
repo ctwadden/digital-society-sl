@@ -12,7 +12,7 @@
       ],
       "notes": "A ranking can be calculated exactly as designed and still cause problems. A system optimized for viewing time may give a viewer content they keep watching without serving their long-term interests. A hiring system may repeat a consistent rule that disadvantages applicants whose circumstances differ. We will distinguish mechanical correctness from justified decisions. The aim is to make a judgement supported by the mechanism, evidence and a clear criterion. The real TikTok case illustrates the tension, but our examples remain bounded by what the sources actually establish.",
       "pages": "86",
-      "visual": "feed-people-concept-v2.png",
+      "visual": "library-judgement-v5.png",
       "table": null,
       "code": null,
       "chart": null,
@@ -23,7 +23,7 @@
       "link": null,
       "number": 1,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 86.",
-      "alt": "Conceptual AI illustration, not evidence or a real platform.",
+      "alt": "Original AI conceptual illustration: library staff listen to a patron and review a request. Fictional people and venue, not case evidence.",
       "response_id": "02-dilemmas-s01",
       "status": "Apply"
     },
@@ -432,5 +432,5 @@
       "status": "Apply"
     }
   ],
-  "version": "2026-10-11-v4"
+  "version": "2026-10-11-v5"
 }

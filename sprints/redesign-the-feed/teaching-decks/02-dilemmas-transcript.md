@@ -2,6 +2,8 @@
 
 3.2E · pp. 86–89; reflection p. 91
 
+Visual teaching edition · 2026-10-11-v5
+
 ## 1. A correct calculation can produce a harmful decision
 
 A ranking can be calculated exactly as designed and still cause problems. A system optimized for viewing time may give a viewer content they keep watching without serving their long-term interests. A hiring system may repeat a consistent rule that disadvantages applicants whose circumstances differ. We will distinguish mechanical correctness from justified decisions. The aim is to make a judgement supported by the mechanism, evidence and a clear criterion. The real TikTok case illustrates the tension, but our examples remain bounded by what the sources actually establish.

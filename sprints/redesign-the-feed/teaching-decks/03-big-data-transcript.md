@@ -2,6 +2,8 @@
 
 3.1H and the start of 3.1I · pp. 72–74
 
+Visual teaching edition · 2026-10-11-v5
+
 ## 1. Data records part of a situation
 
 A viewer might watch a video because they enjoy it, need it for a class or disagree with it. The recorded action is not identical to the viewer’s reason. Data analytics uses observations to find patterns or make predictions. We begin by distinguishing a recorded value from an inference. This matters when a platform decides what to show next. Our examples use invented records. We will not collect personal histories or require students to enter accounts to explore the mechanism.

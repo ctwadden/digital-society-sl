@@ -12,7 +12,7 @@
       ],
       "notes": "The economic context examines how people work and exchange goods and services. A business uses digital systems to coordinate employees, record transactions and understand demand. A platform can also decide which seller or creator a customer encounters. We will connect a system’s mechanism to opportunities and constraints for different people. A successful business outcome does not automatically mean every worker or customer benefits. This deck covers the assigned business and working-practice sections, and identifies the remainder of the economic chapter.",
       "pages": "213",
-      "visual": "remote-work-v3.png",
+      "visual": "bookshop-exchange-v5.png",
       "table": null,
       "code": null,
       "chart": null,
@@ -23,7 +23,7 @@
       "link": null,
       "number": 1,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 213.",
-      "alt": "Conceptual shared workspace with people using connected workstations; not a documentary company photograph",
+      "alt": "Original AI conceptual bookshop exchange: an owner serves a customer beside digital payment and record tools. Fictional venue; not a transaction record or software screenshot.",
       "response_id": "04-business-labour-s01",
       "status": "Apply"
     },
@@ -567,8 +567,8 @@
       "notes": "A fictional bicycle workshop uses software to generate a stock report, while a worker still diagnoses damage and talks with customers. Automating the report is a task change, not evidence that the entire job has vanished. The textbook introduces automation and employment on page 220. Its dated warehouse numbers are not current class evidence. The ILO’s refined 2025 research estimates potential exposure of occupations to generative AI; it does not count actual job losses. Use the distinction between capability, adoption and measured employment outcomes. The workshop image is a generated conceptual example, not a photograph of a real employer.",
       "pages": "220",
       "source_note": "Hodder 2022, printed pp. 220. Original teaching paraphrase; synthetic examples unless a source is named. Current-context source checked 11 October 2026: https://www.ilo.org/resource/article/how-might-generative-ai-impact-different-occupations",
-      "visual": "additive-workshop-v4.png",
-      "alt": "AI conceptual bicycle workshop: a technician checks a printed part beside a CAD model. No actual employer or safety certification is represented.",
+      "visual": "workshop-tasks-v5.png",
+      "alt": "Original AI conceptual workshop: inventory checking and a customer conversation are distinct tasks. Fictional people and workplace; not labour research evidence.",
       "prompt": "Individually, list three tasks in a job you know. Which could be automated, and what would remain? 2 minutes.",
       "number": 20,
       "response_id": "04-business-labour-s20",
@@ -907,5 +907,5 @@
       "status": "Apply"
     }
   ],
-  "version": "2026-10-11-v4"
+  "version": "2026-10-11-v5"
 }
