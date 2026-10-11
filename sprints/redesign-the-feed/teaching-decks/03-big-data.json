@@ -23,7 +23,9 @@
       "link": null,
       "number": 1,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 72–73.",
-      "alt": "Conceptual AI sports scene: sensor, camera, ticket scan and phone contribute different data to storage. No real venue or measured outcomes."
+      "alt": "Conceptual AI sports scene: sensor, camera, ticket scan and phone contribute different data to storage. No real venue or measured outcomes.",
+      "response_id": "03-big-data-s01",
+      "status": "Apply"
     },
     {
       "title": "Big data and data analytics",
@@ -34,7 +36,7 @@
       ],
       "notes": "The textbook characterizes big data using four Vs. Data can be structured in a table or arrive in formats such as video, text and images. Analytics can describe what happened, detect patterns or support a prediction. A classroom table is small data, but it helps us reason about a process that operates on a much larger collection. A numerical output is not automatically a reliable answer. Ask how the records were collected, what they represent and how the analysis matches the question.",
       "pages": "72–73",
-      "visual": "four-vs-v2.svg",
+      "visual": null,
       "table": null,
       "code": null,
       "chart": null,
@@ -45,7 +47,10 @@
       "link": null,
       "number": 2,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 72–73.",
-      "alt": "Teaching diagram: Big data and data analytics. Its relationships are explained in the visible transcript."
+      "alt": "Teaching diagram: Big data and data analytics. Its relationships are explained in the visible transcript.",
+      "diagram": "four-vs",
+      "response_id": "03-big-data-s02",
+      "status": "Apply"
     },
     {
       "title": "Volume and velocity",
@@ -83,7 +88,9 @@
       "mode": "teach",
       "link": null,
       "number": 3,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 73."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 73.",
+      "response_id": "03-big-data-s03",
+      "status": "Understand"
     },
     {
       "title": "Variety and veracity",
@@ -113,7 +120,9 @@
       "mode": "teach",
       "link": null,
       "number": 4,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 73."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 73.",
+      "response_id": "03-big-data-s04",
+      "status": "Apply"
     },
     {
       "title": "Small and clean, or large and messy?",
@@ -155,7 +164,10 @@
       "mode": "teach",
       "link": null,
       "number": 5,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 73–74."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 73–74.",
+      "diagram": "missing-display",
+      "response_id": "03-big-data-s05",
+      "status": "Apply"
     },
     {
       "title": "A missing value is an unresolved question",
@@ -176,7 +188,10 @@
       "mode": "teach",
       "link": null,
       "number": 6,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 73–74."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 73–74.",
+      "diagram": "missing-mean",
+      "response_id": "03-big-data-s06",
+      "status": "Apply"
     },
     {
       "title": "An association does not establish a cause",
@@ -187,7 +202,7 @@
       ],
       "notes": "Items with more exposure often receive more interactions. This could reflect relevance, the number of opportunities to be seen or both. Looking only at interaction totals cannot distinguish those explanations. A carefully designed comparison might hold exposure constant or compare a changed allocation, but even then we need to examine other factors and limits. The important habit is to state the measured relationship first, then ask which alternative explanations the evidence has ruled out.",
       "pages": "73",
-      "visual": "correlation-intent.svg",
+      "visual": null,
       "table": null,
       "code": null,
       "chart": null,
@@ -198,7 +213,10 @@
       "link": null,
       "number": 7,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 73.",
-      "alt": "Teaching diagram: An association does not establish a cause. Its relationships are explained in the visible transcript."
+      "alt": "Teaching diagram: An association does not establish a cause. Its relationships are explained in the visible transcript.",
+      "diagram": "association-limit",
+      "response_id": "03-big-data-s07",
+      "status": "Apply"
     },
     {
       "title": "The data lifecycle creates decisions at every stage",
@@ -228,7 +246,9 @@
       "mode": "teach",
       "link": null,
       "number": 8,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 72, 74."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 72, 74.",
+      "response_id": "03-big-data-s08",
+      "status": "Apply"
     },
     {
       "title": "Collection can shape the eventual result",
@@ -249,7 +269,10 @@
       "mode": "teach",
       "link": null,
       "number": 9,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 74."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 74.",
+      "diagram": "collection",
+      "response_id": "03-big-data-s09",
+      "status": "Apply"
     },
     {
       "title": "Analytics can support several purposes",
@@ -270,7 +293,9 @@
       "mode": "teach",
       "link": null,
       "number": 10,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 73."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 73.",
+      "response_id": "03-big-data-s10",
+      "status": "Apply"
     },
     {
       "title": "A bounded big-data inquiry",
@@ -291,7 +316,9 @@
       "mode": "teach",
       "link": "../source-passport.html",
       "number": 11,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 74."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 74.",
+      "response_id": "03-big-data-s11",
+      "status": "Apply"
     },
     {
       "title": "Chapter coverage and delayed retrieval",
@@ -321,7 +348,10 @@
       "mode": "transfer",
       "link": null,
       "number": 12,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 72–74."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 72–74.",
+      "response_id": "03-big-data-s12",
+      "status": "Apply"
     }
-  ]
+  ],
+  "version": "2026-10-11-v4"
 }

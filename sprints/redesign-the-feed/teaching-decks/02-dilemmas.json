@@ -23,7 +23,9 @@
       "link": null,
       "number": 1,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 86.",
-      "alt": "Conceptual AI illustration, not evidence or a real platform."
+      "alt": "Conceptual AI illustration, not evidence or a real platform.",
+      "response_id": "02-dilemmas-s01",
+      "status": "Apply"
     },
     {
       "title": "Replacing and supporting human judgement",
@@ -44,7 +46,9 @@
       "mode": "teach",
       "link": null,
       "number": 2,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 86–87."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 86–87.",
+      "response_id": "02-dilemmas-s02",
+      "status": "Apply"
     },
     {
       "title": "Bias can enter at several points",
@@ -55,7 +59,7 @@
       ],
       "notes": "Algorithmic bias concerns systematic skew or unfairness in decisions. The textbook identifies biased or incomplete data and choices made by developers. We can examine those choices more precisely. A location variable may stand in for access to resources rather than the ability we want to measure. A target based on previous approvals can repeat past exclusion. A threshold can create different error rates across groups. More data does not automatically solve these problems if it preserves the same omissions or labels.",
       "pages": "87",
-      "visual": "dilemmas-v2.svg",
+      "visual": null,
       "table": null,
       "code": null,
       "chart": null,
@@ -66,7 +70,10 @@
       "link": null,
       "number": 3,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 87.",
-      "alt": "Teaching diagram: Bias can enter at several points. Its relationships are explained in the visible transcript."
+      "alt": "Teaching diagram: Bias can enter at several points. Its relationships are explained in the visible transcript.",
+      "diagram": "bias-points",
+      "response_id": "02-dilemmas-s03",
+      "status": "Apply"
     },
     {
       "title": "Missing examples can change who succeeds",
@@ -111,7 +118,9 @@
       "mode": "teach",
       "link": null,
       "number": 4,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 87."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 87.",
+      "response_id": "02-dilemmas-s04",
+      "status": "Apply"
     },
     {
       "title": "A proxy can misrepresent the intended quality",
@@ -132,7 +141,9 @@
       "mode": "teach",
       "link": null,
       "number": 5,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 87."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 87.",
+      "response_id": "02-dilemmas-s05",
+      "status": "Apply"
     },
     {
       "title": "A feedback loop can reinforce an early advantage",
@@ -143,7 +154,7 @@
       ],
       "notes": "If the first ranking gives one creator more exposure, that creator has more opportunities to receive views and reactions. If the next ranking uses those totals, the original advantage can grow. This is a possible feedback mechanism, not proof of unfairness in every recommender. A creator might also receive exposure because people find the work useful. We need to examine the rule and compare appropriate measures. Explain each link and identify what could interrupt the loop, such as reserving opportunities for items with little previous exposure.",
       "pages": "87–89",
-      "visual": "feedback-v2.svg",
+      "visual": null,
       "table": null,
       "code": null,
       "chart": null,
@@ -154,7 +165,10 @@
       "link": "../sim/feedback-loop.html",
       "number": 6,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 87–89.",
-      "alt": "Teaching diagram: A feedback loop can reinforce an early advantage. Its relationships are explained in the visible transcript."
+      "alt": "Teaching diagram: A feedback loop can reinforce an early advantage. Its relationships are explained in the visible transcript.",
+      "diagram": "feedback-chain",
+      "response_id": "02-dilemmas-s06",
+      "status": "Apply"
     },
     {
       "title": "Human judgement can erode through over-reliance",
@@ -175,7 +189,9 @@
       "mode": "teach",
       "link": null,
       "number": 7,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 86–88."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 86–88.",
+      "response_id": "02-dilemmas-s07",
+      "status": "Apply"
     },
     {
       "title": "A black box limits explanation",
@@ -205,7 +221,9 @@
       "mode": "teach",
       "link": null,
       "number": 8,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 88."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 88.",
+      "response_id": "02-dilemmas-s08",
+      "status": "Apply"
     },
     {
       "title": "Transparency makes parts of the decision understandable",
@@ -226,7 +244,10 @@
       "mode": "teach",
       "link": null,
       "number": 9,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 88."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 88.",
+      "diagram": "transparency",
+      "response_id": "02-dilemmas-s09",
+      "status": "Apply"
     },
     {
       "title": "Accountability assigns responsibility and consequences",
@@ -247,7 +268,10 @@
       "mode": "teach",
       "link": null,
       "number": 10,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 88."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 88.",
+      "diagram": "accountability",
+      "response_id": "02-dilemmas-s10",
+      "status": "Apply"
     },
     {
       "title": "Real case A: a provider explains recommendations",
@@ -268,7 +292,9 @@
       "mode": "case",
       "link": "../case-file.html",
       "number": 11,
-      "source_note": "TikTok, 18 June 2020, provider account. https://newsroom.tiktok.com/en-us/how-tiktok-recommends-videos-for-you Textbook connection: pp. 86–89."
+      "source_note": "TikTok, 18 June 2020, provider account. https://newsroom.tiktok.com/en-us/how-tiktok-recommends-videos-for-you Textbook connection: pp. 86–89.",
+      "response_id": "02-dilemmas-s11",
+      "status": "Apply"
     },
     {
       "title": "Real case C: a regulator examines design risks",
@@ -298,7 +324,9 @@
       "mode": "case",
       "link": null,
       "number": 12,
-      "source_note": "European Commission, 6 February 2026, preliminary findings. https://digital-strategy.ec.europa.eu/en/news/commission-preliminarily-finds-tiktoks-addictive-design-breach-digital-services-act Textbook connection: pp. 86–89."
+      "source_note": "European Commission, 6 February 2026, preliminary findings. https://digital-strategy.ec.europa.eu/en/news/commission-preliminarily-finds-tiktoks-addictive-design-breach-digital-services-act Textbook connection: pp. 86–89.",
+      "response_id": "02-dilemmas-s12",
+      "status": "Apply"
     },
     {
       "title": "Observation, explanation and intention",
@@ -309,7 +337,7 @@
       ],
       "notes": "Suppose three items receive more views than the others. That is an observation. A rule favouring previous engagement could explain how the pattern develops, but we need evidence about the rule and exposure. Claiming the operator intended to silence another creator adds a further inference. An uneven result does not establish that intention. A source describing a goal, an internal document or another suitable record may help investigate purpose. Keep these levels separate so an inquiry remains critical without exaggerating its evidence.",
       "pages": "87–89",
-      "visual": "evidence-ladder-v2.svg",
+      "visual": null,
       "table": null,
       "code": null,
       "chart": null,
@@ -320,7 +348,10 @@
       "link": null,
       "number": 13,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 87–89.",
-      "alt": "Teaching diagram: Observation, explanation and intention. Its relationships are explained in the visible transcript."
+      "alt": "Teaching diagram: Observation, explanation and intention. Its relationships are explained in the visible transcript.",
+      "diagram": "evidence-steps",
+      "response_id": "02-dilemmas-s13",
+      "status": "Apply"
     },
     {
       "title": "A conditional judgement weighs an intervention",
@@ -341,7 +372,9 @@
       "mode": "teach",
       "link": null,
       "number": 14,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 89."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 89.",
+      "response_id": "02-dilemmas-s14",
+      "status": "Apply"
     },
     {
       "title": "Paper 1 and Paper 2 use the same knowledge differently",
@@ -362,7 +395,9 @@
       "mode": "teach",
       "link": "../paper-practice.html",
       "number": 15,
-      "source_note": "IB Digital Society guide, local April 2026 revision, sections 3.1H, 3.2A–E and 4.2A–D. Assessment authority. Textbook connection: pp. 89, 91."
+      "source_note": "IB Digital Society guide, local April 2026 revision, sections 3.1H, 3.2A–E and 4.2A–D. Assessment authority. Textbook connection: pp. 89, 91.",
+      "response_id": "02-dilemmas-s15",
+      "status": "Apply"
     },
     {
       "title": "Chapter 3.2: delayed explanation check",
@@ -392,7 +427,10 @@
       "mode": "transfer",
       "link": null,
       "number": 16,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 86–91."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 86–91.",
+      "response_id": "02-dilemmas-s16",
+      "status": "Apply"
     }
-  ]
+  ],
+  "version": "2026-10-11-v4"
 }

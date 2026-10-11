@@ -12,7 +12,7 @@
       ],
       "notes": "Imagine a school media feed containing a concert, a science demonstration and a sports update. The phone shows an ordered list, but somebody has decided which information to collect and which outcomes to favour. We will begin with very small rules that we can follow ourselves. Later we will examine recommendation systems and the consequences for people. You do not need programming experience. By the end, you should be able to trace a rule, explain its result and identify a decision hidden inside it.",
       "pages": "81",
-      "visual": "algorithm-v2.svg",
+      "visual": "feed-people-concept-v2.png",
       "table": null,
       "code": null,
       "chart": null,
@@ -23,7 +23,9 @@
       "link": null,
       "number": 1,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 81.",
-      "alt": "Teaching diagram: A feed is a sequence of decisions. Its relationships are explained in the visible transcript."
+      "alt": "Original AI conceptual scene linking creators, a viewer and platform decisions. Not an actual platform or outcome study.",
+      "response_id": "01-algorithms-s01",
+      "status": "Apply"
     },
     {
       "title": "An algorithm",
@@ -44,7 +46,9 @@
       "mode": "teach",
       "link": null,
       "number": 2,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 81–82."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 81–82.",
+      "response_id": "01-algorithms-s02",
+      "status": "Understand"
     },
     {
       "title": "Characteristics of a usable algorithm",
@@ -65,7 +69,9 @@
       "mode": "teach",
       "link": null,
       "number": 3,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 81–82."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 81–82.",
+      "response_id": "01-algorithms-s03",
+      "status": "Apply"
     },
     {
       "title": "Variables hold values",
@@ -116,7 +122,9 @@
       "mode": "teach",
       "link": null,
       "number": 4,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 82."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 82.",
+      "response_id": "01-algorithms-s04",
+      "status": "Apply"
     },
     {
       "title": "Conditionals choose a branch",
@@ -137,7 +145,9 @@
       "mode": "teach",
       "link": null,
       "number": 5,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 83."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 83.",
+      "response_id": "01-algorithms-s05",
+      "status": "Apply"
     },
     {
       "title": "Loops repeat a set of instructions",
@@ -158,7 +168,10 @@
       "mode": "teach",
       "link": null,
       "number": 6,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 83."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 83.",
+      "diagram": "loop-trace",
+      "response_id": "01-algorithms-s06",
+      "status": "Apply"
     },
     {
       "title": "One procedure, several representations",
@@ -180,7 +193,9 @@
       "link": null,
       "number": 7,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 83.",
-      "alt": "Flowchart: START, READ numeric duration, test duration <= 60. YES includes the item, NO excludes it. Both branches STOP. Oval start/stop, parallelogram input, diamond condition and rectangle process."
+      "alt": "Flowchart: START, READ numeric duration, test duration <= 60. YES includes the item, NO excludes it. Both branches STOP. Oval start/stop, parallelogram input, diamond condition and rectangle process.",
+      "response_id": "01-algorithms-s07",
+      "status": "Apply"
     },
     {
       "title": "Algorithm, pseudocode and code",
@@ -210,7 +225,9 @@
       "mode": "teach",
       "link": null,
       "number": 8,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 83–84."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 83–84.",
+      "response_id": "01-algorithms-s08",
+      "status": "Apply"
     },
     {
       "title": "Searching finds a target",
@@ -252,7 +269,9 @@
       "mode": "teach",
       "link": "../sim/search-sort.html",
       "number": 9,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 84."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 84.",
+      "response_id": "01-algorithms-s09",
+      "status": "Apply"
     },
     {
       "title": "Sorting changes the order",
@@ -294,7 +313,9 @@
       "mode": "teach",
       "link": null,
       "number": 10,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 84."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 84.",
+      "response_id": "01-algorithms-s10",
+      "status": "Apply"
     },
     {
       "title": "Filtering and counting",
@@ -332,7 +353,10 @@
       "mode": "teach",
       "link": null,
       "number": 11,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 84."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 84.",
+      "diagram": "filter-sort",
+      "response_id": "01-algorithms-s11",
+      "status": "Understand"
     },
     {
       "title": "Efficiency needs a measure",
@@ -362,7 +386,9 @@
       "mode": "teach",
       "link": null,
       "number": 12,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 81, 84–86."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 81, 84–86.",
+      "response_id": "01-algorithms-s12",
+      "status": "Apply"
     },
     {
       "title": "Prioritizing turns a goal into an order",
@@ -404,7 +430,9 @@
       "mode": "teach",
       "link": null,
       "number": 13,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 85."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 85.",
+      "response_id": "01-algorithms-s13",
+      "status": "Apply"
     },
     {
       "title": "A changed objective: prediction",
@@ -425,7 +453,9 @@
       "mode": "predict",
       "link": null,
       "number": 14,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 85."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 85.",
+      "response_id": "01-algorithms-s14",
+      "status": "Apply"
     },
     {
       "title": "A changed objective: worked result",
@@ -471,7 +501,9 @@
       "mode": "reveal",
       "link": null,
       "number": 15,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 85."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 85.",
+      "response_id": "01-algorithms-s15",
+      "status": "Apply"
     },
     {
       "title": "Classifying and associating",
@@ -501,7 +533,9 @@
       "mode": "teach",
       "link": null,
       "number": 16,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 85."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 85.",
+      "response_id": "01-algorithms-s16",
+      "status": "Apply"
     },
     {
       "title": "Rules and learned models",
@@ -522,7 +556,9 @@
       "mode": "teach",
       "link": null,
       "number": 17,
-      "source_note": "IB Digital Society guide, local April 2026 revision, sections 3.1H, 3.2A–E and 4.2A–D. Assessment authority. Textbook connection: pp. 85, 91."
+      "source_note": "IB Digital Society guide, local April 2026 revision, sections 3.1H, 3.2A–E and 4.2A–D. Assessment authority. Textbook connection: pp. 85, 91.",
+      "response_id": "01-algorithms-s17",
+      "status": "Understand"
     },
     {
       "title": "The complete decision pipeline",
@@ -533,7 +569,7 @@
       ],
       "notes": "A recommender involves several algorithms and human decisions rather than one magical rule. A system might validate records, remove ineligible items, score the remaining items, sort them and display a selection. The display creates new interactions that can be recorded for later recommendations. A software developer has to implement and test this pipeline. The model can change over time. When explaining a real system, distinguish steps established by a source from steps that you infer or propose. Our simplified model lets us practise tracing, but it does not reveal a platform’s private code.",
       "pages": "84–85, 91",
-      "visual": "signal-map-v2.svg",
+      "visual": null,
       "table": null,
       "code": null,
       "chart": null,
@@ -544,7 +580,10 @@
       "link": null,
       "number": 18,
       "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 84–85, 91.",
-      "alt": "Teaching diagram: The complete decision pipeline. Its relationships are explained in the visible transcript."
+      "alt": "Teaching diagram: The complete decision pipeline. Its relationships are explained in the visible transcript.",
+      "diagram": "pipeline",
+      "response_id": "01-algorithms-s18",
+      "status": "Apply"
     },
     {
       "title": "Independent transfer: a library queue",
@@ -565,7 +604,9 @@
       "mode": "transfer",
       "link": null,
       "number": 19,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 81–85."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 81–85.",
+      "response_id": "01-algorithms-s19",
+      "status": "Apply"
     },
     {
       "title": "Chapter 3.2: the knowledge to carry forward",
@@ -595,7 +636,10 @@
       "mode": "teach",
       "link": "../paper-practice.html",
       "number": 20,
-      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 81–91."
+      "source_note": "Bomfim et al., Digital Society for the IB Diploma, Hodder, 2022. Printed pages cited per slide. Original paraphrase. Textbook connection: pp. 81–91.",
+      "response_id": "01-algorithms-s20",
+      "status": "Apply"
     }
-  ]
+  ],
+  "version": "2026-10-11-v4"
 }
