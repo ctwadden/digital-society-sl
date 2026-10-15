@@ -39,6 +39,7 @@ def build(config=None):
             sections.append(f'<section class="section" id="{key}" aria-labelledby="{key}-title"><h2 id="{key}-title">{esc(title)}</h2>{content}</section>')
 
     cards = [
+        ('Economics business growth lab', 'Connect your Netflix or Amazon inquiry to four business growth strategies, test a fictional shop, and begin Supply Chain Detective.', 'lessons/economics-business-growth/', 'Economics presentation and follow-up'),
         ('Four lenses → Criterion B', 'Watch one TED talk, build a study infographic, then rank your own IA sources and select a provisional top three.', 'lessons/source-power-criterion-b/', 'Independent lesson · 70 minutes'),
         ('Identity under the lens', 'Reconnect Identity with Power, Systems and Values & Ethics through guided analysis, source work and independent transfer.', 'sprints/identity-connected-concepts/', 'Sprint 2 workbook'),
         ('Concepts & command terms', 'Turn a case into precise explanations, connected analysis and a reasoned evaluation. Includes guided practice and classroom criteria.', 'concepts-command-lab/', 'Two-class investigation'),
