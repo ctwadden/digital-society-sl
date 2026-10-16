@@ -137,10 +137,10 @@ export const economicsSlides=[
   },
   {
     "id": "local-econ-12",
-    "title": "Northstar: see the business change, then judge it.",
-    "kicker": "LAB · 12 MIN · PAIRS, INDIVIDUAL EXPLANATION",
-    "content": "You are Northstar’s adviser. Choose one growth move and predict whether it changes the offer, chain, audience or industry. Reveal the before/after structure, identify the benefit and new responsibility, then compare the move with the core shop. Test one changed condition only after you understand the first result.",
-    "prompt": "Recommend the move only if you can explain what changed, who is affected, and the condition that would reverse your decision.",
+    "title": "Northstar mission: grow without breaking the promise.",
+    "kicker": "SIMULATION · 18 MIN · PAIRS THINK, EACH STUDENT WRITES",
+    "content": "Choose an operational action without being shown its strategy label. Lock a structural prediction, run the normal round, record your first recommendation, then draw a disruption and revise. Finish with the unfamiliar music-service transfer case.",
+    "prompt": "Your evidence is the decision trail: prediction, result, revision, stakeholder consequence, limitation and transfer—not a high score.",
     "visual": "simulation",
     "image": "assets/economics-northstar-operations.png",
     "imageAlt": "The fictional Northstar stationery shop with checkout, packing operation and delivery van visible together",
@@ -155,10 +155,10 @@ export const economicsSlides=[
   },
   {
     "id": "local-econ-13",
-    "title": "More demand is not the same as more output.",
-    "kicker": "DEBRIEF · OBSERVATION BEFORE JUDGMENT",
-    "content": "Compare two recorded trials. Separate revenue, operating surplus and first-round cash after setup. Name the bottleneck. A higher wage changes this model’s payroll; it does not automatically calculate retention, well-being or productivity.",
-    "prompt": "State one result as “In this model, under these assumptions…” Then name the real evidence you would need.",
+    "title": "A disruption tests the recommendation—not your memory.",
+    "kicker": "DEBRIEF · COMPARE ROUND 1 WITH ROUND 2",
+    "content": "Separate orders completed, orders unfilled, operating surplus and first-round cash. Explain the bottleneck and the new responsibility. The model calculates a bounded set of fictional values; it cannot establish safety, fairness, loyalty or long-term demand.",
+    "prompt": "Use the stem: “In this model, under these assumptions…” Then state the fact that could reverse your judgment.",
     "visual": "debrief",
     "goals": [
       "Use attributed evidence and a model limitation to make a conditional stakeholder judgment."
@@ -233,10 +233,10 @@ export const economicsSlides=[
   },
   {
     "id": "local-econ-18",
-    "title": "Your evidence: one Northstar growth decision.",
-    "kicker": "CURRENT ASSIGNMENT · DECISION BRIEF",
-    "content": "Choose one Northstar growth move. Show the business before and after. Classify the move by what changes—not by memorizing its name. Use one fair model comparison, explain a consequence for a named stakeholder, and state one limitation of the model.",
-    "prompt": "Can a reader see your claim, model evidence, reasoning and reversal condition on one page?",
+    "title": "Assignment: prove the reasoning travels beyond Northstar.",
+    "kicker": "CURRENT ASSIGNMENT · TEACHER-REVIEWED FORMATIVE EVIDENCE",
+    "content": "Submit your Northstar decision trail plus the unfamiliar music-service response. You are assessed on structural classification, fair model interpretation, stakeholder consequence and conditional transfer—not on profit or simulation completion.",
+    "prompt": "Can a reader see what changed, what the numbers support, what they cannot prove, and why your judgment changes under a new condition?",
     "visual": "project",
     "image": "assets/economics-supply-chain-detective.png",
     "imageAlt": "An investigation desk tracing a parcel through factory, warehouse, ship, delivery vehicle and customer",
@@ -246,10 +246,10 @@ export const economicsSlides=[
   },
   {
     "id": "local-econ-19",
-    "title": "A changed condition tests your recommendation.",
-    "kicker": "FOLLOW-UP · REVISE, DO NOT RESTART",
-    "content": "Run the same growth move under one new condition: supplier delay, demand surge, higher wage or reduced capacity. Explain whether the recommendation still holds. The numbers are fictional model evidence; they are not facts about Amazon, Netflix or any real company.",
-    "prompt": "Submit a one-page decision brief or a two-minute explanation: classification, before/after change, model comparison, stakeholder consequence, limitation and reversal condition.",
+    "title": "Four criteria make the target visible.",
+    "kicker": "SUCCESS CRITERIA · 2 POINTS EACH · 8 TOTAL",
+    "content": "A: classify from before/after evidence. B: compare the same condition and interpret two model measures. C: connect a named stakeholder to a benefit, cost or responsibility and a limitation. D: revise conditionally and transfer the method to the unfamiliar case.",
+    "prompt": "A strong response explains why; a partial response names; an unclear response lists or copies without structural evidence.",
     "visual": "followup",
     "goals": [
       "Use attributed evidence and a model limitation to make a conditional stakeholder judgment."
@@ -257,8 +257,8 @@ export const economicsSlides=[
   },
   {
     "id": "local-econ-20",
-    "title": "What can you now explain without the model?",
-    "kicker": "EXIT · INDEPENDENT TRANSFER · 4 MIN",
+    "title": "What can you explain when the labels disappear?",
+    "kicker": "EXIT · INDEPENDENT TRANSFER · 5 MIN",
     "content": "An unfamiliar music service buys a ticket-delivery business. Explain a plausible growth classification, one new dependency and one stakeholder trade-off. Identify one fact you would need before judging the decision. State any assumption about how the businesses connect.",
     "prompt": "Next lesson: reconstruct your input → decision → output chain without notes; then test a new disruption.",
     "visual": "exit",
