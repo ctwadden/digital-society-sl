@@ -25,7 +25,7 @@ export const economicsSlides=[
     "id": "local-econ-03",
     "title": "Today you will follow one decision from click to consequence.",
     "kicker": "LESSON ROUTE · SEE IT, TEST IT, JUDGE IT",
-    "content": "First, trace how a transaction becomes data. Next, classify four ways a business can grow. Then test a fictional shop, compare company and regulator evidence, and begin a Supply Chain Detective route of your own.",
+    "content": "First, trace how a transaction becomes data. Next, classify four ways a business can grow. Then advise a fictional shop: predict what changes, test the consequence, and defend a conditional recommendation. Finally, transfer that reasoning to real evidence.",
     "prompt": "Success means you can explain the mechanism, name the stakeholder trade-off, and identify the evidence still needed.",
     "visual": "distinction",
     "goals": [
@@ -137,10 +137,10 @@ export const economicsSlides=[
   },
   {
     "id": "local-econ-12",
-    "title": "Northstar: make one decision, then test it.",
+    "title": "Northstar: see the business change, then judge it.",
     "kicker": "LAB · 12 MIN · PAIRS, INDIVIDUAL EXPLANATION",
-    "content": "Round 1: predict, run the core shop, then change only the growth decision. Round 2: keep the strategy fixed and change one staff policy. Round 3: keep both fixed and introduce one disruption. Record before/after values. Each partner explains one result.",
-    "prompt": "Which constraint changed the result? What does this model leave out about workers and customers?",
+    "content": "You are Northstar’s adviser. Choose one growth move and predict whether it changes the offer, chain, audience or industry. Reveal the before/after structure, identify the benefit and new responsibility, then compare the move with the core shop. Test one changed condition only after you understand the first result.",
+    "prompt": "Recommend the move only if you can explain what changed, who is affected, and the condition that would reverse your decision.",
     "visual": "simulation",
     "image": "assets/economics-northstar-operations.png",
     "imageAlt": "The fictional Northstar stationery shop with checkout, packing operation and delivery van visible together",
@@ -150,7 +150,7 @@ export const economicsSlides=[
     "activity": {
       "type": "simulation",
       "model": "business-growth",
-      "alternative": "Use the printed baseline and vertical comparison in the follow-up task; calculate costs and defend a conditional decision."
+      "alternative": "Use the printed Northstar before/after cards and model table; classify the move and defend a conditional decision."
     }
   },
   {
@@ -233,10 +233,10 @@ export const economicsSlides=[
   },
   {
     "id": "local-econ-18",
-    "title": "Follow the order beyond the screen.",
-    "kicker": "MAIN PROJECT · SUPPLY CHAIN DETECTIVE",
-    "content": "Investigate one bounded route: a product order from supplier to buyer, or a digital title from hosting to viewer. Trace goods/service, money, data and control. Show where one digital system makes a consequential decision. Do not invent hidden infrastructure.",
-    "prompt": "Choose a route and one question about efficiency, power or resilience. Why is that boundary manageable?",
+    "title": "Your evidence: one Northstar growth decision.",
+    "kicker": "CURRENT ASSIGNMENT · DECISION BRIEF",
+    "content": "Choose one Northstar growth move. Show the business before and after. Classify the move by what changes—not by memorizing its name. Use one fair model comparison, explain a consequence for a named stakeholder, and state one limitation of the model.",
+    "prompt": "Can a reader see your claim, model evidence, reasoning and reversal condition on one page?",
     "visual": "project",
     "image": "assets/economics-supply-chain-detective.png",
     "imageAlt": "An investigation desk tracing a parcel through factory, warehouse, ship, delivery vehicle and customer",
@@ -246,10 +246,10 @@ export const economicsSlides=[
   },
   {
     "id": "local-econ-19",
-    "title": "A disruption reveals the dependencies.",
-    "kicker": "FOLLOW-UP · BEFORE THE FULL PROJECT",
-    "content": "Choose one Northstar trial pair. Explain a growth strategy, calculate one result and identify what the model omits. Then return to your Netflix/Amazon evidence and propose one bounded Supply Chain Detective route. Keep model results separate from real-world facts.",
-    "prompt": "Submit a one-page decision brief or a two-minute recorded explanation with an annotated route and source list. Use the same reasoning criteria.",
+    "title": "A changed condition tests your recommendation.",
+    "kicker": "FOLLOW-UP · REVISE, DO NOT RESTART",
+    "content": "Run the same growth move under one new condition: supplier delay, demand surge, higher wage or reduced capacity. Explain whether the recommendation still holds. The numbers are fictional model evidence; they are not facts about Amazon, Netflix or any real company.",
+    "prompt": "Submit a one-page decision brief or a two-minute explanation: classification, before/after change, model comparison, stakeholder consequence, limitation and reversal condition.",
     "visual": "followup",
     "goals": [
       "Use attributed evidence and a model limitation to make a conditional stakeholder judgment."
