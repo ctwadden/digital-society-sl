@@ -12,10 +12,10 @@ export const economicsSlides=[
   },
   {
     "id": "local-econ-02",
-    "title": "Bring back your evidence—not just your opinion.",
-    "kicker": "RETRIEVE · 5 MIN · INDIVIDUAL THEN PAIRS",
-    "content": "Locate one fact from each source. Trace input → processing decision → output → business purpose. Circle one statement in your response that is an inference.",
-    "prompt": "Explain your chain to a partner in 45 seconds; your partner asks: what does the source actually establish?",
+    "title": "Economics asks how digital systems move value—and power.",
+    "kicker": "START HERE · THE TOPIC IN ONE QUESTION",
+    "content": "A digital business does more than sell a product. It moves goods or services, money, data and control. Those flows can make a business faster or larger while shifting costs, choices and risks onto workers, customers, suppliers or communities.",
+    "prompt": "When a one-click order feels effortless, which people and systems made that convenience possible?",
     "visual": "retrieve",
     "goals": [
       "Explain a digital mechanism and distinguish its business purpose from evidence of its effects."
@@ -23,10 +23,10 @@ export const economicsSlides=[
   },
   {
     "id": "local-econ-03",
-    "title": "The discovery: useful to whom, and under what conditions?",
-    "kicker": "CONNECT THE ICEBREAKER TO TODAY",
-    "content": "Netflix: recommendations can help discovery, but a stated purpose is not proof that every viewer chooses more easily. Amazon: faster processing and worker needs are separate questions. A speed claim alone cannot settle the balance.",
-    "prompt": "Did your evidence establish a feature, an outcome, or a claim about an outcome?",
+    "title": "Today you will follow one decision from click to consequence.",
+    "kicker": "LESSON ROUTE · SEE IT, TEST IT, JUDGE IT",
+    "content": "First, trace how a transaction becomes data. Next, classify four ways a business can grow. Then test a fictional shop, compare company and regulator evidence, and begin a Supply Chain Detective route of your own.",
+    "prompt": "Success means you can explain the mechanism, name the stakeholder trade-off, and identify the evidence still needed.",
     "visual": "distinction",
     "goals": [
       "Explain a digital mechanism and distinguish its business purpose from evidence of its effects."
@@ -39,6 +39,8 @@ export const economicsSlides=[
     "content": "Goods and services move to users. Money pays for them. Data coordinates decisions. Control determines who sets the rules. We will follow these flows from a small shop to a global chain.",
     "prompt": "Which flow was easiest to see in your inquiry? Which was hidden?",
     "visual": "flows",
+    "image": "assets/economics-transaction-network.png",
+    "imageAlt": "A stationery checkout connected by glowing data paths to a server, warehouse and home delivery",
     "goals": [
       "Explain a digital mechanism and distinguish its business purpose from evidence of its effects."
     ]
@@ -69,6 +71,8 @@ export const economicsSlides=[
     "content": "Ask what changes: the offer, the stage of the chain, the audience, or the industry. Real company moves can overlap; classify a specified move rather than giving an entire company one permanent label.",
     "prompt": "Diversity describes who participates in the organization. How is that different from diversification?",
     "visual": "directions",
+    "image": "assets/economics-growth-directions.png",
+    "imageAlt": "A stationery shop branching toward related retail, school kits, owned delivery and a bicycle repair business",
     "goals": [
       "Classify a growth strategy by what changes and explain a cost, benefit and dependency."
     ]
@@ -138,6 +142,8 @@ export const economicsSlides=[
     "content": "Round 1: predict, run the core shop, then change only the growth decision. Round 2: keep the strategy fixed and change one staff policy. Round 3: keep both fixed and introduce one disruption. Record before/after values. Each partner explains one result.",
     "prompt": "Which constraint changed the result? What does this model leave out about workers and customers?",
     "visual": "simulation",
+    "image": "assets/economics-northstar-operations.png",
+    "imageAlt": "The fictional Northstar stationery shop with checkout, packing operation and delivery van visible together",
     "goals": [
       "Classify a growth strategy by what changes and explain a cost, benefit and dependency."
     ],
@@ -165,6 +171,8 @@ export const economicsSlides=[
     "content": "Amazon’s 18 October 2023 announcement says Sequoia can identify and store incoming inventory up to 75% faster. The US Department of Labor’s 19 December 2024 release describes a settlement requiring corporate-wide ergonomic measures. Different sources answer different questions.",
     "prompt": "Does either source alone prove that automation improves—or worsens—every worker’s experience?",
     "visual": "evidence",
+    "image": "assets/economics-automation-workers.png",
+    "imageAlt": "Automated warehouse robots beside workers conducting an ergonomic safety review",
     "goals": [
       "Use attributed evidence and a model limitation to make a conditional stakeholder judgment."
     ],
@@ -230,6 +238,8 @@ export const economicsSlides=[
     "content": "Investigate one bounded route: a product order from supplier to buyer, or a digital title from hosting to viewer. Trace goods/service, money, data and control. Show where one digital system makes a consequential decision. Do not invent hidden infrastructure.",
     "prompt": "Choose a route and one question about efficiency, power or resilience. Why is that boundary manageable?",
     "visual": "project",
+    "image": "assets/economics-supply-chain-detective.png",
+    "imageAlt": "An investigation desk tracing a parcel through factory, warehouse, ship, delivery vehicle and customer",
     "goals": [
       "Explain a digital mechanism and distinguish its business purpose from evidence of its effects."
     ]
