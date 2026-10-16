@@ -1,4 +1,4 @@
-import {strategies,businessResult} from './business-model.js';
+import {strategies,businessResult} from './business-model.js?v=20261016-2';
 const el=(tag,text,props={})=>Object.assign(document.createElement(tag),{textContent:text||'',...props});
 
 export function renderBusiness(host,{submit,onRecord,storageKey='economics-business-v2'}={}){
