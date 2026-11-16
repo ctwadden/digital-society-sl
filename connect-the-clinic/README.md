@@ -4,9 +4,9 @@ An original browser game about helping Riverbend Community Clinic choose equipme
 
 ## Open the game
 
-**Intended published URL:** https://ctwadden.github.io/digital-society-sl/connect-the-clinic/
+**Play:** https://ctwadden.github.io/digital-society-sl/connect-the-clinic/dist/
 
-This export is prepared for that address. Publication and browser verification are tracked separately in [MIGRATION.md](MIGRATION.md); the link must not be treated as proof of a successful deployment.
+Published and verified on 16 November 2026. The shorter project address, https://ctwadden.github.io/digital-society-sl/connect-the-clinic/, opens the same game. See the [published-browser checks](qa/PUBLISHED_GITHUB_0_6.md) and [migration record](MIGRATION.md) for the exact scope and remaining school-device checks.
 
 **Source folder:** https://github.com/ctwadden/digital-society-sl/tree/main/connect-the-clinic
 
@@ -29,6 +29,12 @@ npm test
 ```
 
 No `npm install` is required. The exported suite includes its original synthetic regression fixtures. See [test results](qa/EXPORT_TEST_RESULTS.md) for the environment, result and limits.
+
+## Start playing
+
+Select **Find reception’s port**. Choose reception’s Ethernet socket and a free switch socket, then connect and test. Jo guides the first connection, unplug/repair experiment and explanation. Choose **Start independent practice** when the guided lesson ends. Guidance in practice is free.
+
+![The published guided lesson](qa/GITHUB_PAGES_0_6.jpg)
 
 ## For the teacher and future authors
 

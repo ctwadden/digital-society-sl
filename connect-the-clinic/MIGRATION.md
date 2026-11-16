@@ -10,11 +10,17 @@
 
 ## Publication target
 
-Intended URL: https://ctwadden.github.io/digital-society-sl/connect-the-clinic/
+Verified game URL: https://ctwadden.github.io/digital-society-sl/connect-the-clinic/dist/
+
+The project entry https://ctwadden.github.io/digital-society-sl/connect-the-clinic/ was opened and redirected successfully to the game above.
 
 Source: https://github.com/ctwadden/digital-society-sl/tree/main/connect-the-clinic
 
-At export preparation, GitHub upload/deployment and live browser checks are **pending**. The lead integrator must record the resulting commit, workflow/deployment result and actually observed URL; do not infer success from this target.
+Published runtime commit: `54778219b26ac56868027df49b1ce7f2aa468f1d`.
+
+The existing [DS course release workflow](https://github.com/ctwadden/digital-society-sl/actions/runs/43855584127) completed successfully. All 59 added files were inside `connect-the-clinic/`; every pre-existing repository tree entry retained its original Git object. The 13 uploaded runtime blob hashes match the original tested 0.6.0 files. The later documentation receipt changes no game code.
+
+Live browser checks completed on 16 November 2026 in managed Linux Chromium, without a sign-in. Detailed results and limits: [qa/PUBLISHED_GITHUB_0_6.md](qa/PUBLISHED_GITHUB_0_6.md).
 
 ## Save migration and browser limitations
 
@@ -24,11 +30,12 @@ The unchanged save/lock/channel prefix is `riverbend.clinic.v03.`. Every path un
 
 ## Verification checklist
 
-- [ ] GitHub commit contains only this isolated project folder; existing files are preserved.
-- [ ] Existing Pages workflow succeeds for the actual commit and produces an accessible HTTPS game URL.
-- [ ] Anonymous opening follows the relative entry to `dist/`; modules, CSS, icons and device artwork load at the project subpath.
-- [ ] On the published origin: guided connection, test, unplug/fail, repair/retest and reload agree with the authoritative model.
-- [ ] On the published origin: progress/evidence export; valid import; damaged-import rejection preserves the current attempt; reset cancel/confirm; two-tab writer/read-only behavior.
+- [x] GitHub commit contains only this isolated project folder; existing files are preserved.
+- [x] Existing Pages workflow succeeds for the actual commit and produces an accessible HTTPS game URL.
+- [x] Anonymous opening follows the relative entry to `dist/`; modules, CSS, icons and device artwork visibly load at the project subpath.
+- [x] On the published origin: guided connection, test, unplug/fail, repair/retest and reload agree with the authoritative model.
+- [x] On the published origin: progress/evidence downloads; valid backup import through Paste backup JSON; damaged pasted JSON is rejected without replacing the attempt; restart cancel/confirm; second tab opens read-only with its mutation control disabled.
+- [ ] Repeat file-picker imports, cross-device transfer, takeover between writers, full independent/client mission, and accessibility/performance checks on the new published origin. This migration check did not repeat the complete prior development-browser audit.
 - [ ] On the actual school Windows browser: keyboard/focus/zoom, saving policy, downloads/imports, school filtering and acceptable responsiveness.
 - [ ] Teacher walkthrough and small student pilot recorded separately from automated tests and development-browser observations.
 
