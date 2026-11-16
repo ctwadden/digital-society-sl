@@ -1,0 +1,1284 @@
+{
+  "schemaVersion": 1,
+  "buildVersion": "0.3.0",
+  "campaignId": "campaign.fixture",
+  "revision": 31,
+  "attemptSequence": 2,
+  "activeAttemptId": "attempt.0002",
+  "attempts": {
+    "attempt.0001": {
+      "id": "attempt.0001",
+      "mode": "training",
+      "testSuiteVersion": 2,
+      "fixtureId": "fixture.bootcamp.local.001",
+      "network": {
+        "cidr": "192.168.50.0/24",
+        "mask": "255.255.255.0",
+        "serverAddress": "192.168.50.10",
+        "receptionAddress": "192.168.50.20",
+        "inheritedNurseAddress": "192.168.60.20",
+        "base": "192.168.50"
+      },
+      "technicalRevision": 5,
+      "evidenceRevision": 0,
+      "sequence": 5,
+      "deviceSequence": 2,
+      "cableSequence": 0,
+      "observationSequence": 0,
+      "devices": {
+        "attempt.0001.device.0001": {
+          "id": "attempt.0001.device.0001",
+          "kind": "server",
+          "roleId": "role.records",
+          "locationId": "location.equipment",
+          "powered": true,
+          "address": "192.168.50.10",
+          "mask": "255.255.255.0",
+          "attachments": [],
+          "wifiApId": null
+        },
+        "attempt.0001.device.0002": {
+          "id": "attempt.0001.device.0002",
+          "kind": "switch4",
+          "roleId": "infra.switch",
+          "locationId": "location.equipment",
+          "powered": true,
+          "address": "",
+          "mask": "255.255.255.0",
+          "attachments": [],
+          "wifiApId": null
+        }
+      },
+      "cables": [],
+      "serverEnabled": true,
+      "policyId": "policy.roles-separated",
+      "policyRevision": 0,
+      "observations": [],
+      "events": [
+        {
+          "id": "attempt.0001.event.0001",
+          "sequence": 1,
+          "type": "CHOOSE_DEVICE",
+          "origin": "mission-setup",
+          "technicalRevision": 1,
+          "evidenceRevision": 0,
+          "payload": {
+            "deviceId": "attempt.0001.device.0001",
+            "roleId": "role.records",
+            "kind": "server",
+            "replacedDeviceId": null
+          }
+        },
+        {
+          "id": "attempt.0001.event.0002",
+          "sequence": 2,
+          "type": "POWER_DEVICE",
+          "origin": "mission-setup",
+          "technicalRevision": 2,
+          "evidenceRevision": 0,
+          "payload": {
+            "deviceId": "attempt.0001.device.0001",
+            "on": true
+          }
+        },
+        {
+          "id": "attempt.0001.event.0003",
+          "sequence": 3,
+          "type": "CHOOSE_DEVICE",
+          "origin": "mission-setup",
+          "technicalRevision": 3,
+          "evidenceRevision": 0,
+          "payload": {
+            "deviceId": "attempt.0001.device.0002",
+            "roleId": "infra.switch",
+            "kind": "switch4",
+            "replacedDeviceId": null
+          }
+        },
+        {
+          "id": "attempt.0001.event.0004",
+          "sequence": 4,
+          "type": "POWER_DEVICE",
+          "origin": "mission-setup",
+          "technicalRevision": 4,
+          "evidenceRevision": 0,
+          "payload": {
+            "deviceId": "attempt.0001.device.0002",
+            "on": true
+          }
+        },
+        {
+          "id": "attempt.0001.event.0005",
+          "sequence": 5,
+          "type": "SET_SERVICE_STATE",
+          "origin": "mission-setup",
+          "technicalRevision": 5,
+          "evidenceRevision": 0,
+          "payload": {
+            "enabled": true
+          }
+        }
+      ],
+      "messages": [],
+      "hints": {},
+      "freeGuideGrants": [],
+      "fault": {
+        "id": "fault.nurse.legacy-address",
+        "seeded": false,
+        "initialAddress": null,
+        "lastAddress": null,
+        "seedDeviceId": null,
+        "seedEventId": null,
+        "changes": [],
+        "baselineFailures": []
+      },
+      "wearable": {
+        "collected": [],
+        "handedOff": [],
+        "receipts": [],
+        "returned": false,
+        "companionDeviceId": null
+      },
+      "explanations": {
+        "equipment": {
+          "text": "",
+          "oral": false,
+          "contextRevision": 0
+        },
+        "repair": {
+          "text": "",
+          "oral": false,
+          "contextRevision": 0
+        },
+        "privacy": {
+          "text": "",
+          "oral": false,
+          "contextRevision": 0
+        },
+        "limitations": {
+          "text": "",
+          "oral": false,
+          "contextRevision": 0
+        }
+      },
+      "training": {
+        "stationIndex": 0,
+        "stage": "practice",
+        "isDemo": false,
+        "practiceActions": [],
+        "demoSteps": [],
+        "provenance": null
+      },
+      "historyCompacted": false
+    },
+    "attempt.0002": {
+      "id": "attempt.0002",
+      "mode": "client",
+      "testSuiteVersion": 2,
+      "fixtureId": "fixture.clinic.local.001",
+      "network": {
+        "cidr": "10.40.10.0/24",
+        "mask": "255.255.255.0",
+        "serverAddress": "10.40.10.10",
+        "receptionAddress": "10.40.10.20",
+        "inheritedNurseAddress": "10.40.20.30",
+        "base": "10.40.10"
+      },
+      "technicalRevision": 25,
+      "evidenceRevision": 4,
+      "sequence": 41,
+      "deviceSequence": 6,
+      "cableSequence": 3,
+      "observationSequence": 11,
+      "devices": {
+        "attempt.0002.device.0001": {
+          "id": "attempt.0002.device.0001",
+          "kind": "laptop",
+          "roleId": "role.reception",
+          "locationId": "location.reception",
+          "powered": true,
+          "address": "10.40.10.20",
+          "mask": "255.255.255.0",
+          "attachments": [
+            "ethernet-adapter"
+          ],
+          "wifiApId": null
+        },
+        "attempt.0002.device.0002": {
+          "id": "attempt.0002.device.0002",
+          "kind": "laptop",
+          "roleId": "role.nurse",
+          "locationId": "location.exam-a",
+          "powered": true,
+          "address": "10.40.10.31",
+          "mask": "255.255.255.0",
+          "attachments": [
+            "sensor-dock"
+          ],
+          "wifiApId": "attempt.0002.device.0006"
+        },
+        "attempt.0002.device.0003": {
+          "id": "attempt.0002.device.0003",
+          "kind": "wearable",
+          "roleId": "role.monitor",
+          "locationId": "location.exam-a",
+          "powered": true,
+          "address": "",
+          "mask": "255.255.255.0",
+          "attachments": [],
+          "wifiApId": null
+        },
+        "attempt.0002.device.0004": {
+          "id": "attempt.0002.device.0004",
+          "kind": "desktop",
+          "roleId": "role.records",
+          "locationId": "location.equipment",
+          "powered": true,
+          "address": "10.40.10.10",
+          "mask": "255.255.255.0",
+          "attachments": [],
+          "wifiApId": null
+        },
+        "attempt.0002.device.0005": {
+          "id": "attempt.0002.device.0005",
+          "kind": "switch8",
+          "roleId": "infra.switch",
+          "locationId": "location.equipment",
+          "powered": true,
+          "address": "",
+          "mask": "255.255.255.0",
+          "attachments": [],
+          "wifiApId": null
+        },
+        "attempt.0002.device.0006": {
+          "id": "attempt.0002.device.0006",
+          "kind": "access-point",
+          "roleId": "infra.ap",
+          "locationId": "location.equipment",
+          "powered": true,
+          "address": "",
+          "mask": "255.255.255.0",
+          "attachments": [],
+          "wifiApId": null
+        }
+      },
+      "cables": [
+        {
+          "id": "attempt.0002.cable.0001",
+          "fromDeviceId": "attempt.0002.device.0004",
+          "fromPortId": "attempt.0002.device.0004.eth1",
+          "toDeviceId": "attempt.0002.device.0005",
+          "toPortId": "attempt.0002.device.0005.eth1"
+        },
+        {
+          "id": "attempt.0002.cable.0002",
+          "fromDeviceId": "attempt.0002.device.0001",
+          "fromPortId": "attempt.0002.device.0001.adapter.eth1",
+          "toDeviceId": "attempt.0002.device.0005",
+          "toPortId": "attempt.0002.device.0005.eth2"
+        },
+        {
+          "id": "attempt.0002.cable.0003",
+          "fromDeviceId": "attempt.0002.device.0006",
+          "fromPortId": "attempt.0002.device.0006.eth1",
+          "toDeviceId": "attempt.0002.device.0005",
+          "toPortId": "attempt.0002.device.0005.eth3"
+        }
+      ],
+      "serverEnabled": true,
+      "policyId": "policy.nurse-also-books",
+      "policyRevision": 1,
+      "observations": [
+        {
+          "testId": "upload",
+          "label": "Submit-only marker intake",
+          "sourceDeviceId": "attempt.0002.device.0002",
+          "serviceId": "service.marker-intake",
+          "actorRoleId": "role.monitor-transfer",
+          "contextLocationId": null,
+          "code": "SERVICE_AVAILABLE",
+          "message": "The local service is reachable and this role has permission.",
+          "pass": true,
+          "expectedDenied": false,
+          "pathIds": [
+            "attempt.0002.device.0002",
+            "attempt.0002.device.0002.wifi0",
+            "attempt.0002.device.0006",
+            "attempt.0002.cable.0003",
+            "attempt.0002.device.0005",
+            "attempt.0002.cable.0001",
+            "attempt.0002.device.0004"
+          ],
+          "id": "attempt.0002.observation.0001",
+          "testedTechnicalRevision": 25,
+          "origin": "player",
+          "eventId": "attempt.0002.event.0026"
+        },
+        {
+          "testId": "reception",
+          "label": "Reception bookings",
+          "sourceDeviceId": "attempt.0002.device.0001",
+          "serviceId": "service.bookings",
+          "actorRoleId": "role.reception",
+          "contextLocationId": null,
+          "code": "SERVICE_AVAILABLE",
+          "message": "The local service is reachable and this role has permission.",
+          "pass": true,
+          "expectedDenied": false,
+          "pathIds": [
+            "attempt.0002.device.0001",
+            "attempt.0002.cable.0002",
+            "attempt.0002.device.0005",
+            "attempt.0002.cable.0001",
+            "attempt.0002.device.0004"
+          ],
+          "id": "attempt.0002.observation.0002",
+          "testedTechnicalRevision": 25,
+          "origin": "player",
+          "eventId": "attempt.0002.event.0032"
+        },
+        {
+          "testId": "nurse",
+          "label": "Nurse workspace",
+          "sourceDeviceId": "attempt.0002.device.0002",
+          "serviceId": "service.workspace",
+          "actorRoleId": "role.nurse",
+          "contextLocationId": null,
+          "code": "SERVICE_AVAILABLE",
+          "message": "The local service is reachable and this role has permission.",
+          "pass": true,
+          "expectedDenied": false,
+          "pathIds": [
+            "attempt.0002.device.0002",
+            "attempt.0002.device.0002.wifi0",
+            "attempt.0002.device.0006",
+            "attempt.0002.cable.0003",
+            "attempt.0002.device.0005",
+            "attempt.0002.cable.0001",
+            "attempt.0002.device.0004"
+          ],
+          "id": "attempt.0002.observation.0003",
+          "testedTechnicalRevision": 25,
+          "origin": "player",
+          "eventId": "attempt.0002.event.0033"
+        },
+        {
+          "testId": "nurse-room-a",
+          "label": "Nurse workspace · room A",
+          "sourceDeviceId": "attempt.0002.device.0002",
+          "serviceId": "service.workspace",
+          "actorRoleId": "role.nurse",
+          "contextLocationId": "location.exam-a",
+          "code": "SERVICE_AVAILABLE",
+          "message": "The local service is reachable and this role has permission.",
+          "pass": true,
+          "expectedDenied": false,
+          "pathIds": [
+            "attempt.0002.device.0002",
+            "attempt.0002.device.0002.wifi0",
+            "attempt.0002.device.0006",
+            "attempt.0002.cable.0003",
+            "attempt.0002.device.0005",
+            "attempt.0002.cable.0001",
+            "attempt.0002.device.0004"
+          ],
+          "id": "attempt.0002.observation.0004",
+          "testedTechnicalRevision": 25,
+          "origin": "engine-check",
+          "eventId": "attempt.0002.event.0034"
+        },
+        {
+          "testId": "nurse-room-b",
+          "label": "Nurse workspace · room B",
+          "sourceDeviceId": "attempt.0002.device.0002",
+          "serviceId": "service.workspace",
+          "actorRoleId": "role.nurse",
+          "contextLocationId": "location.exam-b",
+          "code": "SERVICE_AVAILABLE",
+          "message": "The local service is reachable and this role has permission.",
+          "pass": true,
+          "expectedDenied": false,
+          "pathIds": [
+            "attempt.0002.device.0002",
+            "attempt.0002.device.0002.wifi0",
+            "attempt.0002.device.0006",
+            "attempt.0002.cable.0003",
+            "attempt.0002.device.0005",
+            "attempt.0002.cable.0001",
+            "attempt.0002.device.0004"
+          ],
+          "id": "attempt.0002.observation.0005",
+          "testedTechnicalRevision": 25,
+          "origin": "engine-check",
+          "eventId": "attempt.0002.event.0035"
+        },
+        {
+          "testId": "nurse-bookings",
+          "label": "Nurse follow-up bookings",
+          "sourceDeviceId": "attempt.0002.device.0002",
+          "serviceId": "service.bookings",
+          "actorRoleId": "role.nurse",
+          "contextLocationId": null,
+          "code": "SERVICE_AVAILABLE",
+          "message": "The local service is reachable and this role has permission.",
+          "pass": true,
+          "expectedDenied": false,
+          "pathIds": [
+            "attempt.0002.device.0002",
+            "attempt.0002.device.0002.wifi0",
+            "attempt.0002.device.0006",
+            "attempt.0002.cable.0003",
+            "attempt.0002.device.0005",
+            "attempt.0002.cable.0001",
+            "attempt.0002.device.0004"
+          ],
+          "id": "attempt.0002.observation.0006",
+          "testedTechnicalRevision": 25,
+          "origin": "player",
+          "eventId": "attempt.0002.event.0036"
+        },
+        {
+          "testId": "access-reception",
+          "label": "Reception cannot browse clinical workspace",
+          "sourceDeviceId": "attempt.0002.device.0001",
+          "serviceId": "service.workspace",
+          "actorRoleId": "role.reception",
+          "contextLocationId": null,
+          "code": "ACCESS_DENIED",
+          "message": "The path and service work; the policy denies this role as required.",
+          "pass": true,
+          "expectedDenied": true,
+          "pathIds": [
+            "attempt.0002.device.0001",
+            "attempt.0002.cable.0002",
+            "attempt.0002.device.0005",
+            "attempt.0002.cable.0001",
+            "attempt.0002.device.0004"
+          ],
+          "id": "attempt.0002.observation.0007",
+          "testedTechnicalRevision": 25,
+          "origin": "player",
+          "eventId": "attempt.0002.event.0037"
+        },
+        {
+          "testId": "access-outsider-bookings",
+          "label": "Outside role cannot use bookings",
+          "sourceDeviceId": "attempt.0002.device.0001",
+          "serviceId": "service.bookings",
+          "actorRoleId": "role.outsider",
+          "contextLocationId": null,
+          "code": "ACCESS_DENIED",
+          "message": "The path and service work; the policy denies this role as required.",
+          "pass": true,
+          "expectedDenied": true,
+          "pathIds": [
+            "attempt.0002.device.0001",
+            "attempt.0002.cable.0002",
+            "attempt.0002.device.0005",
+            "attempt.0002.cable.0001",
+            "attempt.0002.device.0004"
+          ],
+          "id": "attempt.0002.observation.0008",
+          "testedTechnicalRevision": 25,
+          "origin": "player",
+          "eventId": "attempt.0002.event.0038"
+        },
+        {
+          "testId": "access-outsider-workspace",
+          "label": "Outside role cannot browse workspace",
+          "sourceDeviceId": "attempt.0002.device.0001",
+          "serviceId": "service.workspace",
+          "actorRoleId": "role.outsider",
+          "contextLocationId": null,
+          "code": "ACCESS_DENIED",
+          "message": "The path and service work; the policy denies this role as required.",
+          "pass": true,
+          "expectedDenied": true,
+          "pathIds": [
+            "attempt.0002.device.0001",
+            "attempt.0002.cable.0002",
+            "attempt.0002.device.0005",
+            "attempt.0002.cable.0001",
+            "attempt.0002.device.0004"
+          ],
+          "id": "attempt.0002.observation.0009",
+          "testedTechnicalRevision": 25,
+          "origin": "player",
+          "eventId": "attempt.0002.event.0039"
+        },
+        {
+          "testId": "access-transfer",
+          "label": "Transfer role cannot browse workspace",
+          "sourceDeviceId": "attempt.0002.device.0002",
+          "serviceId": "service.workspace",
+          "actorRoleId": "role.monitor-transfer",
+          "contextLocationId": null,
+          "code": "ACCESS_DENIED",
+          "message": "The path and service work; the policy denies this role as required.",
+          "pass": true,
+          "expectedDenied": true,
+          "pathIds": [
+            "attempt.0002.device.0002",
+            "attempt.0002.device.0002.wifi0",
+            "attempt.0002.device.0006",
+            "attempt.0002.cable.0003",
+            "attempt.0002.device.0005",
+            "attempt.0002.cable.0001",
+            "attempt.0002.device.0004"
+          ],
+          "id": "attempt.0002.observation.0010",
+          "testedTechnicalRevision": 25,
+          "origin": "player",
+          "eventId": "attempt.0002.event.0040"
+        },
+        {
+          "testId": "upload",
+          "label": "Submit-only marker intake",
+          "sourceDeviceId": "attempt.0002.device.0002",
+          "serviceId": "service.marker-intake",
+          "actorRoleId": "role.monitor-transfer",
+          "contextLocationId": null,
+          "code": "SERVICE_AVAILABLE",
+          "message": "The local service is reachable and this role has permission.",
+          "pass": true,
+          "expectedDenied": false,
+          "pathIds": [
+            "attempt.0002.device.0002",
+            "attempt.0002.device.0002.wifi0",
+            "attempt.0002.device.0006",
+            "attempt.0002.cable.0003",
+            "attempt.0002.device.0005",
+            "attempt.0002.cable.0001",
+            "attempt.0002.device.0004"
+          ],
+          "id": "attempt.0002.observation.0011",
+          "testedTechnicalRevision": 25,
+          "origin": "player",
+          "eventId": "attempt.0002.event.0041"
+        }
+      ],
+      "events": [
+        {
+          "id": "attempt.0002.event.0001",
+          "sequence": 1,
+          "type": "START_CLIENT_ATTEMPT",
+          "origin": "player",
+          "technicalRevision": 0,
+          "evidenceRevision": 0,
+          "payload": {
+            "route": "teacher-directed-prior-learning",
+            "terms": {
+              "version": "economy.consultation.pilot.001@0.3",
+              "missionVersion": "0.3.0",
+              "gross": 120,
+              "credits": 5,
+              "minutes": 3,
+              "creditCap": 15,
+              "minuteCap": 9
+            }
+          }
+        },
+        {
+          "id": "attempt.0002.event.0002",
+          "sequence": 2,
+          "type": "CHOOSE_DEVICE",
+          "origin": "player",
+          "technicalRevision": 1,
+          "evidenceRevision": 0,
+          "payload": {
+            "deviceId": "attempt.0002.device.0001",
+            "roleId": "role.reception",
+            "kind": "laptop",
+            "replacedDeviceId": null
+          }
+        },
+        {
+          "id": "attempt.0002.event.0003",
+          "sequence": 3,
+          "type": "POWER_DEVICE",
+          "origin": "player",
+          "technicalRevision": 2,
+          "evidenceRevision": 0,
+          "payload": {
+            "deviceId": "attempt.0002.device.0001",
+            "on": true
+          }
+        },
+        {
+          "id": "attempt.0002.event.0004",
+          "sequence": 4,
+          "type": "CHOOSE_DEVICE",
+          "origin": "player",
+          "technicalRevision": 3,
+          "evidenceRevision": 0,
+          "payload": {
+            "deviceId": "attempt.0002.device.0002",
+            "roleId": "role.nurse",
+            "kind": "laptop",
+            "replacedDeviceId": null
+          }
+        },
+        {
+          "id": "attempt.0002.event.0005",
+          "sequence": 5,
+          "type": "POWER_DEVICE",
+          "origin": "player",
+          "technicalRevision": 4,
+          "evidenceRevision": 0,
+          "payload": {
+            "deviceId": "attempt.0002.device.0002",
+            "on": true
+          }
+        },
+        {
+          "id": "attempt.0002.event.0006",
+          "sequence": 6,
+          "type": "CHOOSE_DEVICE",
+          "origin": "player",
+          "technicalRevision": 5,
+          "evidenceRevision": 0,
+          "payload": {
+            "deviceId": "attempt.0002.device.0003",
+            "roleId": "role.monitor",
+            "kind": "wearable",
+            "replacedDeviceId": null
+          }
+        },
+        {
+          "id": "attempt.0002.event.0007",
+          "sequence": 7,
+          "type": "POWER_DEVICE",
+          "origin": "player",
+          "technicalRevision": 6,
+          "evidenceRevision": 0,
+          "payload": {
+            "deviceId": "attempt.0002.device.0003",
+            "on": true
+          }
+        },
+        {
+          "id": "attempt.0002.event.0008",
+          "sequence": 8,
+          "type": "CHOOSE_DEVICE",
+          "origin": "player",
+          "technicalRevision": 7,
+          "evidenceRevision": 0,
+          "payload": {
+            "deviceId": "attempt.0002.device.0004",
+            "roleId": "role.records",
+            "kind": "desktop",
+            "replacedDeviceId": null
+          }
+        },
+        {
+          "id": "attempt.0002.event.0009",
+          "sequence": 9,
+          "type": "POWER_DEVICE",
+          "origin": "player",
+          "technicalRevision": 8,
+          "evidenceRevision": 0,
+          "payload": {
+            "deviceId": "attempt.0002.device.0004",
+            "on": true
+          }
+        },
+        {
+          "id": "attempt.0002.event.0010",
+          "sequence": 10,
+          "type": "CHOOSE_DEVICE",
+          "origin": "player",
+          "technicalRevision": 9,
+          "evidenceRevision": 0,
+          "payload": {
+            "deviceId": "attempt.0002.device.0005",
+            "roleId": "infra.switch",
+            "kind": "switch8",
+            "replacedDeviceId": null
+          }
+        },
+        {
+          "id": "attempt.0002.event.0011",
+          "sequence": 11,
+          "type": "POWER_DEVICE",
+          "origin": "player",
+          "technicalRevision": 10,
+          "evidenceRevision": 0,
+          "payload": {
+            "deviceId": "attempt.0002.device.0005",
+            "on": true
+          }
+        },
+        {
+          "id": "attempt.0002.event.0012",
+          "sequence": 12,
+          "type": "CHOOSE_DEVICE",
+          "origin": "player",
+          "technicalRevision": 11,
+          "evidenceRevision": 0,
+          "payload": {
+            "deviceId": "attempt.0002.device.0006",
+            "roleId": "infra.ap",
+            "kind": "access-point",
+            "replacedDeviceId": null
+          }
+        },
+        {
+          "id": "attempt.0002.event.0013",
+          "sequence": 13,
+          "type": "POWER_DEVICE",
+          "origin": "player",
+          "technicalRevision": 12,
+          "evidenceRevision": 0,
+          "payload": {
+            "deviceId": "attempt.0002.device.0006",
+            "on": true
+          }
+        },
+        {
+          "id": "attempt.0002.event.0014",
+          "sequence": 14,
+          "type": "ATTACH_ADAPTER",
+          "origin": "player",
+          "technicalRevision": 13,
+          "evidenceRevision": 0,
+          "payload": {
+            "deviceId": "attempt.0002.device.0001",
+            "kind": "ethernet-adapter"
+          }
+        },
+        {
+          "id": "attempt.0002.event.0015",
+          "sequence": 15,
+          "type": "CONNECT_PORTS",
+          "origin": "player",
+          "technicalRevision": 14,
+          "evidenceRevision": 0,
+          "payload": {
+            "id": "attempt.0002.cable.0001",
+            "fromDeviceId": "attempt.0002.device.0004",
+            "fromPortId": "attempt.0002.device.0004.eth1",
+            "toDeviceId": "attempt.0002.device.0005",
+            "toPortId": "attempt.0002.device.0005.eth1"
+          }
+        },
+        {
+          "id": "attempt.0002.event.0016",
+          "sequence": 16,
+          "type": "CONNECT_PORTS",
+          "origin": "player",
+          "technicalRevision": 15,
+          "evidenceRevision": 0,
+          "payload": {
+            "id": "attempt.0002.cable.0002",
+            "fromDeviceId": "attempt.0002.device.0001",
+            "fromPortId": "attempt.0002.device.0001.adapter.eth1",
+            "toDeviceId": "attempt.0002.device.0005",
+            "toPortId": "attempt.0002.device.0005.eth2"
+          }
+        },
+        {
+          "id": "attempt.0002.event.0017",
+          "sequence": 17,
+          "type": "CONNECT_PORTS",
+          "origin": "player",
+          "technicalRevision": 16,
+          "evidenceRevision": 0,
+          "payload": {
+            "id": "attempt.0002.cable.0003",
+            "fromDeviceId": "attempt.0002.device.0006",
+            "fromPortId": "attempt.0002.device.0006.eth1",
+            "toDeviceId": "attempt.0002.device.0005",
+            "toPortId": "attempt.0002.device.0005.eth3"
+          }
+        },
+        {
+          "id": "attempt.0002.event.0018",
+          "sequence": 18,
+          "type": "ASSOCIATE_WIFI",
+          "origin": "player",
+          "technicalRevision": 17,
+          "evidenceRevision": 0,
+          "payload": {
+            "deviceId": "attempt.0002.device.0002",
+            "apDeviceId": "attempt.0002.device.0006"
+          }
+        },
+        {
+          "id": "attempt.0002.event.0019",
+          "sequence": 19,
+          "type": "SET_SERVICE_STATE",
+          "origin": "player",
+          "technicalRevision": 18,
+          "evidenceRevision": 0,
+          "payload": {
+            "enabled": true
+          }
+        },
+        {
+          "id": "attempt.0002.event.0020",
+          "sequence": 20,
+          "type": "SET_STATIC_ADDRESS",
+          "origin": "player",
+          "technicalRevision": 19,
+          "evidenceRevision": 0,
+          "payload": {
+            "deviceId": "attempt.0002.device.0002",
+            "before": {
+              "address": "10.40.20.30",
+              "mask": "255.255.255.0"
+            },
+            "after": {
+              "address": "10.40.10.31",
+              "mask": "255.255.255.0"
+            }
+          }
+        },
+        {
+          "id": "attempt.0002.event.0021",
+          "sequence": 21,
+          "type": "SET_PERMISSIONS",
+          "origin": "player",
+          "technicalRevision": 20,
+          "evidenceRevision": 0,
+          "payload": {
+            "policyId": "policy.nurse-also-books"
+          }
+        },
+        {
+          "id": "attempt.0002.event.0022",
+          "sequence": 22,
+          "type": "RUN_COLLECTION_CHECK",
+          "origin": "player",
+          "technicalRevision": 21,
+          "evidenceRevision": 0,
+          "payload": {
+            "count": 7,
+            "nonclinical": true
+          }
+        },
+        {
+          "id": "attempt.0002.event.0023",
+          "sequence": 23,
+          "type": "RETURN_WEARABLE",
+          "origin": "player",
+          "technicalRevision": 22,
+          "evidenceRevision": 0,
+          "payload": {
+            "locationId": "location.exam-a"
+          }
+        },
+        {
+          "id": "attempt.0002.event.0024",
+          "sequence": 24,
+          "type": "ATTACH_ADAPTER",
+          "origin": "player",
+          "technicalRevision": 23,
+          "evidenceRevision": 0,
+          "payload": {
+            "deviceId": "attempt.0002.device.0002",
+            "kind": "sensor-dock"
+          }
+        },
+        {
+          "id": "attempt.0002.event.0025",
+          "sequence": 25,
+          "type": "HANDOFF_MARKERS",
+          "origin": "player",
+          "technicalRevision": 24,
+          "evidenceRevision": 0,
+          "payload": {
+            "count": 7,
+            "companionDeviceId": "attempt.0002.device.0002",
+            "medium": "sensor-dock"
+          }
+        },
+        {
+          "id": "attempt.0002.event.0026",
+          "sequence": 26,
+          "type": "RUN_PROBE",
+          "origin": "player",
+          "technicalRevision": 25,
+          "evidenceRevision": 0,
+          "payload": {
+            "observationId": "attempt.0002.observation.0001",
+            "testId": "upload",
+            "code": "SERVICE_AVAILABLE",
+            "pass": true
+          }
+        },
+        {
+          "id": "attempt.0002.event.0027",
+          "sequence": 27,
+          "type": "UPLOAD_MARKERS",
+          "origin": "player",
+          "technicalRevision": 25,
+          "evidenceRevision": 0,
+          "payload": {
+            "count": 7,
+            "markerIds": [
+              "attempt.0002.marker.day1",
+              "attempt.0002.marker.day2",
+              "attempt.0002.marker.day3",
+              "attempt.0002.marker.day4",
+              "attempt.0002.marker.day5",
+              "attempt.0002.marker.day6",
+              "attempt.0002.marker.day7"
+            ],
+            "observationId": "attempt.0002.observation.0001"
+          }
+        },
+        {
+          "id": "attempt.0002.event.0028",
+          "sequence": 28,
+          "type": "SAVE_EXPLANATION",
+          "origin": "player",
+          "technicalRevision": 25,
+          "evidenceRevision": 1,
+          "payload": {
+            "key": "equipment",
+            "oral": false,
+            "hasText": true
+          }
+        },
+        {
+          "id": "attempt.0002.event.0029",
+          "sequence": 29,
+          "type": "SAVE_EXPLANATION",
+          "origin": "player",
+          "technicalRevision": 25,
+          "evidenceRevision": 2,
+          "payload": {
+            "key": "repair",
+            "oral": false,
+            "hasText": true
+          }
+        },
+        {
+          "id": "attempt.0002.event.0030",
+          "sequence": 30,
+          "type": "SAVE_EXPLANATION",
+          "origin": "player",
+          "technicalRevision": 25,
+          "evidenceRevision": 3,
+          "payload": {
+            "key": "privacy",
+            "oral": false,
+            "hasText": true
+          }
+        },
+        {
+          "id": "attempt.0002.event.0031",
+          "sequence": 31,
+          "type": "SAVE_EXPLANATION",
+          "origin": "player",
+          "technicalRevision": 25,
+          "evidenceRevision": 4,
+          "payload": {
+            "key": "limitations",
+            "oral": false,
+            "hasText": true
+          }
+        },
+        {
+          "id": "attempt.0002.event.0032",
+          "sequence": 32,
+          "type": "RUN_PROBE",
+          "origin": "player",
+          "technicalRevision": 25,
+          "evidenceRevision": 4,
+          "payload": {
+            "observationId": "attempt.0002.observation.0002",
+            "testId": "reception",
+            "code": "SERVICE_AVAILABLE",
+            "pass": true
+          }
+        },
+        {
+          "id": "attempt.0002.event.0033",
+          "sequence": 33,
+          "type": "RUN_PROBE",
+          "origin": "player",
+          "technicalRevision": 25,
+          "evidenceRevision": 4,
+          "payload": {
+            "observationId": "attempt.0002.observation.0003",
+            "testId": "nurse",
+            "code": "SERVICE_AVAILABLE",
+            "pass": true
+          }
+        },
+        {
+          "id": "attempt.0002.event.0034",
+          "sequence": 34,
+          "type": "RUN_PROBE",
+          "origin": "engine-check",
+          "technicalRevision": 25,
+          "evidenceRevision": 4,
+          "payload": {
+            "observationId": "attempt.0002.observation.0004",
+            "testId": "nurse-room-a",
+            "code": "SERVICE_AVAILABLE",
+            "pass": true
+          }
+        },
+        {
+          "id": "attempt.0002.event.0035",
+          "sequence": 35,
+          "type": "RUN_PROBE",
+          "origin": "engine-check",
+          "technicalRevision": 25,
+          "evidenceRevision": 4,
+          "payload": {
+            "observationId": "attempt.0002.observation.0005",
+            "testId": "nurse-room-b",
+            "code": "SERVICE_AVAILABLE",
+            "pass": true
+          }
+        },
+        {
+          "id": "attempt.0002.event.0036",
+          "sequence": 36,
+          "type": "RUN_PROBE",
+          "origin": "player",
+          "technicalRevision": 25,
+          "evidenceRevision": 4,
+          "payload": {
+            "observationId": "attempt.0002.observation.0006",
+            "testId": "nurse-bookings",
+            "code": "SERVICE_AVAILABLE",
+            "pass": true
+          }
+        },
+        {
+          "id": "attempt.0002.event.0037",
+          "sequence": 37,
+          "type": "RUN_PROBE",
+          "origin": "player",
+          "technicalRevision": 25,
+          "evidenceRevision": 4,
+          "payload": {
+            "observationId": "attempt.0002.observation.0007",
+            "testId": "access-reception",
+            "code": "ACCESS_DENIED",
+            "pass": true
+          }
+        },
+        {
+          "id": "attempt.0002.event.0038",
+          "sequence": 38,
+          "type": "RUN_PROBE",
+          "origin": "player",
+          "technicalRevision": 25,
+          "evidenceRevision": 4,
+          "payload": {
+            "observationId": "attempt.0002.observation.0008",
+            "testId": "access-outsider-bookings",
+            "code": "ACCESS_DENIED",
+            "pass": true
+          }
+        },
+        {
+          "id": "attempt.0002.event.0039",
+          "sequence": 39,
+          "type": "RUN_PROBE",
+          "origin": "player",
+          "technicalRevision": 25,
+          "evidenceRevision": 4,
+          "payload": {
+            "observationId": "attempt.0002.observation.0009",
+            "testId": "access-outsider-workspace",
+            "code": "ACCESS_DENIED",
+            "pass": true
+          }
+        },
+        {
+          "id": "attempt.0002.event.0040",
+          "sequence": 40,
+          "type": "RUN_PROBE",
+          "origin": "player",
+          "technicalRevision": 25,
+          "evidenceRevision": 4,
+          "payload": {
+            "observationId": "attempt.0002.observation.0010",
+            "testId": "access-transfer",
+            "code": "ACCESS_DENIED",
+            "pass": true
+          }
+        },
+        {
+          "id": "attempt.0002.event.0041",
+          "sequence": 41,
+          "type": "RUN_PROBE",
+          "origin": "player",
+          "technicalRevision": 25,
+          "evidenceRevision": 4,
+          "payload": {
+            "observationId": "attempt.0002.observation.0011",
+            "testId": "upload",
+            "code": "SERVICE_AVAILABLE",
+            "pass": true
+          }
+        }
+      ],
+      "messages": [
+        {
+          "id": "attempt.0002.message.0001",
+          "templateId": "phone.clinic.brief.001",
+          "speaker": "Ari · Clinic coordinator",
+          "text": "Riverbend opens next month. Equip reception, a mobile nurse, a week-at-home wearable and central records. Build and test the local network, repair the inherited nurse setting, choose access permissions and leave a handover. Use only synthetic markers; do not enter names or patient information.",
+          "kind": "request",
+          "observationIds": [],
+          "revision": null,
+          "read": false
+        },
+        {
+          "id": "attempt.0002.message.0002",
+          "templateId": "phone.clinic.quote.001",
+          "speaker": "Ari · Clinic coordinator",
+          "text": "The service fee is 120 fictional credits. Each technical-guide section reserves 5 credits and adds 3 simulated consultation minutes, capped at 15 credits and 9 minutes. Reopening and all hint levels are included. The brief, controls, glossary and diagnostics remain free.",
+          "kind": "request",
+          "observationIds": [],
+          "revision": null,
+          "read": false
+        },
+        {
+          "id": "attempt.0002.message.0003",
+          "templateId": "phone.clinic.nurse-booking-request.001",
+          "speaker": "Mina · Nurse",
+          "text": "Could nurses also arrange follow-up bookings? I value the flexibility, but reception-only booking is a reasonable boundary. Please decide and explain the trade-off.",
+          "kind": "request",
+          "observationIds": [],
+          "revision": null,
+          "read": false
+        },
+        {
+          "id": "attempt.0002.message.0004",
+          "templateId": "phone.clinic.marker-receipt.001",
+          "speaker": "Ari · Clinic coordinator",
+          "text": "The intake service received all seven nonclinical day markers. This is a delayed return-and-sync transfer, not live home monitoring.",
+          "kind": "observation",
+          "observationIds": [
+            "attempt.0002.observation.0001"
+          ],
+          "revision": 25,
+          "read": false
+        }
+      ],
+      "hints": {},
+      "freeGuideGrants": [],
+      "fault": {
+        "id": "fault.nurse.legacy-address",
+        "seeded": true,
+        "initialAddress": "10.40.20.30",
+        "lastAddress": "10.40.10.31",
+        "seedDeviceId": "attempt.0002.device.0002",
+        "seedEventId": "attempt.0002.event.0004",
+        "changes": [
+          {
+            "deviceId": "attempt.0002.device.0002",
+            "before": {
+              "address": "10.40.20.30",
+              "mask": "255.255.255.0"
+            },
+            "after": {
+              "address": "10.40.10.31",
+              "mask": "255.255.255.0"
+            },
+            "technicalRevision": 19,
+            "origin": "player"
+          }
+        ],
+        "baselineFailures": []
+      },
+      "wearable": {
+        "collected": [
+          "attempt.0002.marker.day1",
+          "attempt.0002.marker.day2",
+          "attempt.0002.marker.day3",
+          "attempt.0002.marker.day4",
+          "attempt.0002.marker.day5",
+          "attempt.0002.marker.day6",
+          "attempt.0002.marker.day7"
+        ],
+        "handedOff": [
+          "attempt.0002.marker.day1",
+          "attempt.0002.marker.day2",
+          "attempt.0002.marker.day3",
+          "attempt.0002.marker.day4",
+          "attempt.0002.marker.day5",
+          "attempt.0002.marker.day6",
+          "attempt.0002.marker.day7"
+        ],
+        "receipts": [
+          "attempt.0002.marker.day1",
+          "attempt.0002.marker.day2",
+          "attempt.0002.marker.day3",
+          "attempt.0002.marker.day4",
+          "attempt.0002.marker.day5",
+          "attempt.0002.marker.day6",
+          "attempt.0002.marker.day7"
+        ],
+        "returned": true,
+        "companionDeviceId": "attempt.0002.device.0002"
+      },
+      "explanations": {
+        "equipment": {
+          "text": "Student explanation of equipment.",
+          "oral": false,
+          "contextRevision": 1
+        },
+        "repair": {
+          "text": "Student explanation of repair.",
+          "oral": false,
+          "contextRevision": 1
+        },
+        "privacy": {
+          "text": "Student explanation of privacy.",
+          "oral": false,
+          "contextRevision": 1
+        },
+        "limitations": {
+          "text": "Student explanation of limitations.",
+          "oral": false,
+          "contextRevision": 1
+        }
+      },
+      "training": {
+        "stationIndex": 0,
+        "stage": "practice",
+        "isDemo": false,
+        "practiceActions": [],
+        "demoSteps": [],
+        "provenance": null
+      },
+      "historyCompacted": false
+    }
+  },
+  "training": {
+    "completed": [],
+    "history": [],
+    "priorLearning": true
+  },
+  "contract": {
+    "id": "contract.clinic.001",
+    "phase": "active",
+    "currentAttemptId": "attempt.0002",
+    "terms": {
+      "version": "economy.consultation.pilot.001@0.3",
+      "missionVersion": "0.3.0",
+      "gross": 120,
+      "credits": 5,
+      "minutes": 3,
+      "creditCap": 15,
+      "minuteCap": 9
+    },
+    "grants": [],
+    "ledgerRevision": 0,
+    "delivery": null,
+    "settlement": null,
+    "acceptedRoute": "teacher-directed-prior-learning"
+  },
+  "wallet": 0,
+  "settlements": [],
+  "imported": false
+}

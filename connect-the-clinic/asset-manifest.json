@@ -1,0 +1,2153 @@
+{
+  "manifestId": "manifest.clinic.assets",
+  "manifestVersion": "0.6.0",
+  "buildContract": "CONTRACT.md with docs/revisions/REVIEW_0_6.md",
+  "artModuleVersion": "0.4.0",
+  "auditedAtUtc": "2026-11-16T02:20:02.327870+00:00",
+  "status": "IMPLEMENTED_WITH_SCOPED_MANAGED_PREVIEW_ACCEPTANCE_0_6_SCHOOL_PENDING",
+  "sourceBasis": {
+    "priorSpecification": "clinic-plan/asset-manifest.proposed.json v0.2.0-proposed",
+    "priorStandaloneAssetCount": 43,
+    "sourceOfCurriculum": "Teacher Riverbend Computers lesson; no outcome IDs invented"
+  },
+  "assets": [
+    {
+      "assetId": "asset.device.desktop",
+      "kind": "desktop",
+      "label": "Desktop computer",
+      "status": "IMPLEMENTED_SOURCE_VERIFIED",
+      "integrationStatus": "UI_INTEGRATED_SOURCE_AND_MODEL_BACKED_RENDER_VERIFIED_BROWSER_QA_SEPARATE",
+      "source": {
+        "path": "dist/art.js",
+        "export": "deviceSvg",
+        "argument": "desktop",
+        "sourceSha256": "dc16957550896250d8b5fa2fb1d15da4c95360fcdbcf90eeb52b4d09446c684d"
+      },
+      "generatedOutput": {
+        "sha256": "0afa3e83c18b8dac0cb9373952b1ab8cea6e6d6ca6162a27bc7c8cbe1ea1f382",
+        "utf8Bytes": 940,
+        "viewBox": [
+          0,
+          0,
+          120,
+          100
+        ],
+        "filePath": null,
+        "delivery": "inline SVG returned by local ES module"
+      },
+      "catalogBinding": {
+        "catalog": "CATALOG",
+        "key": "desktop",
+        "assetIdInCatalog": true
+      },
+      "visibleEthernetPorts": 1,
+      "physicalPortSemantics": "Decorative annotations only; engine catalog and UI port list determine actual connectivity. Zero visible ports is not a claim that the device has none.",
+      "altTextPolicy": {
+        "svgDecorative": true,
+        "requiredAdjacentLabel": "Desktop computer",
+        "keyboardFocusOwner": "UI control, never SVG"
+      },
+      "stateOwnership": "Static illustration only. UI draws engine-derived power/link/address/service/access states separately.",
+      "provenance": {
+        "type": "original code-native vector artwork",
+        "creators": [
+          "project lead: original vector paths",
+          "art director: source audit, safe-kind fallback, inert port annotations",
+          "revision 0.4 interface specialist: explicit desktop/server Ethernet openings and port-anchor integration"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "stateVariants": [
+        "Static equipment illustration; power, ports and observed status are separate model-derived DOM/SVG overlays"
+      ],
+      "licence": "Original project artwork; no third-party assets or licence dependencies. No separate project redistribution licence is declared.",
+      "fallback": "Neutral unknown-kind SVG; adjacent DOM device/role names and complete List/Inspect controls remain available when illustrations are hidden."
+    },
+    {
+      "assetId": "asset.device.laptop",
+      "kind": "laptop",
+      "label": "Laptop computer",
+      "status": "IMPLEMENTED_SOURCE_VERIFIED",
+      "integrationStatus": "UI_INTEGRATED_SOURCE_AND_MODEL_BACKED_RENDER_VERIFIED_BROWSER_QA_SEPARATE",
+      "source": {
+        "path": "dist/art.js",
+        "export": "deviceSvg",
+        "argument": "laptop",
+        "sourceSha256": "dc16957550896250d8b5fa2fb1d15da4c95360fcdbcf90eeb52b4d09446c684d"
+      },
+      "generatedOutput": {
+        "sha256": "574415810d044221ce790a358d22a8e4f66af6238698f869368d08b00b2ed90e",
+        "utf8Bytes": 650,
+        "viewBox": [
+          0,
+          0,
+          120,
+          100
+        ],
+        "filePath": null,
+        "delivery": "inline SVG returned by local ES module"
+      },
+      "catalogBinding": {
+        "catalog": "CATALOG",
+        "key": "laptop",
+        "assetIdInCatalog": true
+      },
+      "visibleEthernetPorts": 0,
+      "physicalPortSemantics": "Decorative annotations only; engine catalog and UI port list determine actual connectivity. Zero visible ports is not a claim that the device has none.",
+      "altTextPolicy": {
+        "svgDecorative": true,
+        "requiredAdjacentLabel": "Laptop computer",
+        "keyboardFocusOwner": "UI control, never SVG"
+      },
+      "stateOwnership": "Static illustration only. UI draws engine-derived power/link/address/service/access states separately.",
+      "provenance": {
+        "type": "original code-native vector artwork",
+        "creators": [
+          "project lead: original vector paths",
+          "art director: source audit, safe-kind fallback, inert port annotations",
+          "revision 0.4 interface specialist: explicit desktop/server Ethernet openings and port-anchor integration"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "stateVariants": [
+        "Static equipment illustration; power, ports and observed status are separate model-derived DOM/SVG overlays"
+      ],
+      "licence": "Original project artwork; no third-party assets or licence dependencies. No separate project redistribution licence is declared.",
+      "fallback": "Neutral unknown-kind SVG; adjacent DOM device/role names and complete List/Inspect controls remain available when illustrations are hidden."
+    },
+    {
+      "assetId": "asset.device.tablet",
+      "kind": "tablet",
+      "label": "Tablet computer",
+      "status": "IMPLEMENTED_SOURCE_VERIFIED",
+      "integrationStatus": "UI_INTEGRATED_SOURCE_AND_MODEL_BACKED_RENDER_VERIFIED_BROWSER_QA_SEPARATE",
+      "source": {
+        "path": "dist/art.js",
+        "export": "deviceSvg",
+        "argument": "tablet",
+        "sourceSha256": "dc16957550896250d8b5fa2fb1d15da4c95360fcdbcf90eeb52b4d09446c684d"
+      },
+      "generatedOutput": {
+        "sha256": "3dbbf8d30ca6b6c093064d378ca8d94662804c2e638a68358e90deeeed37efce",
+        "utf8Bytes": 460,
+        "viewBox": [
+          0,
+          0,
+          120,
+          100
+        ],
+        "filePath": null,
+        "delivery": "inline SVG returned by local ES module"
+      },
+      "catalogBinding": {
+        "catalog": "CATALOG",
+        "key": "tablet",
+        "assetIdInCatalog": true
+      },
+      "visibleEthernetPorts": 0,
+      "physicalPortSemantics": "Decorative annotations only; engine catalog and UI port list determine actual connectivity. Zero visible ports is not a claim that the device has none.",
+      "altTextPolicy": {
+        "svgDecorative": true,
+        "requiredAdjacentLabel": "Tablet computer",
+        "keyboardFocusOwner": "UI control, never SVG"
+      },
+      "stateOwnership": "Static illustration only. UI draws engine-derived power/link/address/service/access states separately.",
+      "provenance": {
+        "type": "original code-native vector artwork",
+        "creators": [
+          "project lead: original vector paths",
+          "art director: source audit, safe-kind fallback, inert port annotations",
+          "revision 0.4 interface specialist: explicit desktop/server Ethernet openings and port-anchor integration"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "stateVariants": [
+        "Static equipment illustration; power, ports and observed status are separate model-derived DOM/SVG overlays"
+      ],
+      "licence": "Original project artwork; no third-party assets or licence dependencies. No separate project redistribution licence is declared.",
+      "fallback": "Neutral unknown-kind SVG; adjacent DOM device/role names and complete List/Inspect controls remain available when illustrations are hidden."
+    },
+    {
+      "assetId": "asset.device.server",
+      "kind": "server",
+      "label": "Small server",
+      "status": "IMPLEMENTED_SOURCE_VERIFIED",
+      "integrationStatus": "UI_INTEGRATED_SOURCE_AND_MODEL_BACKED_RENDER_VERIFIED_BROWSER_QA_SEPARATE",
+      "source": {
+        "path": "dist/art.js",
+        "export": "deviceSvg",
+        "argument": "server",
+        "sourceSha256": "dc16957550896250d8b5fa2fb1d15da4c95360fcdbcf90eeb52b4d09446c684d"
+      },
+      "generatedOutput": {
+        "sha256": "75522c8d9a50abcc01572a4a454402cf8c95e843ca88d26b191e81245e8365b3",
+        "utf8Bytes": 984,
+        "viewBox": [
+          0,
+          0,
+          120,
+          100
+        ],
+        "filePath": null,
+        "delivery": "inline SVG returned by local ES module"
+      },
+      "catalogBinding": {
+        "catalog": "CATALOG",
+        "key": "server",
+        "assetIdInCatalog": true
+      },
+      "visibleEthernetPorts": 1,
+      "physicalPortSemantics": "Decorative annotations only; engine catalog and UI port list determine actual connectivity. Zero visible ports is not a claim that the device has none.",
+      "altTextPolicy": {
+        "svgDecorative": true,
+        "requiredAdjacentLabel": "Small server",
+        "keyboardFocusOwner": "UI control, never SVG"
+      },
+      "stateOwnership": "Static illustration only. UI draws engine-derived power/link/address/service/access states separately.",
+      "provenance": {
+        "type": "original code-native vector artwork",
+        "creators": [
+          "project lead: original vector paths",
+          "art director: source audit, safe-kind fallback, inert port annotations",
+          "revision 0.4 interface specialist: explicit desktop/server Ethernet openings and port-anchor integration"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "stateVariants": [
+        "Static equipment illustration; power, ports and observed status are separate model-derived DOM/SVG overlays"
+      ],
+      "licence": "Original project artwork; no third-party assets or licence dependencies. No separate project redistribution licence is declared.",
+      "fallback": "Neutral unknown-kind SVG; adjacent DOM device/role names and complete List/Inspect controls remain available when illustrations are hidden."
+    },
+    {
+      "assetId": "asset.device.wearable",
+      "kind": "wearable",
+      "label": "Wearable computer",
+      "status": "IMPLEMENTED_SOURCE_VERIFIED",
+      "integrationStatus": "UI_INTEGRATED_SOURCE_AND_MODEL_BACKED_RENDER_VERIFIED_BROWSER_QA_SEPARATE",
+      "source": {
+        "path": "dist/art.js",
+        "export": "deviceSvg",
+        "argument": "wearable",
+        "sourceSha256": "dc16957550896250d8b5fa2fb1d15da4c95360fcdbcf90eeb52b4d09446c684d"
+      },
+      "generatedOutput": {
+        "sha256": "63423eba2364d5d99c1f9fd87194e5087b242fb6d8d99ace8298e36462e307f5",
+        "utf8Bytes": 516,
+        "viewBox": [
+          0,
+          0,
+          120,
+          100
+        ],
+        "filePath": null,
+        "delivery": "inline SVG returned by local ES module"
+      },
+      "catalogBinding": {
+        "catalog": "CATALOG",
+        "key": "wearable",
+        "assetIdInCatalog": true
+      },
+      "visibleEthernetPorts": 0,
+      "physicalPortSemantics": "Decorative annotations only; engine catalog and UI port list determine actual connectivity. Zero visible ports is not a claim that the device has none.",
+      "altTextPolicy": {
+        "svgDecorative": true,
+        "requiredAdjacentLabel": "Wearable computer",
+        "keyboardFocusOwner": "UI control, never SVG"
+      },
+      "stateOwnership": "Static illustration only. UI draws engine-derived power/link/address/service/access states separately.",
+      "provenance": {
+        "type": "original code-native vector artwork",
+        "creators": [
+          "project lead: original vector paths",
+          "art director: source audit, safe-kind fallback, inert port annotations",
+          "revision 0.4 interface specialist: explicit desktop/server Ethernet openings and port-anchor integration"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "stateVariants": [
+        "Static equipment illustration; power, ports and observed status are separate model-derived DOM/SVG overlays"
+      ],
+      "licence": "Original project artwork; no third-party assets or licence dependencies. No separate project redistribution licence is declared.",
+      "fallback": "Neutral unknown-kind SVG; adjacent DOM device/role names and complete List/Inspect controls remain available when illustrations are hidden."
+    },
+    {
+      "assetId": "asset.device.switch4",
+      "kind": "switch4",
+      "label": "4-port switch",
+      "status": "IMPLEMENTED_SOURCE_VERIFIED",
+      "integrationStatus": "UI_INTEGRATED_SOURCE_AND_MODEL_BACKED_RENDER_VERIFIED_BROWSER_QA_SEPARATE",
+      "source": {
+        "path": "dist/art.js",
+        "export": "deviceSvg",
+        "argument": "switch4",
+        "sourceSha256": "dc16957550896250d8b5fa2fb1d15da4c95360fcdbcf90eeb52b4d09446c684d"
+      },
+      "generatedOutput": {
+        "sha256": "35d45b0c70ece4c069aceac6344fc368f7aad5b924e7ed30d14bfdf91e18a40b",
+        "utf8Bytes": 1069,
+        "viewBox": [
+          0,
+          0,
+          120,
+          100
+        ],
+        "filePath": null,
+        "delivery": "inline SVG returned by local ES module"
+      },
+      "catalogBinding": {
+        "catalog": "CATALOG",
+        "key": "switch4",
+        "assetIdInCatalog": true
+      },
+      "visibleEthernetPorts": 4,
+      "physicalPortSemantics": "Decorative annotations only; engine catalog and UI port list determine actual connectivity. Zero visible ports is not a claim that the device has none.",
+      "altTextPolicy": {
+        "svgDecorative": true,
+        "requiredAdjacentLabel": "4-port switch",
+        "keyboardFocusOwner": "UI control, never SVG"
+      },
+      "stateOwnership": "Static illustration only. UI draws engine-derived power/link/address/service/access states separately.",
+      "provenance": {
+        "type": "original code-native vector artwork",
+        "creators": [
+          "project lead: original vector paths",
+          "art director: source audit, safe-kind fallback, inert port annotations",
+          "revision 0.4 interface specialist: explicit desktop/server Ethernet openings and port-anchor integration"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "stateVariants": [
+        "Static equipment illustration; power, ports and observed status are separate model-derived DOM/SVG overlays"
+      ],
+      "licence": "Original project artwork; no third-party assets or licence dependencies. No separate project redistribution licence is declared.",
+      "fallback": "Neutral unknown-kind SVG; adjacent DOM device/role names and complete List/Inspect controls remain available when illustrations are hidden."
+    },
+    {
+      "assetId": "asset.device.switch8",
+      "kind": "switch8",
+      "label": "8-port switch",
+      "status": "IMPLEMENTED_SOURCE_VERIFIED",
+      "integrationStatus": "UI_INTEGRATED_SOURCE_AND_MODEL_BACKED_RENDER_VERIFIED_BROWSER_QA_SEPARATE",
+      "source": {
+        "path": "dist/art.js",
+        "export": "deviceSvg",
+        "argument": "switch8",
+        "sourceSha256": "dc16957550896250d8b5fa2fb1d15da4c95360fcdbcf90eeb52b4d09446c684d"
+      },
+      "generatedOutput": {
+        "sha256": "2500a99e117224806fb0ab0023939a3a0552663f506f682f43b732ea4a02ec91",
+        "utf8Bytes": 1749,
+        "viewBox": [
+          0,
+          0,
+          120,
+          100
+        ],
+        "filePath": null,
+        "delivery": "inline SVG returned by local ES module"
+      },
+      "catalogBinding": {
+        "catalog": "CATALOG",
+        "key": "switch8",
+        "assetIdInCatalog": true
+      },
+      "visibleEthernetPorts": 8,
+      "physicalPortSemantics": "Decorative annotations only; engine catalog and UI port list determine actual connectivity. Zero visible ports is not a claim that the device has none.",
+      "altTextPolicy": {
+        "svgDecorative": true,
+        "requiredAdjacentLabel": "8-port switch",
+        "keyboardFocusOwner": "UI control, never SVG"
+      },
+      "stateOwnership": "Static illustration only. UI draws engine-derived power/link/address/service/access states separately.",
+      "provenance": {
+        "type": "original code-native vector artwork",
+        "creators": [
+          "project lead: original vector paths",
+          "art director: source audit, safe-kind fallback, inert port annotations",
+          "revision 0.4 interface specialist: explicit desktop/server Ethernet openings and port-anchor integration"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "stateVariants": [
+        "Static equipment illustration; power, ports and observed status are separate model-derived DOM/SVG overlays"
+      ],
+      "licence": "Original project artwork; no third-party assets or licence dependencies. No separate project redistribution licence is declared.",
+      "fallback": "Neutral unknown-kind SVG; adjacent DOM device/role names and complete List/Inspect controls remain available when illustrations are hidden."
+    },
+    {
+      "assetId": "asset.device.access-point",
+      "kind": "access-point",
+      "label": "Wireless access point",
+      "status": "IMPLEMENTED_SOURCE_VERIFIED",
+      "integrationStatus": "UI_INTEGRATED_SOURCE_AND_MODEL_BACKED_RENDER_VERIFIED_BROWSER_QA_SEPARATE",
+      "source": {
+        "path": "dist/art.js",
+        "export": "deviceSvg",
+        "argument": "access-point",
+        "sourceSha256": "dc16957550896250d8b5fa2fb1d15da4c95360fcdbcf90eeb52b4d09446c684d"
+      },
+      "generatedOutput": {
+        "sha256": "4b6fd1f1cd874124303bf1835a922d34e92e2f716eb208ed6ca9cdccc3bc1c50",
+        "utf8Bytes": 724,
+        "viewBox": [
+          0,
+          0,
+          120,
+          100
+        ],
+        "filePath": null,
+        "delivery": "inline SVG returned by local ES module"
+      },
+      "catalogBinding": {
+        "catalog": "CATALOG",
+        "key": "access-point",
+        "assetIdInCatalog": true
+      },
+      "visibleEthernetPorts": 1,
+      "physicalPortSemantics": "Decorative annotations only; engine catalog and UI port list determine actual connectivity. Zero visible ports is not a claim that the device has none.",
+      "altTextPolicy": {
+        "svgDecorative": true,
+        "requiredAdjacentLabel": "Wireless access point",
+        "keyboardFocusOwner": "UI control, never SVG"
+      },
+      "stateOwnership": "Static illustration only. UI draws engine-derived power/link/address/service/access states separately.",
+      "provenance": {
+        "type": "original code-native vector artwork",
+        "creators": [
+          "project lead: original vector paths",
+          "art director: source audit, safe-kind fallback, inert port annotations",
+          "revision 0.4 interface specialist: explicit desktop/server Ethernet openings and port-anchor integration"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "stateVariants": [
+        "Static equipment illustration; power, ports and observed status are separate model-derived DOM/SVG overlays"
+      ],
+      "licence": "Original project artwork; no third-party assets or licence dependencies. No separate project redistribution licence is declared.",
+      "fallback": "Neutral unknown-kind SVG; adjacent DOM device/role names and complete List/Inspect controls remain available when illustrations are hidden."
+    },
+    {
+      "assetId": "asset.device.ethernet-adapter",
+      "kind": "ethernet-adapter",
+      "label": "Ethernet adapter",
+      "status": "IMPLEMENTED_SOURCE_VERIFIED",
+      "integrationStatus": "UI_INTEGRATED_SOURCE_AND_MODEL_BACKED_RENDER_VERIFIED_BROWSER_QA_SEPARATE",
+      "source": {
+        "path": "dist/art.js",
+        "export": "deviceSvg",
+        "argument": "ethernet-adapter",
+        "sourceSha256": "dc16957550896250d8b5fa2fb1d15da4c95360fcdbcf90eeb52b4d09446c684d"
+      },
+      "generatedOutput": {
+        "sha256": "0c649d911b1af06cb8ae1a02eaabd7c8e7c5c2544454066e3732ee38017a9e87",
+        "utf8Bytes": 529,
+        "viewBox": [
+          0,
+          0,
+          120,
+          100
+        ],
+        "filePath": null,
+        "delivery": "inline SVG returned by local ES module"
+      },
+      "catalogBinding": {
+        "catalog": "ATTACHMENTS",
+        "key": "ethernet-adapter",
+        "assetIdInCatalog": false
+      },
+      "visibleEthernetPorts": 1,
+      "physicalPortSemantics": "Decorative annotations only; engine catalog and UI port list determine actual connectivity. Zero visible ports is not a claim that the device has none.",
+      "altTextPolicy": {
+        "svgDecorative": true,
+        "requiredAdjacentLabel": "Ethernet adapter",
+        "keyboardFocusOwner": "UI control, never SVG"
+      },
+      "stateOwnership": "Static illustration only. UI draws engine-derived power/link/address/service/access states separately.",
+      "provenance": {
+        "type": "original code-native vector artwork",
+        "creators": [
+          "project lead: original vector paths",
+          "art director: source audit, safe-kind fallback, inert port annotations",
+          "revision 0.4 interface specialist: explicit desktop/server Ethernet openings and port-anchor integration"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "stateVariants": [
+        "Static equipment illustration; power, ports and observed status are separate model-derived DOM/SVG overlays"
+      ],
+      "licence": "Original project artwork; no third-party assets or licence dependencies. No separate project redistribution licence is declared.",
+      "fallback": "Neutral unknown-kind SVG; adjacent DOM device/role names and complete List/Inspect controls remain available when illustrations are hidden."
+    },
+    {
+      "assetId": "asset.device.sensor-dock",
+      "kind": "sensor-dock",
+      "label": "Sensor transfer dock",
+      "status": "IMPLEMENTED_SOURCE_VERIFIED",
+      "integrationStatus": "UI_INTEGRATED_SOURCE_AND_MODEL_BACKED_RENDER_VERIFIED_BROWSER_QA_SEPARATE",
+      "source": {
+        "path": "dist/art.js",
+        "export": "deviceSvg",
+        "argument": "sensor-dock",
+        "sourceSha256": "dc16957550896250d8b5fa2fb1d15da4c95360fcdbcf90eeb52b4d09446c684d"
+      },
+      "generatedOutput": {
+        "sha256": "6f79c5ae72133ec25533f479fcef76ede090d3c2085c1f6d7ea991c2510d6d92",
+        "utf8Bytes": 392,
+        "viewBox": [
+          0,
+          0,
+          120,
+          100
+        ],
+        "filePath": null,
+        "delivery": "inline SVG returned by local ES module"
+      },
+      "catalogBinding": {
+        "catalog": "ATTACHMENTS",
+        "key": "sensor-dock",
+        "assetIdInCatalog": false
+      },
+      "visibleEthernetPorts": 0,
+      "physicalPortSemantics": "Decorative annotations only; engine catalog and UI port list determine actual connectivity. Zero visible ports is not a claim that the device has none.",
+      "altTextPolicy": {
+        "svgDecorative": true,
+        "requiredAdjacentLabel": "Sensor transfer dock",
+        "keyboardFocusOwner": "UI control, never SVG"
+      },
+      "stateOwnership": "Static illustration only. UI draws engine-derived power/link/address/service/access states separately.",
+      "provenance": {
+        "type": "original code-native vector artwork",
+        "creators": [
+          "project lead: original vector paths",
+          "art director: source audit, safe-kind fallback, inert port annotations",
+          "revision 0.4 interface specialist: explicit desktop/server Ethernet openings and port-anchor integration"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "stateVariants": [
+        "Static equipment illustration; power, ports and observed status are separate model-derived DOM/SVG overlays"
+      ],
+      "licence": "Original project artwork; no third-party assets or licence dependencies. No separate project redistribution licence is declared.",
+      "fallback": "Neutral unknown-kind SVG; adjacent DOM device/role names and complete List/Inspect controls remain available when illustrations are hidden."
+    },
+    {
+      "assetId": "asset.device.unknown",
+      "kind": "unknown",
+      "label": "Unknown equipment",
+      "status": "IMPLEMENTED_SOURCE_VERIFIED",
+      "integrationStatus": "UI_INTEGRATED_SOURCE_AND_MODEL_BACKED_RENDER_VERIFIED_BROWSER_QA_SEPARATE",
+      "source": {
+        "path": "dist/art.js",
+        "export": "deviceSvg",
+        "argument": "unknown",
+        "sourceSha256": "dc16957550896250d8b5fa2fb1d15da4c95360fcdbcf90eeb52b4d09446c684d"
+      },
+      "generatedOutput": {
+        "sha256": "fd3b6b03bd3c728dba0e8e4782b8c7d6604be0a2a8440e4d474b973c07953511",
+        "utf8Bytes": 248,
+        "viewBox": [
+          0,
+          0,
+          120,
+          100
+        ],
+        "filePath": null,
+        "delivery": "inline SVG returned by local ES module"
+      },
+      "catalogBinding": {
+        "catalog": "fallback",
+        "key": "unknown",
+        "assetIdInCatalog": false
+      },
+      "visibleEthernetPorts": 0,
+      "physicalPortSemantics": "Decorative annotations only; engine catalog and UI port list determine actual connectivity. Zero visible ports is not a claim that the device has none.",
+      "altTextPolicy": {
+        "svgDecorative": true,
+        "requiredAdjacentLabel": "Unknown equipment",
+        "keyboardFocusOwner": "UI control, never SVG"
+      },
+      "stateOwnership": "Static illustration only. UI draws engine-derived power/link/address/service/access states separately.",
+      "provenance": {
+        "type": "original code-native vector artwork",
+        "creators": [
+          "project lead: original vector paths",
+          "art director: source audit, safe-kind fallback, inert port annotations",
+          "revision 0.4 interface specialist: explicit desktop/server Ethernet openings and port-anchor integration"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "stateVariants": [
+        "Static equipment illustration; power, ports and observed status are separate model-derived DOM/SVG overlays"
+      ],
+      "licence": "Original project artwork; no third-party assets or licence dependencies. No separate project redistribution licence is declared.",
+      "fallback": "Neutral unknown-kind SVG; adjacent DOM device/role names and complete List/Inspect controls remain available when illustrations are hidden."
+    },
+    {
+      "assetId": "asset.app.favicon",
+      "kind": "favicon",
+      "label": "Connect the Clinic app icon",
+      "status": "IMPLEMENTED_SOURCE_VERIFIED",
+      "integrationStatus": "LOCAL_FILE_AVAILABLE",
+      "source": {
+        "path": "dist/assets/favicon.svg",
+        "sourceSha256": "fe544982b7b51b8bd04fbe795c7c5c9b8a0054a0b1f386496258f7e293cafde1"
+      },
+      "generatedOutput": {
+        "viewBox": [
+          0,
+          0,
+          64,
+          64
+        ],
+        "filePath": "dist/assets/favicon.svg",
+        "utf8Bytes": 285,
+        "sha256": "fe544982b7b51b8bd04fbe795c7c5c9b8a0054a0b1f386496258f7e293cafde1",
+        "delivery": "local SVG file"
+      },
+      "provenance": {
+        "type": "original project vector artwork",
+        "creator": "project lead",
+        "thirdPartyArtImported": false
+      },
+      "stateOwnership": "Decorative app identity; no gameplay state."
+    },
+    {
+      "assetId": "asset.scene.clinic-grid",
+      "kind": "clinic-room-geometry",
+      "generator": "mountUI/renderScene: .clinic-building and .clinic-rooms",
+      "dimensions": "Responsive cutaway DOM grid; one-column room layout on narrow screens; labels and actual equipment remain DOM controls",
+      "stateVariants": [
+        "Equipment appears in its actual engine location",
+        "Empty role slots use ordinary buttons",
+        "First-station unused rooms show later-job context; no home inset unless relevant or occupied"
+      ],
+      "fallback": "List view groups devices by their engine location and retains all inspector/connect controls.",
+      "status": "IMPLEMENTED_WITH_SCOPED_BROWSER_AND_MODEL_BACKED_RENDER_CHECKS",
+      "source": {
+        "path": "dist/ui.js",
+        "generator": "mountUI/renderScene: .clinic-building and .clinic-rooms",
+        "sourceSha256": "596da61d50d93e3c5c3011d355273274bf5a9f98965d48584e2c82cd80d4e64d",
+        "stylePath": "dist/styles.css",
+        "styleSha256": "cde542a8cad28a5cb8f42425860aadafcdacb29f58e85e83d3bbbfdb048ab491"
+      },
+      "provenance": {
+        "type": "original code-native semantic DOM and SVG geometry",
+        "creators": [
+          "revision 0.4 interface specialist",
+          "revision 0.5 interface specialist and lead integration"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "licence": "Original project geometry; no third-party artwork or licence dependencies. No separate project redistribution licence is declared.",
+      "stateOwnership": "Physical facts from derive().devices/cables; outcomes only from derive().diagnostics, never inferred from a rendered connection."
+    },
+    {
+      "assetId": "asset.scene.home-site",
+      "kind": "separate-home-site",
+      "generator": "mountUI/renderScene: .remote-site as a sibling after .clinic-building",
+      "dimensions": "Responsive DOM region below and outside the clinic boundary",
+      "stateVariants": [
+        "Offline wearable at home",
+        "Returned wearable disappears from home and appears at its current clinic location",
+        "Saved association outside named radio rooms is text-only, with no drawn radio path"
+      ],
+      "fallback": "List view explicitly labels the home site as separate and outside clinic coverage.",
+      "status": "IMPLEMENTED_WITH_SCOPED_BROWSER_AND_MODEL_BACKED_RENDER_CHECKS",
+      "source": {
+        "path": "dist/ui.js",
+        "generator": "mountUI/renderScene: .remote-site as a sibling after .clinic-building",
+        "sourceSha256": "596da61d50d93e3c5c3011d355273274bf5a9f98965d48584e2c82cd80d4e64d",
+        "stylePath": "dist/styles.css",
+        "styleSha256": "cde542a8cad28a5cb8f42425860aadafcdacb29f58e85e83d3bbbfdb048ab491"
+      },
+      "provenance": {
+        "type": "original code-native semantic DOM and SVG geometry",
+        "creators": [
+          "revision 0.4 interface specialist",
+          "revision 0.5 interface specialist and lead integration"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "licence": "Original project geometry; no third-party artwork or licence dependencies. No separate project redistribution licence is declared.",
+      "stateOwnership": "Physical facts from derive().devices/cables; outcomes only from derive().diagnostics, never inferred from a rendered connection."
+    },
+    {
+      "assetId": "asset.ui.connection-paths",
+      "kind": "physical-and-observed-paths",
+      "generator": "mountUI/drawSceneConnections",
+      "dimensions": "SVG viewBox matches measured scene width/height; endpoints measured from actual DOM ports",
+      "stateVariants": [
+        "Neutral solid Ethernet cable",
+        "Dashed saved Wi-Fi association in the named clinic radio rooms",
+        "Solid current passing observation trace",
+        "Dashed current failing observation trace",
+        "Dotted stale observation trace",
+        "No fabricated path when pathIds is empty"
+      ],
+      "fallback": "Latest observation and each diagnostic retain result, code, revision and a textual path; Connect lists actual cable endpoints.",
+      "status": "IMPLEMENTED_WITH_SCOPED_BROWSER_AND_MODEL_BACKED_RENDER_CHECKS",
+      "source": {
+        "path": "dist/ui.js",
+        "generator": "mountUI/drawSceneConnections",
+        "sourceSha256": "596da61d50d93e3c5c3011d355273274bf5a9f98965d48584e2c82cd80d4e64d",
+        "stylePath": "dist/styles.css",
+        "styleSha256": "cde542a8cad28a5cb8f42425860aadafcdacb29f58e85e83d3bbbfdb048ab491"
+      },
+      "provenance": {
+        "type": "original code-native semantic DOM and SVG geometry",
+        "creators": [
+          "revision 0.4 interface specialist",
+          "revision 0.5 interface specialist and lead integration"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "licence": "Original project geometry; no third-party artwork or licence dependencies. No separate project redistribution licence is declared.",
+      "stateOwnership": "Physical facts from derive().devices/cables; outcomes only from derive().diagnostics, never inferred from a rendered connection.",
+      "presentation": "Shown in Network view; textual observations and List/Connect remain available in other views"
+    },
+    {
+      "assetId": "asset.ui.port-anchor",
+      "kind": "model-port-dom",
+      "generator": "mountUI/sceneDeviceMarkup: [data-port-id]",
+      "dimensions": "Selectable-text DOM spans; complete labelled port controls remain in Inspect and Connect",
+      "stateVariants": [
+        "Filled-square cable-connected port",
+        "Hollow-square port without a cable",
+        "Separately labelled radio capability/association",
+        "Explicit adapter Ethernet port only when present in engine ports"
+      ],
+      "fallback": "Inspect lists full stable port IDs and Connect uses labelled device/port select controls.",
+      "status": "IMPLEMENTED_WITH_SCOPED_BROWSER_AND_MODEL_BACKED_RENDER_CHECKS",
+      "source": {
+        "path": "dist/ui.js",
+        "generator": "mountUI/sceneDeviceMarkup: [data-port-id]",
+        "sourceSha256": "596da61d50d93e3c5c3011d355273274bf5a9f98965d48584e2c82cd80d4e64d",
+        "stylePath": "dist/styles.css",
+        "styleSha256": "cde542a8cad28a5cb8f42425860aadafcdacb29f58e85e83d3bbbfdb048ab491"
+      },
+      "provenance": {
+        "type": "original code-native semantic DOM and SVG geometry",
+        "creators": [
+          "revision 0.4 interface specialist",
+          "revision 0.5 interface specialist and lead integration"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "licence": "Original project geometry; no third-party artwork or licence dependencies. No separate project redistribution licence is declared.",
+      "stateOwnership": "Physical facts from derive().devices/cables; outcomes only from derive().diagnostics, never inferred from a rendered connection."
+    },
+    {
+      "assetId": "asset.person.ari.portrait",
+      "kind": "staff-portrait",
+      "label": "ari",
+      "source": {
+        "path": "dist/scene-art.js",
+        "export": "portraitSvg",
+        "argument": "ari",
+        "sourceSha256": "f851dd8643efbf5e87ab270452ae1a7fb865cbe2b9954012500a6d6529b25aea"
+      },
+      "generatedOutput": {
+        "sha256": "d0f36e846ec550dc6b1a4174603b536427b000744c1b549bf59c5c7438da50aa",
+        "utf8Bytes": 1528,
+        "viewBox": [
+          0,
+          0,
+          120,
+          120
+        ],
+        "filePath": null,
+        "delivery": "inline SVG from local module"
+      },
+      "stateVariants": [
+        "Static original illustration only"
+      ],
+      "stateOwnership": "No simulation state, equipment, network links, observations or success claims in artwork. Adjacent DOM owns names and controls.",
+      "status": "XML_AND_ISOLATED_RENDER_VERIFIED_0_6_BROWSER_REVIEW_SEPARATE",
+      "provenance": {
+        "type": "original code-native vector artwork",
+        "creators": [
+          "revision 0.5 art specialist"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "altTextPolicy": {
+        "svgDecorative": true,
+        "requiredAdjacentLabel": true,
+        "keyboardFocusOwner": "UI control, never SVG"
+      },
+      "licence": "Original project artwork; no third-party dependencies. No separate redistribution licence declared.",
+      "fallback": "Neutral portrait or empty room SVG for unknown input; names, controls and List view remain ordinary DOM."
+    },
+    {
+      "assetId": "asset.person.jo.portrait",
+      "kind": "staff-portrait",
+      "label": "jo",
+      "source": {
+        "path": "dist/scene-art.js",
+        "export": "portraitSvg",
+        "argument": "jo",
+        "sourceSha256": "f851dd8643efbf5e87ab270452ae1a7fb865cbe2b9954012500a6d6529b25aea"
+      },
+      "generatedOutput": {
+        "sha256": "153c3a17dac3e0b73e130d5a2669e914b199ba2b94b9e6b29a5e72787db6a9d6",
+        "utf8Bytes": 1491,
+        "viewBox": [
+          0,
+          0,
+          120,
+          120
+        ],
+        "filePath": null,
+        "delivery": "inline SVG from local module"
+      },
+      "stateVariants": [
+        "Static original illustration only"
+      ],
+      "stateOwnership": "No simulation state, equipment, network links, observations or success claims in artwork. Adjacent DOM owns names and controls.",
+      "status": "XML_AND_ISOLATED_RENDER_VERIFIED_0_6_BROWSER_REVIEW_SEPARATE",
+      "provenance": {
+        "type": "original code-native vector artwork",
+        "creators": [
+          "revision 0.5 art specialist"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "altTextPolicy": {
+        "svgDecorative": true,
+        "requiredAdjacentLabel": true,
+        "keyboardFocusOwner": "UI control, never SVG"
+      },
+      "licence": "Original project artwork; no third-party dependencies. No separate redistribution licence declared.",
+      "fallback": "Neutral portrait or empty room SVG for unknown input; names, controls and List view remain ordinary DOM."
+    },
+    {
+      "assetId": "asset.person.unknown.portrait",
+      "kind": "staff-portrait",
+      "label": "unknown",
+      "source": {
+        "path": "dist/scene-art.js",
+        "export": "portraitSvg",
+        "argument": "unknown",
+        "sourceSha256": "f851dd8643efbf5e87ab270452ae1a7fb865cbe2b9954012500a6d6529b25aea"
+      },
+      "generatedOutput": {
+        "sha256": "973fad42bf374dff129d7d89b0412f5d89ca091eecbf5c43e5a86588bd91f41b",
+        "utf8Bytes": 346,
+        "viewBox": [
+          0,
+          0,
+          120,
+          120
+        ],
+        "filePath": null,
+        "delivery": "inline SVG from local module"
+      },
+      "stateVariants": [
+        "Static original illustration only"
+      ],
+      "stateOwnership": "No simulation state, equipment, network links, observations or success claims in artwork. Adjacent DOM owns names and controls.",
+      "status": "XML_AND_ISOLATED_RENDER_VERIFIED_0_6_BROWSER_REVIEW_SEPARATE",
+      "provenance": {
+        "type": "original code-native vector artwork",
+        "creators": [
+          "revision 0.5 art specialist"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "altTextPolicy": {
+        "svgDecorative": true,
+        "requiredAdjacentLabel": true,
+        "keyboardFocusOwner": "UI control, never SVG"
+      },
+      "licence": "Original project artwork; no third-party dependencies. No separate redistribution licence declared.",
+      "fallback": "Neutral portrait or empty room SVG for unknown input; names, controls and List view remain ordinary DOM."
+    },
+    {
+      "assetId": "asset.room.reception.decor",
+      "kind": "decorative-room",
+      "label": "reception",
+      "source": {
+        "path": "dist/scene-art.js",
+        "export": "roomDecorSvg",
+        "argument": "location.reception",
+        "sourceSha256": "f851dd8643efbf5e87ab270452ae1a7fb865cbe2b9954012500a6d6529b25aea"
+      },
+      "generatedOutput": {
+        "sha256": "949cb439c6ca535e7fcb5fcceeb705683947bf19bc971bc9b06b4856346d168c",
+        "utf8Bytes": 2284,
+        "viewBox": [
+          0,
+          0,
+          400,
+          260
+        ],
+        "filePath": null,
+        "delivery": "inline SVG from local module"
+      },
+      "stateVariants": [
+        "Static original illustration only"
+      ],
+      "stateOwnership": "No simulation state, equipment, network links, observations or success claims in artwork. Adjacent DOM owns names and controls.",
+      "status": "XML_AND_ISOLATED_RENDER_VERIFIED_0_6_BROWSER_REVIEW_SEPARATE",
+      "provenance": {
+        "type": "original code-native vector artwork",
+        "creators": [
+          "revision 0.5 art specialist"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "altTextPolicy": {
+        "svgDecorative": true,
+        "requiredAdjacentLabel": true,
+        "keyboardFocusOwner": "UI control, never SVG"
+      },
+      "licence": "Original project artwork; no third-party dependencies. No separate redistribution licence declared.",
+      "fallback": "Neutral portrait or empty room SVG for unknown input; names, controls and List view remain ordinary DOM.",
+      "integrationStatus": "LEGACY_FALLBACK_RETAINED; continuous UI uses roomFurnitureSvg"
+    },
+    {
+      "assetId": "asset.room.equipment.decor",
+      "kind": "decorative-room",
+      "label": "equipment",
+      "source": {
+        "path": "dist/scene-art.js",
+        "export": "roomDecorSvg",
+        "argument": "location.equipment",
+        "sourceSha256": "f851dd8643efbf5e87ab270452ae1a7fb865cbe2b9954012500a6d6529b25aea"
+      },
+      "generatedOutput": {
+        "sha256": "5d4be7dd620171d02c994ae6913780f1e39ac06659e2cdcceeaa880da8acaea1",
+        "utf8Bytes": 1606,
+        "viewBox": [
+          0,
+          0,
+          400,
+          260
+        ],
+        "filePath": null,
+        "delivery": "inline SVG from local module"
+      },
+      "stateVariants": [
+        "Static original illustration only"
+      ],
+      "stateOwnership": "No simulation state, equipment, network links, observations or success claims in artwork. Adjacent DOM owns names and controls.",
+      "status": "XML_AND_ISOLATED_RENDER_VERIFIED_0_6_BROWSER_REVIEW_SEPARATE",
+      "provenance": {
+        "type": "original code-native vector artwork",
+        "creators": [
+          "revision 0.5 art specialist"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "altTextPolicy": {
+        "svgDecorative": true,
+        "requiredAdjacentLabel": true,
+        "keyboardFocusOwner": "UI control, never SVG"
+      },
+      "licence": "Original project artwork; no third-party dependencies. No separate redistribution licence declared.",
+      "fallback": "Neutral portrait or empty room SVG for unknown input; names, controls and List view remain ordinary DOM.",
+      "integrationStatus": "LEGACY_FALLBACK_RETAINED; continuous UI uses roomFurnitureSvg"
+    },
+    {
+      "assetId": "asset.room.exam-a.decor",
+      "kind": "decorative-room",
+      "label": "exam-a",
+      "source": {
+        "path": "dist/scene-art.js",
+        "export": "roomDecorSvg",
+        "argument": "location.exam-a",
+        "sourceSha256": "f851dd8643efbf5e87ab270452ae1a7fb865cbe2b9954012500a6d6529b25aea"
+      },
+      "generatedOutput": {
+        "sha256": "57ac4f71ebd7caf4be33a1ef7918903bf56a7acd434d229d41b3af428103e433",
+        "utf8Bytes": 2073,
+        "viewBox": [
+          0,
+          0,
+          400,
+          260
+        ],
+        "filePath": null,
+        "delivery": "inline SVG from local module"
+      },
+      "stateVariants": [
+        "Static original illustration only"
+      ],
+      "stateOwnership": "No simulation state, equipment, network links, observations or success claims in artwork. Adjacent DOM owns names and controls.",
+      "status": "XML_AND_ISOLATED_RENDER_VERIFIED_0_6_BROWSER_REVIEW_SEPARATE",
+      "provenance": {
+        "type": "original code-native vector artwork",
+        "creators": [
+          "revision 0.5 art specialist"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "altTextPolicy": {
+        "svgDecorative": true,
+        "requiredAdjacentLabel": true,
+        "keyboardFocusOwner": "UI control, never SVG"
+      },
+      "licence": "Original project artwork; no third-party dependencies. No separate redistribution licence declared.",
+      "fallback": "Neutral portrait or empty room SVG for unknown input; names, controls and List view remain ordinary DOM.",
+      "integrationStatus": "LEGACY_FALLBACK_RETAINED; continuous UI uses roomFurnitureSvg"
+    },
+    {
+      "assetId": "asset.room.exam-b.decor",
+      "kind": "decorative-room",
+      "label": "exam-b",
+      "source": {
+        "path": "dist/scene-art.js",
+        "export": "roomDecorSvg",
+        "argument": "location.exam-b",
+        "sourceSha256": "f851dd8643efbf5e87ab270452ae1a7fb865cbe2b9954012500a6d6529b25aea"
+      },
+      "generatedOutput": {
+        "sha256": "efc26b278cf36c441a69f3b72046a0413c959d8927e4257a2ef6f2e8539df5fa",
+        "utf8Bytes": 2073,
+        "viewBox": [
+          0,
+          0,
+          400,
+          260
+        ],
+        "filePath": null,
+        "delivery": "inline SVG from local module"
+      },
+      "stateVariants": [
+        "Static original illustration only"
+      ],
+      "stateOwnership": "No simulation state, equipment, network links, observations or success claims in artwork. Adjacent DOM owns names and controls.",
+      "status": "XML_AND_ISOLATED_RENDER_VERIFIED_0_6_BROWSER_REVIEW_SEPARATE",
+      "provenance": {
+        "type": "original code-native vector artwork",
+        "creators": [
+          "revision 0.5 art specialist"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "altTextPolicy": {
+        "svgDecorative": true,
+        "requiredAdjacentLabel": true,
+        "keyboardFocusOwner": "UI control, never SVG"
+      },
+      "licence": "Original project artwork; no third-party dependencies. No separate redistribution licence declared.",
+      "fallback": "Neutral portrait or empty room SVG for unknown input; names, controls and List view remain ordinary DOM.",
+      "integrationStatus": "LEGACY_FALLBACK_RETAINED; continuous UI uses roomFurnitureSvg"
+    },
+    {
+      "assetId": "asset.room.home.decor",
+      "kind": "decorative-room",
+      "label": "home",
+      "source": {
+        "path": "dist/scene-art.js",
+        "export": "roomDecorSvg",
+        "argument": "location.home",
+        "sourceSha256": "f851dd8643efbf5e87ab270452ae1a7fb865cbe2b9954012500a6d6529b25aea"
+      },
+      "generatedOutput": {
+        "sha256": "db68463f486288260847dc6ec902be67b224b563963a9a20f187eca611557925",
+        "utf8Bytes": 2219,
+        "viewBox": [
+          0,
+          0,
+          400,
+          260
+        ],
+        "filePath": null,
+        "delivery": "inline SVG from local module"
+      },
+      "stateVariants": [
+        "Static original illustration only"
+      ],
+      "stateOwnership": "No simulation state, equipment, network links, observations or success claims in artwork. Adjacent DOM owns names and controls.",
+      "status": "XML_AND_ISOLATED_RENDER_VERIFIED_0_6_BROWSER_REVIEW_SEPARATE",
+      "provenance": {
+        "type": "original code-native vector artwork",
+        "creators": [
+          "revision 0.5 art specialist"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "altTextPolicy": {
+        "svgDecorative": true,
+        "requiredAdjacentLabel": true,
+        "keyboardFocusOwner": "UI control, never SVG"
+      },
+      "licence": "Original project artwork; no third-party dependencies. No separate redistribution licence declared.",
+      "fallback": "Neutral portrait or empty room SVG for unknown input; names, controls and List view remain ordinary DOM.",
+      "integrationStatus": "LEGACY_FALLBACK_RETAINED; continuous UI uses roomFurnitureSvg"
+    },
+    {
+      "assetId": "asset.room.unknown.decor",
+      "kind": "decorative-room",
+      "label": "unknown",
+      "source": {
+        "path": "dist/scene-art.js",
+        "export": "roomDecorSvg",
+        "argument": "unknown",
+        "sourceSha256": "f851dd8643efbf5e87ab270452ae1a7fb865cbe2b9954012500a6d6529b25aea"
+      },
+      "generatedOutput": {
+        "sha256": "b0fd87b1e8fa38864c97b168a43b338071c7e0969806cddb60caeb0aff86b62c",
+        "utf8Bytes": 205,
+        "viewBox": [
+          0,
+          0,
+          400,
+          260
+        ],
+        "filePath": null,
+        "delivery": "inline SVG from local module"
+      },
+      "stateVariants": [
+        "Static original illustration only"
+      ],
+      "stateOwnership": "No simulation state, equipment, network links, observations or success claims in artwork. Adjacent DOM owns names and controls.",
+      "status": "XML_AND_ISOLATED_RENDER_VERIFIED_0_6_BROWSER_REVIEW_SEPARATE",
+      "provenance": {
+        "type": "original code-native vector artwork",
+        "creators": [
+          "revision 0.5 art specialist"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "altTextPolicy": {
+        "svgDecorative": true,
+        "requiredAdjacentLabel": true,
+        "keyboardFocusOwner": "UI control, never SVG"
+      },
+      "licence": "Original project artwork; no third-party dependencies. No separate redistribution licence declared.",
+      "fallback": "Neutral portrait or empty room SVG for unknown input; names, controls and List view remain ordinary DOM.",
+      "integrationStatus": "LEGACY_FALLBACK_RETAINED; continuous UI uses roomFurnitureSvg"
+    },
+    {
+      "assetId": "asset.room.reception.furniture",
+      "kind": "decorative-room-furniture",
+      "label": "reception furniture",
+      "source": {
+        "path": "dist/scene-art.js",
+        "export": "roomFurnitureSvg",
+        "argument": "location.reception",
+        "sourceSha256": "f851dd8643efbf5e87ab270452ae1a7fb865cbe2b9954012500a6d6529b25aea"
+      },
+      "generatedOutput": {
+        "sha256": "40bd5a32963e06d5d662fe69a11c28ea95ecde77abc6182ebeb3e7fdab855c46",
+        "utf8Bytes": 1550,
+        "viewBox": [
+          0,
+          0,
+          400,
+          260
+        ],
+        "filePath": null,
+        "delivery": "inline SVG from local ES module"
+      },
+      "stateVariants": [
+        "Static decorative layout only; no device or service state"
+      ],
+      "stateOwnership": "No simulation state, equipment, network links, observations or success claims in artwork. Adjacent DOM owns room labels, device positions, port controls and actual network paths.",
+      "status": "XML_AND_ISOLATED_RENDER_VERIFIED_0_6_BROWSER_REVIEW_SEPARATE",
+      "integrationStatus": "SOURCE_INTEGRATED_VIA_CONTINUOUS_CLINIC_HOOK; rendered acceptance owned by lead",
+      "provenance": {
+        "type": "original code-native vector artwork",
+        "creators": [
+          "revision0.6 art specialist",
+          "existing original revision0.5 furniture paths retained"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "altTextPolicy": {
+        "svgDecorative": true,
+        "requiredAdjacentLabel": true,
+        "keyboardFocusOwner": "UI control, never SVG"
+      },
+      "licence": "Original project artwork; no third-party dependencies. No separate redistribution licence declared.",
+      "fallback": "Existing roomDecorSvg backdrop remains available when continuous-scene exports are not provided; unknown furniture input returns an empty inert SVG. Adjacent DOM names, controls and List view remain available.",
+      "layoutPolicy": "Furniture-only400×260 frame; preserveAspectRatio=xMidYMid meet keeps scale coherent. No own room shell or floor. Home is rendered only inside the separate remote-site DOM boundary."
+    },
+    {
+      "assetId": "asset.room.equipment.furniture",
+      "kind": "decorative-room-furniture",
+      "label": "equipment furniture",
+      "source": {
+        "path": "dist/scene-art.js",
+        "export": "roomFurnitureSvg",
+        "argument": "location.equipment",
+        "sourceSha256": "f851dd8643efbf5e87ab270452ae1a7fb865cbe2b9954012500a6d6529b25aea"
+      },
+      "generatedOutput": {
+        "sha256": "55996fbd04d28c907ef6289225f84a31f84e6b2e3b791f5509688452c75e47c9",
+        "utf8Bytes": 872,
+        "viewBox": [
+          0,
+          0,
+          400,
+          260
+        ],
+        "filePath": null,
+        "delivery": "inline SVG from local ES module"
+      },
+      "stateVariants": [
+        "Static decorative layout only; no device or service state"
+      ],
+      "stateOwnership": "No simulation state, equipment, network links, observations or success claims in artwork. Adjacent DOM owns room labels, device positions, port controls and actual network paths.",
+      "status": "XML_AND_ISOLATED_RENDER_VERIFIED_0_6_BROWSER_REVIEW_SEPARATE",
+      "integrationStatus": "SOURCE_INTEGRATED_VIA_CONTINUOUS_CLINIC_HOOK; rendered acceptance owned by lead",
+      "provenance": {
+        "type": "original code-native vector artwork",
+        "creators": [
+          "revision0.6 art specialist",
+          "existing original revision0.5 furniture paths retained"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "altTextPolicy": {
+        "svgDecorative": true,
+        "requiredAdjacentLabel": true,
+        "keyboardFocusOwner": "UI control, never SVG"
+      },
+      "licence": "Original project artwork; no third-party dependencies. No separate redistribution licence declared.",
+      "fallback": "Existing roomDecorSvg backdrop remains available when continuous-scene exports are not provided; unknown furniture input returns an empty inert SVG. Adjacent DOM names, controls and List view remain available.",
+      "layoutPolicy": "Furniture-only400×260 frame; preserveAspectRatio=xMidYMid meet keeps scale coherent. No own room shell or floor. Home is rendered only inside the separate remote-site DOM boundary."
+    },
+    {
+      "assetId": "asset.room.exam-a.furniture",
+      "kind": "decorative-room-furniture",
+      "label": "exam-a furniture",
+      "source": {
+        "path": "dist/scene-art.js",
+        "export": "roomFurnitureSvg",
+        "argument": "location.exam-a",
+        "sourceSha256": "f851dd8643efbf5e87ab270452ae1a7fb865cbe2b9954012500a6d6529b25aea"
+      },
+      "generatedOutput": {
+        "sha256": "eb4f8b1887f39edf0fa90a701a4dba72f8ae63a92c0853f563e98c1ae7d2d241",
+        "utf8Bytes": 1339,
+        "viewBox": [
+          0,
+          0,
+          400,
+          260
+        ],
+        "filePath": null,
+        "delivery": "inline SVG from local ES module"
+      },
+      "stateVariants": [
+        "Static decorative layout only; no device or service state"
+      ],
+      "stateOwnership": "No simulation state, equipment, network links, observations or success claims in artwork. Adjacent DOM owns room labels, device positions, port controls and actual network paths.",
+      "status": "XML_AND_ISOLATED_RENDER_VERIFIED_0_6_BROWSER_REVIEW_SEPARATE",
+      "integrationStatus": "SOURCE_INTEGRATED_VIA_CONTINUOUS_CLINIC_HOOK; rendered acceptance owned by lead",
+      "provenance": {
+        "type": "original code-native vector artwork",
+        "creators": [
+          "revision0.6 art specialist",
+          "existing original revision0.5 furniture paths retained"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "altTextPolicy": {
+        "svgDecorative": true,
+        "requiredAdjacentLabel": true,
+        "keyboardFocusOwner": "UI control, never SVG"
+      },
+      "licence": "Original project artwork; no third-party dependencies. No separate redistribution licence declared.",
+      "fallback": "Existing roomDecorSvg backdrop remains available when continuous-scene exports are not provided; unknown furniture input returns an empty inert SVG. Adjacent DOM names, controls and List view remain available.",
+      "layoutPolicy": "Furniture-only400×260 frame; preserveAspectRatio=xMidYMid meet keeps scale coherent. No own room shell or floor. Home is rendered only inside the separate remote-site DOM boundary."
+    },
+    {
+      "assetId": "asset.room.exam-b.furniture",
+      "kind": "decorative-room-furniture",
+      "label": "exam-b furniture",
+      "source": {
+        "path": "dist/scene-art.js",
+        "export": "roomFurnitureSvg",
+        "argument": "location.exam-b",
+        "sourceSha256": "f851dd8643efbf5e87ab270452ae1a7fb865cbe2b9954012500a6d6529b25aea"
+      },
+      "generatedOutput": {
+        "sha256": "fe81391e00b202cc64f4b58ad6e6b6e9dbd381522f2964f2ee2ab649e0e6ff01",
+        "utf8Bytes": 1339,
+        "viewBox": [
+          0,
+          0,
+          400,
+          260
+        ],
+        "filePath": null,
+        "delivery": "inline SVG from local ES module"
+      },
+      "stateVariants": [
+        "Static decorative layout only; no device or service state"
+      ],
+      "stateOwnership": "No simulation state, equipment, network links, observations or success claims in artwork. Adjacent DOM owns room labels, device positions, port controls and actual network paths.",
+      "status": "XML_AND_ISOLATED_RENDER_VERIFIED_0_6_BROWSER_REVIEW_SEPARATE",
+      "integrationStatus": "SOURCE_INTEGRATED_VIA_CONTINUOUS_CLINIC_HOOK; rendered acceptance owned by lead",
+      "provenance": {
+        "type": "original code-native vector artwork",
+        "creators": [
+          "revision0.6 art specialist",
+          "existing original revision0.5 furniture paths retained"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "altTextPolicy": {
+        "svgDecorative": true,
+        "requiredAdjacentLabel": true,
+        "keyboardFocusOwner": "UI control, never SVG"
+      },
+      "licence": "Original project artwork; no third-party dependencies. No separate redistribution licence declared.",
+      "fallback": "Existing roomDecorSvg backdrop remains available when continuous-scene exports are not provided; unknown furniture input returns an empty inert SVG. Adjacent DOM names, controls and List view remain available.",
+      "layoutPolicy": "Furniture-only400×260 frame; preserveAspectRatio=xMidYMid meet keeps scale coherent. No own room shell or floor. Home is rendered only inside the separate remote-site DOM boundary."
+    },
+    {
+      "assetId": "asset.room.home.furniture",
+      "kind": "decorative-room-furniture",
+      "label": "home furniture",
+      "source": {
+        "path": "dist/scene-art.js",
+        "export": "roomFurnitureSvg",
+        "argument": "location.home",
+        "sourceSha256": "f851dd8643efbf5e87ab270452ae1a7fb865cbe2b9954012500a6d6529b25aea"
+      },
+      "generatedOutput": {
+        "sha256": "a27961315add2c4148837fc13c2adf86039c4933eef117cccf79f781087fb964",
+        "utf8Bytes": 1485,
+        "viewBox": [
+          0,
+          0,
+          400,
+          260
+        ],
+        "filePath": null,
+        "delivery": "inline SVG from local ES module"
+      },
+      "stateVariants": [
+        "Static decorative layout only; no device or service state"
+      ],
+      "stateOwnership": "No simulation state, equipment, network links, observations or success claims in artwork. Adjacent DOM owns room labels, device positions, port controls and actual network paths.",
+      "status": "XML_AND_ISOLATED_RENDER_VERIFIED_0_6_BROWSER_REVIEW_SEPARATE",
+      "integrationStatus": "SOURCE_INTEGRATED_VIA_CONTINUOUS_CLINIC_HOOK; rendered acceptance owned by lead",
+      "provenance": {
+        "type": "original code-native vector artwork",
+        "creators": [
+          "revision0.6 art specialist",
+          "existing original revision0.5 furniture paths retained"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "altTextPolicy": {
+        "svgDecorative": true,
+        "requiredAdjacentLabel": true,
+        "keyboardFocusOwner": "UI control, never SVG"
+      },
+      "licence": "Original project artwork; no third-party dependencies. No separate redistribution licence declared.",
+      "fallback": "Existing roomDecorSvg backdrop remains available when continuous-scene exports are not provided; unknown furniture input returns an empty inert SVG. Adjacent DOM names, controls and List view remain available.",
+      "layoutPolicy": "Furniture-only400×260 frame; preserveAspectRatio=xMidYMid meet keeps scale coherent. No own room shell or floor. Home is rendered only inside the separate remote-site DOM boundary."
+    },
+    {
+      "assetId": "asset.room.unknown.furniture",
+      "kind": "decorative-room-furniture",
+      "label": "unknown furniture",
+      "source": {
+        "path": "dist/scene-art.js",
+        "export": "roomFurnitureSvg",
+        "argument": "unknown",
+        "sourceSha256": "f851dd8643efbf5e87ab270452ae1a7fb865cbe2b9954012500a6d6529b25aea"
+      },
+      "generatedOutput": {
+        "sha256": "0398b90e255218c3f5e9c6b25a654fe20aceaa02157912841b86128320c167b2",
+        "utf8Bytes": 209,
+        "viewBox": [
+          0,
+          0,
+          400,
+          260
+        ],
+        "filePath": null,
+        "delivery": "inline SVG from local ES module"
+      },
+      "stateVariants": [
+        "Static decorative layout only; no device or service state"
+      ],
+      "stateOwnership": "No simulation state, equipment, network links, observations or success claims in artwork. Adjacent DOM owns room labels, device positions, port controls and actual network paths.",
+      "status": "XML_AND_ISOLATED_RENDER_VERIFIED_0_6_BROWSER_REVIEW_SEPARATE",
+      "integrationStatus": "SOURCE_INTEGRATED_VIA_CONTINUOUS_CLINIC_HOOK; rendered acceptance owned by lead",
+      "provenance": {
+        "type": "original code-native vector artwork",
+        "creators": [
+          "revision0.6 art specialist",
+          "existing original revision0.5 furniture paths retained"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "altTextPolicy": {
+        "svgDecorative": true,
+        "requiredAdjacentLabel": true,
+        "keyboardFocusOwner": "UI control, never SVG"
+      },
+      "licence": "Original project artwork; no third-party dependencies. No separate redistribution licence declared.",
+      "fallback": "Existing roomDecorSvg backdrop remains available when continuous-scene exports are not provided; unknown furniture input returns an empty inert SVG. Adjacent DOM names, controls and List view remain available.",
+      "layoutPolicy": "Furniture-only400×260 frame; preserveAspectRatio=xMidYMid meet keeps scale coherent. No own room shell or floor. Home is rendered only inside the separate remote-site DOM boundary."
+    },
+    {
+      "assetId": "asset.scene.clinic.floor.guided",
+      "kind": "decorative-continuous-floor",
+      "label": "Shared clinic floor — guided layout",
+      "source": {
+        "path": "dist/scene-art.js",
+        "export": "clinicFloorSvg",
+        "argument": {
+          "guided": true
+        },
+        "sourceSha256": "f851dd8643efbf5e87ab270452ae1a7fb865cbe2b9954012500a6d6529b25aea"
+      },
+      "generatedOutput": {
+        "sha256": "23a4f9312eeba08938c087c96af9ad6eb960688807fbf6dfaf1a02f0c85d6ce1",
+        "utf8Bytes": 1514,
+        "viewBox": [
+          0,
+          0,
+          800,
+          340
+        ],
+        "filePath": null,
+        "delivery": "inline SVG from local ES module"
+      },
+      "stateVariants": [
+        "Static decorative layout only; no device or service state"
+      ],
+      "stateOwnership": "No simulation state, equipment, network links, observations or success claims in artwork. Adjacent DOM owns room labels, device positions, port controls and actual network paths.",
+      "status": "XML_AND_ISOLATED_RENDER_VERIFIED_0_6_BROWSER_REVIEW_SEPARATE",
+      "integrationStatus": "SOURCE_INTEGRATED_VIA_CONTINUOUS_CLINIC_HOOK; rendered acceptance owned by lead",
+      "provenance": {
+        "type": "original code-native vector artwork",
+        "creators": [
+          "revision0.6 art specialist"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "altTextPolicy": {
+        "svgDecorative": true,
+        "requiredAdjacentLabel": true,
+        "keyboardFocusOwner": "UI control, never SVG"
+      },
+      "licence": "Original project artwork; no third-party dependencies. No separate redistribution licence declared.",
+      "fallback": "Existing roomDecorSvg backdrop remains available when continuous-scene exports are not provided; unknown furniture input returns an empty inert SVG. Adjacent DOM names, controls and List view remain available.",
+      "layoutPolicy": "One shallow cutaway perimeter and shared tiled floor; no internal partition assumes a fixed responsive room grid. preserveAspectRatio=none fits the shared container."
+    },
+    {
+      "assetId": "asset.scene.clinic.floor.full",
+      "kind": "decorative-continuous-floor",
+      "label": "Shared clinic floor — full layout",
+      "source": {
+        "path": "dist/scene-art.js",
+        "export": "clinicFloorSvg",
+        "argument": {
+          "guided": false
+        },
+        "sourceSha256": "f851dd8643efbf5e87ab270452ae1a7fb865cbe2b9954012500a6d6529b25aea"
+      },
+      "generatedOutput": {
+        "sha256": "4f1b87fbc59476a2fc7b2d720e6ae51ed8fa348c8f84df04fabff72e3b129f2a",
+        "utf8Bytes": 1548,
+        "viewBox": [
+          0,
+          0,
+          800,
+          560
+        ],
+        "filePath": null,
+        "delivery": "inline SVG from local ES module"
+      },
+      "stateVariants": [
+        "Static decorative layout only; no device or service state"
+      ],
+      "stateOwnership": "No simulation state, equipment, network links, observations or success claims in artwork. Adjacent DOM owns room labels, device positions, port controls and actual network paths.",
+      "status": "XML_AND_ISOLATED_RENDER_VERIFIED_0_6_BROWSER_REVIEW_SEPARATE",
+      "integrationStatus": "SOURCE_INTEGRATED_VIA_CONTINUOUS_CLINIC_HOOK; rendered acceptance owned by lead",
+      "provenance": {
+        "type": "original code-native vector artwork",
+        "creators": [
+          "revision0.6 art specialist"
+        ],
+        "thirdPartyArtImported": false,
+        "externalRuntimeDependencies": []
+      },
+      "altTextPolicy": {
+        "svgDecorative": true,
+        "requiredAdjacentLabel": true,
+        "keyboardFocusOwner": "UI control, never SVG"
+      },
+      "licence": "Original project artwork; no third-party dependencies. No separate redistribution licence declared.",
+      "fallback": "Existing roomDecorSvg backdrop remains available when continuous-scene exports are not provided; unknown furniture input returns an empty inert SVG. Adjacent DOM names, controls and List view remain available.",
+      "layoutPolicy": "One shallow cutaway perimeter and shared tiled floor; no internal partition assumes a fixed responsive room grid. preserveAspectRatio=none fits the shared container."
+    }
+  ],
+  "plannedAssetReconciliation": [
+    {
+      "proposedAssetId": "asset.room.reception.base",
+      "proposedFile": "public/assets/clinic/rooms/reception.svg",
+      "disposition": "CONSOLIDATED_IN_ORIGINAL_DECORATIVE_SVG_AND_MODEL_BACKED_DOM",
+      "owner": "interface_designer",
+      "expectedSource": [
+        "dist/ui.js",
+        "dist/styles.css"
+      ],
+      "oldStandaloneFileCreated": false,
+      "requirement": "Original 2D labelled rooms; the home site is outside the clinic boundary as a separate sibling region. No home-to-clinic Wi-Fi path.",
+      "runtimeSource": [
+        "dist/scene-art.js",
+        "dist/ui.js",
+        "dist/styles.css"
+      ]
+    },
+    {
+      "proposedAssetId": "asset.room.exam-a.base",
+      "proposedFile": "public/assets/clinic/rooms/exam-a.svg",
+      "disposition": "CONSOLIDATED_IN_ORIGINAL_DECORATIVE_SVG_AND_MODEL_BACKED_DOM",
+      "owner": "interface_designer",
+      "expectedSource": [
+        "dist/ui.js",
+        "dist/styles.css"
+      ],
+      "oldStandaloneFileCreated": false,
+      "requirement": "Original 2D labelled rooms; the home site is outside the clinic boundary as a separate sibling region. No home-to-clinic Wi-Fi path.",
+      "runtimeSource": [
+        "dist/scene-art.js",
+        "dist/ui.js",
+        "dist/styles.css"
+      ]
+    },
+    {
+      "proposedAssetId": "asset.room.exam-b.base",
+      "proposedFile": "public/assets/clinic/rooms/exam-b.svg",
+      "disposition": "CONSOLIDATED_IN_ORIGINAL_DECORATIVE_SVG_AND_MODEL_BACKED_DOM",
+      "owner": "interface_designer",
+      "expectedSource": [
+        "dist/ui.js",
+        "dist/styles.css"
+      ],
+      "oldStandaloneFileCreated": false,
+      "requirement": "Original 2D labelled rooms; the home site is outside the clinic boundary as a separate sibling region. No home-to-clinic Wi-Fi path.",
+      "runtimeSource": [
+        "dist/scene-art.js",
+        "dist/ui.js",
+        "dist/styles.css"
+      ]
+    },
+    {
+      "proposedAssetId": "asset.room.equipment.base",
+      "proposedFile": "public/assets/clinic/rooms/equipment.svg",
+      "disposition": "CONSOLIDATED_IN_ORIGINAL_DECORATIVE_SVG_AND_MODEL_BACKED_DOM",
+      "owner": "interface_designer",
+      "expectedSource": [
+        "dist/ui.js",
+        "dist/styles.css"
+      ],
+      "oldStandaloneFileCreated": false,
+      "requirement": "Original 2D labelled rooms; the home site is outside the clinic boundary as a separate sibling region. No home-to-clinic Wi-Fi path.",
+      "runtimeSource": [
+        "dist/scene-art.js",
+        "dist/ui.js",
+        "dist/styles.css"
+      ]
+    },
+    {
+      "proposedAssetId": "asset.room.home-inset.base",
+      "proposedFile": "public/assets/clinic/rooms/home-inset.svg",
+      "disposition": "CONSOLIDATED_IN_ORIGINAL_DECORATIVE_SVG_AND_MODEL_BACKED_DOM",
+      "owner": "interface_designer",
+      "expectedSource": [
+        "dist/ui.js",
+        "dist/styles.css"
+      ],
+      "oldStandaloneFileCreated": false,
+      "requirement": "Original 2D labelled rooms; the home site is outside the clinic boundary as a separate sibling region. No home-to-clinic Wi-Fi path.",
+      "runtimeSource": [
+        "dist/scene-art.js",
+        "dist/ui.js",
+        "dist/styles.css"
+      ]
+    },
+    {
+      "proposedAssetId": "asset.device.desktop",
+      "proposedFile": "public/assets/clinic/devices/desktop.svg",
+      "disposition": "CONSOLIDATED_IN_IMPLEMENTED_CODE_NATIVE_SVG",
+      "runtimeAssetId": "asset.device.desktop",
+      "runtimeSource": "dist/art.js",
+      "oldStandaloneFileCreated": false
+    },
+    {
+      "proposedAssetId": "asset.device.laptop",
+      "proposedFile": "public/assets/clinic/devices/laptop.svg",
+      "disposition": "CONSOLIDATED_IN_IMPLEMENTED_CODE_NATIVE_SVG",
+      "runtimeAssetId": "asset.device.laptop",
+      "runtimeSource": "dist/art.js",
+      "oldStandaloneFileCreated": false
+    },
+    {
+      "proposedAssetId": "asset.device.tablet",
+      "proposedFile": "public/assets/clinic/devices/tablet.svg",
+      "disposition": "CONSOLIDATED_IN_IMPLEMENTED_CODE_NATIVE_SVG",
+      "runtimeAssetId": "asset.device.tablet",
+      "runtimeSource": "dist/art.js",
+      "oldStandaloneFileCreated": false
+    },
+    {
+      "proposedAssetId": "asset.device.wearable",
+      "proposedFile": "public/assets/clinic/devices/wearable.svg",
+      "disposition": "CONSOLIDATED_IN_IMPLEMENTED_CODE_NATIVE_SVG",
+      "runtimeAssetId": "asset.device.wearable",
+      "runtimeSource": "dist/art.js",
+      "oldStandaloneFileCreated": false
+    },
+    {
+      "proposedAssetId": "asset.device.server",
+      "proposedFile": "public/assets/clinic/devices/server.svg",
+      "disposition": "CONSOLIDATED_IN_IMPLEMENTED_CODE_NATIVE_SVG",
+      "runtimeAssetId": "asset.device.server",
+      "runtimeSource": "dist/art.js",
+      "oldStandaloneFileCreated": false
+    },
+    {
+      "proposedAssetId": "asset.device.switch-8",
+      "proposedFile": "public/assets/clinic/devices/switch-8.svg",
+      "disposition": "CONSOLIDATED_IN_IMPLEMENTED_CODE_NATIVE_SVG",
+      "runtimeAssetId": "asset.device.switch8",
+      "runtimeSource": "dist/art.js",
+      "oldStandaloneFileCreated": false
+    },
+    {
+      "proposedAssetId": "asset.device.access-point",
+      "proposedFile": "public/assets/clinic/devices/access-point.svg",
+      "disposition": "CONSOLIDATED_IN_IMPLEMENTED_CODE_NATIVE_SVG",
+      "runtimeAssetId": "asset.device.access-point",
+      "runtimeSource": "dist/art.js",
+      "oldStandaloneFileCreated": false
+    },
+    {
+      "proposedAssetId": "asset.device.sensor-dock",
+      "proposedFile": "public/assets/clinic/devices/sensor-dock.svg",
+      "disposition": "CONSOLIDATED_IN_IMPLEMENTED_CODE_NATIVE_SVG",
+      "runtimeAssetId": "asset.device.sensor-dock",
+      "runtimeSource": "dist/art.js",
+      "oldStandaloneFileCreated": false
+    },
+    {
+      "proposedAssetId": "asset.device.ethernet-adapter",
+      "proposedFile": "public/assets/clinic/devices/ethernet-adapter.svg",
+      "disposition": "CONSOLIDATED_IN_IMPLEMENTED_CODE_NATIVE_SVG",
+      "runtimeAssetId": "asset.device.ethernet-adapter",
+      "runtimeSource": "dist/art.js",
+      "oldStandaloneFileCreated": false
+    },
+    {
+      "proposedAssetId": "asset.device.switch-4",
+      "proposedFile": "public/assets/clinic/devices/switch-4.svg",
+      "disposition": "CONSOLIDATED_IN_IMPLEMENTED_CODE_NATIVE_SVG",
+      "runtimeAssetId": "asset.device.switch4",
+      "runtimeSource": "dist/art.js",
+      "oldStandaloneFileCreated": false
+    },
+    {
+      "proposedAssetId": "asset.connection.ethernet",
+      "proposedFile": "public/assets/clinic/connections/ethernet.svg",
+      "disposition": "STANDALONE_GLYPH_DEFERRED_USE_UI_PATHS_AND_TEXT",
+      "owner": "interface_designer",
+      "expectedSource": [
+        "dist/ui.js",
+        "dist/styles.css"
+      ],
+      "oldStandaloneFileCreated": false,
+      "requirement": "Paths from actual engine cables/association; Ethernet, Wi-Fi and sensor-transfer visually distinct. No proximity-created connections."
+    },
+    {
+      "proposedAssetId": "asset.connection.wifi",
+      "proposedFile": "public/assets/clinic/connections/wifi.svg",
+      "disposition": "STANDALONE_GLYPH_DEFERRED_USE_UI_PATHS_AND_TEXT",
+      "owner": "interface_designer",
+      "expectedSource": [
+        "dist/ui.js",
+        "dist/styles.css"
+      ],
+      "oldStandaloneFileCreated": false,
+      "requirement": "Paths from actual engine cables/association; Ethernet, Wi-Fi and sensor-transfer visually distinct. No proximity-created connections."
+    },
+    {
+      "proposedAssetId": "asset.connection.sensor-transfer",
+      "proposedFile": "public/assets/clinic/connections/sensor-transfer.svg",
+      "disposition": "STANDALONE_GLYPH_DEFERRED_USE_UI_PATHS_AND_TEXT",
+      "owner": "interface_designer",
+      "expectedSource": [
+        "dist/ui.js",
+        "dist/styles.css"
+      ],
+      "oldStandaloneFileCreated": false,
+      "requirement": "Paths from actual engine cables/association; Ethernet, Wi-Fi and sensor-transfer visually distinct. No proximity-created connections."
+    },
+    {
+      "proposedAssetId": "asset.connection.ethernet-port",
+      "proposedFile": "public/assets/clinic/connections/ethernet-port.svg",
+      "disposition": "STANDALONE_GLYPH_DEFERRED_USE_UI_PATHS_AND_TEXT",
+      "owner": "interface_designer",
+      "expectedSource": [
+        "dist/ui.js",
+        "dist/styles.css"
+      ],
+      "oldStandaloneFileCreated": false,
+      "requirement": "Paths from actual engine cables/association; Ethernet, Wi-Fi and sensor-transfer visually distinct. No proximity-created connections."
+    },
+    {
+      "proposedAssetId": "asset.connection.sensor-port",
+      "proposedFile": "public/assets/clinic/connections/sensor-port.svg",
+      "disposition": "STANDALONE_GLYPH_DEFERRED_USE_UI_PATHS_AND_TEXT",
+      "owner": "interface_designer",
+      "expectedSource": [
+        "dist/ui.js",
+        "dist/styles.css"
+      ],
+      "oldStandaloneFileCreated": false,
+      "requirement": "Paths from actual engine cables/association; Ethernet, Wi-Fi and sensor-transfer visually distinct. No proximity-created connections."
+    },
+    {
+      "proposedAssetId": "asset.connection.return-wearable",
+      "proposedFile": "public/assets/clinic/connections/return-wearable.svg",
+      "disposition": "STANDALONE_GLYPH_DEFERRED_USE_UI_PATHS_AND_TEXT",
+      "owner": "interface_designer",
+      "expectedSource": [
+        "dist/ui.js",
+        "dist/styles.css"
+      ],
+      "oldStandaloneFileCreated": false,
+      "requirement": "Paths from actual engine cables/association; Ethernet, Wi-Fi and sensor-transfer visually distinct. No proximity-created connections."
+    },
+    {
+      "proposedAssetId": "asset.glyph.check",
+      "proposedFile": "public/assets/clinic/glyphs/check.svg",
+      "disposition": "STANDALONE_GLYPH_DEFERRED_USE_UI_TEXT_AND_CSS",
+      "owner": "interface_designer",
+      "expectedSource": [
+        "dist/ui.js",
+        "dist/styles.css"
+      ],
+      "oldStandaloneFileCreated": false,
+      "requirement": "Text plus shape where useful; never colour-only or independently calculated success."
+    },
+    {
+      "proposedAssetId": "asset.glyph.fault",
+      "proposedFile": "public/assets/clinic/glyphs/fault.svg",
+      "disposition": "STANDALONE_GLYPH_DEFERRED_USE_UI_TEXT_AND_CSS",
+      "owner": "interface_designer",
+      "expectedSource": [
+        "dist/ui.js",
+        "dist/styles.css"
+      ],
+      "oldStandaloneFileCreated": false,
+      "requirement": "Text plus shape where useful; never colour-only or independently calculated success."
+    },
+    {
+      "proposedAssetId": "asset.glyph.attention",
+      "proposedFile": "public/assets/clinic/glyphs/attention.svg",
+      "disposition": "STANDALONE_GLYPH_DEFERRED_USE_UI_TEXT_AND_CSS",
+      "owner": "interface_designer",
+      "expectedSource": [
+        "dist/ui.js",
+        "dist/styles.css"
+      ],
+      "oldStandaloneFileCreated": false,
+      "requirement": "Text plus shape where useful; never colour-only or independently calculated success."
+    },
+    {
+      "proposedAssetId": "asset.glyph.power-on",
+      "proposedFile": "public/assets/clinic/glyphs/power-on.svg",
+      "disposition": "STANDALONE_GLYPH_DEFERRED_USE_UI_TEXT_AND_CSS",
+      "owner": "interface_designer",
+      "expectedSource": [
+        "dist/ui.js",
+        "dist/styles.css"
+      ],
+      "oldStandaloneFileCreated": false,
+      "requirement": "Text plus shape where useful; never colour-only or independently calculated success."
+    },
+    {
+      "proposedAssetId": "asset.glyph.power-off",
+      "proposedFile": "public/assets/clinic/glyphs/power-off.svg",
+      "disposition": "STANDALONE_GLYPH_DEFERRED_USE_UI_TEXT_AND_CSS",
+      "owner": "interface_designer",
+      "expectedSource": [
+        "dist/ui.js",
+        "dist/styles.css"
+      ],
+      "oldStandaloneFileCreated": false,
+      "requirement": "Text plus shape where useful; never colour-only or independently calculated success."
+    },
+    {
+      "proposedAssetId": "asset.glyph.link-present",
+      "proposedFile": "public/assets/clinic/glyphs/link-present.svg",
+      "disposition": "STANDALONE_GLYPH_DEFERRED_USE_UI_TEXT_AND_CSS",
+      "owner": "interface_designer",
+      "expectedSource": [
+        "dist/ui.js",
+        "dist/styles.css"
+      ],
+      "oldStandaloneFileCreated": false,
+      "requirement": "Text plus shape where useful; never colour-only or independently calculated success."
+    },
+    {
+      "proposedAssetId": "asset.glyph.link-absent",
+      "proposedFile": "public/assets/clinic/glyphs/link-absent.svg",
+      "disposition": "STANDALONE_GLYPH_DEFERRED_USE_UI_TEXT_AND_CSS",
+      "owner": "interface_designer",
+      "expectedSource": [
+        "dist/ui.js",
+        "dist/styles.css"
+      ],
+      "oldStandaloneFileCreated": false,
+      "requirement": "Text plus shape where useful; never colour-only or independently calculated success."
+    },
+    {
+      "proposedAssetId": "asset.glyph.radio-associated",
+      "proposedFile": "public/assets/clinic/glyphs/radio-associated.svg",
+      "disposition": "STANDALONE_GLYPH_DEFERRED_USE_UI_TEXT_AND_CSS",
+      "owner": "interface_designer",
+      "expectedSource": [
+        "dist/ui.js",
+        "dist/styles.css"
+      ],
+      "oldStandaloneFileCreated": false,
+      "requirement": "Text plus shape where useful; never colour-only or independently calculated success."
+    },
+    {
+      "proposedAssetId": "asset.glyph.radio-unassociated",
+      "proposedFile": "public/assets/clinic/glyphs/radio-unassociated.svg",
+      "disposition": "STANDALONE_GLYPH_DEFERRED_USE_UI_TEXT_AND_CSS",
+      "owner": "interface_designer",
+      "expectedSource": [
+        "dist/ui.js",
+        "dist/styles.css"
+      ],
+      "oldStandaloneFileCreated": false,
+      "requirement": "Text plus shape where useful; never colour-only or independently calculated success."
+    },
+    {
+      "proposedAssetId": "asset.glyph.unknown",
+      "proposedFile": "public/assets/clinic/glyphs/unknown.svg",
+      "disposition": "STANDALONE_GLYPH_DEFERRED_USE_UI_TEXT_AND_CSS",
+      "owner": "interface_designer",
+      "expectedSource": [
+        "dist/ui.js",
+        "dist/styles.css"
+      ],
+      "oldStandaloneFileCreated": false,
+      "requirement": "Text plus shape where useful; never colour-only or independently calculated success."
+    },
+    {
+      "proposedAssetId": "asset.glyph.waiting",
+      "proposedFile": "public/assets/clinic/glyphs/waiting.svg",
+      "disposition": "STANDALONE_GLYPH_DEFERRED_USE_UI_TEXT_AND_CSS",
+      "owner": "interface_designer",
+      "expectedSource": [
+        "dist/ui.js",
+        "dist/styles.css"
+      ],
+      "oldStandaloneFileCreated": false,
+      "requirement": "Text plus shape where useful; never colour-only or independently calculated success."
+    },
+    {
+      "proposedAssetId": "asset.glyph.stale",
+      "proposedFile": "public/assets/clinic/glyphs/stale.svg",
+      "disposition": "STANDALONE_GLYPH_DEFERRED_USE_UI_TEXT_AND_CSS",
+      "owner": "interface_designer",
+      "expectedSource": [
+        "dist/ui.js",
+        "dist/styles.css"
+      ],
+      "oldStandaloneFileCreated": false,
+      "requirement": "Text plus shape where useful; never colour-only or independently calculated success."
+    },
+    {
+      "proposedAssetId": "asset.glyph.access-allowed",
+      "proposedFile": "public/assets/clinic/glyphs/access-allowed.svg",
+      "disposition": "STANDALONE_GLYPH_DEFERRED_USE_UI_TEXT_AND_CSS",
+      "owner": "interface_designer",
+      "expectedSource": [
+        "dist/ui.js",
+        "dist/styles.css"
+      ],
+      "oldStandaloneFileCreated": false,
+      "requirement": "Text plus shape where useful; never colour-only or independently calculated success."
+    },
+    {
+      "proposedAssetId": "asset.glyph.access-denied",
+      "proposedFile": "public/assets/clinic/glyphs/access-denied.svg",
+      "disposition": "STANDALONE_GLYPH_DEFERRED_USE_UI_TEXT_AND_CSS",
+      "owner": "interface_designer",
+      "expectedSource": [
+        "dist/ui.js",
+        "dist/styles.css"
+      ],
+      "oldStandaloneFileCreated": false,
+      "requirement": "Text plus shape where useful; never colour-only or independently calculated success."
+    },
+    {
+      "proposedAssetId": "asset.glyph.access-exposed",
+      "proposedFile": "public/assets/clinic/glyphs/access-exposed.svg",
+      "disposition": "STANDALONE_GLYPH_DEFERRED_USE_UI_TEXT_AND_CSS",
+      "owner": "interface_designer",
+      "expectedSource": [
+        "dist/ui.js",
+        "dist/styles.css"
+      ],
+      "oldStandaloneFileCreated": false,
+      "requirement": "Text plus shape where useful; never colour-only or independently calculated success."
+    },
+    {
+      "proposedAssetId": "asset.glyph.stored",
+      "proposedFile": "public/assets/clinic/glyphs/stored.svg",
+      "disposition": "STANDALONE_GLYPH_DEFERRED_USE_UI_TEXT_AND_CSS",
+      "owner": "interface_designer",
+      "expectedSource": [
+        "dist/ui.js",
+        "dist/styles.css"
+      ],
+      "oldStandaloneFileCreated": false,
+      "requirement": "Text plus shape where useful; never colour-only or independently calculated success."
+    },
+    {
+      "proposedAssetId": "asset.glyph.handed-off",
+      "proposedFile": "public/assets/clinic/glyphs/handed-off.svg",
+      "disposition": "STANDALONE_GLYPH_DEFERRED_USE_UI_TEXT_AND_CSS",
+      "owner": "interface_designer",
+      "expectedSource": [
+        "dist/ui.js",
+        "dist/styles.css"
+      ],
+      "oldStandaloneFileCreated": false,
+      "requirement": "Text plus shape where useful; never colour-only or independently calculated success."
+    },
+    {
+      "proposedAssetId": "asset.glyph.server-role",
+      "proposedFile": "public/assets/clinic/glyphs/server-role.svg",
+      "disposition": "STANDALONE_GLYPH_DEFERRED_USE_UI_TEXT_AND_CSS",
+      "owner": "interface_designer",
+      "expectedSource": [
+        "dist/ui.js",
+        "dist/styles.css"
+      ],
+      "oldStandaloneFileCreated": false,
+      "requirement": "Text plus shape where useful; never colour-only or independently calculated success."
+    },
+    {
+      "proposedAssetId": "asset.learning.input",
+      "proposedFile": "public/assets/clinic/learning/input.svg",
+      "disposition": "STANDALONE_GLYPH_DEFERRED_USE_CATALOG_IPOS_TEXT",
+      "owner": "interface_designer",
+      "availableDataSource": "dist/catalog.js:CATALOG[kind].ipos",
+      "oldStandaloneFileCreated": false
+    },
+    {
+      "proposedAssetId": "asset.learning.process",
+      "proposedFile": "public/assets/clinic/learning/process.svg",
+      "disposition": "STANDALONE_GLYPH_DEFERRED_USE_CATALOG_IPOS_TEXT",
+      "owner": "interface_designer",
+      "availableDataSource": "dist/catalog.js:CATALOG[kind].ipos",
+      "oldStandaloneFileCreated": false
+    },
+    {
+      "proposedAssetId": "asset.learning.store",
+      "proposedFile": "public/assets/clinic/learning/store.svg",
+      "disposition": "STANDALONE_GLYPH_DEFERRED_USE_CATALOG_IPOS_TEXT",
+      "owner": "interface_designer",
+      "availableDataSource": "dist/catalog.js:CATALOG[kind].ipos",
+      "oldStandaloneFileCreated": false
+    },
+    {
+      "proposedAssetId": "asset.learning.output",
+      "proposedFile": "public/assets/clinic/learning/output.svg",
+      "disposition": "STANDALONE_GLYPH_DEFERRED_USE_CATALOG_IPOS_TEXT",
+      "owner": "interface_designer",
+      "availableDataSource": "dist/catalog.js:CATALOG[kind].ipos",
+      "oldStandaloneFileCreated": false
+    }
+  ],
+  "uiStateOverlays": {
+    "status": "IMPLEMENTED_SOURCE_AND_MODEL_BACKED_RENDER_VERIFIED_BROWSER_QA_SEPARATE",
+    "owner": "interface_designer",
+    "stateLogicOwner": "engine.js or confirmed persistence adapter",
+    "notRenderedInsideArtModule": true,
+    "groups": [
+      {
+        "group": "power",
+        "source": "derive(game).devices[].powered",
+        "meaning": "Device power only, not service success."
+      },
+      {
+        "group": "physicalLinks",
+        "source": "derive(game).devices[].ports[].cableId and derive(game).cables",
+        "meaning": "Actual engine cable IDs and endpoint ports determine physical geometry. Lines never establish service success."
+      },
+      {
+        "group": "wireless",
+        "source": "derive(game).devices[].wifiApId with currentResults",
+        "meaning": "Association fact does not prove address/service health. No home association path."
+      },
+      {
+        "group": "addressServiceAccess",
+        "source": "derive(game).currentResults and derive(game).diagnostics",
+        "meaning": "Render engine code/message/pass; distinguish expected denial from malfunction."
+      },
+      {
+        "group": "staleObservations",
+        "source": "derive(game).diagnostics[].stale",
+        "meaning": "Latest observation uses exact alternating pathIds with current endpoint matches only; removed components remain textual historic IDs. pass and stale are engine facts, and both tested/current revisions are shown."
+      },
+      {
+        "group": "wearableCollectionHandoff",
+        "source": "derive(game).wearable.collected, returned, handedOff",
+        "meaning": "Separate collection, return and transfer stages."
+      },
+      {
+        "group": "persistentReceipt",
+        "source": "derive(game).wearable.receipts",
+        "meaning": "Prior receipt remains visible when current path/policy fails. Current upload availability uses currentResults separately."
+      },
+      {
+        "group": "readiness",
+        "source": "derive(game).objectives, ready and missing",
+        "meaning": "No image, badge or UI control declares readiness independently."
+      },
+      {
+        "group": "guideCostsTraining",
+        "source": "derive(game).guideQuotes, training and economy",
+        "meaning": "Show engine facts only; fictional business values are not grades."
+      },
+      {
+        "group": "save",
+        "source": "confirmed persistence adapter result",
+        "meaning": "Saved status only after adapter confirms."
+      },
+      {
+        "group": "selectionFocus",
+        "source": "UI selection/browser focus",
+        "meaning": "Nontechnical UI-only state."
+      }
+    ]
+  },
+  "scaleChanges": {
+    "priorDeviceViewBox": [
+      0,
+      0,
+      128,
+      128
+    ],
+    "implementedDeviceViewBox": [
+      0,
+      0,
+      120,
+      100
+    ],
+    "reason": "Uniform code-native illustration frame selected during implementation. UI owns actual DOM hit areas and connection geometry; no old pixel anchors imply ports."
+  },
+  "runtimePackaging": {
+    "sourceModule": "dist/art.js",
+    "symbolDelivery": "Inline SVG strings from one local module",
+    "perDeviceRequest": false,
+    "localFavicon": "dist/assets/favicon.svg",
+    "externalAssetsRequired": false,
+    "applicationInitialRequestsTarget": 30,
+    "requestCountMeasuredInBrowser": false,
+    "artSourceBytes": 5308,
+    "faviconBytes": 285,
+    "uiSourceBytes": 134848,
+    "stylesSourceBytes": 81034,
+    "sceneArtModule": "dist/scene-art.js",
+    "sceneArtSourceBytes": 12175
+  },
+  "checks": {
+    "checkedAtUtc": "2026-11-16T02:20:02.327870+00:00",
+    "historical04Checks": "docs/revisions/asset-manifest-0.4.json",
+    "historical05Scope": {
+      "browserVisualReview": "PASS within scoped managed-Linux preview; room/device composition, phone contrast, real network traces and sampled zoom reviewed",
+      "browserGameplay": "Full fresh six bootcamp checkpoints plus client delivery and settlement played through visible controls; qa/BROWSER_0_5.md",
+      "zoomAndKeyboard": "Sampled normal, 125% and 200% preview; full assistive-technology audit not performed",
+      "artReview": "docs/revisions/ART_0_5.md"
+    },
+    "originalDeviceArt": "Unchanged module; retained catalogue bindings and generated hashes",
+    "sceneSvgXmlAndInertMarkup": "PASS:17 declared outputs parsed; all decorative/focusablefalse, no text/script/image/link/event/animation; all17 rendered with Inkscape. Guided floor+furniture composite visually inspected.",
+    "sceneArtReview": "docs/revisions/ART_0_6.md",
+    "sourceAndModelReview": "qa/REVISION_0_6.md and qa/revision-0.6-test-run.metadata.json; exact final source hashes",
+    "browserVisualReview": "PASS within scoped managed Linux Chromium preview: continuous guided/full clinic floor, real port anchors, current/stale/failing paths, separate home boundary and readable List alternative; qa/BROWSER_0_6.md",
+    "browserGameplay": "Guided optional and fresh routes completed through actual controls, then fresh independent equipment/power/cabling/test and changed-example transition; real 0.5 completed campaign imported and preserved. Not a fresh full six-checkpoint/client 0.6 playthrough.",
+    "zoomAndKeyboard": "Sampled keyboard guided sequence; actual 200% zoom form use at674 CSSpx and337 CSSpx narrow List reflow without document overflow. Full screen-reader/OS reduced-motion/school audit not performed.",
+    "performance": "Static source sizes measured; actual school loading/frame timing NOT MEASURED",
+    "schoolWindows": "NOT TESTED",
+    "publishedOrigin": "NOT TESTED; private access limitation unchanged"
+  },
+  "fallbackPolicy": {
+    "unknownKind": "deviceSvg returns neutral SVG with data-art-kind=unknown",
+    "adjacentNameRequired": true,
+    "ifArtUnavailable": "Retain semantic device name, controls, list mode and state text; complete absence of art module still needs integration error-boundary handling",
+    "uiFallbackVerified": false
+  },
+  "deferred": [
+    "43 separate SVG files from proposed manifest",
+    "standalone state glyph set",
+    "live home Internet/cloud art",
+    "router/DHCP art",
+    "3D scene",
+    "city map",
+    "raster artwork",
+    "real-person likenesses or patient charts"
+  ],
+  "notes": [
+    "Static Wi-Fi motif on access-point art denotes radio capability, not an active association.",
+    "Decorative screen strokes contain no records, clinical readings or gameplay conclusions.",
+    "No runtime or classroom readiness follows from these source checks.",
+    "Revision 0.4 keeps the original 2D visual foundation and renders all map labels as normal DOM text.",
+    "Observed traces only overlay exact surviving physical edges from the latest observation. No route is invented for an empty diagnostic path.",
+    "Mode transitions share the explicit unsaved-draft rescue/discard/cancel boundary.",
+    "Static semantics and Node assertions do not establish real browser layout, assistive-technology support or school readiness.",
+    "Revision 0.5 uses original cutaway room decoration and staff portraits; default Clinic, explicit Network, equivalent List. No decorative asset declares a successful service.",
+    "Revision0.6 uses one continuous clinic floor with furniture-only location art. Floor has no internal partitions, so responsive stacking and additional real devices do not contradict painted room boundaries. Original roomDecorSvg outputs remain unchanged as fallbacks."
+  ],
+  "auditNotes": [
+    "2026-11-15: lead refreshed UI/CSS source hashes after paste-backup recovery integration; original generated art unchanged. Actual browser scope is in qa/BROWSER_0_4.md.",
+    "2026-11-15: lead integrated scene-art outputs and refreshed UI/CSS hashes. Previous manifest retained verbatim under docs/revisions/asset-manifest-0.4.json.",
+    "2026-11-16: revision0.6 art specialist added8 stable SVG outputs (6 furniture including unknown;2 shared-floor layouts), retained9 existing outputs byte-for-byte, refreshed current source hashes. Actual browser acceptance remains with lead.",
+    "2026-11-16: lead refreshed final UI/CSS hashes and scoped browser acceptance. All asset IDs/generation remain original; actual school and published-origin gameplay remain untested."
+  ],
+  "sceneArtModuleVersion": "0.6.0"
+}

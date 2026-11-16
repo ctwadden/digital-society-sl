@@ -1,0 +1,375 @@
+{
+  "documentType": "planning_contract",
+  "contractId": "design.clinic.learning-and-consultation",
+  "version": "0.2.0-proposed",
+  "status": "PROPOSED_NOT_IMPLEMENTED",
+  "date": "2026-11-14",
+  "authority": "Lead-integrated v0.2 amendment; worker proposals are advisory. Preserve existing clinic mission and technical rules.",
+  "missionId": "mission.clinic.001",
+  "modes": {
+    "attemptMode": [
+      "training",
+      "client"
+    ],
+    "immutableAtCreation": true,
+    "sharedEngine": true,
+    "identicalTechnicalResultsForIdenticalState": true,
+    "bootcampDoesNotMutateClient": true,
+    "demonstrationActor": "trainer-demo",
+    "practiceCompletionIsMastery": false
+  },
+  "bootcamp": {
+    "requiredBeforeFirstClient": true,
+    "teacherDirectedPriorLearningStart": "Record route honestly; no fabricated practice or achievement.",
+    "proposedMinutes": [
+      20,
+      30
+    ],
+    "timingMeasured": false,
+    "freeAssistance": true,
+    "unlimitedRetries": true,
+    "stations": [
+      {
+        "id": "bootcamp.station.equipment-connections",
+        "title": "Equipment and connections",
+        "learningIds": [
+          "cc.clinic.ipos",
+          "cc.clinic.device-fit",
+          "cc.clinic.connection-choice",
+          "cc.clinic.system-path"
+        ],
+        "guideSections": [
+          "guide.devices-paths"
+        ],
+        "steps": [
+          "explain",
+          "engine-demonstration",
+          "guided-attempt",
+          "changed-example"
+        ],
+        "guideArticles": [
+          "guide.equipment",
+          "guide.connections"
+        ]
+      },
+      {
+        "id": "bootcamp.station.address-diagnosis",
+        "title": "Addresses and diagnosis",
+        "learningIds": [
+          "cc.clinic.address",
+          "cc.clinic.diagnosis"
+        ],
+        "guideSections": [
+          "guide.addressing-diagnosis"
+        ],
+        "steps": [
+          "explain",
+          "engine-demonstration",
+          "guided-attempt",
+          "changed-example"
+        ],
+        "guideArticles": [
+          "guide.addressing",
+          "guide.diagnostics"
+        ]
+      },
+      {
+        "id": "bootcamp.station.access-handover",
+        "title": "Access, people and handover",
+        "learningIds": [
+          "cc.clinic.access",
+          "cc.clinic.stakeholders",
+          "cc.clinic.data-journey",
+          "cc.clinic.handover"
+        ],
+        "guideSections": [
+          "guide.access-handover"
+        ],
+        "steps": [
+          "explain",
+          "engine-demonstration",
+          "guided-attempt",
+          "changed-example"
+        ],
+        "guideArticles": [
+          "guide.access",
+          "guide.transfer-handover"
+        ]
+      }
+    ],
+    "fixtures": {
+      "initial": {
+        "fixtureId": "fixture.bootcamp.local.001",
+        "cidr": "192.168.50.0/24",
+        "mask": "255.255.255.0",
+        "server": "192.168.50.10",
+        "client": "192.168.50.20",
+        "wrongClient": "192.168.60.20"
+      },
+      "transfer": {
+        "fixtureId": "fixture.bootcamp.transfer.001",
+        "cidr": "192.168.70.0/24",
+        "mask": "255.255.255.0",
+        "server": "192.168.70.10",
+        "client": "192.168.70.20"
+      },
+      "clinic": {
+        "fixtureId": "fixture.clinic.local.001",
+        "cidr": "10.40.10.0/24",
+        "server": "10.40.10.10",
+        "reception": "10.40.10.20",
+        "inheritedNurse": "10.40.20.30",
+        "validNurseExamples": [
+          "10.40.10.30",
+          "10.40.10.31"
+        ]
+      }
+    },
+    "laterModules": [
+      "bootcamp.module.routing",
+      "bootcamp.module.dhcp",
+      "bootcamp.module.dns",
+      "bootcamp.module.filtering"
+    ],
+    "laterModulesStatus": "PLANNED_ONLY; introduce only when their model and next client require them"
+  },
+  "phone": {
+    "componentId": "component.work-phone",
+    "realMessaging": false,
+    "externalAI": false,
+    "engineOwnedHistory": true,
+    "freeClientMessages": true,
+    "templates": [
+      "phone.clinic.brief.001",
+      "phone.clinic.quote.001",
+      "phone.clinic.nurse-symptom.001",
+      "phone.clinic.nurse-booking-request.001",
+      "phone.clinic.marker-receipt.001",
+      "phone.clinic.handover.001"
+    ],
+    "fields": [
+      "messageId",
+      "templateId",
+      "templateVersion",
+      "threadId",
+      "contractId",
+      "speakerId",
+      "sequence",
+      "kind",
+      "triggerEventId",
+      "observationIds",
+      "testedTechnicalRevision",
+      "resolvedText",
+      "linkedActionIds",
+      "readState"
+    ],
+    "dedupeKey": [
+      "campaignId",
+      "contractId",
+      "templateId",
+      "triggerMilestoneIdentity"
+    ],
+    "observedClaimsRequireMatchingObservations": true,
+    "staleHistoricalMessagesRemainVisible": true,
+    "earlyRepairMustNotFabricateFailure": true,
+    "handoverTextBranches": {
+      "written": "Your recorded explanation is included.",
+      "oralPending": "Your practical results are included; an oral explanation is pending teacher review.",
+      "mixed": "Recorded explanations are included; the specified oral explanation remains pending."
+    },
+    "inaccessibleToastOnly": false,
+    "arrivalStealsFocus": false
+  },
+  "consultation": {
+    "policyId": "economy.consultation.pilot.001",
+    "version": "0.2.0-proposed",
+    "currency": "fictional credits",
+    "realMoney": false,
+    "provisionalBalance": true,
+    "grossServiceFee": 120,
+    "sectionCreditCost": 5,
+    "sectionSimulatedMinutes": 3,
+    "perContractCreditCap": 15,
+    "perContractMinuteCap": 9,
+    "grantKey": [
+      "campaignId",
+      "logicalContractId",
+      "guideSectionId"
+    ],
+    "allTiersIncluded": true,
+    "reopenFree": true,
+    "sourceOfCost": "Reserve against the fixed service fee; do not deduct cash before settlement.",
+    "costPeriod": "ACTIVE_UNDELIVERED_CONTRACT_ONLY",
+    "zeroCashBlocksHelp": false,
+    "capExceeded": "Grant further sections for zero credits and zero added minutes; record cap reason.",
+    "freeContexts": [
+      "training",
+      "delivered-contract review",
+      "settled-contract review"
+    ],
+    "freeResources": [
+      "client messages and brief",
+      "equipment facts",
+      "glossary",
+      "basic controls",
+      "input-error explanation",
+      "diagnostic findings",
+      "accessibility options",
+      "recovery",
+      "save/reset/export instructions"
+    ],
+    "wallClockBilling": false,
+    "timeCounterLabel": "Additional simulated consultation minutes",
+    "baseWorkTimeModeled": false,
+    "timelinessBonus": "DEFERRED",
+    "tierRevealRequiresGrantInActiveClient": true,
+    "guideNeverRepairsClient": true,
+    "guideNeverWritesStudentReasoning": true,
+    "quoteFields": [
+      "sectionId",
+      "currentContractPhase",
+      "costPolicyVersion",
+      "actualReservedCredits",
+      "addedSimulatedMinutes",
+      "capReason",
+      "alreadyGranted",
+      "estimatedNetFee"
+    ],
+    "transactionFields": [
+      "consultationEventId",
+      "grantKey",
+      "guideSectionId",
+      "policyVersion",
+      "quotedCredits",
+      "actualReservedCredits",
+      "addedSimulatedMinutes",
+      "ledgerRevision",
+      "waiverOrCapReason"
+    ],
+    "commit": "Validate content exists, quote and phase; atomically grant section and reserve once. Keyboard repeats/reload/concurrent tabs are idempotent.",
+    "technicalRevisionChanges": false,
+    "ledgerRevisionChanges": true,
+    "evidenceExportInvalidated": true,
+    "guideCatalog": [
+      {
+        "sectionId": "guide.devices-paths",
+        "title": "Devices and paths",
+        "articleIds": [
+          "guide.equipment",
+          "guide.connections"
+        ],
+        "allArticlesAndHintTiersIncluded": true
+      },
+      {
+        "sectionId": "guide.addressing-diagnosis",
+        "title": "Addressing and diagnosis",
+        "articleIds": [
+          "guide.addressing",
+          "guide.diagnostics"
+        ],
+        "allArticlesAndHintTiersIncluded": true
+      },
+      {
+        "sectionId": "guide.access-handover",
+        "title": "Access and handover",
+        "articleIds": [
+          "guide.access",
+          "guide.transfer-handover"
+        ],
+        "allArticlesAndHintTiersIncluded": true
+      }
+    ],
+    "acceptedTerms": "Compute every quote from the immutable terms accepted for that logical contract. A mismatched/stale quote is rejected without a grant or charge; reopening quotes the same accepted terms."
+  },
+  "settlement": {
+    "phases": [
+      "offered",
+      "active",
+      "delivered",
+      "settled"
+    ],
+    "deliveryCommit": "REQUEST_HANDOVER flushes drafts, validates technical/access/marker requirements and written/oral evidence presence. A READY delivery atomically freezes deliverySnapshotId, technicalRevision, evidenceRevision, ledgerRevision, feeDefinitionVersion, grossFee, consultationEvents, reservedCredits, consultationMinutes and netFee. Partial export does not freeze/close.",
+    "guidesAfterDelivery": "Free review from delivery closure, including while settlement is pending. No new reservation may enter the frozen cost basis.",
+    "settlementKey": [
+      "campaignId",
+      "logicalContractId"
+    ],
+    "settlementCommit": "SETTLE_CONTRACT validates the immutable delivery/cost snapshot and appends gross-fee credit plus frozen support-expense debits once. Cash increases by gross minus support; no prior cash deduction is repeated.",
+    "repeatedSettlement": "Return existing receipt; zero balance change.",
+    "historicalDeliveryVersusCurrentState": "Later technical edits cannot rewrite a historical delivery or settlement; current readiness is independently derived.",
+    "activeClientReset": "New CLIENT attempt under same logical contract, preserving grants/reservations and payment identity.",
+    "deliveredOrSettledReplay": "Separate free TRAINING/practice clone with source snapshot provenance; preserve the original locked delivery, original mode and settlement eligibility/history.",
+    "fullCampaignReset": "Export-first; clear wallet, reservations and settlement guards together.",
+    "import": "Validate and replace one whole campaign snapshot; never add/merge balances or reapply receipts.",
+    "localEvidenceTamperProof": false,
+    "acceptanceCommit": "Accepting a contract pins mission/contract-definition version, gross fee, consultation-policy version, section tariff and caps into the contract record. Catalog updates apply to new contracts only; they cannot silently reprice ACTIVE or delivered work."
+  },
+  "evidence": {
+    "records": [
+      "practice history",
+      "client technical observations",
+      "student reasoning",
+      "support context",
+      "business ledger"
+    ],
+    "officialOutcomeIds": null,
+    "automaticIBGrade": false,
+    "automaticMastery": false,
+    "automaticTeacherSignoff": false,
+    "automaticEvidenceMapWrite": false,
+    "guideCostAffectsBusinessOnly": true,
+    "customerCountProvesUnderstanding": false,
+    "walletProvesUnderstanding": false,
+    "teacherReviewPattern": "Application after bootcamp; materially different problem; changed-situation explanation. A review suggestion, not an IB rule or automatic threshold.",
+    "simulatedRoleIdentityIsStudentAccount": false,
+    "studentNamesCollected": false,
+    "patientDataCollected": false
+  },
+  "stateAdditions": [
+    "attemptModeAndTrainingFixture",
+    "trainingPracticeHistory",
+    "contractMilestonesAndMessages",
+    "guideGrantsAndReservations",
+    "contractDeliveryCostSnapshot",
+    "settlementLedger",
+    "ledgerRevision"
+  ],
+  "actionAdditions": [
+    "START_TRAINING_ATTEMPT",
+    "START_CLIENT_ATTEMPT",
+    "ACKNOWLEDGE_CLIENT_MESSAGE",
+    "GUIDE_CONSULT",
+    "SETTLE_CONTRACT",
+    "START_DELIVERED_CONTRACT_PRACTICE"
+  ],
+  "existingActionsReused": [
+    "CHOOSE_DEVICE",
+    "CONNECT_PORTS",
+    "DISCONNECT_CABLE",
+    "ASSOCIATE_WIFI",
+    "SET_STATIC_ADDRESS",
+    "RUN_PROBE",
+    "SET_PERMISSIONS",
+    "HANDOFF_MARKERS",
+    "UPLOAD_MARKERS",
+    "SAVE_EXPLANATION",
+    "REVEAL_HINT",
+    "REQUEST_HANDOVER"
+  ],
+  "futureNetworkChangesStatus": "PLANNED_ONLY; no router required in mission.clinic.001",
+  "futureRouterFixture": {
+    "mainCidr": "10.40.10.0/24",
+    "wingCidr": "10.40.20.0/24",
+    "mainRouter": "10.40.10.1/24",
+    "wingRouter": "10.40.20.1/24",
+    "server": "10.40.10.10/24",
+    "serverGateway": "10.40.10.1",
+    "wingClient": "10.40.20.30/24",
+    "wingGateway": "10.40.20.1",
+    "distinctRoutedInterfaces": true,
+    "forwardAndReturnPathRequired": true,
+    "WANModeled": false
+  },
+  "runtimeTestsExecuted": false,
+  "classroomReady": false
+}

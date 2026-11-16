@@ -1,0 +1,292 @@
+{
+  "documentType": "mission_design_specification",
+  "status": "PROPOSED_NOT_IMPLEMENTED",
+  "version": "0.2.0-proposed",
+  "missionId": "mission.clinic.001",
+  "title": "Connect the Clinic",
+  "client": "Riverbend Community Clinic",
+  "sourceAlignment": {
+    "courseLabel": "IB Digital Society",
+    "sourceLabel": "3.3A Types of computers",
+    "primaryDocumentId": "1dfuT_kBzayr9nf_AUXpEHfQ1UtxXdFTj",
+    "teacherDocumentId": "1rxb8z8crOGc7nhSI4JGI0r5ponIYwYLa",
+    "canonicalCourseId": null,
+    "canonicalPackageId": null,
+    "canonicalSkillIds": [],
+    "officialOutcomeIds": [],
+    "mappingStatus": "UNRESOLVED_NO_CODES_INVENTED",
+    "v02Review": {
+      "sources": [
+        "S9",
+        "S10",
+        "S11"
+      ],
+      "officialOutcomeIds": null,
+      "status": "PROPOSED_STATEMENTS_WITH_SOURCE_REFERENCES"
+    }
+  },
+  "roles": [
+    {
+      "id": "role.reception",
+      "location": "location.reception",
+      "needs": [
+        "booking-ui",
+        "text-input",
+        "screen",
+        "local-network"
+      ]
+    },
+    {
+      "id": "role.nurse",
+      "requiredLocations": [
+        "location.exam-a",
+        "location.exam-b"
+      ],
+      "needs": [
+        "portable",
+        "text-input",
+        "screen",
+        "wifi",
+        "workspace-ui",
+        "sensor-handoff-companion"
+      ]
+    },
+    {
+      "id": "role.monitor",
+      "initialLocation": "location.home",
+      "needs": [
+        "wearable",
+        "collect-test-markers",
+        "store-offline",
+        "sensor-transfer"
+      ]
+    },
+    {
+      "id": "role.records",
+      "location": "location.equipment",
+      "needs": [
+        "server-role-enabled",
+        "booking-service",
+        "workspace-service",
+        "marker-intake-service",
+        "local-network"
+      ]
+    }
+  ],
+  "network": {
+    "cidr": "10.40.10.0/24",
+    "mask": "255.255.255.0",
+    "mode": "static-only",
+    "serverAddress": "10.40.10.10",
+    "receptionAddress": "10.40.10.20",
+    "inheritedNurseAddress": "10.40.20.30",
+    "repairExamples": [
+      "10.40.10.30",
+      "10.40.10.31"
+    ],
+    "minimumSwitchPorts": 3,
+    "wifiProfileId": "wifi.clinic.staff",
+    "coverageLocations": [
+      "location.exam-a",
+      "location.exam-b"
+    ],
+    "requiresInternet": false,
+    "requiresRouter": false,
+    "providesDHCP": false,
+    "ethernetAdapterModel": "Explicit compatible host attachment; adds host-controlled NIC, not independently addressed router"
+  },
+  "fault": {
+    "id": "fault.nurse.legacy-address",
+    "trigger": "first nurse role provisioning",
+    "mutation": "apply inherited incorrect static profile once",
+    "reinject": false,
+    "earlyRepairAccepted": true,
+    "baselineFailureRequired": false,
+    "repairRequired": "record relevant correction or valid replacement and current passing nurse service; preserve inherited profile provenance"
+  },
+  "wearable": {
+    "mode": "return-and-sync",
+    "teacherApproval": "PENDING",
+    "markers": 7,
+    "markerContent": "Nonclinical day tokens only",
+    "phases": [
+      "collect-at-home",
+      "return-to-clinic",
+      "compatible-sensor-handoff",
+      "authorized-companion-network-upload"
+    ],
+    "uploadPrincipal": "role.monitor-transfer",
+    "duplicateHandling": "idempotent by marker ID",
+    "receiptHistoryPersists": true,
+    "currentUploadProbeAtHandover": true
+  },
+  "services": [
+    "service.bookings",
+    "service.workspace",
+    "service.marker-intake"
+  ],
+  "policies": {
+    "policy.roles-separated": {
+      "role.reception": [
+        "service.bookings"
+      ],
+      "role.nurse": [
+        "service.workspace"
+      ],
+      "role.monitor-transfer": [
+        "service.marker-intake"
+      ],
+      "role.outsider": []
+    },
+    "policy.nurse-also-books": {
+      "role.reception": [
+        "service.bookings"
+      ],
+      "role.nurse": [
+        "service.bookings",
+        "service.workspace"
+      ],
+      "role.monitor-transfer": [
+        "service.marker-intake"
+      ],
+      "role.outsider": []
+    }
+  },
+  "stateGroups": [
+    "attemptIdentityAndVersions",
+    "revisions",
+    "devicesAndRoles",
+    "portsAndCables",
+    "wirelessAssociations",
+    "addressConfiguration",
+    "powerAndServices",
+    "markerCollectionHandoffsReceipts",
+    "accessMatrix",
+    "observations",
+    "faultProvenance",
+    "currentExplanations",
+    "hintLedger",
+    "boundedEventJournal",
+    "attemptModeAndTrainingFixture",
+    "trainingPracticeHistory",
+    "contractMilestonesAndMessages",
+    "guideGrantsAndReservations",
+    "contractDeliveryCostSnapshot",
+    "settlementLedger",
+    "ledgerRevision"
+  ],
+  "actionTypes": [
+    "CHOOSE_DEVICE",
+    "ASSIGN_ROLE",
+    "PLACE_DEVICE",
+    "POWER_DEVICE",
+    "ATTACH_ADAPTER",
+    "DETACH_ADAPTER",
+    "CONNECT_PORTS",
+    "DISCONNECT_CABLE",
+    "ASSOCIATE_WIFI",
+    "SET_STATIC_ADDRESS",
+    "SET_SERVICE_STATE",
+    "MOVE_NURSE",
+    "RUN_PROBE",
+    "RUN_COLLECTION_CHECK",
+    "RETURN_WEARABLE",
+    "HANDOFF_MARKERS",
+    "UPLOAD_MARKERS",
+    "SET_PERMISSIONS",
+    "SAVE_EXPLANATION",
+    "REVIEW_EXPLANATION_CONTEXT",
+    "REVEAL_HINT",
+    "REQUEST_HANDOVER",
+    "START_TRAINING_ATTEMPT",
+    "START_CLIENT_ATTEMPT",
+    "ACKNOWLEDGE_CLIENT_MESSAGE",
+    "GUIDE_CONSULT",
+    "SETTLE_CONTRACT",
+    "START_DELIVERED_CONTRACT_PRACTICE"
+  ],
+  "forbiddenActions": [
+    "SET_SUCCESS",
+    "MARK_REPAIRED_WITHOUT_STATE_CHANGE",
+    "AWARD_IB_GRADE"
+  ],
+  "observationFields": [
+    "observationId",
+    "origin",
+    "testId",
+    "sourceDeviceId",
+    "serviceId",
+    "actorRoleId",
+    "contextLocationId",
+    "testedTechnicalRevision",
+    "findingCodes",
+    "pathIds",
+    "eventId"
+  ],
+  "revisionRules": {
+    "technical": "changes to operational domain including location/policy/wearable invalidate current probes",
+    "evidence": "explanation edits invalidate prepared exports",
+    "testOrHint": "does not change technical revision",
+    "finalMobilitySuite": "evaluate both named room contexts from one immutable snapshot without moving device; label as engine scenario checks",
+    "guideConsultation": "Changes ledger/evidence revision only; keeps technical tests valid; prepared evidence export invalidated."
+  },
+  "evidence": {
+    "formats": [
+      "text",
+      "json"
+    ],
+    "sameSnapshot": true,
+    "partialExport": true,
+    "identifyingFields": false,
+    "assessmentAutomation": false,
+    "liveTeacherOSIntegration": false,
+    "reasoningPrompts": [
+      "equipment fit and alternative",
+      "fault evidence and repair",
+      "permissions and conditional judgement",
+      "model limitation"
+    ],
+    "oralReview": "explicit pending teacher conversation; no quality inferred",
+    "flushActiveDraftBeforeSnapshot": true,
+    "supportAndMode": "Record actual training/client mode and consultation grants/cost/time separately from technical results and student explanation; no grade deduction.",
+    "handoverCostBasis": "READY delivery freezes gross fee/version, reservations and ledger revision with the evidence snapshot; settlement uses only this immutable basis."
+  },
+  "persistence": {
+    "storage": "localStorage candidate after actual browser validation",
+    "progressExportImport": true,
+    "proposedMaxImportBytes": 1048576,
+    "keepLastGood": true,
+    "validateBeforeReplace": true,
+    "recomputeDerivedOnRestore": true,
+    "sharedTabConflictHandling": true,
+    "resetScope": "Game namespace only. Active client restart preserves logical-contract grants/reservations/payment identity; delivered replay is separate practice. Full game clear removes wallet/history/guards together, with export-first.",
+    "lockScope": "read-mutate-revision-check-persist; fallback to explicit manual-save mode if reliable exclusion unavailable"
+  },
+  "runtimeTestStatus": "NOT_RUN",
+  "buildUrl": null,
+  "deploymentStatus": "UNDECIDED_PENDING_ACCOUNT_CAPACITY_AND_PROJECT_BINDING",
+  "permissionPrincipals": [
+    {
+      "id": "role.reception",
+      "jobRole": "role.reception",
+      "kind": "simulated-staff-role"
+    },
+    {
+      "id": "role.nurse",
+      "jobRole": "role.nurse",
+      "kind": "simulated-staff-role"
+    },
+    {
+      "id": "role.monitor-transfer",
+      "jobRole": "role.monitor",
+      "kind": "submit-only-companion-upload"
+    },
+    {
+      "id": "role.outsider",
+      "jobRole": null,
+      "kind": "synthetic-probe-role"
+    }
+  ],
+  "learningAndNarrativeContract": "BOOTCAMP_PHONE_CONTRACT.proposed.json",
+  "curriculumMap": "deliverables/Clinic_I_Can_Evidence_Map_v0.2.csv"
+}

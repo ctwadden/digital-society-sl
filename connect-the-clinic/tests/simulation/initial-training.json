@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "buildVersion": "0.3.0",
+  "campaignId": "campaign.sample",
+  "revision": 0,
+  "attemptSequence": 1,
+  "activeAttemptId": "attempt.0001",
+  "attempts": {
+    "attempt.0001": {
+      "id": "attempt.0001",
+      "mode": "training",
+      "testSuiteVersion": 2,
+      "fixtureId": "fixture.bootcamp.local.001",
+      "network": {
+        "cidr": "192.168.50.0/24",
+        "mask": "255.255.255.0",
+        "serverAddress": "192.168.50.10",
+        "receptionAddress": "192.168.50.20",
+        "inheritedNurseAddress": "192.168.60.20",
+        "base": "192.168.50"
+      },
+      "technicalRevision": 5,
+      "evidenceRevision": 0,
+      "sequence": 5,
+      "deviceSequence": 2,
+      "cableSequence": 0,
+      "observationSequence": 0,
+      "devices": {
+        "attempt.0001.device.0001": {
+          "id": "attempt.0001.device.0001",
+          "kind": "server",
+          "roleId": "role.records",
+          "locationId": "location.equipment",
+          "powered": true,
+          "address": "192.168.50.10",
+          "mask": "255.255.255.0",
+          "attachments": [],
+          "wifiApId": null
+        },
+        "attempt.0001.device.0002": {
+          "id": "attempt.0001.device.0002",
+          "kind": "switch4",
+          "roleId": "infra.switch",
+          "locationId": "location.equipment",
+          "powered": true,
+          "address": "",
+          "mask": "255.255.255.0",
+          "attachments": [],
+          "wifiApId": null
+        }
+      },
+      "cables": [],
+      "serverEnabled": true,
+      "policyId": "policy.roles-separated",
+      "policyRevision": 0,
+      "observations": [],
+      "events": [
+        {
+          "id": "attempt.0001.event.0001",
+          "sequence": 1,
+          "type": "CHOOSE_DEVICE",
+          "origin": "mission-setup",
+          "technicalRevision": 1,
+          "evidenceRevision": 0,
+          "payload": {
+            "deviceId": "attempt.0001.device.0001",
+            "roleId": "role.records",
+            "kind": "server",
+            "replacedDeviceId": null
+          }
+        },
+        {
+          "id": "attempt.0001.event.0002",
+          "sequence": 2,
+          "type": "POWER_DEVICE",
+          "origin": "mission-setup",
+          "technicalRevision": 2,
+          "evidenceRevision": 0,
+          "payload": {
+            "deviceId": "attempt.0001.device.0001",
+            "on": true
+          }
+        },
+        {
+          "id": "attempt.0001.event.0003",
+          "sequence": 3,
+          "type": "CHOOSE_DEVICE",
+          "origin": "mission-setup",
+          "technicalRevision": 3,
+          "evidenceRevision": 0,
+          "payload": {
+            "deviceId": "attempt.0001.device.0002",
+            "roleId": "infra.switch",
+            "kind": "switch4",
+            "replacedDeviceId": null
+          }
+        },
+        {
+          "id": "attempt.0001.event.0004",
+          "sequence": 4,
+          "type": "POWER_DEVICE",
+          "origin": "mission-setup",
+          "technicalRevision": 4,
+          "evidenceRevision": 0,
+          "payload": {
+            "deviceId": "attempt.0001.device.0002",
+            "on": true
+          }
+        },
+        {
+          "id": "attempt.0001.event.0005",
+          "sequence": 5,
+          "type": "SET_SERVICE_STATE",
+          "origin": "mission-setup",
+          "technicalRevision": 5,
+          "evidenceRevision": 0,
+          "payload": {
+            "enabled": true
+          }
+        }
+      ],
+      "messages": [],
+      "hints": {},
+      "freeGuideGrants": [],
+      "fault": {
+        "id": "fault.nurse.legacy-address",
+        "seeded": false,
+        "initialAddress": null,
+        "lastAddress": null,
+        "seedDeviceId": null,
+        "seedEventId": null,
+        "changes": [],
+        "baselineFailures": []
+      },
+      "wearable": {
+        "collected": [],
+        "handedOff": [],
+        "receipts": [],
+        "returned": false,
+        "companionDeviceId": null
+      },
+      "explanations": {
+        "equipment": {
+          "text": "",
+          "oral": false,
+          "contextRevision": 0
+        },
+        "repair": {
+          "text": "",
+          "oral": false,
+          "contextRevision": 0
+        },
+        "privacy": {
+          "text": "",
+          "oral": false,
+          "contextRevision": 0
+        },
+        "limitations": {
+          "text": "",
+          "oral": false,
+          "contextRevision": 0
+        }
+      },
+      "training": {
+        "stationIndex": 0,
+        "stage": "practice",
+        "isDemo": false,
+        "practiceActions": [],
+        "demoSteps": [],
+        "provenance": null
+      },
+      "historyCompacted": false
+    }
+  },
+  "training": {
+    "completed": [],
+    "history": [],
+    "priorLearning": false
+  },
+  "contract": null,
+  "wallet": 0,
+  "settlements": [],
+  "imported": false
+}

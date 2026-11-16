@@ -1,0 +1,105 @@
+# Simulation model — Connect the Clinic 0.4.0
+
+> Public export: private source locators and former hosting metadata have been removed. Historical implementation records are retained for context; see the project-root MIGRATION.md and qa/EXPORT_TEST_RESULTS.md for this export. Some historical review files referenced below are intentionally not included.
+
+
+## Scope and authority
+
+The engine is original, dependency-free JavaScript. `createGame`, `dispatch`, `derive`, `createEvidence` and `validateSave` are the authoritative domain API. The interface sends actions; it never writes service success, fault repair, completion, guide charges or payment. The same technical evaluator serves training, client play, demonstration and changed examples. Demonstrations are marked `trainer-demo` and cannot satisfy practice checkpoints.
+
+A campaign contains separate immutable-mode attempts, one clinic contract and one settlement identity. The initial scene is free bootcamp. Training now has three explicit derived kinds: bootcamp, teacher-selected full-clinic practice, and delivered replay. The first client job and full-clinic practice both start empty: the player chooses actual device instances, powers them, attaches needed interfaces, wires named Ethernet ports, associates the nurse radio, enables shared services, tests, repairs and explains. The same evaluator serves these attempts.
+
+## Devices and actual connectivity
+
+The catalog specifies device capabilities, Ethernet port counts, Wi-Fi, portable status and supported attachments. Four/eight-port switches expose exactly four/eight Ethernet ports. The access point has one Ethernet uplink and a radio. Laptop/tablet Ethernet exists only while the explicit adapter is attached. Detaching it removes cables using that port. Sensor docks are a distinct capability and cannot supply Ethernet.
+
+Connectivity traverses powered Ethernet cables and associated radios. Only switches and the access point forward between their interfaces: a desktop or laptop cannot accidentally become a bridge. Device art/coordinates do not connect anything. Named clinic rooms A and B supply a deliberately simplified nurse Wi-Fi coverage predicate, and the AP must itself be inside the clinic. Ethernet edges conduct only when both endpoints are at clinic locations. The off-site home location is offline; retaining a cable or radio association while moving a device home cannot supply a clinic service. The engine preserves these endpoint records and reports the real current failure rather than silently moving or reconnecting equipment. All devices must be powered, including bridge devices. There is no distance, WAN, radio propagation, channel interference, roaming timing, rate control, packet loss, switch-learning or spanning-tree model.
+
+Client addresses are static in `10.40.10.0/24`; the server defaults to `.10`, reception `.20`, and the nurse inherits `10.40.20.30`. The address/mask operation rejects malformed text and noncontiguous masks, while valid but unsuitable addresses are accepted so diagnosis has something meaningful to explain. IPv4 masks are calculated bitwise, not by comparing a fixed number of written octets. `/1` through `/30` host masks are accepted by the teaching controls. Network/broadcast host addresses, duplicate active connected addresses, addresses outside the scenario subnet and asymmetric on-link decisions have separate failure causes. Different masks are not universally rejected: if both peers still regard each other as on-link and their addresses are in the brief's range, communication can work.
+
+No router, gateway, DHCP, DNS, Internet, NAT, VLAN or real authentication service exists in this first model. They are neither secretly required nor fabricated by a button. A routing mission is deferred until the first clinic is reviewed.
+
+## Diagnostics and truth
+
+The diagnostic order is role/capability, device power, physical/radio path, address validity/reachability, service enabled and application authorization. Expected denial counts as a successful restriction check only when all earlier prerequisites work. A powered-off host cannot prove that the outsider is denied access by policy.
+
+Each recorded observation has a stable ID, test ID, actual finding, path, source/principal, tested technical revision and origin. Relevant technical mutations make prior observations stale. Derived current checks are labelled separately from recorded tests. A final suite checks reception, nurse, both named nurse-room contexts, required restrictions and submit-only intake from a single snapshot. Those room contexts are `engine-check`; the engine does not pretend that the student physically moved through both rooms.
+
+The inherited nurse configuration is seeded once per attempt. Fault provenance retains the initial profile, actual configuration changes and genuine player nurse-test failures. Room scenario checks cannot manufacture a player's pre-repair observation. Early correction is allowed and exported honestly. A replacement inherits role configuration/history; removing the role cannot satisfy it.
+
+The new station 2 changed example begins with a valid nurse address and an unplugged AP Ethernet uplink. It records a different fault identity, `fault.ap.unplugged-uplink`, with setup disconnection provenance. An eligible baseline is a player nurse `PORT_DISCONNECTED` observation while that uplink is absent and the switch-to-host path is present. Completion then needs a real player AP-to-switch reconnection after the observation, a passing player nurse retest at the current technical revision through that cable, and a submitted repair explanation or pending oral arrangement. Either cable direction and any available switch port work. IP changes do not create missing physical edges. Demonstration actions, unrelated faults and stale passes cannot complete the transfer. The explanation is preserved without semantic grading.
+
+Current diagnostics distinguish an AP/nurse outside radio coverage (`OUTSIDE_COVERAGE`) from a wired source, records host or switch outside the clinic (`OUTSIDE_CLINIC`). Incomplete physical paths have no successful `pathIds`. A whole-clinic physical failure also moves current learning focus back to connection diagnosis.
+
+## Wearable and access
+
+Wearable collection creates seven synthetic day-token IDs at home. Return, a compatible sensor-dock handoff to the current nurse companion and authorized upload are distinct operations. The model deliberately compresses a week; it does not model medical values, clinical accuracy, batteries, emergency alerts or continuous home connectivity. Server receipts are idempotent by marker ID and persist after later outages. Current intake readiness is independently tested.
+
+Two responsible permission matrices pass: separate reception/nurse responsibilities, and nurse-also-books. Both preserve reception booking-only and monitor-transfer submit-only access while denying the outsider. Broad access and deny-all are available to explore their different consequences, but cannot satisfy the brief. Changing policy makes existing privacy reasoning require review. Written explanations are retained verbatim; an explicit oral arrangement remains pending teacher conversation. Presence is not scored for quality.
+
+## Teaching and business state
+
+Each bootcamp station uses a practice fixture followed by a changed example (`192.168.50.0/24` then `192.168.70.0/24`). Station 2 teaches the incorrect static IPv4 setting first, then transfers diagnosis to the missing physical uplink with an already-valid address. It requires actual relevant player actions and current results, not a Next button or demonstration flag. After six checkpoints, a separate clinic attempt can begin. A labelled teacher-directed prior-learning route is recorded without inventing bootcamp history. Existing 0.3 address-transfer saves keep their original task and checkpoint provenance; they are explicitly labelled legacy address transfer and never gain physical-uplink evidence retroactively.
+
+`derive().learningFocus` owns the current stage, display title, two or three existing I-can goal IDs, and next action. Whole-clinic selection follows actual unmet equipment, physical path, address, access, marker, fresh-test and reasoning requirements. The stage and goals are teaching prompts, not detected understanding. The complete list of stable stage IDs is in `ENGINE_API.md`.
+
+Accepted contract terms are copied into the contract: gross fee 120 fictional credits; one reservation of 5 credits and 3 additional simulated consultation minutes per guide section; cap 15/9. No wall clock runs and no upfront cash is needed. Each grant includes every article/tier/reopen. Exact quote tokens reject stale actions without charging. Guide actions alter evidence/ledger revisions, not technical revisions.
+
+Successful handover reruns current checks and freezes the delivery, current explanations, accepted fee, actual grants/costs and net fee together. All later guide review is free, including before settlement. Payment uses the frozen cost basis and occurs once. Active reset creates another client attempt under the same logical contract/grants. A delivered replay is a free training clone with provenance, preserving the original delivery/settlement.
+
+`START_CLINIC_PRACTICE` opens a separate empty clinic at the same clinic network and with the same ordinary fault, service, permission and marker rules. Its teacher selection is a local classroom route, not authenticated access control. Guide support is free, gross/net income and consultation charges are zero, and practice cannot hand over or settle a client contract. It also cannot award bootcamp checkpoints. `RETURN_TO_CLIENT` resumes the untouched paid attempt and ledger. Both retry and reset preserve the practice kind and the existing client. All training kinds, including an unpaid delivered replay, must return to the client before settlement. There is no grade, mastery, teacher-signoff or live Evidence Map write.
+
+Readable evidence begins with a concise teacher overview of mode/attempt, current requirements, actual policy, recorded failure/action/retest and unresolved oral items. Full technical facts and action/test history follow. The new transfer's actual failure, cable repair, passing retest and unchanged explanation are frozen into the campaign checkpoint when advancing; JSON and text retain them during later stations, client work and source-attempt archiving. Oral items remain pending teacher conversation. The active attempt's reasoning and historic checkpoint reasoning are distinguished. Raw unsaved draft rescue remains separate from submitted evidence.
+
+## Persistence boundary and bounded history
+
+The root persistence adapter owns browser storage and cross-tab locking. The engine accepts progress JSON up to 1 MiB, validates schema, identities, catalogs, roles, cables/port occupancy, addresses, attachments, marker stage consistency, observation bounds, training provenance and fee/settlement consistency before returning a replacement state. Current recorded observation outcomes are recomputed on restore. Unknown success flags do not affect derived readiness. Files cannot execute HTML/scripts; the UI must still render text as text.
+
+The engine retains at most 400 events and 180 observations per attempt. Observations referenced by phone messages and fault milestones are pinned. Link-transfer seed/repair events, endpoint-choice witnesses, the latest submitted repair explanation, model-update provenance and retained diagnostic events are protected during event compaction. It retains the newest 14 attempts plus active/current-client/delivery references. Older training provenance is explicitly marked archived; at most 24 detailed practice checkpoints are retained, with a summarized count thereafter. The newest physical-uplink checkpoint is protected alongside the original station checkpoints. Long address-change history retains its first change and latest 59. All compaction is labelled; this is not a complete replay log. Critical state, fault provenance, contract grants, retained learner reasoning and immutable delivery remain intact. Free retries were stress-tested for 150 consecutive resets without producing an unimportable state.
+
+The progress schema remains 1. New fixture/mode constraints and cable-witness event/order validation strengthen the existing import boundary. Original 0.3 in-progress transfer, completed bootcamp and frozen delivery fixtures are tested. The new home-boundary rule also has a narrow historical compatibility path: an old current observation that matches the original spatial rule but changes under the new rule is retained as stale after an explicit technical/evidence revision and `MODEL_UPDATE` event. The optional `modelUpdate` view explains that change. Devices, cables, associations, learner actions and wording are not silently repaired. A second reload does not repeat the update. Original 0.3 frozen deliveries are validated against their recorded historical spatial rule and remain byte-identical; all current evaluations use clinic-only links. This preserves historical facts without presenting an old off-site pass as a current success.
+
+Local evidence remains editable. Validation protects consistency and recoverability; it is not a tamper-proof assessment or anti-cheat system. The app must make device/browser/origin, private browsing, shared profile and manual backup limitations visible.
+
+## Verification performed for revision 0.4
+
+Feature-author checks in Linux Node.js v24.22.1:
+
+- `node --test tests/simulation/engine.test.js` — **40/40 passed** after initial 0.4 implementation.
+- `node --test tests/simulation/engine.test.js tests/simulation/revision04.test.js` — **49/49 passed** after the spatial rule was corrected, before adding its final explicit boundary regression.
+- `node --test tests/simulation/revision04.test.js` — **10/10 passed** on the final production code, including alternate free switch ports, intermediate transfer reload/reset, original 0.3 completed/frozen state, unpaid settlement rejection in all training kinds, focus precedence, damaged fixture/witness rejection and the home-boundary case for nurse/AP/records/switch/reception.
+
+An independent genuine 0.3 off-site-AP delivery fixture was also exercised against the final importer: current nurse failure and stale earlier observations, unchanged saved device locations, byte-identical frozen delivery, labelled model-update and a valid second reload. The independent QA agent owns that fixture and final regression.
+
+The independent final `npm test` gate reported **118/118 passed**, zero failed/skipped/cancelled, covering simulation, integration and QA suites. This is source/model/adapter evidence, not a published-browser or classroom claim. Browser recovery, focus/accessibility, the actual school Windows environment and the beginner timing pilot remain separately observed gates owned by the lead and reviewer.
+
+## Historical 0.3 verification record
+
+`node --test tests/simulation/engine.test.js` — **40 tests passed, 0 failed**, Linux Node.js in this development workspace. Both full equipment routes, broken links/address/capability/access cases, same-engine bootcamp, collection/transfer/receipt, truthful repair/history, guide ledger, frozen payment, malformed save rejection and bounded retry history are covered. These are domain tests, not browser or classroom validation. Browser accessibility, actual school Windows performance/storage/download rules, teacher walkthrough and student pilot require separate evidence.
+
+## Independent QA correction record
+
+The independent agent found that count-only retention could produce a progress file larger than its own 1 MiB import limit. A repeated-diagnostics/retry regression reproduced it. Retention now checks serialized UTF-8 bytes, removes older optional attempts while preserving active/client/delivery references and practice checkpoint summaries, and compacts repetitive observation/event logs if required. An action is rejected atomically if its resulting state still exceeds the limit. The root persistence adapter also guards its write size. This fixes a real self-restore defect; “150 retries passed” alone had not covered diagnostic-heavy attempts.
+
+The same review identified weak validation around sequence counters, duplicate event/grant IDs, dangling observation references, current observation identities, unsupported training-completion flags and disagreements inside a frozen delivery. These are now checked against their related domain facts. Import remains editable local evidence; these checks establish internal consistency, not authenticity.
+
+A nurse-bookings probe was added so the two responsible policies have an observable consequence in a service test: separate responsibilities denies that job to the nurse; nurse-also-books permits it. Both require a healthy technical path. Tests use diagnostic-suite version 2; earlier frozen evidence retains its historical suite.
+
+After these corrections, the combined command `node --test tests/simulation/engine.test.js tests/qa/adversarial.test.js` passed **67/67 tests**: 40 feature-author tests and 27 independently authored adversarial tests. The independent agent owns its acceptance report and retest record. Browser and school-environment limits are unchanged.
+
+A further independent regression covered the normal observed-failure path followed by delivery and free replay. Replays previously cleared observations but retained remapped fault-observation references, which the stronger importer correctly rejected. Replay now records the original delivery and original fault observation IDs as **source provenance**, starts its own observation/configuration-change history empty, and leaves the frozen client evidence untouched. The updated combined suite passes **68/68** tests (40 author, 28 independent), including reload and settlement after this replay path.
+
+
+## Guided first connection — revision 0.6
+
+The new lesson is a separate training kind (`guided-connection`, fixture `fixture.guided.connection.001`, lesson `lesson.connection.001`) before independent equipment selection. The application opts into it for new campaigns with `createGame({guidedIntro:true})`; default engine creation remains compatible with prior independent-bootcamp consumers. Valid prior saves resume their actual state.
+
+Trainer preparation uses ordinary model actions with `mission-setup` origin: powered reception desktop, powered switch/server, enabled services, valid local addresses and permissions, plus the existing server cable. The student must create and test a real path. The derived lesson advances from actual player probes and cables, never from a narrative button. Disconnection must remove a cable on a freshly tested path; the resulting state must be tested before another technical change to claim the experiment observation. A repair followed by a current test establishes service restoration. If another valid route remains, the actual passing observation is retained and no repair is invented.
+
+The short reflection is the guided attempt's own repair explanation/oral request. It cannot overwrite independent/client wording. A repeated unchanged test leaves the reflection valid; changing the setup requires another confirmed result and reviewed explanation context. Explanation presence is not a quality judgement. The module awards no independent bootcamp checkpoint, money, mastery or IB grade.
+
+Opening guided help from existing work preserves a return target, client ledger, reservations, decisions and explanations. Retry preserves that original target. Explicit bypass returns without guided completion. A completed guided record is preserved against ordinary technical edits; opening a new lesson permits further experimentation. The exact actions and view fields are in `ENGINE_API.md`.
+
+Save validation recomputes guided milestone observations from bounded network witnesses and checks event origin, identity, order and actual disconnection. It preserves at most four completed guided attempts plus the current lesson, protecting their critical observations/events and the active saved return target during compaction. Later teacher evidence includes those retained guided records separately from independent practice. Local files remain editable evidence, not authenticated assessment records.
+
+Engine-author checks: **12/12** guided simulation cases and **12/12** persistence cases passed in the development Node runtime. The retention case includes 430 hint events, 185 repeated probes, 20 later retries and replacement of the oldest guided summary after more than four completions. These figures describe exercised retention cases, not expected student behavior or measured learning. The real 0.5 delivery restore retains its source attempt, contract and wallet. Whole-interface, publication, school Windows and unfamiliar-learner results belong to their separate observed records.
