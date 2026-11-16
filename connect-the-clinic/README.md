@@ -38,6 +38,7 @@ Select **Find reception’s port**. Choose reception’s Ethernet socket and a f
 
 ## For the teacher and future authors
 
+- [Gameplay research and proposed first-client redesign](docs/research/gameplay-review-2026-11-16/README.md): the 16 November review of Aspire, the current experience and a more substantial Opening Shift. This is a design handoff; the live game is still 0.6.0.
 - [Teacher guide](docs/TEACHER_GUIDE.md): lesson sequence, expected paths, privacy choices, evidence and recovery.
 - [School pilot checklist](qa/SCHOOL_PILOT.md): teacher walkthrough and a small student pilot.
 - [Shared contract](CONTRACT.md), [model](docs/MODEL.md) and [engine API](docs/ENGINE_API.md): authoritative state, actions, rules and deliberate simplifications.
