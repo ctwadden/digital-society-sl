@@ -1,13 +1,14 @@
 /* Original local persistence adapter. The engine validates state; this module only stores it.
  * An exclusive Web Lock is held for the entire writable tab lifetime, including read,
  * mutation, revision check and write. Unsupported locks => explicitly memory-only mode. */
-const PREFIX = 'riverbend.clinic.v03.';
-const CURRENT = PREFIX + 'snapshot';
-const GOOD = PREFIX + 'last-good';
-const LOCK = PREFIX + 'writer';
-const CHANNEL = PREFIX + 'coordination';
-
-export async function createPersistence({createGame, dispatch, validateSave, onChange=()=>{}}) {
+export async function createPersistence({createGame, dispatch, validateSave, onChange=()=>{}, namespace='riverbend.clinic.v03.'}) {
+  // Each separately versioned mission keeps its own snapshot, backup and tab lock.
+  // The default is unchanged so older saved clinic campaigns still resume intact.
+  if(typeof namespace!=='string' || !/^[a-z0-9.-]{1,80}\.$/.test(namespace))throw new Error('Invalid game-save namespace.');
+  const CURRENT = namespace + 'snapshot';
+  const GOOD = namespace + 'last-good';
+  const LOCK = namespace + 'writer';
+  const CHANNEL = namespace + 'coordination';
   let state = createGame();
   let status = {mode:'starting', label:'Checking local save…', detail:''};
   let writer = false, releaseLock = null, lastStamp = null, corrupt = false;
@@ -120,6 +121,25 @@ export async function createPersistence({createGame, dispatch, validateSave, onC
   addEventListener('pagehide',onPageHide);
   addEventListener('pageshow',onPageShow);
 
+  // Check the held snapshot before replacing in-memory state or its backup.
+  // A storage event can arrive late; the exact stamp check still prevents a
+  // conflicting import/recovery/clear from reporting an unsaved replacement.
+  function preflightMutation() {
+    if(!writer || corrupt)return null;
+    try {
+      const current=localStorage.getItem(CURRENT), disk=current?decode(current):null;
+      if((current && (!disk?.valid || disk.stamp!==lastStamp)) || (!current && lastStamp!==null)) {
+        writer=false;releaseLock?.();releaseLock=null;
+        setStatus('readonly','Save conflict — action not applied','Download your in-memory work or take control to load the latest save.');
+        return {state,accepted:false,code:'SAVE_CONFLICT',message:status.detail};
+      }
+    }catch {
+      writer=false;releaseLock?.();releaseLock=null;
+      setStatus('memory','Playing in memory — not saved','Browser storage can no longer be read. Your current work remains in memory; download progress before closing this page.');
+    }
+    return null;
+  }
+
   return {
     getState:()=>state,
     getStatus:()=>({...status}),
@@ -127,19 +147,7 @@ export async function createPersistence({createGame, dispatch, validateSave, onC
       if(status.mode==='readonly')return {state,accepted:false,code:'TAB_READ_ONLY',message:'Another tab controls this saved game. Take control before changing it.'};
       if(status.mode==='starting')return {state,accepted:false,code:'SAVE_RECONNECTING',message:'The browser is reconnecting local progress. Try the action again when the save status is ready.'};
       // Recheck within the lock before even evaluating a mutation.
-      if(writer && !corrupt){
-        try{
-          const current=localStorage.getItem(CURRENT), disk=current?decode(current):null;
-          if((current && (!disk?.valid || disk.stamp!==lastStamp)) || (!current && lastStamp!==null)){
-            writer=false;releaseLock?.();releaseLock=null;
-            setStatus('readonly','Save conflict — action not applied','Download your in-memory work or take control to load the latest save.');
-            return {state,accepted:false,code:'SAVE_CONFLICT',message:status.detail};
-          }
-        }catch{
-          writer=false;releaseLock?.();releaseLock=null;
-          setStatus('memory','Playing in memory — not saved','Browser storage can no longer be read. Your current work remains in memory; download progress before closing this page.');
-        }
-      }
+      const conflict=preflightMutation();if(conflict)return conflict;
       const result=dispatch(state,action);
       if(result.accepted){state=result.state;persist();notify();}
       return result;
@@ -149,6 +157,7 @@ export async function createPersistence({createGame, dispatch, validateSave, onC
       if(status.mode==='readonly')return {accepted:false,message:'Take control before importing progress.'};
       const checked=validateSave(raw);
       if(!checked.valid)return {accepted:false,message:checked.error||'Invalid progress file. Your current attempt is unchanged.'};
+      const conflict=preflightMutation();if(conflict)return conflict;
       if(writer){
         const current=safeRead(CURRENT);
         if(current && decode(current).valid){try{localStorage.setItem(GOOD,current);}catch{}}
@@ -161,6 +170,7 @@ export async function createPersistence({createGame, dispatch, validateSave, onC
     async recover() {
       if(status.mode==='starting')return {accepted:false,code:'SAVE_RECONNECTING',message:'Local progress is reconnecting. Wait for the save status to be ready, then retry recovery. Your current work is unchanged.'};
       if(status.mode==='readonly')return {accepted:false,message:'Take control before restoring a backup.'};
+      const conflict=preflightMutation();if(conflict)return conflict;
       const backup=decode(safeRead(GOOD));
       if(!backup.valid)return {accepted:false,message:'No valid backup is available. You can still export the in-memory attempt.'};
       state=backup.state;
@@ -180,6 +190,7 @@ export async function createPersistence({createGame, dispatch, validateSave, onC
     async clear() {
       if(status.mode==='starting')return {accepted:false,code:'SAVE_RECONNECTING',message:'Local progress is reconnecting. Wait for the save status to be ready, then retry clearing. Your current work is unchanged.'};
       if(status.mode==='readonly')return {accepted:false,message:'Take control before clearing this game.'};
+      const conflict=preflightMutation();if(conflict)return conflict;
       if(!writer)return {accepted:false,message:'Local storage is unavailable in this mode, so the saved campaign could not be cleared. Export your work; use the browser’s site-data controls to remove any old local copy.'};
       // Keep the existing in-memory campaign until both saved copies are removed and verified.
       let currentRemoved=false;

@@ -1,0 +1,72 @@
+import {createShift, dispatchShift, deriveShift, validateShiftSave, createShiftEvidence} from './engine.js';
+import {createPersistence} from '../persistence.js';
+import {mountOpeningUI} from './ui.js';
+
+const BUILD_VERSION='0.7.0-review';
+const root=document.querySelector('#app');
+let ui;
+
+function download(data, type, filename) {
+  const url=URL.createObjectURL(new Blob([data],{type}));
+  const anchor=document.createElement('a');
+  anchor.href=url;anchor.download=filename;anchor.hidden=true;
+  document.body.append(anchor);anchor.click();anchor.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),30000);
+}
+
+try {
+  const params=new URL(location.href).searchParams;
+  const initialFixture=params.get('fixture')==='B'?'B':'A';
+  const store=await createPersistence({
+    namespace:'riverbend.clinic.opening.v1.',
+    createGame:()=>createShift({fixture:initialFixture}),
+    dispatch:dispatchShift,
+    validateSave:validateShiftSave,
+    onChange:()=>ui?.render()
+  });
+  const getView=()=>({...deriveShift(store.getState()),storage:store.getStatus(),buildVersion:BUILD_VERSION});
+  const report=result=>{
+    ui?.render();ui?.showStatus(result.message||'Updated.',result.accepted?'info':'error');
+    return result;
+  };
+  ui=mountOpeningUI(root,{
+    getView,
+    send:async action=>report(await store.send(action)),
+    onExport:async (format,draft)=>{
+      const state=store.getState();
+      const id=String(state.campaignId||'shift').replace(/[^a-zA-Z0-9_-]/g,'-');
+      if(format==='progress')download(JSON.stringify(state,null,2),'application/json',`opening-shift-progress-${id}.json`);
+      else if(format==='draft')download(typeof draft==='string'?draft:JSON.stringify(draft??{},null,2),'text/plain;charset=utf-8',`opening-shift-UNSUBMITTED-drafts-${id}.txt`);
+      else {
+        const evidence=createShiftEvidence(state);
+        if(format==='json')download(JSON.stringify(evidence.json,null,2),'application/json',`opening-shift-evidence-${id}.json`);
+        else download(evidence.text,'text/plain;charset=utf-8',`opening-shift-evidence-${id}.txt`);
+      }
+      const result={accepted:true,message:'Download prepared. Check your browser downloads; school policies determine where the file is saved.'};
+      ui?.showStatus(result.message,'info');return result;
+    },
+    onImport:async input=>{
+      try {
+        if(!input)return report({accepted:false,message:'Choose an Opening Shift progress file or paste its JSON. Current work is unchanged.'});
+        if(typeof input!=='string' && input.size>1048576)return report({accepted:false,message:'Progress files must be under 1 MiB. Current work is unchanged.'});
+        const raw=typeof input==='string'?input:await input.text();
+        if(new TextEncoder().encode(raw).length>1048576)return report({accepted:false,message:'Progress files must be under 1 MiB. Current work is unchanged.'});
+        return report(await store.importProgress(raw));
+      }catch{return report({accepted:false,message:'That progress file could not be read. Current work is unchanged.'});}
+    },
+    onReset:async()=>report(await store.send({type:'RESET_SHIFT'})),
+    onClear:async()=>report(await store.clear()),
+    onTakeControl:async()=>report(await store.takeControl()),
+    onRecover:async()=>report(await store.recover())
+  });
+  ui.render();
+}catch(error){
+  root.replaceChildren();
+  const main=document.createElement('main');main.className='loading';
+  const heading=document.createElement('h1');heading.textContent='Opening Shift could not open';
+  const info=document.createElement('p');info.textContent='Reload this page. Keep any downloaded progress file if the problem continues.';
+  const detail=document.createElement('pre');detail.textContent=String(error?.message||error);
+  const legacy=document.createElement('a');legacy.href='./index.html';legacy.textContent='Open the preserved bootcamp and earlier clinic';
+  main.append(heading,info,detail,legacy);root.append(main);
+  console.error(error);
+}
