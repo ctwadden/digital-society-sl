@@ -11,7 +11,7 @@ Opening Shift is a narrower, more substantial first independent job. It does not
 
 ## Preparation and first five minutes
 
-Use the existing bootcamp to teach the physical path and static-address task before releasing students into independent work. Opening Shift also provides **Free rehearsal** and the **How-to guide**. Rehearsal is self-directed practice, not a claim that a student has been taught or mastered every concept. The address guide explains `/24` using a different network from the client job.
+The integrated 0.8 entry now teaches these skills through a six-lesson bootcamp before new students enter field work. Use the field header’s Bootcamp button to revisit training; see ../bootcamp/OPERATING_GUIDE.md. This guide describes the independent clinic job. The field job also provides **Free rehearsal** and the **How-to guide**. Rehearsal is self-directed practice, not a claim that a student has been taught or mastered every concept. The address guide explains `/24` using a different network from the client job.
 
 Start with **Review job**, read the client request, and choose **Begin client job**. Reception already works. The task is to make a mobile nurse workspace work in both exam rooms while preserving reception and making a justified booking-access decision. The phone's optional questions reveal mobility, typing and workflow needs. They do not reveal an unobserved hidden fault.
 

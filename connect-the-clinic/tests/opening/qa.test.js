@@ -437,6 +437,7 @@ test('QA-22 source audit only: native controls, escape/focus/keyboard hooks, att
   const ui=readFileSync(new URL('../../dist/opening/ui.js',import.meta.url),'utf8');
   const css=readFileSync(new URL('../../dist/opening/styles.css',import.meta.url),'utf8');
   const main=readFileSync(new URL('../../dist/opening/main.js',import.meta.url),'utf8');
+  const programme=readFileSync(new URL('../../dist/opening/programme.js',import.meta.url),'utf8');
   for(const text of ['role="dialog"','aria-modal="true"','role="tablist"','aria-live="polite"','Skip to clinic workbench','data-form="connect"','data-form="address"','Record inspection'])assert.ok(ui.includes(text),text);
   for(const text of ['focusSnapshot','restoreFocus','setSelectionRange','ArrowLeft','ArrowRight',"e.key==='Escape'","e.key==='Tab'",'getClientRects'])assert.ok(ui.includes(text),text);
   assert.ok(ui.includes('esc(value.text'));assert.ok(ui.includes('esc(saved.text'));assert.ok(ui.includes('esc(lastStatus.message)'));
@@ -444,8 +445,9 @@ test('QA-22 source audit only: native controls, escape/focus/keyboard hooks, att
   assert.ok(ui.includes('draft.needsReview||draft.base!==explanationBase(key)'));assert.ok(ui.includes('UNSUBMITTED DRAFT RESCUE'));
   assert.ok(ui.includes('sessionStorage.setItem(DRAFT_KEY'));assert.ok(ui.includes('draftStorageFailed'));
   assert.match(css,/@media\(prefers-reduced-motion:reduce\)/);assert.match(css,/focus-visible/);assert.match(css,/@media\(max-width:560px\)/);
-  assert.ok(main.includes("namespace:'riverbend.clinic.opening.v1.'"));assert.ok(main.includes("validateSave:validateShiftSave"));
-  assert.ok(main.includes('input.size>1048576'));assert.ok(main.includes('new TextEncoder().encode(raw).length>1048576'));
+  assert.ok(main.includes("namespace:'riverbend.clinic.opening.v1.'"));assert.ok(main.includes("validateSave:validateProgrammeSave"));
+  assert.ok(programme.includes('validateShiftSave(saved)')); // Earlier field files still use their authoritative validator.
+  assert.match(main,/input\.size\s*>\s*1048576/);assert.match(main,/new TextEncoder\(\)\.encode\(raw\)\.length\s*>\s*1048576/);
   assert.equal(OPENING_CONTENT.explanationPrompts.length,4);assert.equal(Object.keys(OPENING_CONTENT.goals).length,4);
   assert.ok(Object.values(OPENING_CONTENT.goals).every(stage=>stage.items.length>=2&&stage.items.length<=3));
 });
