@@ -63,6 +63,12 @@ The progress dialog delegates progress/evidence downloads, validated file import
 - The harness checked unplugged/wrong-address failures, then repair and fresh tests; completion followed only the engine's task conditions. It checked address draft retention across rerender, saved transfer explanation, all twelve material renderers, a rejected import handler retaining programme state, and listener cleanup on destruction.
 - The harness's first reflection assertion required an explicit rerender because its fake nodes do not emulate a browser's live input value. After correcting that harness limitation it passed. This was not a browser result or an import-validation test; the actual validator is tested by the lead and engine worker.
 
+## Published-review repairs
+
+The lead's live review found that repeated renders dropped heading focus after programme navigation and that a removed demonstration trigger had no focus fallback. The interface now preserves an already-focused screen heading and uses a stable mentor heading for phase changes. Nine focused lifecycle harness cases passed, alongside the original full UI/model route.
+
+Shared-model diagnostics use field role IDs. The training display aliases their known labels to Workstation, Mobile workstation and Service host, retaining the exact diagnostic codes, address/mask values and underlying observations. Learner explanations and exported evidence are not rewritten. The real wrong-subnet UI harness and four alias cases passed. The lead also excluded the hidden file input from full-width field styling after observing horizontal overflow; actual published recheck is recorded separately.
+
 ## Still to verify in the integrated build
 
 The lead owns actual published-browser checks: screen layout at 1366 × 768 and narrow/zoomed windows, keyboard and modal focus, native file import/export, damaged import recovery, draft remount, multiple tabs and field regression. Actual school Windows browsers, assistive technology and a small beginner pilot remain required before classroom readiness can be claimed. Hardware photographs, electrical assembly, cable pinouts, full router configuration, realistic radio physics and a professional network emulator are outside this bootcamp.

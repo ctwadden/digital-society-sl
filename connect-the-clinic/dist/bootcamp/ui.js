@@ -10,6 +10,20 @@ const option = (value, label, current, disabled = false) => `<option value='${es
 const roomName = id => id === 'location.exam-b' ? 'Room B' : id === 'location.exam-a' ? 'Room A' : 'Training bench';
 const testName = id => ({reception:'Workstation service',nurse:'Mobile workspace','nurse-bookings':'Mobile booking access',access:'Staff and outsider access',all:'All relevant services','access-reception':'Workstation workspace restriction','access-outsider-bookings':'Outsider bookings restriction','access-outsider-workspace':'Outsider workspace restriction'}[id] || id);
 
+// Display aliases for shared-model diagnostics only. Stored observations, codes,
+// replay and exact learner explanations retain their original contents.
+function diagnosticText(message) {
+  return String(message ?? '')
+    .replace(/\b(?:central records host|central host|records host)\b/gi, name => /^[A-Z]/.test(name) ? 'Service host' : 'service host')
+    .replace(/\bCentral records\b/g, 'Service host')
+    .replace(/\bMobile nurse\b/g, 'Mobile workstation')
+    .replace(/\bnurse device\b/g, 'mobile workstation')
+    .replace(/\bNurse device\b/g, 'Mobile workstation')
+    .replace(/\bnurse\b/g, 'mobile workstation')
+    .replace(/\bNurse\b/g, 'Mobile workstation')
+    .replace(/\bReception\b/g, 'Workstation');
+}
+
 export function mountBootcampUI(root, handlers) {
   const {getView, send, onExport, onImport, onReset, onClear, onTakeControl, onRecover} = handlers;
   let view = getView(), closed = false, busy = false, selectedDeviceId = null, selectedObservationId = null;
@@ -98,7 +112,9 @@ export function mountBootcampUI(root, handlers) {
     return true;
   }
   function showStatus(message, kind = 'info') {
-    feedback = {message:String(message || ''),kind:kind === true ? 'error' : kind === false ? 'info' : kind};
+    const raw = String(message || '');
+    const recordedDiagnostic = list(view.observations).some(o => o.message === raw);
+    feedback = {message:recordedDiagnostic ? diagnosticText(raw) : raw,kind:kind === true ? 'error' : kind === false ? 'info' : kind};
     const el = root.querySelector('#bc-live'); if (el) el.textContent = feedback.message;
     renderFeedback();
   }
@@ -218,7 +234,7 @@ export function mountBootcampUI(root, handlers) {
     const observation = list(view.observations).find(o => o.id === selectedObservationId) || view.observations?.[0];
     const source = device(observation?.sourceDeviceId);
     const elsewhere = source?.roleId === 'role.nurse' && observation.locationId !== source.locationId;
-    return `<section class='bc-bench-card'><div class='bc-card-top'><div><p class='bc-eyebrow'>${view.phase === 'demo' ? 'JO’S EXAMPLE BENCH' : 'YOUR TRAINING BENCH'}</p><h2>See the whole path.</h2></div><span class='bc-badge'>${view.phase === 'demo' ? 'DEMONSTRATION' : 'LOCAL NETWORK'}</span></div>${renderBench(view,{selectedDeviceId,selectedObservationId})}<div class='bc-legend'><span><i class='bc-line'></i>Installed Ethernet</span><span><i class='bc-line bc-dotted'></i>Wi-Fi association</span><span><i class='bc-line bc-tested'></i>Recorded test route</span></div><div class='bc-device-picks' aria-label='Inspect a device'>${list(view.devices).map(d => button('device',esc(deviceName(d)),`data-device-id='${esc(d.id)}' aria-pressed='${selectedDeviceId === d.id}'`,'bc-device-pick')).join('')}</div>${view.nurseDeviceId ? `<div class='bc-room-controls'><span>Mobile workstation: <strong>${esc(roomName(device(view.nurseDeviceId)?.locationId))}</strong></span><div>${['location.exam-a','location.exam-b'].map(id => button('move',esc(roomName(id)),`data-location-id='${id}' aria-pressed='${device(view.nurseDeviceId)?.locationId === id}' ${disabled(!can('MOVE_NURSE'))}`,'bc-outline')).join('')}</div></div>` : ''}${observation ? `<div class='bc-observation ${observation.pass && !observation.stale ? 'pass' : 'attention'}'><div><span class='bc-badge'>${observation.stale ? 'STALE TEST' : observation.pass ? 'TEST PASSED' : 'TEST NEEDS ATTENTION'}</span><strong>${esc(testName(observation.testId))}${source?.roleId === 'role.nurse' ? ' · '+esc(roomName(observation.locationId)) : ''}</strong></div><p>${esc(observation.message)}</p><small>${observation.origin === 'trainer' ? 'Jo’s demonstration' : 'Your recorded test'}${elsewhere ? ' · recorded in the other room; route is not drawn here' : ''}${observation.stale ? ' · the setup changed; test again' : ''}</small></div>` : '<p class=\'bc-bench-note\'>The lines show connections. Run a service test to find out whether the full route works.</p>'}<div data-bc-feedback></div>${networkCard()}${introMaterials()}</section>`;
+    return `<section class='bc-bench-card'><div class='bc-card-top'><div><p class='bc-eyebrow'>${view.phase === 'demo' ? 'JO’S EXAMPLE BENCH' : 'YOUR TRAINING BENCH'}</p><h2>See the whole path.</h2></div><span class='bc-badge'>${view.phase === 'demo' ? 'DEMONSTRATION' : 'LOCAL NETWORK'}</span></div>${renderBench(view,{selectedDeviceId,selectedObservationId})}<div class='bc-legend'><span><i class='bc-line'></i>Installed Ethernet</span><span><i class='bc-line bc-dotted'></i>Wi-Fi association</span><span><i class='bc-line bc-tested'></i>Recorded test route</span></div><div class='bc-device-picks' aria-label='Inspect a device'>${list(view.devices).map(d => button('device',esc(deviceName(d)),`data-device-id='${esc(d.id)}' aria-pressed='${selectedDeviceId === d.id}'`,'bc-device-pick')).join('')}</div>${view.nurseDeviceId ? `<div class='bc-room-controls'><span>Mobile workstation: <strong>${esc(roomName(device(view.nurseDeviceId)?.locationId))}</strong></span><div>${['location.exam-a','location.exam-b'].map(id => button('move',esc(roomName(id)),`data-location-id='${id}' aria-pressed='${device(view.nurseDeviceId)?.locationId === id}' ${disabled(!can('MOVE_NURSE'))}`,'bc-outline')).join('')}</div></div>` : ''}${observation ? `<div class='bc-observation ${observation.pass && !observation.stale ? 'pass' : 'attention'}'><div><span class='bc-badge'>${observation.stale ? 'STALE TEST' : observation.pass ? 'TEST PASSED' : 'TEST NEEDS ATTENTION'}</span><strong>${esc(testName(observation.testId))}${source?.roleId === 'role.nurse' ? ' · '+esc(roomName(observation.locationId)) : ''}</strong></div><p>${esc(diagnosticText(observation.message))}</p><small>${observation.origin === 'trainer' ? 'Jo’s demonstration' : 'Your recorded test'}${elsewhere ? ' · recorded in the other room; route is not drawn here' : ''}${observation.stale ? ' · the setup changed; test again' : ''}</small></div>` : '<p class=\'bc-bench-note\'>The lines show connections. Run a service test to find out whether the full route works.</p>'}<div data-bc-feedback></div>${networkCard()}${introMaterials()}</section>`;
   }
   function tabs() {
     const c = view.controls || {};
@@ -268,7 +284,7 @@ export function mountBootcampUI(root, handlers) {
     return panelHeader('A connection is not permission','Choose who needs each service, then test an allowed request and an intended denial.') + values.map(p => `<article class='bc-policy ${view.policy?.id === p.id ? 'current' : ''}'><h3>${esc(p.label)}</h3><p>${esc(descriptions[p.id] || p.description || '')}</p>${view.policy?.id === p.id ? '<span class=\'bc-badge\'>CURRENT</span>' : ''}${button('policy',view.policy?.id === p.id ? 'Keep this policy' : 'Choose this policy',`data-policy-id='${esc(p.id)}' ${disabled(!can('SET_PERMISSIONS'))}`,'bc-outline')}</article>`).join('') + button('probe','Test staff and outsiders',`data-test-id='all' ${disabled()}`,'bc-primary');
   }
   function testsPanel() {
-    return panelHeader('Test the result','A fresh test records what this setup can do. Read the reason before deciding what to change.') + `<div class='bc-test-buttons'>${view.workstationDeviceId ? button('probe','Run workstation test',`data-test-id='reception' ${disabled()}`,'bc-primary') : ''}${view.nurseDeviceId ? button('probe','Run mobile test here',`data-test-id='nurse' ${disabled()}`,'bc-primary') : ''}${view.controls?.access ? button('probe','Test staff and outsiders',`data-test-id='all' ${disabled()}`,'bc-outline') : ''}</div><ul class='bc-test-records'>${list(view.observations).slice(0,10).map(o => `<li><button type='button' class='bc-test-record ${o.stale ? 'stale' : o.pass ? 'pass' : 'attention'}' data-action='observation' data-observation-id='${esc(o.id)}' aria-pressed='${selectedObservationId === o.id}'><strong>${o.stale ? '↻ Stale' : o.pass ? '✓ Passed' : '! Needs attention'} · ${esc(testName(o.testId))}</strong><span>${esc(o.message)}</span><small>${o.origin === 'trainer' ? 'Jo’s demonstration' : 'Your test'}${o.locationId === 'location.exam-a' || o.locationId === 'location.exam-b' ? ' · '+esc(roomName(o.locationId)) : ''}</small></button></li>`).join('')}</ul>${!list(view.observations).length ? '<p class=\'bc-notice\'>No test has been recorded in this attempt.</p>' : ''}`;
+    return panelHeader('Test the result','A fresh test records what this setup can do. Read the reason before deciding what to change.') + `<div class='bc-test-buttons'>${view.workstationDeviceId ? button('probe','Run workstation test',`data-test-id='reception' ${disabled()}`,'bc-primary') : ''}${view.nurseDeviceId ? button('probe','Run mobile test here',`data-test-id='nurse' ${disabled()}`,'bc-primary') : ''}${view.controls?.access ? button('probe','Test staff and outsiders',`data-test-id='all' ${disabled()}`,'bc-outline') : ''}</div><ul class='bc-test-records'>${list(view.observations).slice(0,10).map(o => `<li><button type='button' class='bc-test-record ${o.stale ? 'stale' : o.pass ? 'pass' : 'attention'}' data-action='observation' data-observation-id='${esc(o.id)}' aria-pressed='${selectedObservationId === o.id}'><strong>${o.stale ? '↻ Stale' : o.pass ? '✓ Passed' : '! Needs attention'} · ${esc(testName(o.testId))}</strong><span>${esc(diagnosticText(o.message))}</span><small>${o.origin === 'trainer' ? 'Jo’s demonstration' : 'Your test'}${o.locationId === 'location.exam-a' || o.locationId === 'location.exam-b' ? ' · '+esc(roomName(o.locationId)) : ''}</small></button></li>`).join('')}</ul>${!list(view.observations).length ? '<p class=\'bc-notice\'>No test has been recorded in this attempt.</p>' : ''}`;
   }
   function reflectionPanel() {
     const saved = view.reflection || {}, draft = reflectionDraft(), value = draft || saved;
@@ -282,9 +298,13 @@ export function mountBootcampUI(root, handlers) {
     const body = ({kit:kitPanel,devices:devicesPanel,cables:cablesPanel,wireless:wirelessPanel,access:accessPanel,tests:testsPanel,reflection:reflectionPanel}[panel] || devicesPanel)();
     return `<section class='bc-tools'><nav class='bc-tool-tabs' role='tablist' aria-label='Training tools'>${t.map(([id,label]) => button('panel',esc(label),`data-panel='${id}' id='bc-tab-${id}' role='tab' aria-selected='${panel === id}' aria-controls='bc-tool-panel' tabindex='${panel === id ? 0 : -1}'`,'bc-tool-tab')).join('')}</nav><div class='bc-tool-panel' id='bc-tool-panel' role='tabpanel' aria-labelledby='bc-tab-${panel}'>${body}</div></section>`;
   }
+  function checkDetail(check) {
+    const observation = list(view.observations).find(o => check.detail === `${o.code}: ${o.message}`);
+    return observation ? `${observation.code}: ${diagnosticText(observation.message)}` : check.detail;
+  }
   function checks() {
     if (!['practice','complete'].includes(view.phase)) return '';
-    return `<section class='bc-checks'><h3>${view.phase === 'complete' ? 'Recorded task conditions' : 'What needs to work'}</h3><ul>${list(view.checks).map(check => `<li class='${check.met ? 'met' : ''}'><span aria-hidden='true'>${check.met ? '✓' : '○'}</span><div><strong>${esc(check.label)}</strong><small>${esc(check.detail)}</small></div></li>`).join('')}</ul>${view.phase === 'practice' ? button('finish','Record this lesson & continue →',disabled(!view.canComplete),'bc-primary bc-wide') : ''}<p class='bc-small'>Training task conditions are checked by the simulation. Understanding and explanation quality remain for teacher review.</p></section>`;
+    return `<section class='bc-checks'><h3>${view.phase === 'complete' ? 'Recorded task conditions' : 'What needs to work'}</h3><ul>${list(view.checks).map(check => `<li class='${check.met ? 'met' : ''}'><span aria-hidden='true'>${check.met ? '✓' : '○'}</span><div><strong>${esc(check.label)}</strong><small>${esc(checkDetail(check))}</small></div></li>`).join('')}</ul>${view.phase === 'practice' ? button('finish','Record this lesson & continue →',disabled(!view.canComplete),'bc-primary bc-wide') : ''}<p class='bc-small'>Training task conditions are checked by the simulation. Understanding and explanation quality remain for teacher review.</p></section>`;
   }
   function workspace() {
     if (view.phase === 'welcome') return welcome();
