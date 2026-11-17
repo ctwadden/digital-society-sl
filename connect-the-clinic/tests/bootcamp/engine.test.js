@@ -158,6 +158,26 @@ test('B4 free hints, exact reflections and trainer/player separation are present
   const evidence=createProgrammeEvidence(d.state);assert.equal(evidence.json.training.completionRecords.at(-1).reflection.text,text);assert.ok(evidence.text.includes(text));assert.equal(evidence.json.training.financialEffect.credits,0);assert.equal(evidence.json.field.wallet,0);assert.ok(evidence.json.training.demonstrations.every(r=>r.origin==='trainer'));assert.equal(evidence.json.field.current.playerObservations.length,0);
 });
 
+test('B4 readable evidence reports frozen choices, access consequences, room tests and the actual repaired fault',()=>{
+  const d=through(driver(),6,{alternate:true,policyId:'policy.nurse-also-books'}),completed=createProgrammeEvidence(d.state);
+  assert.match(completed.text,/service host = desktop, power on/);
+  assert.match(completed.text,/switch = 8-port switch, power on/);
+  assert.match(completed.text,/Applied workstation address 192\.168\.80\.47, mask 255\.255\.255\.0/);
+  assert.match(completed.text,/Nurse also books \(policy\.nurse-also-books\); explicit choice recorded/);
+  assert.match(completed.text,/nurse-bookings @ Exam room A: SERVICE_AVAILABLE; allowed; pass; current at completion/);
+  assert.match(completed.text,/access-outsider-workspace @ [^\n]+: ACCESS_DENIED; denied; pass; current at completion/);
+  for(const room of ['A','B'])assert.ok(completed.text.includes(`nurse @ Exam room ${room}: SERVICE_AVAILABLE; allowed; pass; current at completion`));
+  assert.match(completed.text,/Observed fault: PORT_DISCONNECTED by failed learner test; stale at completion \(before repair\)/);
+  assert.match(completed.text,/Recorded repair: access point eth1 ↔ switch eth4\. Latest required retests follow/);
+  // A new, still-broken attempt must not replace the frozen completed evidence.
+  open(d,'boot.transfer');const before=JSON.stringify(d.state),reopened=createProgrammeEvidence(d.state);
+  assert.equal(JSON.stringify(d.state),before);
+  assert.equal(reopened.text,completed.text);
+  assert.equal(reopened.json.training.current.reflection.text,'');
+  assert.equal(reopened.json.training.current.cables.some(c=>[c.fromDeviceId,c.toDeviceId].includes(d.training.apDeviceId)),false);
+  assert.deepEqual(reopened.json.training.completionRecords,completed.json.training.completionRecords);
+});
+
 test('B5 retries create new attempt IDs and retain completed training without altering field work',()=>{
   const d=through(driver(),2),field=JSON.stringify(d.state.field),completed=d.training.completedLessonIds.slice();d.boot({type:'START_LESSON',lessonId:'boot.cables'});d.boot({type:'START_PRACTICE'});const before=d.training.attemptId;link(d,d.training.serverDeviceId,1);d.boot({type:'RESTART_PRACTICE'});
   assert.notEqual(d.training.attemptId,before);assert.equal(d.training.cables.length,0);assert.deepEqual(d.training.completedLessonIds,completed);assert.equal(JSON.stringify(d.state.field),field);

@@ -129,9 +129,48 @@ export function validateProgrammeSave(raw){
 export function createProgrammeEvidence(state){
   const training=createBootcampEvidence(state.bootcamp),field=createShiftEvidence(state.field),view=deriveShift(state.field);
   const json={format:'riverbend-programme-evidence',schemaVersion:1,buildVersion:VERSION,campaignId:state.campaignId,imported:state.imported??false,importProvenance:state.importProvenance??'none',fieldStarted:state.fieldStarted,migrationSource:state.seed.origin,training:training.json,field:field.json,programmeActionLog:clone(state.actions),evidenceNotice:'Training, demonstrations and independent field evidence are distinct. Local action replay checks consistency, not identity or mastery.'};
+  const roles={'role.reception':'workstation','role.records':'service host','infra.switch':'switch','role.nurse':'mobile device','infra.ap':'access point'};
+  const kinds={desktop:'desktop',server:'server',switch4:'4-port switch',switch8:'8-port switch',laptop:'laptop','access-point':'wireless access point'};
+  const requiredTests={'boot.kit':[],'boot.cables':['reception'],'boot.address':['reception'],'boot.wireless':['nurse'],'boot.access':['reception','nurse','nurse-bookings','access-reception','access-outsider-bookings','access-outsider-workspace'],'boot.transfer':['nurse','reception']};
+  const trainingLines=[training.text.split('\n\n')[0],'Latest completed attempt per lesson; details are frozen at completion. Tests below are actual learner tests. Pass includes a required denial.',''];
+  for(const l of deriveBootcamp(state.bootcamp).lessons){
+    const record=training.json.completionRecords.filter(r=>r.lessonId===l.id).at(-1),demo=training.json.demonstrations.find(r=>r.lessonId===l.id);
+    trainingLines.push(`${l.title}: ${record?'practical task recorded':'not completed'}${demo?`; worked example ${demo.completed?'finished':'partly viewed'}`:''}.`);
+    if(!record)continue;
+    const device=roleId=>record.devices.find(d=>d.roleId===roleId);
+    const name=deviceId=>roles[record.devices.find(d=>d.id===deviceId)?.roleId]||deviceId;
+    const endpoint=(deviceId,portId)=>`${name(deviceId)} ${portId.startsWith(`${deviceId}.`)?portId.slice(deviceId.length+1):portId}`;
+    const cableText=c=>`${endpoint(c.fromDeviceId,c.fromPortId)} ↔ ${endpoint(c.toDeviceId,c.toPortId)}`;
+    if(l.id==='boot.kit')trainingLines.push(`  Selected equipment: ${record.devices.map(d=>`${roles[d.roleId]||d.roleId} = ${kinds[d.kind]||d.kind}, power ${d.powered?'on':'off'}`).join('; ')}.`);
+    if(l.id==='boot.cables')trainingLines.push(`  Connected: ${record.cables.map(cableText).join('; ')||'no cables recorded'}.`);
+    if(l.id==='boot.address'){
+      const workstation=device('role.reception'),server=device('role.records');
+      trainingLines.push(`  Applied workstation address ${workstation?.address||'not recorded'}, mask ${workstation?.mask||'not recorded'}; service host ${server?.address||'not recorded'}; supplied network ${record.network.cidr}.`);
+    }
+    if(l.id==='boot.wireless'){
+      const ap=device('infra.ap'),mobile=device('role.nurse'),uplink=record.cables.find(c=>c.fromDeviceId===ap?.id||c.toDeviceId===ap?.id);
+      trainingLines.push(`  At completion: ${kinds[mobile?.kind]||mobile?.kind||'mobile device'}, power ${mobile?.powered?'on':'off'}, associated with ${mobile?.wifiApId?name(mobile.wifiApId):'no access point'}; access point power ${ap?.powered?'on':'off'}. Uplink: ${uplink?cableText(uplink):'not recorded'}.`);
+    }
+    if(l.id==='boot.access')trainingLines.push(`  Access decision: ${view.policies.find(p=>p.id===record.policyId)?.label||record.policyId} (${record.policyId}); explicit choice ${record.policyDecision?'recorded':'not recorded'}.`);
+    if(l.id==='boot.transfer'){
+      const observed=record.repair.observed,change=record.repair.change,cable=record.cables.find(c=>c.id===change?.cableId);
+      trainingLines.push(`  Observed fault: ${observed?`${observed.reason} by ${observed.kind==='inspection'?'device inspection':'failed learner test'}; ${observed.technicalRevision===record.technicalRevision?'current':'stale'} at completion (before repair)`:'not recorded'}.`);
+      trainingLines.push(`  Recorded repair: ${cable?cableText(cable):'not recorded'}. Latest required retests follow.`);
+    }
+    const tests=new Map();
+    for(const o of record.observations){if(o.origin!=='learner'||!requiredTests[l.id].includes(o.testId))continue;const key=l.id==='boot.wireless'?`${o.testId}|${o.locationId}`:o.testId;tests.set(key,o);}
+    for(const o of tests.values()){
+      const room=view.locations.find(location=>location.id===o.locationId)?.label||o.locationId||'location not recorded';
+      const access=o.code==='SERVICE_AVAILABLE'?'allowed; ':o.code==='ACCESS_DENIED'?'denied; ':'';
+      trainingLines.push(`  ${o.testId} @ ${room}: ${o.code}; ${access}${o.pass?'pass':'needs attention'}; ${o.testedTechnicalRevision===record.technicalRevision?'current':'stale'} at completion.`);
+    }
+    trainingLines.push(`  Help: ${record.hints.length} hint levels opened; teacher review pending.`);
+  }
+  // Keep the learner's exact reflection and the existing evidence notices verbatim.
+  const readableTraining=trainingLines.join('\n')+training.text.slice(training.text.indexOf('\n\nEXACT TRANSFER EXPLANATION\n'));
   const latest=new Map();for(const o of view.observations){const key=`${o.testId}|${o.locationId}`;if(!latest.has(key))latest.set(key,o);}
   const failures=[...new Set(view.observations.filter(o=>!o.pass).map(o=>`${o.code}: ${o.message}`))];
-  const lines=['OPENING SHIFT — TRAINING AND FIELD REVIEW',`Campaign ${state.campaignId}. Import provenance: ${state.importProvenance??'none'}.`,state.seed.origin==='opening-0.7'?'Earlier field work was migrated without claiming new bootcamp completion.':'New programme: training and field have separate evidence.','',training.text,'','INDEPENDENT FIELD RECORD',state.fieldStarted?`${view.mode==='practice'?'Free field rehearsal':'Client job'} — ${view.phase}.`:'Independent field work has not started.',`Equipment choice: ${field.json.current.equipmentDecision?.itemId||'not recorded'}. Access policy: ${view.policy.label}; explicit decision ${view.policyDecision?'recorded':'not recorded'}.`,`Equipment allowance ${view.economy.allowance}; spent ${view.economy.spent}; unused ${view.economy.remaining}. Contractor fee ${view.economy.gross}; guidance ${view.economy.reserved}; simulated minutes ${view.economy.minutes}; campaign wallet ${view.economy.wallet}. Unused client funds are not earnings.`,`Field delivery: ${field.json.delivered?'frozen':'not recorded'}; settlement: ${field.json.settlement?'recorded once':'not recorded'}.`,'','LATEST ACTUAL FIELD TESTS BY CHECK AND ROOM'];
+  const lines=['OPENING SHIFT — TRAINING AND FIELD REVIEW',`Campaign ${state.campaignId}. Import provenance: ${state.importProvenance??'none'}.`,state.seed.origin==='opening-0.7'?'Earlier field work was migrated without claiming new bootcamp completion.':'New programme: training and field have separate evidence.','',readableTraining,'','INDEPENDENT FIELD RECORD',state.fieldStarted?`${view.mode==='practice'?'Free field rehearsal':'Client job'} — ${view.phase}.`:'Independent field work has not started.',`Equipment choice: ${field.json.current.equipmentDecision?.itemId||'not recorded'}. Access policy: ${view.policy.label}; explicit decision ${view.policyDecision?'recorded':'not recorded'}.`,`Equipment allowance ${view.economy.allowance}; spent ${view.economy.spent}; unused ${view.economy.remaining}. Contractor fee ${view.economy.gross}; guidance ${view.economy.reserved}; simulated minutes ${view.economy.minutes}; campaign wallet ${view.economy.wallet}. Unused client funds are not earnings.`,`Field delivery: ${field.json.delivered?'frozen':'not recorded'}; settlement: ${field.json.settlement?'recorded once':'not recorded'}.`,'','LATEST ACTUAL FIELD TESTS BY CHECK AND ROOM'];
   if(!latest.size)lines.push('No field player tests recorded.');
   for(const o of latest.values())lines.push(`${o.testId} at ${o.locationId}: ${o.code}; ${o.pass?'required result passed':'needs attention'}; ${o.stale?'stale':'current'}.`);
   if(failures.length)lines.push('','EARLIER OR CURRENT FIELD FAILURES',...failures);

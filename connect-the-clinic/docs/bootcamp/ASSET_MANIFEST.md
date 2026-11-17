@@ -54,7 +54,7 @@ All new CSS is scoped under `.bootcamp-app`. Dialogs have a labelled modal role,
 
 Unsubmitted address, mask, Wi-Fi and reflection drafts are keyed by programme campaign and training attempt and retained through ordinary rerenders. Accepted model actions remain separate. Draft backup uses session storage; failure is surfaced and a draft-rescue export remains available. Replacing progress or taking control marks surviving drafts for explicit review. Applying an address edit preserves a separate unapplied Wi-Fi choice.
 
-The progress dialog delegates progress/evidence downloads, validated file imports, recovery, current-practice reset and clearing to the programme adapter. Replacements have a review dialog. A rejected import remains in its dialog and retains the existing model. Header navigation preserves drafts before the lead's fresh-host remount.
+The progress dialog delegates progress/evidence downloads, validated file imports, recovery, current-practice reset and clearing to the programme adapter. Replacements have a review dialog. A rejected import remains in its dialog and retains the existing model. Its escaped error is visible inside the dialog and explicitly states that current progress is unchanged. Modal feedback is scoped to that dialog, cleared when another dialog opens or a retry starts, and rendered in a dedicated non-live container so the existing single live status region handles announcements. Updating feedback does not replace the dialog or its controls. Header navigation preserves drafts before the lead's fresh-host remount.
 
 ## Verification performed by the interface worker
 
@@ -68,6 +68,8 @@ The progress dialog delegates progress/evidence downloads, validated file import
 The lead's live review found that repeated renders dropped heading focus after programme navigation and that a removed demonstration trigger had no focus fallback. The interface now preserves an already-focused screen heading and uses a stable mentor heading for phase changes. Nine focused lifecycle harness cases passed, alongside the original full UI/model route.
 
 Shared-model diagnostics use field role IDs. The training display aliases their known labels to Workstation, Mobile workstation and Service host, retaining the exact diagnostic codes, address/mask values and underlying observations. Learner explanations and exported evidence are not rewritten. The real wrong-subnet UI harness and four alias cases passed. The lead also excluded the hidden file input from full-width field styling after observing horizontal overflow; actual published recheck is recorded separately.
+
+The lead's published review also found that rejected-import feedback was only visible behind the confirmation backdrop. A focused non-browser mounted-UI harness now verifies visible in-dialog rejection using malformed JSON and the real validator, unchanged programme state, retained Cancel/retry controls, no duplicated retry message, clearing on an unrelated dialog or close/reopen, HTML escaping and no additional live region. JavaScript syntax passed. This focused check does not claim browser focus or assistive-technology acceptance; those remain with the lead's live recheck.
 
 ## Still to verify in the integrated build
 

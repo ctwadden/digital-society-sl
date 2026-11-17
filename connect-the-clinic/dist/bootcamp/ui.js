@@ -116,17 +116,26 @@ export function mountBootcampUI(root, handlers) {
     const raw = view.phase === 'intro' && !view.demo?.available && original === 'Lesson opened. Watch the worked example, then try the task in a fresh setup.'
       ? 'Challenge opened. There is no solved demonstration. Observe the setup, make a relevant repair and test again.' : original;
     const recordedDiagnostic = list(view.observations).some(o => o.message === raw);
-    feedback = {message:recordedDiagnostic ? diagnosticText(raw) : raw,kind:kind === true ? 'error' : kind === false ? 'info' : kind};
+    const statusKind = kind === true ? 'error' : kind === false ? 'info' : kind;
+    const detail = recordedDiagnostic ? diagnosticText(raw) : raw;
+    feedback = {message:modal?.type === 'import' && statusKind === 'error'
+      ? `Import not applied. Current progress is unchanged. ${detail}` : detail,kind:statusKind};
+    if (modal) modal.feedback = feedback;
     const el = root.querySelector('#bc-live'); if (el) el.textContent = feedback.message;
     renderFeedback();
   }
+  function feedbackHTML(item) {
+    return item ? `<div class='bc-feedback ${esc(item.kind)}'><span aria-hidden='true'>${item.kind === 'error' ? '!' : '↳'}</span><p>${esc(item.message)}</p></div>` : '';
+  }
   function renderFeedback() {
     const el = root.querySelector('[data-bc-feedback]');
-    if (el) el.innerHTML = feedback ? `<div class='bc-feedback ${esc(feedback.kind)}'><span aria-hidden='true'>${feedback.kind === 'error' ? '!' : '↳'}</span><p>${esc(feedback.message)}</p></div>` : '';
+    if (el) el.innerHTML = feedbackHTML(feedback);
+    const dialogFeedback = root.querySelector('[data-bc-modal-feedback]');
+    if (dialogFeedback) dialogFeedback.innerHTML = feedbackHTML(modal?.feedback);
   }
   function openModal(type, extras = {}) {
     if (!modal) returnFocus = focusSnapshot();
-    modal = {type,...extras}; renderModal(); setBackgroundInert(true);
+    modal = {type,...extras,feedback:null}; renderModal(); setBackgroundInert(true);
     root.querySelector('#bc-dialog-title')?.focus({preventScroll:true});
   }
   function closeModal() {
@@ -166,6 +175,7 @@ export function mountBootcampUI(root, handlers) {
   const network = (action, after) => boot({type:'NETWORK_ACTION',action},after);
   async function replacement(handler) {
     if (busy || readOnly() && modal?.type !== 'takeover') return;
+    if (modal) modal.feedback = null;
     const held = focusSnapshot(); busy = true; render();
     try {
       const result = await handler();
@@ -350,7 +360,7 @@ export function mountBootcampUI(root, handlers) {
       case 'replace-lesson': title = 'Open a different training task?'; body = '<p>The active practice is replaced by a fresh lesson. Earlier completed records and field work remain preserved. Save or download any explanation draft you want to keep.</p>'; footer = button('apply-lesson',`Open ${esc(shortTitle(modal.lessonId))}`,disabled(false,true),'bc-primary'); break;
       case 'replace-demo': title = 'Watch a fresh worked example?'; body = '<p>The current practice bench is replaced by Jo’s demonstration. It earns no learner credit. Your old drafts and completed training records remain separate.</p>'; footer = button('apply-demo','Watch the example',disabled(false,true),'bc-primary'); break;
     }
-    update('modal',`<div class='bc-modal-backdrop'><section class='bc-dialog ${modal.type === 'materials' ? 'bc-dialog-wide' : ''}' role='dialog' aria-modal='true' aria-labelledby='bc-dialog-title'><header><h2 id='bc-dialog-title' tabindex='-1'>${esc(title)}</h2>${button('close','×',"aria-label='Close dialog'",'bc-close')}</header><div class='bc-dialog-body'>${body}</div><footer>${button('close',destructive ? 'Cancel' : 'Close','','bc-outline')}${footer}</footer></section></div>`);
+    update('modal',`<div class='bc-modal-backdrop'><section class='bc-dialog ${modal.type === 'materials' ? 'bc-dialog-wide' : ''}' role='dialog' aria-modal='true' aria-labelledby='bc-dialog-title'><header><h2 id='bc-dialog-title' tabindex='-1'>${esc(title)}</h2>${button('close','×',"aria-label='Close dialog'",'bc-close')}</header><div class='bc-dialog-body'><div data-bc-modal-feedback>${feedbackHTML(modal.feedback)}</div>${body}</div><footer>${button('close',destructive ? 'Cancel' : 'Close','','bc-outline')}${footer}</footer></section></div>`);
   }
   function render() {
     if (closed) return;
