@@ -1,0 +1,75 @@
+OPENING SHIFT — TRAINING AND FIELD REVIEW
+Campaign opening.8633edb3-1773-4380-8e0d-6a7fec72d27f. Import provenance: manual-file.
+New programme: training and field have separate evidence.
+
+FIELD-READY BOOTCAMP — TRAINING RECORD
+6/6 practical tasks recorded. This is not a grade or mastery certificate.
+Demonstrations are trainer actions. Practice observations are learner actions. All training help is free.
+Latest completed attempt per lesson; details are frozen at completion. Tests below are actual learner tests. Pass includes a required denial.
+
+Meet the equipment: practical task recorded; worked example finished.
+  Selected equipment: workstation = desktop, power on; switch = 8-port switch, power on; service host = server, power on.
+  Help: 0 hint levels opened; teacher review pending.
+Build a physical path: practical task recorded; worked example finished.
+  Connected: workstation eth1 ↔ switch eth4; service host eth1 ↔ switch eth3.
+  reception @ Reception: SERVICE_AVAILABLE; allowed; pass; current at completion.
+  Help: 0 hint levels opened; teacher review pending.
+Give the device an address: practical task recorded; worked example finished.
+  Applied workstation address 192.168.80.254, mask 255.255.255.0; service host 192.168.80.10; supplied network 192.168.80.0/24.
+  reception @ Reception: SERVICE_AVAILABLE; allowed; pass; current at completion.
+  Help: 1 hint levels opened; teacher review pending.
+Add a wireless device: practical task recorded; worked example finished.
+  At completion: laptop, power on, associated with access point; access point power on. Uplink: access point eth1 ↔ switch eth4.
+  nurse @ Exam room A: SERVICE_AVAILABLE; allowed; pass; current at completion.
+  nurse @ Exam room B: SERVICE_AVAILABLE; allowed; pass; current at completion.
+  Help: 0 hint levels opened; teacher review pending.
+Decide who gets access: practical task recorded; worked example finished.
+  Access decision: Nurse also books (policy.nurse-also-books); explicit choice recorded.
+  reception @ Reception: SERVICE_AVAILABLE; allowed; pass; current at completion.
+  nurse @ Exam room A: SERVICE_AVAILABLE; allowed; pass; current at completion.
+  nurse-bookings @ Exam room A: SERVICE_AVAILABLE; allowed; pass; current at completion.
+  access-reception @ Reception: ACCESS_DENIED; denied; pass; current at completion.
+  access-outsider-bookings @ Reception: ACCESS_DENIED; denied; pass; current at completion.
+  access-outsider-workspace @ Reception: ACCESS_DENIED; denied; pass; current at completion.
+  Help: 0 hint levels opened; teacher review pending.
+Diagnose a different fault: practical task recorded.
+  Observed fault: PORT_DISCONNECTED by failed learner test; stale at completion (before repair).
+  Recorded repair: access point eth1 ↔ switch eth3. Latest required retests follow.
+  reception @ Reception: SERVICE_AVAILABLE; allowed; pass; current at completion.
+  nurse @ Exam room A: SERVICE_AVAILABLE; allowed; pass; current at completion.
+  Help: 0 hint levels opened; teacher review pending.
+
+EXACT TRANSFER EXPLANATION
+The mobile test reported that Wi-Fi was associated but the access point had no complete Ethernet path. Changing the valid address from 192.168.90.30 to 192.168.90.45 did not restore the service.
+
+I connected the AP to switch port 3, then reran the workstation and mobile tests. Both passed. An IP address identifies an interface; it cannot supply a missing physical link. These tests cover this local setup, not Internet access or real clinic authentication.
+Explanation quality remains pending teacher judgement.
+
+Training tasks and trainer demonstrations are separate from independent field evidence. Task completion and help use never award an IB grade or prove mastery.
+No names, patient information or accounts are required. Local files are editable; action replay checks consistency, not learner identity.
+
+INDEPENDENT FIELD RECORD
+Independent field work has not started.
+Equipment choice: not recorded. Access policy: Separate responsibilities; explicit decision not recorded.
+Equipment allowance 180; spent 0; unused 180. Contractor fee 120; guidance 0; simulated minutes 0; campaign wallet 0. Unused client funds are not earnings.
+Field delivery: not recorded; settlement: not recorded.
+
+LATEST ACTUAL FIELD TESTS BY CHECK AND ROOM
+No field player tests recorded.
+
+EXACT FIELD EXPLANATIONS
+EQUIPMENT
+[No written explanation]
+Not submitted.
+REPAIR
+[No written explanation]
+Not submitted.
+PRIVACY
+[No written explanation]
+Not submitted.
+LIMITATIONS
+[No written explanation]
+Not submitted.
+
+Model limits: one local IPv4 network; named-room Wi-Fi coverage; simulated role permissions, not real authentication. No router, Internet, DHCP, DNS or radio-physics model. No real student or patient data is required.
+Task completion, income, speed and help use do not award an IB grade or establish mastery. Full test paths, current engine checks and action provenance are in the evidence JSON.

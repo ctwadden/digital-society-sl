@@ -12,7 +12,7 @@ The shorter project address, https://ctwadden.github.io/digital-society-sl/conne
 
 **Source folder:** https://github.com/ctwadden/digital-society-sl/tree/main/connect-the-clinic
 
-The existing0.6 network engine remains the causal core. The field mission and original clinic assets live under `dist/opening/`; the training engine, mentor interface and bench live under `dist/bootcamp/`. One programme state owns both records. The parent course repository's existing Pages workflow publishes this isolated subfolder. There is no new hosting subscription or service.
+The existing 0.6 network engine remains the causal core. The field mission and original clinic assets live under `dist/opening/`; the training engine, mentor interface and bench live under `dist/bootcamp/`. One programme state owns both records. The parent course repository's existing Pages workflow publishes this isolated subfolder. There is no new hosting subscription or service.
 
 ## Run and test locally
 
@@ -35,6 +35,10 @@ No `npm install` is required. The exported suite includes its original synthetic
 ## Learn, then take the clinic job
 
 New campaigns open the bootcamp. Review the hardware and cable guide, then learn through five worked examples and six fresh practical tasks: equipment, Ethernet, IP address/mask, wireless, access and a changed fault. Training hints/retries are free. Completing the task conditions opens the first independent job; it does not award an IB grade or certify mastery. Existing field players can use **Bootcamp** and return without losing their clinic work.
+
+![Published address-and-mask demonstration with its actual wrong-subnet diagnostic](qa/BOOTCAMP_ADDRESS_DEMO.jpg)
+
+The current automated suite passes **258/258**. The lead completed all six tasks on the published site, including intentional faults, repair, exact explanation export, save/reload, reset, two-tab takeover, damaged/valid import, local backup recovery and the first-client handoff. [Bootcamp browser observations](qa/BOOTCAMP_BROWSER.md) separate those checks from automated/source results and the still-unperformed school pilot. The image shows a replay of the mentor's address lesson after the synthetic review campaign completed; the six prior records do not belong to that demonstration.
 
 In the field, review the phone brief and ask about the nurse's work. Choose the existing laptop or a tablet, inspect the equipment and use the relevant tools to get the nurse's workspace working. The **free rehearsal** keeps the independent client job intact and makes guidance free. In the client job, the shop uses a separate equipment allowance; unused client funds never become contractor income.
 

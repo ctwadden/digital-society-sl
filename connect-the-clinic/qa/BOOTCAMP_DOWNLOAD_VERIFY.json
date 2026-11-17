@@ -1,0 +1,41 @@
+{
+  "runtimeCommit": "e151fb4627f479e054d54c836f819f8ff0f6f52f",
+  "kind": "lead synthetic published-browser QA artifacts; not student work",
+  "result": "PASS",
+  "checks": [
+    "actual downloaded progress validates",
+    "downloaded evidence JSON equals production regeneration",
+    "downloaded readable text exactly equals production regeneration",
+    "six learner completion records and five trainer demonstrations",
+    "exact original reflection preserved",
+    "actual chosen policy, mask, physical repair and intended denials appear in readable evidence",
+    "training financial effect zero; field not started and wallet zero"
+  ],
+  "outputs": [
+    {
+      "path": "qa/bootcamp-sample/progress.json",
+      "bytes": 97821,
+      "sha256": "12f039ef7ea4c428c2a9847ac09fb24a7a4077314cf9b16a10b6e15a715e8e78"
+    },
+    {
+      "path": "qa/bootcamp-sample/evidence.json",
+      "bytes": 143836,
+      "sha256": "f99a4bc50c78c6f6b334a014065c03c79e6a12fbf058d1d78242e9fb9dd67010"
+    },
+    {
+      "path": "qa/BOOTCAMP_EVIDENCE_SAMPLE.txt",
+      "bytes": 4960,
+      "sha256": "42cbf956586b55c580e72392d96c907b9afff44a9ebc2920fc7ce2c65b3bfbb7"
+    },
+    {
+      "path": "qa/BOOTCAMP_ADDRESS_DEMO.jpg",
+      "bytes": 119891,
+      "sha256": "31c56334620d0fcf12ccb3a2caf912da1764c94e6f5b6c6ed21d887ee9ede27e"
+    },
+    {
+      "path": "qa/BOOTCAMP_IMPORT_ERROR.jpg",
+      "bytes": 69654,
+      "sha256": "ac34a69ea99564b7184bcde000c6917c3cec490ad2dc92556e3b6a775455be23"
+    }
+  ]
+}

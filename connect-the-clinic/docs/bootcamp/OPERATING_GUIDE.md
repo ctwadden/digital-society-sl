@@ -1,6 +1,6 @@
 # Opening Shift — bootcamp and first field job
 
-**Teacher review build.** This guide describes the integrated 0.8 training sequence. Actual school Windows devices, managed browser/storage/download policies and beginner learning still need observation. The prior 0.7 browser report is historical evidence for the field mission, not proof of the new bootcamp's browser behavior.
+**Teacher review build.** This guide describes the integrated 0.8 training sequence. The lead completed all six training tasks on the published site, including deliberate failures, repair, reload, draft recovery, reset, two-tab control, downloads, valid/damaged import and entry into the independent job. See [published observations](../../qa/BOOTCAMP_BROWSER.md) for the exact coverage. Actual school Windows devices, managed browser/storage/download policies and beginner learning still need observation.
 
 ## Open and start
 
@@ -45,11 +45,15 @@ Once all six practical tasks are recorded, a new campaign can enter the first cl
 
 The final training explanation is retained exactly, or marked for oral discussion. Presence of an answer permits the activity record; the game does not judge the quality of the explanation by keywords. Hints, speed, income and completion do not award an IB grade or establish mastery. The teacher can use observation, conversation and the exported product together.
 
-Progress export contains the restorable training and field campaign. Readable evidence gives per-lesson task summaries, provenance, the transfer explanation and field evidence. Detailed JSON keeps the recorded actions and observations. No student name, patient information or account is requested; keep identifying information out of free text.
+Progress export contains the restorable training and field campaign. Readable evidence gives the latest completed record for each lesson: selected hardware, actual ports, applied address/mask, access choice, required test codes and room, freshness at completion, repair, exact transfer explanation and separate field evidence. Detailed JSON keeps the recorded actions and observations. See the [synthetic teacher-summary example](../../qa/BOOTCAMP_EVIDENCE_SAMPLE.txt); it is a QA walkthrough, not student work. No student name, patient information or account is requested; keep identifying information out of free text.
 
 ## Saving and recovery
 
 Work remains in the same browser profile and site origin. Before moving between home and school, download **progress**, then import it on the other device. Evidence is for review and is not a substitute for a progress backup. School profile cleanup, private browsing or storage/download restrictions may remove or prevent local retention.
+
+In the training screen, use **Progress → Open a downloaded progress file → Choose progress JSON**. Review the filename, then validate and replace. The alternative paste field accepts the complete text of the same downloaded progress JSON. A filename, evidence report or partial excerpt is not a restorable programme. Cancel or a rejected import retains current work. Download current progress first if both versions matter.
+
+**Progress → Recovery and local save → Review saved backup** offers the last valid local snapshot. Restoring it intentionally returns to that earlier state; it is not cloud synchronization. The published-browser review successfully restored a pre-import local backup. Keep a downloaded copy as well.
 
 Opening training and returning to field work preserves the field campaign and the field editor's separate draft scope. Retry starts a fresh training attempt and does not award another client payment. Read-only tabs must explicitly take control before changing progress. A rejected damaged import must leave current work untouched.
 
