@@ -120,7 +120,7 @@ export function mountBootcampUI(root, handlers) {
   }
   async function run(action, after) {
     if (busy || closed) return {accepted:false,message:'Wait for the current action.'};
-    const held = focusSnapshot(); busy = true; render();
+    const held = focusSnapshot(), previousPhase = view.phase; busy = true; render();
     try {
       const result = await send(action); if (closed) return result;
       view = getView();
@@ -131,8 +131,17 @@ export function mountBootcampUI(root, handlers) {
       if (!closed) showStatus('That action could not be completed. Your draft is still available. '+String(error?.message || ''),'error');
       return {accepted:false};
     } finally {
+      const latestFocus = !closed ? focusSnapshot() : null;
       busy = false;
-      if (!closed) { render(); if (!restoreFocus(held)) root.querySelector(modal ? '#bc-dialog-title' : '#bc-panel-heading')?.focus({preventScroll:true}); }
+      if (!closed) {
+        render();
+        if (!restoreFocus(latestFocus || held)) {
+          const destination = modal ? root.querySelector('#bc-dialog-title')
+            : previousPhase !== view.phase ? root.querySelector('#bc-mentor-heading')
+            : root.querySelector('#bc-panel-heading') || root.querySelector('#bc-mentor-heading');
+          (destination || root.querySelector('#bc-course-heading'))?.focus({preventScroll:true});
+        }
+      }
     }
   }
   const boot = (action, after) => run({type:'BOOT_ACTION',action},after);
@@ -193,7 +202,7 @@ export function mountBootcampUI(root, handlers) {
       detail = `<details class='bc-details'><summary>Step-by-step instructions</summary><ol>${list(l?.practice?.steps).map(step => `<li><strong>${esc(step.title)}.</strong> ${esc(step.text)}</li>`).join('')}</ol></details>`;
       actions = button('howto','Open the how-to guide','','bc-text') + button('retry','Reset this practice',disabled(false,true),'bc-text');
     }
-    return `<section class='bc-mentor'><div class='bc-coach-label'><span class='bc-avatar' aria-hidden='true'>J</span><div><strong>Jo</strong><span>${phase === 'demo' ? 'Worked example' : phase === 'practice' ? 'Here if you need help' : 'Training mentor'}</span></div><span class='bc-badge'>FREE</span></div><h2>${esc(title)}</h2><p>${esc(text)}</p>${detail}<div class='bc-button-row'>${actions}</div></section>`;
+    return `<section class='bc-mentor'><div class='bc-coach-label'><span class='bc-avatar' aria-hidden='true'>J</span><div><strong>Jo</strong><span>${phase === 'demo' ? 'Worked example' : phase === 'practice' ? 'Here if you need help' : 'Training mentor'}</span></div><span class='bc-badge'>FREE</span></div><h2 id='bc-mentor-heading' tabindex='-1'>${esc(title)}</h2><p>${esc(text)}</p>${detail}<div class='bc-button-row'>${actions}</div></section>`;
   }
   function introMaterials() {
     if (view.phase !== 'intro') return '';

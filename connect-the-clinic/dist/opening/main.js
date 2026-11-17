@@ -83,9 +83,20 @@ function renderApp() {
     mountedScreen = screen;
     ui = screen === 'bootcamp'
       ? mountBootcampUI(host, handlers(screen)) : mountOpeningUI(host, handlers(screen));
-    const heading = host.querySelector('h1');
-    if (heading) { heading.tabIndex = -1; heading.focus({preventScroll:true}); }
-  } else ui.render();
+    focusScreenHeading();
+  } else {
+    // A persistence notification and report() can render the new screen twice.
+    // Preserve an already-focused heading if a UI redraw replaced that node.
+    const active = document.activeElement;
+    const headingWasFocused = active?.tagName === 'H1' && root.contains(active);
+    ui.render();
+    if (headingWasFocused && (!document.activeElement || document.activeElement === document.body)) focusScreenHeading();
+  }
+}
+
+function focusScreenHeading() {
+  const heading = root.querySelector('h1');
+  if (heading) { heading.tabIndex = -1; heading.focus({preventScroll:true}); }
 }
 
 try {
