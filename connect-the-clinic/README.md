@@ -38,6 +38,10 @@ Review the phone brief and ask about the nurse's work. Choose the existing lapto
 
 The game records actual tests from each room. An on-screen cable or an earlier passing result cannot certify a changed network. Use the handover to submit your own equipment, repair, privacy and limitation explanations, or mark an item for oral teacher review. Export evidence for your teacher and progress for recovery.
 
+![Opening Shift's published first client request](qa/OPENING_SHIFT_WELCOME.jpg)
+
+The lead completed the published job and the changed physical-fault rehearsal, including actual evidence downloads, damaged/valid import, reload/drafts, reset and two-tab control. The final automated suite passed 212/212. See the [published browser observations](qa/OPENING_SHIFT_BROWSER.md) for exact coverage, repaired defects and remaining school-device checks.
+
 ## Earlier bootcamp and wearable clinic
 
 Select **Find reception’s port**. Choose reception’s Ethernet socket and a free switch socket, then connect and test. Jo guides the first connection, unplug/repair experiment and explanation. Choose **Start independent practice** when the guided lesson ends. Guidance in practice is free.
