@@ -16,6 +16,8 @@ The current opening explains a small connection task clearly, but the student ha
 | [ASPIRE_GAMEPLAY_FIELDNOTES.md](ASPIRE_GAMEPLAY_FIELDNOTES.md) | Historical gameplay/contracts, evidence register and original design interpretations |
 | [ASPIRE_VISUAL_LEVEL_FIELDNOTES.md](ASPIRE_VISUAL_LEVEL_FIELDNOTES.md) | Graphic observations, playing modes, five-area level and original visual direction |
 | [INTEGRATION_REVIEW.md](INTEGRATION_REVIEW.md) | Independent review of the proposal and resolution status |
+| [LEGACY_COPY_SOURCE_NOTES.md](LEGACY_COPY_SOURCE_NOTES.md) | Concrete older-copy leads, editions and verification limits |
+| [LEGACY_ANALYSIS_PLAN.md](LEGACY_ANALYSIS_PLAN.md) | How to investigate a legacy copy and apply observations to original work |
 | [RUN.md](RUN.md) | Bounded assignments, decisions, completed work, task list and verification limits |
 
 ## Which document governs the next build?
