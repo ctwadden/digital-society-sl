@@ -1,8 +1,12 @@
 # Older Aspire copies — source and availability notes
 
-**16 November 2026 (America/Halifax) · bounded public-source search · no executable downloaded or run**
+**16 November 2026 (America/Halifax) · initial public-source search record; see the retrieval update below**
 
-## Finding
+## Retrieval update
+
+The archive has now been retrieved, and the teacher supplied a corresponding copy. Version 1.1.6.28 and all 4,402 common game files were verified; both ZIP integrity checks passed. See [retrieval and verification](LEGACY_RETRIEVAL_VERIFICATION.md) and [actual package findings](LEGACY_PACKAGE_FINDINGS.md). The original search notes below are retained as history; their unverified-download status is superseded. No runtime launch or publisher-authenticity claim follows.
+
+## Original search finding
 
 There are concrete surviving leads for **Cisco Aspire Networking Academy Edition**, including a community resource pointing to a named Google Drive ZIP and a university lab page indexing an exact installer. This research did **not** establish a currently downloadable, authentic, complete binary or a current Cisco-hosted release. An indexed filename, a catalogue listing and a validated installer are different levels of evidence.
 

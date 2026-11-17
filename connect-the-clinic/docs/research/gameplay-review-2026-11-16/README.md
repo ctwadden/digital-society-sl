@@ -6,6 +6,19 @@ The current opening explains a small connection task clearly, but the student ha
 
 **The proposed Opening Shift is not implemented.** The [current game](https://ctwadden.github.io/digital-society-sl/connect-the-clinic/dist/) remains the existing 0.6.0 teacher-review build.
 
+## Retrieved application and reusable game blueprint
+
+The older Aspire reference copy has now been obtained. The uploaded package is version **1.1.6.28**; its 4,402 common game files match the retrieved reference by SHA-256, and both ZIP integrity checks passed. We inspected packaged state machines and selected visual assets without running the executable. Only original reports are published here.
+
+| File | Purpose |
+| --- | --- |
+| [LEGACY_RETRIEVAL_VERIFICATION.md](LEGACY_RETRIEVAL_VERIFICATION.md) | Exact file receipts, integrity/content comparison and limits |
+| [LEGACY_PACKAGE_FINDINGS.md](LEGACY_PACKAGE_FINDINGS.md) | Actual client, phone, contract, failure and reward structure |
+| [LEGACY_VISUAL_ARCHITECTURE.md](LEGACY_VISUAL_ARCHITECTURE.md) | Inspected graphics organisation and an original visual specification |
+| [ORIGINAL_GAME_BLUEPRINT.md](ORIGINAL_GAME_BLUEPRINT.md) | Lead integration decisions and bounded implementation sequence |
+| [DS_SCENARIO_HARNESS.md](DS_SCENARIO_HARNESS.md) | Shared job framework with separate hardware, security, media and health models |
+| [LEGACY_ANALYSIS_QA.md](LEGACY_ANALYSIS_QA.md) | Independent consistency review of the analysis handoff |
+
 ## Start here
 
 | File | Purpose |

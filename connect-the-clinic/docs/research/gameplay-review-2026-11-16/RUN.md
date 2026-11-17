@@ -77,3 +77,19 @@ The reviewer found four specification issues, not demonstrated current-runtime d
 New evidence comprises the lead's limited published-browser observation, two original screenshots, the specialist's model traces and independent specification review. Existing automated/published checks remain in the earlier QA records. No new-mission runtime tests have passed because the new mission has not been implemented. Documentation publication changes no game behavior. The live teacher-review build remains 0.6.0.
 
 No teacher decision blocks the recorded research. Before tuning the revised build, confirm starting IP knowledge, available lesson time and placement of the wearable follow-up. These are teaching/pacing choices, not requests to approve routine technical fixes.
+
+## Retrieved application and cross-topic follow-up
+
+The teacher clarified that the work should retrieve the application itself, then supplied a ZIP and asked for reverse-engineering to inform an original game. They also identified hardware disassembly/building, security, media and health as possible Digital Society contexts.
+
+| Bounded task | Owner | Output | Result |
+| --- | --- | --- | --- |
+| Actual archive retrieval, content comparison, lead integration | Lead | LEGACY_RETRIEVAL_VERIFICATION.md, ORIGINAL_GAME_BLUEPRINT.md | Archive retrieved; uploaded reference matched; static checks completed |
+| Client/contract/phone structure | aspire_legacy_sources | LEGACY_PACKAGE_FINDINGS.md | All 44 FSMs parsed; selected flows and conditions inspected |
+| Source graphics and reusable scene design | legacy_visual_architecture | LEGACY_VISUAL_ARCHITECTURE.md | Selected artwork viewed; original recommendations, no assets imported |
+| Shared framework and topic-specific rules | ds_scenario_architecture | DS_SCENARIO_HARNESS.md | Proposed hardware/security/media/health model boundaries |
+| Independent handoff review | ds_scenario_architecture | LEGACY_ANALYSIS_QA.md | See report for reviewed scope and result |
+
+Decisions: preserve the authoritative model; separate client agendas from work within a job; implement meaningful equipment transactions and phone decisions; use original layered 2D scenes; keep Opening Shift as the next playable milestone, followed by one hardware job to test reuse. Preserve teacher review of understanding independently from game money and completion.
+
+Completed checks are archive integrity, version, SHA-256 comparison of 4,402 common files, XML parsing and static graphic/structure inspection. Legacy normal play, all encoded data, precise reward formulas and modern Windows execution remain unverified. No game runtime changes, copied proprietary scripts/artwork or new curriculum outcome claims are part of this documentation update.

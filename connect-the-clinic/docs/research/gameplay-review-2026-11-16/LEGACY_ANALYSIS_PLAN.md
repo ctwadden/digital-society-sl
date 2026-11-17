@@ -1,8 +1,12 @@
 # Studying a legacy Aspire copy for an original game
 
-**16 November 2026 (America/Halifax) · lead follow-up · research plan, not an executed binary analysis**
+**16 November 2026 (America/Halifax) · initial lead plan retained with execution update below**
 
-## Decision
+## Execution update
+
+The reference ZIP has now been retrieved and statically inspected. The teacher's upload contains the same 4,402 game files, verified by SHA-256 content comparison. See [verification](LEGACY_RETRIEVAL_VERIFICATION.md), [package findings](LEGACY_PACKAGE_FINDINGS.md), [visual findings](LEGACY_VISUAL_ARCHITECTURE.md) and the [original integration blueprint](ORIGINAL_GAME_BLUEPRINT.md). The initial plan below is retained as history. Retrieval and static inspection are complete; normal-play recording remains unperformed.
+
+## Original planning decision
 
 A legacy copy would be useful as a reference for actual play: pacing, decisions, transitions, mistakes, resource management and visible consequences. The [source notes](LEGACY_COPY_SOURCE_NOTES.md) identify a concrete community archive candidate. Its contents, integrity, licence, completeness and runtime compatibility have not been verified. No copy was installed or executed in this research.
 
