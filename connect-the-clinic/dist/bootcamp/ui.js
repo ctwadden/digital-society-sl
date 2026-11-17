@@ -112,7 +112,9 @@ export function mountBootcampUI(root, handlers) {
     return true;
   }
   function showStatus(message, kind = 'info') {
-    const raw = String(message || '');
+    const original = String(message || '');
+    const raw = view.phase === 'intro' && !view.demo?.available && original === 'Lesson opened. Watch the worked example, then try the task in a fresh setup.'
+      ? 'Challenge opened. There is no solved demonstration. Observe the setup, make a relevant repair and test again.' : original;
     const recordedDiagnostic = list(view.observations).some(o => o.message === raw);
     feedback = {message:recordedDiagnostic ? diagnosticText(raw) : raw,kind:kind === true ? 'error' : kind === false ? 'info' : kind};
     const el = root.querySelector('#bc-live'); if (el) el.textContent = feedback.message;
@@ -293,18 +295,24 @@ export function mountBootcampUI(root, handlers) {
     return panelHeader(prompt?.title || 'Explain the repair','Record your reasoning in your own words. A teacher reviews it; this is not a keyword test.') + `<form data-form='reflection'><label for='bc-reflection'>${esc(prompt?.prompt || prompt?.question || 'Why would changing an IP address not repair the missing physical connection? What did your test show after your repair?')}</label><textarea id='bc-reflection' rows='6' maxlength='2000' data-draft='reflection' ${readOnly() || !practice() ? 'readonly' : ''}>${esc(value.text || '')}</textarea><label class='bc-check-label'><input type='checkbox' data-draft='oral' ${value.oral ? 'checked' : ''} ${disabled()}> Discuss this explanation with my teacher — review pending.</label>${conflict ? '<p class=\'bc-warning\'>Check this draft against the current saved explanation before replacing it.</p><details class=\'bc-details\'><summary>Current saved explanation</summary><p class=\'bc-exact\'>'+esc(saved.text || '[No written explanation]')+'</p></details>' : ''}<p class='bc-small' data-draft-note>${draft ? 'Unsubmitted draft. Save it before completing the lesson.' : saved.submitted ? 'Saved for teacher review; no quality grade awarded.' : 'A short written explanation or pending oral arrangement is needed.'}</p><button type='submit' class='bc-button bc-primary' ${disabled()}>${conflict ? 'Replace saved explanation with this draft' : 'Save my explanation'}</button></form>`;
   }
   function controls() {
-    if (!['practice','complete'].includes(view.phase)) return `<section class='bc-demo-progress'><h3>${view.phase === 'intro' ? 'A worked example, then your turn' : 'The demonstration so far'}</h3><ol>${list(view.demo?.steps).map((step,index) => `<li class='${step.done ? 'done' : ''}'><span>${step.done ? '✓' : index+1}</span><p>${esc(list(lesson()?.demonstration?.steps).find(s => s.id === step.id)?.title || step.title)}</p></li>`).join('')}</ol>${view.phase === 'intro' && !view.demo?.available ? '<p>This challenge has no solved demonstration. Use the method and free guides to investigate.</p>' : ''}</section>`;
+    if (!['practice','complete'].includes(view.phase)) return `<section class='bc-demo-progress'><h3>${view.phase === 'intro' ? view.demo?.available ? 'A worked example, then your turn' : 'Use your troubleshooting method' : 'The demonstration so far'}</h3><ol>${list(view.demo?.steps).map((step,index) => `<li class='${step.done ? 'done' : ''}'><span>${step.done ? '✓' : index+1}</span><p>${esc(list(lesson()?.demonstration?.steps).find(s => s.id === step.id)?.title || step.title)}</p></li>`).join('')}</ol>${view.phase === 'intro' && !view.demo?.available ? '<p>This challenge has no solved demonstration. Use the method and free guides to investigate.</p>' : ''}</section>`;
     const t = tabs();
     const body = ({kit:kitPanel,devices:devicesPanel,cables:cablesPanel,wireless:wirelessPanel,access:accessPanel,tests:testsPanel,reflection:reflectionPanel}[panel] || devicesPanel)();
     return `<section class='bc-tools'><nav class='bc-tool-tabs' role='tablist' aria-label='Training tools'>${t.map(([id,label]) => button('panel',esc(label),`data-panel='${id}' id='bc-tab-${id}' role='tab' aria-selected='${panel === id}' aria-controls='bc-tool-panel' tabindex='${panel === id ? 0 : -1}'`,'bc-tool-tab')).join('')}</nav><div class='bc-tool-panel' id='bc-tool-panel' role='tabpanel' aria-labelledby='bc-tab-${panel}'>${body}</div></section>`;
   }
   function checkDetail(check) {
+    if (view.lessonId === 'boot.transfer' && check.id === 'fault-observed') return 'Record a test or inspect the route before changing the setup.';
+    if (view.lessonId === 'boot.transfer' && check.id === 'relevant-repair') return 'Use your observations to choose what to change, then run a new test.';
     const observation = list(view.observations).find(o => check.detail === `${o.code}: ${o.message}`);
     return observation ? `${observation.code}: ${diagnosticText(observation.message)}` : check.detail;
   }
+  function checkLabel(check) {
+    return view.lessonId === 'boot.transfer' && check.id === 'relevant-repair'
+      ? 'Make a relevant repair and retest' : check.label;
+  }
   function checks() {
     if (!['practice','complete'].includes(view.phase)) return '';
-    return `<section class='bc-checks'><h3>${view.phase === 'complete' ? 'Recorded task conditions' : 'What needs to work'}</h3><ul>${list(view.checks).map(check => `<li class='${check.met ? 'met' : ''}'><span aria-hidden='true'>${check.met ? '✓' : '○'}</span><div><strong>${esc(check.label)}</strong><small>${esc(checkDetail(check))}</small></div></li>`).join('')}</ul>${view.phase === 'practice' ? button('finish','Record this lesson & continue →',disabled(!view.canComplete),'bc-primary bc-wide') : ''}<p class='bc-small'>Training task conditions are checked by the simulation. Understanding and explanation quality remain for teacher review.</p></section>`;
+    return `<section class='bc-checks'><h3>${view.phase === 'complete' ? 'Recorded task conditions' : 'What needs to work'}</h3><ul>${list(view.checks).map(check => `<li class='${check.met ? 'met' : ''}'><span aria-hidden='true'>${check.met ? '✓' : '○'}</span><div><strong>${esc(checkLabel(check))}</strong><small>${esc(checkDetail(check))}</small></div></li>`).join('')}</ul>${view.phase === 'practice' ? button('finish','Record this lesson & continue →',disabled(!view.canComplete),'bc-primary bc-wide') : ''}<p class='bc-small'>Training task conditions are checked by the simulation. Understanding and explanation quality remain for teacher review.</p></section>`;
   }
   function workspace() {
     if (view.phase === 'welcome') return welcome();
