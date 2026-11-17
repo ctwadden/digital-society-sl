@@ -116,6 +116,7 @@ for (const scenario of [
   prepare(h,scenario);
   finalChecks(h,scenario.policy);
   assert.equal(h.view.ready,true,JSON.stringify(h.view.objectives));
+  assert.match(h.view.learningFocus.nextAction,/request handover/i,'ready active work directs the learner to handover');
   assert.equal(h.view.repair.confirmed,true);
   assert.equal(h.view.repair.observationKind,'inspection');
   assert.equal(h.view.repair.preRepairFailureObserved,false);
@@ -130,10 +131,15 @@ for (const scenario of [
   assert.ok(h.view.delivery.currentChecks.every(check => check.origin === 'engine-check'));
   assert.ok(h.view.delivery.evidence.playerObservations.every(check => check.origin === 'player'));
   assert.equal(h.view.phase,'delivered');
+  assert.match(h.view.learningFocus.nextAction,/collect.*fee/i,'delivered work directs the learner to the outstanding receipt');
+  assert.doesNotMatch(h.view.learningFocus.nextAction,/request handover/i,'already-delivered work does not request another handover');
   const delivery = copy(h.view.delivery);
   h.act('SETTLE_CONTRACT');
   assert.equal(h.view.economy.wallet,120);
   assert.equal(h.view.economy.net,120);
+  assert.equal(h.view.phase,'settled');
+  assert.match(h.view.learningFocus.nextAction,/delivery evidence.*free rehearsal/i,'settled work offers evidence and separate practice');
+  assert.doesNotMatch(h.view.learningFocus.nextAction,/collect|request handover/i,'paid work does not prompt duplicate handover or collection');
   h.act('SETTLE_CONTRACT');
   h.act('REQUEST_HANDOVER');
   assert.equal(h.view.economy.wallet,120,'fee cannot duplicate');
@@ -473,6 +479,8 @@ test('free rehearsal has zero prices, help costs and earnings while preserving t
   assert.equal(h.view.economy.reserved,0);
   assert.equal(h.view.economy.minutes,0);
   assert.equal(h.view.economy.net,0);
+  assert.match(h.view.learningFocus.nextAction,/free rehearsal evidence/i,'completed practice offers its own evidence');
+  assert.doesNotMatch(h.view.learningFocus.nextAction,/collect|request handover/i,'practice never directs the learner to claim a client payment');
   h.reject('REQUEST_HANDOVER',{},'CLIENT_ONLY');
   h.reject('SETTLE_CONTRACT',{},'CLIENT_ONLY');
   assert.deepEqual(h.state.client,paid);

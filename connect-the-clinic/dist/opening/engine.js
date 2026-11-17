@@ -702,6 +702,11 @@ export function dispatchShift(state, action) {
 
 export function deriveShift(state) {
   const session = active(state), checked = evaluation(session), child = checked.childView;
+  const currentPhase = phase(session);
+  const nextAction = currentPhase === 'settled' ? 'Download your delivery evidence or open a free rehearsal.'
+    : currentPhase === 'delivered' ? 'Collect the frozen fee and download your delivery evidence.'
+    : checked.objectives.find(objective => !objective.met)?.label
+      || (session.mode === 'practice' ? 'Export the free rehearsal evidence for teacher review.' : 'Review your evidence and request handover.');
   const mappedDevices = child.devices.map(device => ({...clone(device),itemId:itemForDevice(session,device.id)?.id || null}));
   const mappedCables = child.cables.map(cable => ({...clone(cable),itemId:Object.values(session.inventory).find(item => item.cableId === cable.id)?.id || null}));
   const diagnostics = [...session.observations].reverse().map(observation => ({...clone(observation),stale:observation.testedTechnicalRevision !== session.technicalRevision}));
@@ -712,7 +717,7 @@ export function deriveShift(state) {
     handover:{title:'Explain your decision',goals:['stakeholders','handover']}
   }[checked.stageId];
   return {missionId:MISSION_ID,campaignId:state.campaignId,attemptId:session.id,revision:state.revision,buildVersion:VERSION,schemaVersion:1,
-    mode:session.mode,fixture:session.fixture,fixtureId:session.fixtureId,phase:phase(session),stageId:checked.stageId,
+    mode:session.mode,fixture:session.fixture,fixtureId:session.fixtureId,phase:currentPhase,stageId:checked.stageId,
     technicalRevision:session.technicalRevision,briefReviewed:session.briefReviewed,
     questions:questionIds.map(id => ({id,asked:session.questions.includes(id)})),
     devices:mappedDevices,cables:mappedCables,
@@ -732,7 +737,7 @@ export function deriveShift(state) {
       observationId:observation.id,stale:observation.stale})),
     economy:economy(state,session),transactions:clone(session.transactions),
     guideQuotes:guideIds.map(id => guideQuote(state,session,id)),hints:clone(session.help.hints),delivery:clone(session.delivery),settlement:clone(session.settlement),
-    learningFocus:{stageId:checked.stageId,title:stageDetails.title,goalIds:stageDetails.goals.map(goal => `cc.clinic.${goal}`),nextAction:checked.objectives.find(objective => !objective.met)?.label || (session.mode === 'practice' ? 'Export the free rehearsal evidence for teacher review.' : 'Request handover, then collect the frozen fee.')},
+    learningFocus:{stageId:checked.stageId,title:stageDetails.title,goalIds:stageDetails.goals.map(goal => `cc.clinic.${goal}`),nextAction},
     limits:{maxActions:MAX_ACTIONS,remainingActions:MAX_ACTIONS-state.actions.length,maxSaveBytes:MAX_BYTES},
     followUp:{wearableCompleted:false,bootcampCompleted:false}};
 }
