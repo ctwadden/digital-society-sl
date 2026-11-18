@@ -187,6 +187,7 @@ export function mentorLine(view){
     if(r.pass){
       const pc=dev(view,'role.reception');
       if(pc&&pc.mask&&pc.mask!==view.network.mask&&['visit.2','drill.addressing.bench'].includes(v.id))return {mood:'thinking',text:`It answered — but your mask is ${pc.mask} and the card says ${view.network.mask}. A wrong mask can work on a small bench and cause trouble later. Match the card.`};
+      if(v.id==='drill.devices.bench'&&view.checks.some(c=>c.id==='kit.host'&&!c.met))return {mood:'thinking',text:'It answered, so the cables and power are right. But the host is a desktop. It works today. Is it the computer built to serve everyone, all day? Swap it, then test again.'};
       if(v.id==='visit.1')return {mood:'pleased',text:`${base} Look at Theo.`};
       if(r.testId==='nurse'&&t)return {mood:'pleased',text:`Tablet works in ${t.locationId==='location.exam-b'?'room B':'room A'}. ${unmet(view)?.id==='test.roomB'?'Now the other room.':''}`.trim()};
       return {mood:'pleased',text:level===0?'Good. Keep going.':base};
