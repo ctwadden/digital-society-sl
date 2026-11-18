@@ -161,3 +161,12 @@ test('visits cannot be skipped and completed visits are frozen',()=>{
   assert.equal(run(s,{type:'RUN_TEST',testId:'reception'},false).code,'VISIT_FINISHED');
   assert.equal(VISITS.length,3);
 });
+
+test('QA T07: mentor names an irrelevant IP change in the lead visit',async()=>{
+  const {mentorLine}=await import('../../dist/apprentice/mentor.js');
+  let s=playVisit2(playVisit1(pack(createApprenticeship({campaignId:'t.qa'}))));
+  s=run(s,{type:'START_VISIT',visitId:'visit.3'}).state;
+  s=run(s,{type:'NETWORK_ACTION',action:{type:'SET_STATIC_ADDRESS',deviceId:dev(s,'role.nurse').id,address:'10.12.1.31',mask:'255.255.255.0'}}).state;
+  s=run(s,{type:'RUN_TEST',testId:'nurse'}).state;
+  assert.match(mentorLine(v(s)).text,/address change can’t replace a missing cable/);
+});

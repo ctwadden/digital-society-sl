@@ -24,6 +24,7 @@ const MISTAKES={
   USB_NOT_NETWORK:'USB is for keyboards, drives, that sort of thing. It won’t join this computer to the switch.',
   USB_WRONG_SOCKET:'USB plug, wrong socket. And remember: USB isn’t our network link today.',
   ETHERNET_IN_WRONG_SOCKET:'Right cable, wrong socket. Ethernet goes into an RJ45 Ethernet port.',
+  AUDIO_SOCKET:'That’s the headphone jack. Nothing in this bag belongs there.',
   CABLE_TO_RADIO:'That’s the wireless radio — no cable goes there. Wi-Fi joins by association, not by plugging in.',
   PORT_ALREADY_USED:'That port’s taken. Pick a free one — the switch doesn’t care which number, as long as it’s free.',
   SAME_DEVICE_BOTH_ENDS:'Both ends on the same box goes nowhere. The other end belongs on a different device — usually the switch.'
@@ -115,8 +116,8 @@ export function mentorLine(view){
       if(r.testId==='nurse'&&t)return {mood:'pleased',text:`Tablet works in ${t.locationId==='location.exam-b'?'room B':'room A'}. ${unmet(view)?.id==='test.roomB'?'Now the other room.':''}`.trim()};
       return {mood:'pleased',text:level===0?'Good. Keep going.':base};
     }
+    if(v.id==='visit.3'&&r.code==='PORT_DISCONNECTED'&&view.addressChange&&!view.fault.repair)return {mood:'concerned',text:'You changed the tablet’s address, and the tester still says the cable path is incomplete. An address change can’t replace a missing cable. Where does the route stop?'};
     if(level===0)return {mood:'thinking',text:r.code==='PORT_DISCONNECTED'&&v.id==='visit.3'?'So — where does the route stop? What would you check first?':'What does that result tell you?'};
-    if(v.id==='visit.3'&&r.code==='PORT_DISCONNECTED'&&view.addressChange)return {mood:'concerned',text:'You changed the tablet’s address, and the tester still says the cable path is incomplete. The address was never the problem.'};
     return {mood:'thinking',text:level===1&&asks===0?`${base} Want a hint? Just ask.`:base};
   }
   if(r.kind==='inspection'){
@@ -192,7 +193,7 @@ export function staffLines(view){
   const lines=[];
   if(!view.visit)return lines;
   const s=view.staff;
-  if(s.reception==='working')lines.push({person:'reception',name:'Theo',mood:'pleased',text:view.visit.id==='visit.1'?'Bookings are back — I can start the day.':'Booking screen’s all good.'});
+  if(s.reception==='working'&&view.visit.id!=='visit.3')lines.push({person:'reception',name:'Theo',mood:'pleased',text:view.visit.id==='visit.1'?'Bookings are back — I can start the day.':'Booking screen’s all good.'});
   else if(s.reception==='waiting')lines.push({person:'reception',name:'Theo',mood:'worried',text:s.receptionCode==='SERVICE_AVAILABLE'?'Is it ready? Should I try bookings now?':view.visit.id==='visit.2'?'Bookings say they can’t reach the service.':'Still the spinning clock…'});
   if(s.nurse.state==='working')lines.push({person:'nurse',name:'Ana',mood:'pleased',text:`Workspace open in ${s.nurse.locationId==='location.exam-b'?'room B':'room A'}. I can update the room checklist.`});
   else if(s.nurse.state==='waiting')lines.push({person:'nurse',name:'Ana',mood:'worried',text:s.nurse.code==='WIFI_NOT_ASSOCIATED'?'My tablet isn’t on the clinic Wi-Fi.':s.nurse.code==='AP_OFF'?'My tablet can’t find the clinic Wi-Fi at all.':s.nurse.code==='SERVICE_AVAILABLE'?'Is it ready? Should I try the workspace now?':'My tablet shows Wi-Fi, but the workspace won’t load.'});

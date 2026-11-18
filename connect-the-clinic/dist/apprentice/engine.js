@@ -53,7 +53,7 @@ const visit=id=>VISITS.find(v=>v.id===id);
 const ACTION_FIELDS={PACK_ITEM:['itemId'],UNPACK_ITEM:['itemId'],START_VISIT:['visitId'],RESTART_VISIT:[],RETURN_TO_YARD:[],HOLD_CABLE:['cableType'],RELEASE_CABLE:[],PLUG:['deviceId','socketId'],NETWORK_ACTION:['action'],INSPECT_DEVICE:['deviceId'],RUN_TEST:['testId'],ASK_MENTOR:['topic'],SAVE_EXPLANATION:['text','oral'],FINISH_VISIT:[],CLAIM_TRUCK:[]};
 const NETWORK_FIELDS={CHOOSE_DEVICE:['roleId','kind'],POWER_DEVICE:['deviceId','on'],CONNECT_PORTS:['fromDeviceId','fromPortId','toDeviceId','toPortId'],DISCONNECT_CABLE:['cableId'],SET_STATIC_ADDRESS:['deviceId','address','mask'],ASSOCIATE_WIFI:['deviceId','apDeviceId'],MOVE_NURSE:['locationId'],SET_PERMISSIONS:['policyId']};
 const MENTOR_TOPICS=['next','why','show','cables','address','wireless','access'];
-const SOCKET_KINDS=['ethernet','power','hdmi','usb'];
+const SOCKET_KINDS=['ethernet','power','hdmi','usb','audio'];
 
 const net=a=>a.networkState.attempts[a.networkState.activeAttemptId];
 const role=(a,id)=>Object.values(net(a).devices).find(d=>d.roleId===id)||null;
@@ -213,6 +213,7 @@ function plug(a,deviceId,socketId){
     socket=socketId.slice(deviceId.length+1);need(SOCKET_KINDS.includes(socket)&&socket!=='ethernet','SOCKET_UNKNOWN','Choose a socket on this device.');
   }
   const held=a.held;
+  if(socket==='audio'){mistake(a,'AUDIO_SOCKET',{held,socket,deviceId});return {code:'MISTAKE',message:'That is a headphone jack.'};}
   if(held==='power'){
     if(socket!=='power'){mistake(a,'POWER_IN_WRONG_SOCKET',{held,socket,deviceId});return {code:'MISTAKE',message:'A power cord only fits the power inlet.'};}
     if(d.powered){event(a,'PLUG_POWER',{deviceId,alreadyOn:true});a.lastResult={kind:'change',code:'ALREADY_POWERED',changed:false};return {code:'ALREADY_POWERED',message:'That device already has power.'};}

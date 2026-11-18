@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Opening Shift art preview</title>
+<style>
+  :root { color-scheme: light; }
+  body { margin: 0; font: 14px system-ui, sans-serif; background: #eae4d6; color: #1f2a33; }
+  main { padding: 16px; display: grid; gap: 20px; }
+  section { background: #fff; border-radius: 10px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+  h2 { margin: 0 0 8px; font-size: 15px; }
+  .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-start; }
+  .row > div { flex: 0 0 auto; }
+  svg { display: block; max-width: 100%; height: auto; }
+  .w-full svg { width: 100%; }
+  .w-port svg { width: 160px; }
+  .w-close svg { width: 520px; }
+  .w-van svg { width: 420px; }
+  .cap { font-size: 12px; color: #5b6670; margin-top: 4px; }
+  body.only main { padding: 0; }
+  body.only section { padding: 0; border-radius: 0; box-shadow: none; background: transparent; }
+  body.only h2, body.only .cap { display: none; }
+  body.only .w-full svg { width: 100vw; height: 100vh; }
+  .ap-pulse { animation: ap-pulse 1.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  @keyframes ap-pulse { 50% { opacity: .45; } }
+  .ap-packet { animation: ap-pk 1.2s ease-in-out infinite; animation-delay: calc(var(--i) * 120ms); }
+  @keyframes ap-pk { 50% { opacity: .3; } }
+  @media (prefers-reduced-motion: reduce) { .ap-pulse, .ap-packet { animation: none; } }
+</style>
+</head>
+<body>
+<main id="out"></main>
+<script type="module">
+import * as A from './art.js';
+
+const v1Devices = [
+  { id: 'd-desk', roleId: 'role.reception', kind: 'desktop', powered: true, locationId: 'location.reception' },
+  { id: 'd-sw', roleId: 'infra.switch', kind: 'switch4', powered: true, locationId: 'location.equipment' },
+  { id: 'd-srv', roleId: 'role.records', kind: 'server', powered: true, locationId: 'location.equipment', selected: true }
+];
+const v1 = {
+  activeRooms: ['reception', 'closet'], devices: v1Devices,
+  cables: [{ id: 'c1', fromDeviceId: 'd-desk', toDeviceId: 'd-sw', state: 'tested-ok' }, { id: 'c2', fromDeviceId: 'd-sw', toDeviceId: 'd-srv', state: 'tested-ok' }],
+  staff: { reception: 'working', nurse: { state: 'absent' }, manager: 'absent' },
+  mentor: { locationId: 'reception', pose: 'pointing' }, player: { locationId: 'reception' },
+  testPulse: { ids: ['d-desk', 'd-sw', 'd-srv'], pass: true }, timeOfDay: 'morning'
+};
+const v2Devices = v1Devices.map((d) => ({ ...d, selected: false })).concat([
+  { id: 'd-ap', roleId: 'infra.ap', kind: 'access-point', powered: true, locationId: 'location.equipment' },
+  { id: 'd-tab', roleId: 'role.nurse', kind: 'tablet', powered: true, locationId: 'location.exam-b' }
+]);
+const v2 = {
+  activeRooms: ['reception', 'closet', 'examA', 'examB'], devices: v2Devices,
+  cables: [{ id: 'c1', fromDeviceId: 'd-desk', toDeviceId: 'd-sw', state: 'tested-ok' }, { id: 'c2', fromDeviceId: 'd-sw', toDeviceId: 'd-srv', state: 'installed' }, { id: 'c3', fromDeviceId: 'd-sw', toDeviceId: 'd-ap', state: 'tested-ok' }],
+  wifi: { apDeviceId: 'd-ap', clientDeviceId: 'd-tab', state: 'tested-ok' },
+  staff: { reception: 'working', nurse: { state: 'working', locationId: 'location.exam-b' }, manager: 'absent' },
+  mentor: { locationId: 'examB', pose: 'thumbs' }, player: { locationId: 'corridor' }, timeOfDay: 'afternoon'
+};
+const v3 = {
+  activeRooms: ['closet', 'examA'], devices: v2Devices.map((d) => d.id === 'd-tab' ? { ...d, locationId: 'location.exam-a' } : d),
+  cables: [{ id: 'c1', fromDeviceId: 'd-desk', toDeviceId: 'd-sw', state: 'stale' }, { id: 'c2', fromDeviceId: 'd-sw', toDeviceId: 'd-srv', state: 'tested-fail' }],
+  wifi: { apDeviceId: 'd-ap', clientDeviceId: 'd-tab', state: 'tested-fail' },
+  staff: { reception: 'waiting', nurse: { state: 'denied', locationId: 'location.exam-a' }, manager: 'present' },
+  mentor: { locationId: 'closet', pose: 'thinking' }, player: { locationId: 'closet' },
+  highlight: { roleSlot: 'infra.ap' }, testPulse: { ids: ['d-desk', 'd-sw', 'd-srv'], pass: false }, timeOfDay: 'morning'
+};
+const v3b = { ...v3, devices: v3.devices.filter((d) => d.id !== 'd-ap'), highlight: { roleSlot: 'infra.ap' }, staff: { ...v3.staff, nurse: { state: 'waiting', locationId: 'location.exam-a' } }, mentor: { locationId: 'corridor', pose: 'idle' }, player: { locationId: 'corridor' } };
+
+const P = (id, kind, eth, extra = {}) => ({ id, kind, powered: true, ports: eth, ...extra });
+const items = [
+  ['site-empty', 'Clinic: empty', () => A.renderSite({ activeRooms: [], devices: [], cables: [], staff: {}, mentor: { locationId: 'reception', pose: 'idle' }, player: { locationId: 'reception' } }), 'full'],
+  ['site-v1', 'Clinic: visit 1', () => A.renderSite(v1), 'full'],
+  ['site-v2', 'Clinic: visit 2 (afternoon, wifi ok)', () => A.renderSite(v2), 'full'],
+  ['site-v3', 'Clinic: visit 3 (faults, manager present)', () => A.renderSite(v3), 'full'],
+  ['site-v3b', 'Clinic: visit 3 (AP missing, nurse waiting)', () => A.renderSite(v3b), 'full'],
+  ['yard-0', 'Yard: nothing packed', () => A.renderYard({ packed: [], highlight: 'item.patch-cable', mentorPose: 'pointing', showPlayer: true }), 'full'],
+  ['yard-3', 'Yard: 3 packed', () => A.renderYard({ packed: ['item.patch-cable', 'item.power-cord', 'item.link-tester'], highlight: null, mentorPose: 'thumbs', showPlayer: true }), 'full'],
+  ['close-desktop', 'Close-up: desktop (holding ethernet)', () => A.renderCloseup({ device: P('d-desk', 'desktop', [{ id: 'd-desk.eth1', medium: 'ethernet', cableId: null }]), heldCable: 'ethernet', highlightPortId: 'd-desk.eth1' }), 'close'],
+  ['close-server', 'Close-up: server', () => A.renderCloseup({ device: P('d-srv', 'server', [{ id: 'd-srv.eth1', medium: 'ethernet', cableId: 'c2' }]), heldCable: 'power' }), 'close'],
+  ['close-switch4', 'Close-up: switch4 (two occupied)', () => A.renderCloseup({ device: P('d-sw', 'switch4', [1, 2, 3, 4].map((i) => ({ id: 'd-sw.p' + i, medium: 'ethernet', cableId: i <= 2 ? 'c' + i : null }))), heldCable: 'phone', highlightPortId: 'd-sw.p3' }), 'close'],
+  ['close-switch8', 'Close-up: switch8 (off)', () => A.renderCloseup({ device: { id: 'd-s8', kind: 'switch8', powered: false, ports: [1, 2, 3, 4, 5, 6, 7, 8].map((i) => ({ id: 's8.p' + i, medium: 'ethernet', cableId: i === 1 ? 'x' : null })) }, heldCable: 'hdmi' }), 'close'],
+  ['close-ap', 'Close-up: access point', () => A.renderCloseup({ device: P('d-ap', 'access-point', [{ id: 'd-ap.up', medium: 'ethernet', cableId: null }, { id: 'd-ap.radio', medium: 'wifi' }]), heldCable: 'usb' }), 'close'],
+  ['close-laptop', 'Close-up: laptop', () => A.renderCloseup({ device: { id: 'd-lap', kind: 'laptop', powered: false, ports: [{ id: 'd-lap.wifi', medium: 'wifi' }] }, heldCable: null }), 'close'],
+  ['portraits', 'Portraits', () => ['neutral', 'pleased', 'concerned', 'thinking', 'explaining'].map((m) => A.renderMentorPortrait(m)).concat(['reception', 'nurse', 'manager'].flatMap((p) => ['neutral', 'pleased', 'worried'].map((m) => A.renderStaffPortrait(p, m)))), 'port'],
+  ['vans', 'Vans', () => [A.renderVan({ variant: 'mentor', doors: 'closed' }), A.renderVan({ variant: 'mentor', doors: 'open' }), A.renderVan({ variant: 'player', doors: 'closed', shine: true }), A.renderVan({ variant: 'player', doors: 'open' })], 'van'],
+  ['title', 'Title', () => A.renderTitle(), 'full'],
+  ['drive', 'Drive (0, .5, 1)', () => [0, 0.5, 1].map((p) => A.renderDrive({ progress: p })), 'full']
+];
+const only = new URLSearchParams(location.search).get('only');
+if (only) document.body.classList.add('only');
+const out = document.getElementById('out');
+for (const [id, label, fn, size] of items) {
+  if (only && only !== id) continue;
+  let r; try { r = fn(); } catch (e) { r = `<pre>${e.stack}</pre>`; }
+  const list = Array.isArray(r) ? r : [r];
+  const sec = document.createElement('section');
+  sec.id = id;
+  sec.innerHTML = `<h2>${label}</h2><div class="row w-${size}">${list.map((s) => `<div class="${size === 'full' ? 'w-full' : ''}" style="${size === 'full' ? 'flex:1 1 100%' : ''}">${s}</div>`).join('')}</div>`;
+  out.appendChild(sec);
+}
+const cap = document.createElement('section');
+cap.innerHTML = `<h2>Anchors</h2><pre>${JSON.stringify({ SITE_SLOTS: A.SITE_SLOTS, YARD_ITEMS: A.YARD_ITEMS, YARD_BAG: A.YARD_BAG, sockets: A.CLOSEUP_SOCKETS('switch4') }, null, 1)}</pre>`;
+if (!only) out.appendChild(cap);
+</script>
+</body>
+</html>

@@ -115,9 +115,9 @@ export function mountApprenticeUI(root,handlers){
     if(view.at!=='site')return '';
     const slots=art?.SITE_SLOTS||{'role.reception':{x:420,y:620},'role.nurse':{x:1150,y:420}};
     const anchor=(r,l)=>art?.siteAnchor?.(r,l)||slots[r]||{x:800,y:500};
-    const desk=anchor('role.reception');
-    const pos={reception:desk,nurse:anchor('role.nurse',view.staff.nurse.locationId),manager:slots.manager||{x:desk.x+170,y:desk.y+60}};
-    return staffLines(view).map(s=>{const p=pos[s.person];if(!p)return '';return `<div class="ll-bubble mood-${s.mood} who-${s.person}" style="${anchorPct(p.x,p.y-(s.person==='manager'?40:110))}"><b>${esc(s.name)}</b> ${esc(s.text)}</div>`;}).join('');
+    const desk=slots.receptionist||anchor('role.reception');
+    const pos={reception:desk,nurse:art?.siteAnchor?art.siteAnchor('nurse',view.staff.nurse.locationId):anchor('role.nurse',view.staff.nurse.locationId),manager:slots.manager||{x:desk.x+170,y:desk.y+60}};
+    return staffLines(view).map(s=>{const p=pos[s.person];if(!p)return '';return `<div class="ll-bubble mood-${s.mood} who-${s.person}" style="${anchorPct(p.x,p.y-(art?.SITE_SLOTS?28:110))}"><b>${esc(s.name)}</b> ${esc(s.text)}</div>`;}).join('');
   }
   function bag(){
     if(view.at!=='site'||!view.visit||view.visit.finished)return '';
@@ -252,6 +252,9 @@ export function mountApprenticeUI(root,handlers){
   }
 
   // ---------- RENDER ----------
+  let opener=null;
+  function openDialog(fn){opener=document.activeElement&&root.contains(document.activeElement)?focusSignature(document.activeElement):null;fn();}
+  function closeDialogs(){modal=null;ceremony=false;render();const back=opener&&[...root.querySelectorAll('[data-act]')].find(el=>focusSignature(el)===opener);(back||R('panel'))?.focus?.();opener=null;}
   function render(){
     if(closed)return;
     view=getView();
@@ -265,7 +268,9 @@ export function mountApprenticeUI(root,handlers){
     root.querySelector('.ll-game').classList.toggle('is-yard',view.at==='yard');
     const line=mentorLine(view).text;if(line&&line!==lastLineKey){lastLineKey=line;R('live').textContent=`Mags: ${line}`;}
     if(focusKey){const again=[...root.querySelectorAll('[data-act],[name]')].find(el=>focusSignature(el)===focusKey);if(again&&document.activeElement!==again)again.focus({preventScroll:true});}
-    const dialog=root.querySelector('[role=dialog],[role=alertdialog]');if(dialog&&!dialog.contains(document.activeElement))dialog.querySelector('button,input')?.focus();
+    const dialog=root.querySelector('[role=dialog],[role=alertdialog]');
+    for(const el of [R('hud'),R('storage'),root.querySelector('.ll-stage'),root.querySelector('.ll-skip')])if(el){if(dialog)el.setAttribute('inert','');else el.removeAttribute('inert');}
+    if(dialog&&!dialog.contains(document.activeElement))dialog.querySelector('button,input')?.focus();
   }
   function focusSignature(el){return [el.dataset.act,el.dataset.panel,el.dataset.item,el.dataset.device,el.dataset.socket,el.dataset.cable,el.dataset.topic,el.dataset.test,el.dataset.visit,el.getAttribute('name')].join('|');}
   function openPanel(name){panel=name;render();R('panel').focus({preventScroll:true});}
@@ -276,8 +281,8 @@ export function mountApprenticeUI(root,handlers){
     const d=t.dataset,a=d.act;
     if(a==='panel')return openPanel(d.panel);
     if(a==='close-panel'){panel=null;selected=null;return render();}
-    if(a==='modal'){modal=d.modal;return render();}
-    if(a==='close-modal'){modal=null;return render();}
+    if(a==='modal')return openDialog(()=>{modal=d.modal;render();});
+    if(a==='close-modal')return closeDialogs();
     if(a==='select'){selected=d.device;return openPanel('device');}
     if(a==='slot'){selected=`slot:${d.role}`;return openPanel('device');}
     if(a==='pack')return act({type:'PACK_ITEM',itemId:d.item});
@@ -302,8 +307,8 @@ export function mountApprenticeUI(root,handlers){
     if(a==='policy'){const v=root.querySelector('input[name=policy]:checked')?.value;if(v)return act({type:'NETWORK_ACTION',action:{type:'SET_PERMISSIONS',policyId:v}});return;}
     if(a==='finish'){const r=await act({type:'FINISH_VISIT'});if(r?.accepted&&r.code==='APPRENTICESHIP_COMPLETE'){/* the depot shows the ceremony call */}return;}
     if(a==='restart'){modal=null;selected=null;draft=null;addrDraft={};return act({type:'RESTART_VISIT'});}
-    if(a==='ceremony'){ceremony=true;return render();}
-    if(a==='close-ceremony'){ceremony=false;return render();}
+    if(a==='ceremony')return openDialog(()=>{ceremony=true;render();});
+    if(a==='close-ceremony')return closeDialogs();
     if(a==='claim')return act({type:'CLAIM_TRUCK'});
     if(a==='field'){ceremony=false;return programme({type:'ENTER_FIELD'});}
     if(a==='bench')return programme({type:'OPEN_BOOTCAMP'});
@@ -325,15 +330,17 @@ export function mountApprenticeUI(root,handlers){
     if(f.dataset.form==='explain'&&e.target.name==='text')draft=e.target.value;
   });
   root.addEventListener('keydown',e=>{
+    if(e.key==='Tab'){const dialog=root.querySelector('[role=dialog],[role=alertdialog]');if(!dialog)return;const items=[...dialog.querySelectorAll('button:not([disabled]),input:not([disabled]),summary,a[href]')];if(!items.length)return;const first=items[0],last=items.at(-1);
+      if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}else if(!dialog.contains(document.activeElement)){e.preventDefault();first.focus();}return;}
     if(e.key!=='Escape')return;
-    if(modal||ceremony){modal=null;ceremony=false;render();return;}
+    if(modal||ceremony){closeDialogs();return;}
     if(panel&&view.at==='site'){panel=null;selected=null;render();}
     else if(view.held&&view.at==='site')act({type:'RELEASE_CABLE'});
   });
   // Sockets drawn in the close-up work like the socket buttons listed beneath it.
   root.addEventListener('click',e=>{
     const s=e.target.closest('.ll-closeup-art [data-port-id],.ll-closeup-art [data-socket-id]');if(!s||!selected||!byId(selected))return;
-    const socketId=(s.dataset.portId||s.dataset.socketId).replace(/\.(usb|hdmi)\d+$/,'.$1');
+    const socketId=(s.dataset.portId||s.dataset.socketId).replace(/\.usbc?\d+$/,'.usb').replace(/\.hdmi\d+$/,'.hdmi');
     if(!view.held){status={tone:'error',text:'Pick a cable from the tool bag first.'};render();return;}
     act({type:'PLUG',deviceId:selected,socketId});
   });

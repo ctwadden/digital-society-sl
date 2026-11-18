@@ -1,30 +1,42 @@
 # Apprenticeship run record (lead: Claude Code)
 
-**Contract:** programme 0.9.0 · `lanternline.apprenticeship` schema 1 · branch `apprenticeship-0.9` (checkpoint `898abfb`).
+**Contract:** programme 0.9.0 · `lanternline.apprenticeship` schema 1 · branch `apprenticeship-0.9`.
 **Baseline:** `1bf1cde` (origin/main), 258/258 tests before changes.
 
-## Decisions
-- Programme screen `apprentice` is the new start. `APP_ACTION`/`OPEN_APPRENTICE` added; bootcamp is now the optional practice bench.
-- Independent work opens from `fieldStarted` or a replayed truck (three `learner-practice` visit records). 0.8 saves migrate as `apprenticeOrigin:'legacy'`: earlier field work and a completed bench route are kept; no visits are credited.
-- One clinic (Harbour Street, `10.12.1.0/24`) across three visits: physical setup → replacement computer address + Wi-Fi in two rooms → missing AP uplink with valid IP + access decision + explanation.
-- Plugging HDMI/USB/phone cords is recorded as a mistake with mentor advice; only Ethernet and power reach the model. No crimping, routing, DHCP or radio physics is simulated.
-- The mentor's "show me" highlights an object; it never performs learner actions.
+## What changed
+- New start screen: the Lantern Line depot (pack the tool bag) → three supervised visits to Harbour Street Clinic (`10.12.1.0/24`) → earned Van 7 → the existing Riverbend clinic job as the first solo client. The old bootcamp remains as the optional practice bench.
+  1. **Visit 1, alongside:** install, power, cable and test the desk computer, switch and service host.
+  2. **Visit 2, supported:** a replacement computer arrives with an address from another office (`192.168.1.50`); give it a valid unused address with the card's mask. Then bring the access point into service and test the tablet in rooms A and B.
+  3. **Visit 3, the apprentice leads:** the AP uplink is missing while the tablet's IP is valid; decide access in response to the manager's "leave it all open"; write an explanation (or arrange an oral one).
+- Engine `dist/apprentice/engine.js` drives the existing causal model. Mentor and staff dialogue (`mentor.js`) and phone messages are pure functions of the derived view. Plugging HDMI, USB, phone cords or the headphone jack is recorded as a mistake with advice; only Ethernet and power reach the model. "Show me" highlights an object and never acts for the learner.
+- Independent work opens from `fieldStarted` or the replayed truck (three learner-practice visit records). 0.8 saves migrate as `apprenticeOrigin:'legacy'`: earlier field work, plus a completed-bench route into it, are kept; no visits are credited.
 
 ## Workers
-| Task | Route | Owned paths | Status |
+| Task | Route | Owned paths | Result |
 |---|---|---|---|
-| Art module (scene/yard/close-ups/portraits/vans) | **Claude subagent** (started before the Codex instruction; not a Codex worker) | `dist/apprentice/art*.js`, `art-preview.html` | running |
-| T02 Curriculum | `codex exec -m gpt-5.6-sol`, worktree `codex/T02-curriculum` | `docs/apprenticeship/LEARNING.md`, `results/T02-mentor-review.md` | running |
-| T06 Recovery/evidence | `codex exec -m gpt-5.6-sol`, worktree `codex/T06-recovery` | `tests/apprentice/recovery.test.js`, `docs/apprenticeship/SAVE_COMPATIBILITY.md` | running |
+| Art module | **Claude subagent** (started before the Codex instruction; not Codex) | `dist/apprentice/art*.js`, `art-preview.html` | Integrated; reframed after lead review |
+| T02 Curriculum | `codex exec -m gpt-5.6-sol`, worktree | `LEARNING.md`, `results/T02-mentor-review.md` | Complete. 20 text corrections accepted (unmodelled lights, clicks and pins; patient wording); I-can goals shown in the job sheet |
+| T06 Recovery | `codex exec -m gpt-5.6-sol`, worktree | `tests/apprentice/recovery.test.js`, `SAVE_COMPATIBILITY.md` | Complete. 10 tests, no production defect |
+| T07 QA | `codex exec -m gpt-5.6-sol --sandbox read-only` | none | Complete. 2 medium findings, both fixed and rechecked (below) |
 
-The first launch failed: the configured default model `gpt-6.1-sol` was rejected for ChatGPT sign-in (`model_not_found`). Relaunched with `-m gpt-5.6-sol` from `codex debug models`; config left unchanged.
+The first Codex launch failed: the configured default model `gpt-6.1-sol` was rejected for ChatGPT sign-in (`model_not_found`). Relaunched with `-m gpt-5.6-sol` from `codex debug models`; config left unchanged. The Codex report could not confirm its own model or effort.
 
 ## Observed checks
-- Automated: 273/273 plus the apprentice suite (engine and programme, including real 0.8 save fixtures).
-- Local browser (1366×768, fallback art): the depot pack route, then visit 1: a laptop choice gets advice; HDMI and phone-cord mistakes get advice; an unpowered switch gives `SWITCH_OFF`; the mentor gives the next step; powering the switch marks the old result stale; the retest gives `SERVICE_AVAILABLE` with its route; sign-off; reload preserves it; evidence lists the visit.
+- **Automated:** `npm test` 284/284 (registered `tests/apprentice/*.test.js`), including real 0.8 save fixtures generated by the previous build.
+- **Local browser** (Claude Browser pane, 1366×768, plus a 375×812 reflow check): played the opening and all three visits through the UI and saw the following.
+  - Laptop at the desk → mentor advice.
+  - HDMI, phone cord and USB mistakes → specific advice; the drawn close-up sockets respond to a real mouse click.
+  - Unpowered switch → `SWITCH_OFF`; old result marked stale; retest gives `SERVICE_AVAILABLE` with the route; Theo resumes his booking task.
+  - Visit 2: wrong subnet, duplicate, then a valid address. `AP_OFF` → `PORT_DISCONNECTED` → rooms A and B pass.
+  - Visit 3: tablet IP change still gives `PORT_DISCONNECTED`, and Mags names it. AP inspection, repair, access policy, access checks and explanation follow.
+  - Van ceremony, keys, solo job; reload preserves state; evidence text lists actual tests and mistakes.
+- **QA T07 fixes:**
+  - The mentor's IP-change correction was unreachable → reordered, with a regression test.
+  - Dialog focus → background `inert`, Tab containment, focus returns to the opener. Rechecked with 12 real Tab presses and Escape.
+- **Not yet observed:** published site (pending deploy), managed school Windows/Chromebook, screen readers, beginner pilot.
 
 ## Release rule found in play
-Saves are validated by exact replay, so any change to the *stored* apprenticeship attempt shape invalidates earlier 0.9 saves. An unpublished dev save hit this and the game showed recovery safely. After 0.9 is published, derive new presentation facts in selectors or add an explicit migration; never silently change stored state.
+Saves are validated by exact replay. Any change to the *stored* apprenticeship attempt shape invalidates earlier 0.9 saves; an unpublished dev save hit this, and the game showed recovery safely. After 0.9 is published, derive new presentation facts in selectors or add an explicit migration.
 
-## Next
-Integrate art; apply the accepted T02 text fixes; merge T06 tests; play visits 2–3 and the van; then independent QA (job 07, Codex, read-only); publish and verify the live page.
+## Screenshots
+`screenshots/01…06` are real captures from the browser pane at 1366×768.
