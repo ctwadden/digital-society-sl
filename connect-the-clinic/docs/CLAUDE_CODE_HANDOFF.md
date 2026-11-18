@@ -121,6 +121,8 @@ Current contracts protect causal truth and saved work; they do not forbid the te
 
 ## 9. Delegate and build
 
+For the teacher's requested **Claude Code department head with Codex specialists**, use [the team launch package](claude-codex-team/README.md). It contains the master prompt, seven bounded job briefs, file ownership, the Delegate workflow and the actual Codex CLI dispatch route. Its setup checks are distinct from game-runtime verification.
+
 Keep one capable lead integrator responsible for product direction, shared state and final acceptance. Assign bounded files to gameplay/simulation, mentor/curriculum, interface/experience and art specialists. Add independent QA after a material playable segment exists. Use a small concurrent team compatible with the runtime; coordinate shared files explicitly. Use available project skills or translate these contracts into worker prompts when those skills are unavailable.
 
 Prove the opening plus one complete mentor-supported site interaction first: arriving, choosing a real item, operating equipment, observing a test and receiving a relevant mentor response. Inspect it in the browser before scaling all three visits. Then integrate reduced-support practice and the earned-truck transition. Do not build another disconnected demo or stop after a plan.
