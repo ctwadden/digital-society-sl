@@ -4,7 +4,7 @@ import {mountOpeningUI} from './ui.js';
 import {mountBootcampUI} from '../bootcamp/ui.js';
 import {mountApprenticeUI} from '../apprentice/ui.js';
 
-const BUILD_VERSION = '0.9.0-review';
+const BUILD_VERSION = '0.10.0-review';
 const root = document.querySelector('#app');
 let store = null, ui = null, mountedScreen = null;
 

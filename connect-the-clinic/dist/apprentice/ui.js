@@ -52,14 +52,24 @@ export function mountApprenticeUI(root,handlers){
   const dev=roleId=>view.devices.find(d=>d.roleId===roleId)||null;
   const byId=id=>view.devices.find(d=>d.id===id)||null;
 
+  // Controls are disabled while an action saves; keep keyboard focus on the same control afterwards.
+  function restoreFocus(sig){
+    if(!sig)return;const el=[...root.querySelectorAll('[data-act],[name]')].find(x=>focusSignature(x)===sig);
+    if(el&&!el.disabled&&document.activeElement!==el)el.focus({preventScroll:true});
+    else if(!el&&(!document.activeElement||document.activeElement===document.body)){
+      const kind=sig.split('|')[0],next=['sort','classify'].includes(kind)?R('panel').querySelector(`[data-act="${kind}"]:not([disabled])`):null;
+      (next||R('panel'))?.focus({preventScroll:true});
+    }
+  }
   async function act(action){
     if(busy||readOnly())return;
+    const active=document.activeElement,sig=active&&root.contains(active)&&active.matches('[data-act],[name]')?focusSignature(active):null;
     busy=true;
     try{
       const result=await send({type:'APP_ACTION',action});
       if(!result.accepted)status={tone:'error',text:result.message};else status=null;
       return result;
-    }finally{busy=false;render();}
+    }finally{busy=false;render();restoreFocus(sig);}
   }
   async function programme(action){busy=true;try{const r=await send(action);if(!r.accepted)status={tone:'error',text:r.message};return r;}finally{busy=false;render();}}
 
