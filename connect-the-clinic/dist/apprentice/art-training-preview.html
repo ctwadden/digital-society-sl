@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Training Centre art preview</title><style>
+html,body{margin:0;background:#17242b;color:#f4ead4;font-family:system-ui,sans-serif}main{max-width:1600px;margin:auto}header{display:flex;gap:1rem;align-items:center;padding:.55rem 1rem;background:#20343c}select{font:inherit;padding:.35rem}.frame{line-height:0}.frame svg{width:100%;height:auto;display:block}.ap-pulse{animation:pulse 1.8s ease-in-out infinite;transform-box:fill-box}@keyframes pulse{50%{opacity:.42;transform:scale(1.035)}}@media(prefers-reduced-motion:reduce){.ap-pulse{animation:none}}
+</style></head><body><main><header><strong>Lantern Line Training Centre</strong><label>Case <select id="case"></select></label></header><div class="frame" id="frame"></div></main><script type="module">
+import {renderTraining} from './art-training.js';
+const ids=['station.cables','station.addressing','station.parts','station.devices','station.speed','station.security'];
+const stations=(states)=>ids.map((id,i)=>({id,state:states[i]||'locked'}));
+const devices=[{id:'device.bench-pc',roleId:'role.reception',kind:'desktop',powered:true,selected:false},{id:'device.switch',roleId:'infra.switch',kind:'switch4',powered:true,selected:true},{id:'device.server',roleId:'role.records',kind:'server',powered:true,selected:false}];
+const cases={
+ 'all-open':{stations:stations(ids.map(()=> 'open')),focus:'station.cables',mentor:{stationId:'station.cables',pose:'pointing'},player:{stationId:'station.addressing'}},
+ 'progress':{stations:stations(['done','open','locked','locked','locked','locked']),focus:'station.addressing',mentor:{stationId:'station.addressing',pose:'thumbs'},player:{stationId:'station.addressing'}},
+ 'bench-ok':{stations:stations(['done','open','locked','locked','locked','locked']),bench:{devices,cables:[{id:'cable.pc-switch',fromDeviceId:'device.bench-pc',toDeviceId:'device.switch',state:'tested-ok'},{id:'cable.switch-server',fromDeviceId:'device.switch',toDeviceId:'device.server',state:'tested-ok'}]},focus:'station.addressing'},
+ 'bench-fail':{stations:stations(['open','open','locked','locked','locked','locked']),bench:{devices:devices.map(d=>d.roleId==='infra.switch'?{...d,powered:false}:d),cables:[{id:'cable.failed',fromDeviceId:'device.bench-pc',toDeviceId:'device.switch',state:'tested-fail'}]},focus:'station.addressing',mentor:{stationId:'station.addressing',pose:'thinking'}},
+ 'sorted-three':{stations:stations(['open','open','locked','locked','locked','locked']),cableWall:{sorted:{ethernet:0,power:1,hdmi:2}},focus:'station.cables',player:{stationId:'station.cables'}}
+};
+const sel=document.querySelector('#case'), frame=document.querySelector('#frame'); for(const k of Object.keys(cases))sel.add(new Option(k,k)); const q=new URLSearchParams(location.search).get('only'); if(q&&cases[q])sel.value=q; const draw=()=>frame.innerHTML=renderTraining(cases[sel.value]); sel.addEventListener('change',()=>{draw();history.replaceState(null,'','?only='+encodeURIComponent(sel.value))}); draw();
+</script></body></html>

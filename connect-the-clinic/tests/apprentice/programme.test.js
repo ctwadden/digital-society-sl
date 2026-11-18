@@ -59,7 +59,7 @@ test('a real 0.8 save with an unfinished bench migrates without inventing appren
   const v=deriveProgramme(r.state);
   assert.equal(v.screen,'bootcamp');assert.equal(v.apprenticeOrigin,'legacy');
   assert.equal(v.apprentice.completedVisitIds.length,0);assert.equal(v.apprentice.truckEarned,false);
-  assert.equal(r.state.buildVersion,'0.9.0');
+  assert.equal(r.state.buildVersion,'0.10.0');
   // The migrated programme keeps replaying under 0.9 rules after further play.
   let s=send(r.state,{type:'OPEN_APPRENTICE'});
   const again=validateProgrammeSave(serializeProgrammeProgress(s));assert.equal(again.valid,true,again.error);
@@ -78,4 +78,33 @@ test('a real 0.8 save with field work in progress resumes it exactly',()=>{
   assert.deepEqual(r.state.field,before.field);assert.equal(deriveProgramme(r.state).screen,'field');
   const tampered=clone(before);tampered.bootcamp.completionRecords=[];
   assert.equal(validateProgrammeSave(JSON.stringify(tampered)).valid,false);
+});
+
+test('a real published 0.9 save keeps ungated visits and gains the Training Centre without credit',()=>{
+  const r=validateProgrammeSave(fixture('v09-visit1-done.json'));
+  assert.equal(r.valid,true,r.error);assert.equal(r.migrated,true);
+  assert.equal(r.state.buildVersion,'0.10.0');assert.equal(r.state.apprenticeRules,'ungated');
+  const v=deriveProgramme(r.state).apprentice;
+  assert.deepEqual(v.completedVisitIds,['visit.1']);assert.equal(v.training.gate,false);
+  assert.ok(v.training.stations.every(s=>!s.earned),'no training card is invented by migration');
+  let s=send(r.state,{type:'APP_ACTION',action:{type:'START_VISIT',visitId:'visit.2'}});
+  assert.equal(deriveProgramme(s).apprentice.visit.id,'visit.2','0.9 learners are not locked out of their next visit');
+  const again=validateProgrammeSave(serializeProgrammeProgress(s));assert.equal(again.valid,true,again.error);
+  assert.equal(again.state.apprenticeRules,'ungated');
+  const flipped=JSON.parse(serializeProgrammeProgress(s));flipped.apprenticeRules='gated';
+  assert.equal(validateProgrammeSave(JSON.stringify(flipped)).valid,false,'a gated replay rejects the ungated visit start');
+});
+
+test('new 0.10 programmes gate visits on training cards earned by real drills',()=>{
+  const d=programmeDriver(createProgramme({campaignId:'p.gate'}));
+  assert.equal(d.state.apprenticeRules,'gated');
+  for(const itemId of ['item.patch-cable','item.power-cord','item.link-tester','item.port-light'])d.act({type:'PACK_ITEM',itemId});
+  d.act({type:'START_VISIT',visitId:'visit.1'},false);
+  d.act({type:'OPEN_TRAINING'});
+  d.act({type:'SORT_CABLE',cableType:'phone',job:'network'});
+  assert.equal(d.view.training.sorted.phone,undefined,'a wrong sort is recorded but not placed');
+  d.act({type:'ASK_MENTOR',topic:'cables'});
+  assert.equal(d.view.training.stations.find(s=>s.id==='station.cables').earned,false,'asking does not earn a card');
+  const forged=JSON.parse(serializeProgrammeProgress(d.state));Object.assign(forged.apprentice.training.sorted,{ethernet:'network',power:'power',hdmi:'display',usb:'peripheral',phone:'phone-line'});
+  assert.equal(validateProgrammeSave(JSON.stringify(forged)).valid,false,'edited training progress is rejected by replay');
 });

@@ -141,3 +141,14 @@
 .ll-bubble.who-reception::after{right:auto;left:62%;bottom:auto;top:-8px;transform:translateX(-50%);border:8px solid transparent;border-bottom-color:#fffdf7;border-top:0}
 .ll-bubble.who-manager{transform:translate(-18%,34px)}
 .ll-bubble.who-manager::after{right:auto;left:18%;bottom:auto;top:-8px;transform:translateX(-50%);border:8px solid transparent;border-bottom-color:#fffdf7;border-top:0}
+
+/* Training Centre */
+.ll-traincall{display:grid;gap:4px;padding:12px 14px;margin:8px 0;border-radius:14px;background:linear-gradient(135deg,#e7f3ef,#d7ece5);box-shadow:inset 0 0 0 2px #17675f55}.ll-traincall span{font-size:.86rem;color:var(--muted)}.ll-traincall .ll-btn{justify-self:start;margin-top:4px}
+.ll-stations{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:8px}.ll-stationbtn{display:grid;gap:2px;width:100%;text-align:left;border:0;border-radius:12px;padding:10px 12px;background:#f3eee2;font:inherit;cursor:pointer;box-shadow:inset 0 0 0 1px #14353a22}.ll-stationbtn small{color:var(--muted)}.ll-stationbtn .ll-tag{justify-self:start}
+.ll-stations li.done .ll-stationbtn{background:#e2f4e9}.ll-stations li.locked .ll-stationbtn{opacity:.75;background:repeating-linear-gradient(45deg,#f3eee2,#f3eee2 8px,#ece5d4 8px,#ece5d4 16px)}
+.ll-sortlist{list-style:none;margin:0;padding:0;display:grid;gap:8px}.ll-sortlist li{display:grid;gap:6px;padding:8px 10px;border-radius:10px;background:#f6f1e4}.ll-sortlist li.done{background:#e6f5ec}
+.ll-sortname{display:flex;align-items:center;gap:8px;font-weight:600}.ll-sortname i{width:24px;height:16px;display:inline-block;border-radius:4px}.ll-mono{font-family:"Courier New",ui-monospace,monospace;font-size:1rem}
+.ll-choicebar{display:flex;flex-wrap:wrap;gap:4px}.ll-choicebar .ll-chip{font-size:.8rem;padding:6px 10px;min-height:34px}
+.ll-hb-summary{background:#fffbea;border-radius:10px;padding:10px 12px;box-shadow:inset 0 0 0 1px #e0c76a;margin-bottom:8px}.ll-hb-summary p{margin:0 0 8px}
+.ll-handbook h3{margin-top:14px}.ll-handbook p{font-size:.95rem;line-height:1.55}.ll-terms dt{margin-top:6px}.ll-terms dd{color:var(--ink)}
+.ll-cardearned{font-weight:700;color:#1d5e3a;background:#e2f4e9;padding:8px 12px;border-radius:10px}

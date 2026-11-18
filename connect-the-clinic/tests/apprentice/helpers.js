@@ -11,7 +11,18 @@ export function programmeDriver(state){
 }
 const dev=(d,roleId)=>d.view.devices.find(x=>x.roleId===roleId);
 const eth=(x,i=1)=>`${x.id}.eth${i}`;
-export function pack(d){for(const itemId of ['item.patch-cable','item.power-cord','item.link-tester','item.port-light'])d.act({type:'PACK_ITEM',itemId});return d;}
+/** Earns both training cards through real drills (sorting, classifying, bench repairs). */
+export function train(d){
+  d.act({type:'OPEN_TRAINING'});
+  for(const [cableType,job] of [['ethernet','network'],['power','power'],['hdmi','display'],['usb','peripheral'],['phone','phone-line']])d.act({type:'SORT_CABLE',cableType,job});
+  d.act({type:'START_DRILL',drillId:'drill.cables.bench'});d.act({type:'RUN_TEST',testId:'reception'});
+  power(d,dev(d,'infra.switch'));cable(d,dev(d,'role.reception'),1,dev(d,'infra.switch'),2);d.act({type:'RUN_TEST',testId:'reception'});d.act({type:'FINISH_VISIT'});
+  for(const [address,verdict] of [['172.20.8.0','network'],['172.20.8.77','usable'],['172.20.8.10','taken'],['172.20.9.5','other-network'],['172.20.8.255','broadcast'],['10.12.1.40','other-network']])d.act({type:'CLASSIFY_ADDRESS',address,verdict});
+  d.act({type:'START_DRILL',drillId:'drill.addressing.bench'});const pc=dev(d,'role.reception');d.act({type:'INSPECT_DEVICE',deviceId:pc.id});
+  d.act({type:'NETWORK_ACTION',action:{type:'SET_STATIC_ADDRESS',deviceId:pc.id,address:'172.20.8.77',mask:'255.255.255.0'}});d.act({type:'RUN_TEST',testId:'reception'});d.act({type:'FINISH_VISIT'});
+  d.act({type:'RETURN_TO_YARD'});return d;
+}
+export function pack(d){const t=d.view.training;if(t?.gate&&!t.stations.every(s=>!s.card||s.earned))train(d);for(const itemId of ['item.patch-cable','item.power-cord','item.link-tester','item.port-light'])d.act({type:'PACK_ITEM',itemId});return d;}
 export function cable(d,a,ai,b,bi){d.act({type:'HOLD_CABLE',cableType:'ethernet'});d.act({type:'PLUG',deviceId:a.id,socketId:eth(a,ai)});d.act({type:'PLUG',deviceId:b.id,socketId:eth(b,bi)});return d;}
 export function power(d,x){d.act({type:'HOLD_CABLE',cableType:'power'});d.act({type:'PLUG',deviceId:x.id,socketId:`${x.id}.power`});return d;}
 export function visit1(d){
