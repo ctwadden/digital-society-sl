@@ -120,3 +120,8 @@
 @media (prefers-reduced-motion:reduce){.ll-game *,.ll-game *::before,.ll-game *::after{animation:none!important;transition:none!important}}
 @media (forced-colors:active){.ll-hot::before{forced-color-adjust:none;background:Canvas;box-shadow:0 0 0 3px CanvasText}}
 .ll-runlist{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:4px;font-size:.88rem}.ll-runlist li{padding-left:20px;position:relative}.ll-runlist li::before{position:absolute;left:0;font-weight:800}.ll-runlist li.ok::before{content:"✓";color:var(--ok)}.ll-runlist li.bad::before{content:"✕";color:var(--bad)}
+.ll-badge{display:inline-grid;place-items:center;min-width:20px;height:20px;border-radius:10px;background:var(--orange);color:#fff;font-size:.72rem;margin-left:4px}
+.ll-phone{list-style:none;margin:0;padding:0;display:grid;gap:8px}.ll-phone li{background:#16201f;color:#eef6f2;border-radius:14px;padding:10px 12px;box-shadow:inset 0 0 0 1px #ffffff1c}.ll-phone p{margin:4px 0 0;font-size:.92rem}
+.ll-phone-from{font-weight:700;font-size:.82rem;color:#9fe0c0}.ll-phone-from small{color:#9ab;font-weight:500;margin-left:6px}.ll-phone-latest{margin-bottom:12px}
+.ll-ican ul{margin:6px 0 0;padding-left:20px;font-size:.9rem}
+.ll-bag .ll-quiet{color:#f7f0df}

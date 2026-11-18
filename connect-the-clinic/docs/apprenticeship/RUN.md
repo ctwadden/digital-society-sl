@@ -23,5 +23,8 @@ The first launch failed: the configured default model `gpt-6.1-sol` was rejected
 - Automated: 273/273 plus the apprentice suite (engine and programme, including real 0.8 save fixtures).
 - Local browser (1366×768, fallback art): the depot pack route, then visit 1: a laptop choice gets advice; HDMI and phone-cord mistakes get advice; an unpowered switch gives `SWITCH_OFF`; the mentor gives the next step; powering the switch marks the old result stale; the retest gives `SERVICE_AVAILABLE` with its route; sign-off; reload preserves it; evidence lists the visit.
 
+## Release rule found in play
+Saves are validated by exact replay, so any change to the *stored* apprenticeship attempt shape invalidates earlier 0.9 saves. An unpublished dev save hit this and the game showed recovery safely. After 0.9 is published, derive new presentation facts in selectors or add an explicit migration; never silently change stored state.
+
 ## Next
 Integrate art; apply the accepted T02 text fixes; merge T06 tests; play visits 2–3 and the van; then independent QA (job 07, Codex, read-only); publish and verify the live page.

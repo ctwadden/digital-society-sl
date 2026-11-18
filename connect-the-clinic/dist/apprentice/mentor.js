@@ -204,4 +204,23 @@ export function staffLines(view){
   return lines;
 }
 
+/** Phone messages are derived from recorded progress only (completed visits, claimed van). Newest first. */
+export function phoneMessages(view){
+  const done=new Set(view.completedVisitIds),m=[];
+  const add=(id,from,text,when)=>m.push({id,from,text,when});
+  add('msg.v1.request','Ms. Ruiz · Harbour Street Clinic','Our front desk has no working computer and we open at 8. Theo can’t see any bookings. Can Lantern Line come this morning?','Day 1');
+  if(done.has('visit.1')){
+    add('msg.v1.thanks','Theo · Front desk','Bookings worked all morning. Thanks for testing it with me there.','Day 1');
+    add('msg.v2.request','Ms. Ruiz · Harbour Street Clinic','We got a replacement desk computer from our other office, and Ana needs her tablet working in both exam rooms. Tomorrow?','Day 2');
+  }
+  if(done.has('visit.2')){
+    add('msg.v2.thanks','Ana · Exam rooms','Did my room checklist from room B today. First time the tablet worked in both rooms!','Day 2');
+    add('msg.v3.request','Ms. Ruiz · Harbour Street Clinic','After the weekend renovation Ana’s tablet won’t open the workspace. And honestly, could you just open everything up so nobody gets locked out?','Day 3');
+  }
+  if(done.has('visit.3'))add('msg.v3.thanks','Ms. Ruiz · Harbour Street Clinic','Ana’s back on the workspace, and thanks for explaining who needs what. We’ll keep the rules as you set them.','Day 3');
+  if(view.truckEarned)add('msg.truck','Mags','Come back to the depot. There’s something by the shed with your unit number on it.','Day 3');
+  if(view.truckClaimed)add('msg.solo','Ari · Riverbend Community Clinic','Hi — Lantern Line gave us your number. Our nurse needs a working setup before the afternoon shift. Can you take the job?','Today');
+  return m.reverse();
+}
+
 export {ROLE_NAME};

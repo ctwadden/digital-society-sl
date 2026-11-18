@@ -2,7 +2,7 @@
  * Lantern Line apprenticeship interface. The scene is the workspace; panels open when needed.
  * Every state shown here comes from the derived engine view. The UI never decides success.
  */
-import {mentorLine,staffLines,MENTOR,GOALS} from './mentor.js';
+import {mentorLine,staffLines,MENTOR,GOALS,phoneMessages} from './mentor.js';
 
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
 const ROLE_LABEL={'role.reception':'Desk computer','role.records':'Service host','infra.switch':'Network switch','infra.ap':'Wireless access point','role.nurse':'Ana’s tablet'};
@@ -63,7 +63,7 @@ export function mountApprenticeUI(root,handlers){
     const pips=view.visits.map(x=>`<li class="${x.completed?'done':x.active?'now':''}" title="Visit ${x.number}: ${esc(x.title)}"><span class="ll-sr">Visit ${x.number} ${x.completed?'completed':x.unlocked?'open':'locked'}</span></li>`).join('')+`<li class="van ${view.truckEarned?'done':''}" title="Your own van"><span class="ll-sr">Own van ${view.truckEarned?'earned':'not yet earned'}</span></li>`;
     return `<div class="ll-brand"><span class="ll-lantern" aria-hidden="true"></span><div><strong>Lantern Line</strong><span>${site?`Harbour Street Clinic · Visit ${v.number} of 3`:'Depot yard'}</span></div></div>
       <ol class="ll-pips" aria-label="Apprenticeship progress">${pips}</ol>
-      <nav class="ll-hud-actions" aria-label="Game menu">${site?btn('panel','Job sheet','data-panel="job"','ll-btn ll-quiet')+btn('panel','Network card','data-panel="card"','ll-btn ll-quiet'):''}${btn('panel','Cable guide','data-panel="guide"','ll-btn ll-quiet')}${site?btn('yard','Depot',dis(),'ll-btn ll-quiet'):''}${btn('modal','Progress','data-modal="progress"','ll-btn ll-quiet')}</nav>`;
+      <nav class="ll-hud-actions" aria-label="Game menu">${site?btn('panel','Job sheet','data-panel="job"','ll-btn ll-quiet')+btn('panel','Network card','data-panel="card"','ll-btn ll-quiet'):''}${btn('panel',`Phone <span class="ll-badge">${phoneMessages(view).length}</span>`,'data-panel="phone" aria-label="Phone messages"','ll-btn ll-quiet')}${btn('panel','Cable guide','data-panel="guide"','ll-btn ll-quiet')}${site?btn('yard','Depot',dis(),'ll-btn ll-quiet'):''}${btn('modal','Progress','data-modal="progress"','ll-btn ll-quiet')}</nav>`;
   }
   function storage(){
     const s=view.storage||{};if(!s.mode||s.mode==='saved')return '';
@@ -146,7 +146,7 @@ export function mountApprenticeUI(root,handlers){
     const cards=view.visits.map(x=>`<li class="ll-visit ${x.completed?'done':''} ${x.unlocked?'':'locked'}"><span class="ll-visit-no">Visit ${x.number}</span><strong>${esc(x.title)}</strong><span class="ll-visit-support">${{alongside:'Mags works alongside you',supported:'Supported: you configure',lead:'You lead the job'}[x.support]}</span>${x.completed?`<span class="ll-tag ok">Completed</span>${btn('start','Practise again',`data-visit="${x.id}" ${dis()}`,'ll-btn ll-quiet')}`:x.unlocked?btn('start',x.active?'Continue visit':'Ride to the clinic',`data-visit="${x.id}" ${ready?'':'disabled'} ${dis()}`,'ll-btn ll-primary'):'<span class="ll-tag">Locked</span>'}</li>`).join('');
     const bagList=view.items.map(i=>`<li class="${i.packed?'in':''}"><button type="button" class="ll-bagitem" data-act="${i.packed?'unpack':'pack'}" data-item="${esc(i.id)}" aria-pressed="${i.packed}" ${dis()}><b>${esc(i.label)}</b><small>${esc(i.use)}</small></button></li>`).join('');
     const truck=view.truckEarned?`<div class="ll-truckcall"><strong>${view.truckClaimed?'Van 7 is yours':'Something is waiting by the shed'}</strong>${view.truckClaimed?`<p>Independent jobs are open.</p>${btn('field','Take your first solo job →',dis(),'ll-btn ll-primary')}`:btn('ceremony','Go and see →',dis(),'ll-btn ll-primary')}</div>`:'';
-    return `<h2>Today’s work</h2>${truck}<ol class="ll-visits">${cards}</ol>${ready?'':'<p class="ll-note">Pack the essentials before you leave. Click items on the van shelves or choose them here.</p>'}<details class="ll-details" ${ready?'':'open'}><summary>Tool bag (${view.packed.length} items)</summary><ul class="ll-baglist">${bagList}</ul></details><div class="ll-links">${btn('bench','Optional practice bench',dis(),'ll-btn ll-quiet')}${view.canEnterField&&!view.truckEarned?btn('field','Return to field job',dis(),'ll-btn ll-quiet'):''}</div><p class="ll-fine">${esc(view.notice)}</p>`;
+    return `<div class="ll-phone-latest" aria-label="Latest phone message">${phoneCard(phoneMessages(view),1)}</div><h2>Today’s work</h2>${truck}<ol class="ll-visits">${cards}</ol>${ready?'':'<p class="ll-note">Pack the essentials before you leave. Click items on the van shelves or choose them here.</p>'}<details class="ll-details" ${ready?'':'open'}><summary>Tool bag (${view.packed.length} items)</summary><ul class="ll-baglist">${bagList}</ul></details><div class="ll-links">${btn('bench','Optional practice bench',dis(),'ll-btn ll-quiet')}${view.canEnterField&&!view.truckEarned?btn('field','Return to field job',dis(),'ll-btn ll-quiet'):''}</div><p class="ll-fine">${esc(view.notice)}</p>`;
   }
 
   function devicePanel(){
@@ -225,7 +225,10 @@ export function mountApprenticeUI(root,handlers){
       <li><i class="t-light"></i><div><b>Inspection light</b><small>Reads a device’s ports, power, address and mask.</small></div></li></ul>
       <p class="ll-fine">The game simulates power, Ethernet links, addresses, Wi-Fi association and access rules. It does not simulate crimping cables, electrical work or routing between networks.</p>`;
   }
+  function phoneCard(msgs,limit){return `<ol class="ll-phone">${msgs.slice(0,limit).map(x=>`<li><span class="ll-phone-from">${esc(x.from)} <small>${esc(x.when)}</small></span><p>${esc(x.text)}</p></li>`).join('')}</ol>`;}
+  function phonePanel(){return `<header class="ll-panel-head"><h2>Phone</h2><p>Messages from clients and Mags.</p>${btn('close-panel','Close','aria-label="Close panel"','ll-btn ll-text')}</header>${phoneCard(phoneMessages(view),20)}`;}
   function panelHtml(){
+    if(panel==='phone')return phonePanel();
     if(view.at==='yard')return panel==='guide'?guidePanel():yardPanel();
     if(!view.visit)return '';
     if(panel==='device')return devicePanel();
@@ -252,7 +255,7 @@ export function mountApprenticeUI(root,handlers){
   function render(){
     if(closed)return;
     view=getView();
-    if(view.at==='yard'&&!['guide'].includes(panel))panel=null;
+    if(view.at==='yard'&&!['guide','phone'].includes(panel))panel=null;
     if(selected&&!selected.startsWith('slot:')&&!byId(selected)){selected=null;if(panel==='device')panel=null;}
     const keyEl=document.activeElement?.closest?.('[data-act],[name]');
     const focusKey=keyEl&&root.contains(keyEl)?focusSignature(keyEl):null;
@@ -326,6 +329,13 @@ export function mountApprenticeUI(root,handlers){
     if(modal||ceremony){modal=null;ceremony=false;render();return;}
     if(panel&&view.at==='site'){panel=null;selected=null;render();}
     else if(view.held&&view.at==='site')act({type:'RELEASE_CABLE'});
+  });
+  // Sockets drawn in the close-up work like the socket buttons listed beneath it.
+  root.addEventListener('click',e=>{
+    const s=e.target.closest('.ll-closeup-art [data-port-id],.ll-closeup-art [data-socket-id]');if(!s||!selected||!byId(selected))return;
+    const socketId=(s.dataset.portId||s.dataset.socketId).replace(/\.(usb|hdmi)\d+$/,'.$1');
+    if(!view.held){status={tone:'error',text:'Pick a cable from the tool bag first.'};render();return;}
+    act({type:'PLUG',deviceId:selected,socketId});
   });
   // Clicking a device drawn in the SVG works like its hotspot button.
   root.addEventListener('click',e=>{
