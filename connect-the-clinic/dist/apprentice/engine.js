@@ -49,8 +49,36 @@ export const VISITS=Object.freeze([
    rooms:['reception','closet','examA','examB'],roles:{},
    actions:['POWER_DEVICE','CONNECT_PORTS','DISCONNECT_CABLE','SET_STATIC_ADDRESS','ASSOCIATE_WIFI','MOVE_NURSE','SET_PERMISSIONS'],tests:['reception','nurse','access']}
 ]);
-const visit=id=>VISITS.find(v=>v.id===id);
-const ACTION_FIELDS={PACK_ITEM:['itemId'],UNPACK_ITEM:['itemId'],START_VISIT:['visitId'],RESTART_VISIT:[],RETURN_TO_YARD:[],HOLD_CABLE:['cableType'],RELEASE_CABLE:[],PLUG:['deviceId','socketId'],NETWORK_ACTION:['action'],INSPECT_DEVICE:['deviceId'],RUN_TEST:['testId'],ASK_MENTOR:['topic'],SAVE_EXPLANATION:['text','oral'],FINISH_VISIT:[],CLAIM_TRUCK:[]};
+/** Training Centre stations. Cards are derived from recorded learner work, never stored as flags. */
+export const STATIONS=Object.freeze([
+  {id:'station.cables',title:'Cable wall',card:'card.cables',lesson:'Course 3.4 Networks',open:true,unlocks:['visit.1']},
+  {id:'station.addressing',title:'Network rack',card:'card.addressing',lesson:'Course 3.4 Networks',open:true,unlocks:['visit.2']},
+  {id:'station.parts',title:'Parts bench',card:null,lesson:'Course 3.3B Components',open:false,unlocks:[]},
+  {id:'station.devices',title:'Device locker',card:null,lesson:'Course 3.3A Types of computers',open:false,unlocks:[]},
+  {id:'station.speed',title:'Speed lab',card:null,lesson:'Course 3.4 Networks',open:false,unlocks:[]},
+  {id:'station.security',title:'Security desk',card:null,lesson:'Course 3.4 Networks',open:false,unlocks:[]}
+]);
+export const VISIT_CARDS=Object.freeze({'visit.1':['card.cables'],'visit.2':['card.addressing'],'visit.3':['card.cables','card.addressing']});
+export const SORT_JOBS=Object.freeze(['network','power','display','peripheral','phone-line']);
+const SORT_ANSWER={ethernet:'network',power:'power',hdmi:'display',usb:'peripheral',phone:'phone-line'};
+export const PRACTICE_NETWORK=Object.freeze({base:'172.20.8',cidr:'172.20.8.0/24',mask:'255.255.255.0',serverAddress:'172.20.8.10',receptionAddress:'172.20.8.20',inheritedNurseAddress:'172.20.8.30'});
+export const ADDRESS_CANDIDATES=Object.freeze([
+  {address:'172.20.8.0',verdict:'network'},{address:'172.20.8.77',verdict:'usable'},{address:'172.20.8.10',verdict:'taken'},
+  {address:'172.20.9.5',verdict:'other-network'},{address:'172.20.8.255',verdict:'broadcast'},{address:'10.12.1.40',verdict:'other-network'}]);
+export const ADDRESS_VERDICTS=Object.freeze(['usable','network','broadcast','taken','other-network']);
+export const DRILLS=Object.freeze([
+  {id:'drill.cables.bench',stationId:'station.cables',number:0,support:'alongside',title:'Bench fault: find the dead link',
+   brief:'The practice bench has a computer, a switch and a service host. Someone left it broken. Test it, read what the tester tells you, fix one thing at a time and test again.',
+   goal:'Run a test that fails, fix each cause you find, and finish with a passing test.',
+   roles:{},actions:['POWER_DEVICE','CONNECT_PORTS','DISCONNECT_CABLE'],tests:['reception'],network:'practice'},
+  {id:'drill.addressing.bench',stationId:'station.addressing',number:0,support:'alongside',title:'Rack fault: the wrong address',
+   brief:'The rack computer was moved here from another office. Its cable and power are fine. Read the practice network card, give it a valid unused address with the right mask, and test.',
+   goal:'Inspect the computer, apply a valid unused address with the card’s mask, and finish with a passing test.',
+   roles:{},actions:['POWER_DEVICE','CONNECT_PORTS','DISCONNECT_CABLE','SET_STATIC_ADDRESS'],tests:['reception'],network:'practice'}
+]);
+const visit=id=>VISITS.find(v=>v.id===id)||DRILLS.find(d=>d.id===id);
+const isDrill=id=>DRILLS.some(d=>d.id===id);
+const ACTION_FIELDS={OPEN_TRAINING:[],START_DRILL:['drillId'],SORT_CABLE:['cableType','job'],CLASSIFY_ADDRESS:['address','verdict'],PACK_ITEM:['itemId'],UNPACK_ITEM:['itemId'],START_VISIT:['visitId'],RESTART_VISIT:[],RETURN_TO_YARD:[],HOLD_CABLE:['cableType'],RELEASE_CABLE:[],PLUG:['deviceId','socketId'],NETWORK_ACTION:['action'],INSPECT_DEVICE:['deviceId'],RUN_TEST:['testId'],ASK_MENTOR:['topic'],SAVE_EXPLANATION:['text','oral'],FINISH_VISIT:[],CLAIM_TRUCK:[]};
 const NETWORK_FIELDS={CHOOSE_DEVICE:['roleId','kind'],POWER_DEVICE:['deviceId','on'],CONNECT_PORTS:['fromDeviceId','fromPortId','toDeviceId','toPortId'],DISCONNECT_CABLE:['cableId'],SET_STATIC_ADDRESS:['deviceId','address','mask'],ASSOCIATE_WIFI:['deviceId','apDeviceId'],MOVE_NURSE:['locationId'],SET_PERMISSIONS:['policyId']};
 const MENTOR_TOPICS=['next','why','show','cables','address','wireless','access'];
 const SOCKET_KINDS=['ethernet','power','hdmi','usb','audio'];
@@ -61,10 +89,22 @@ const recordsFor=(s,id)=>s.completionRecords.filter(r=>r.visitId===id);
 const completedVisitIds=s=>[...new Set(s.completionRecords.map(r=>r.visitId))];
 const unlockedIndex=s=>Math.min(VISITS.length-1,VISITS.findIndex(v=>!completedVisitIds(s).includes(v.id))<0?VISITS.length-1:VISITS.findIndex(v=>!completedVisitIds(s).includes(v.id)));
 export const truckEarned=s=>VISITS.every(v=>recordsFor(s,v.id).some(r=>r.origin==='learner-practice'));
+const training=s=>s.training||{gate:false,current:null,sorted:{},classified:{},log:[],records:[],support:[]};
+const sortDone=s=>Object.entries(SORT_ANSWER).every(([type,job])=>training(s).sorted[type]===job);
+const classifyDone=s=>ADDRESS_CANDIDATES.every(c=>training(s).classified[c.address]===c.verdict);
+const drillDone=(s,id)=>training(s).records.some(r=>r.visitId===id&&r.origin==='learner-practice');
+/** Cards come only from the learner's own sorting/classifying plus a completed bench drill. */
+export function cardEarned(s,cardId){
+  if(cardId==='card.cables')return sortDone(s)&&drillDone(s,'drill.cables.bench');
+  if(cardId==='card.addressing')return classifyDone(s)&&drillDone(s,'drill.addressing.bench');
+  return false;
+}
+const visitGateOpen=(s,visitId)=>!training(s).gate||(VISIT_CARDS[visitId]||[]).every(c=>cardEarned(s,c));
 
-export function createApprenticeship({campaignId='apprentice.local'}={}){
+export function createApprenticeship({campaignId='apprentice.local',trainingGate=true}={}){
   need(typeof campaignId==='string'&&/^[A-Za-z0-9._:-]{1,120}$/.test(campaignId),'CAMPAIGN_INVALID','Use an anonymous campaign identifier.');
-  return {appId:APP_ID,schemaVersion:1,campaignId,revision:0,at:'yard',packed:[],yardLog:[],attemptSequence:0,current:null,completionRecords:[],truck:{claimed:false,claimedRevision:null}};
+  return {appId:APP_ID,schemaVersion:1,campaignId,revision:0,at:'yard',packed:[],yardLog:[],attemptSequence:0,current:null,completionRecords:[],truck:{claimed:false,claimedRevision:null},
+    training:{gate:trainingGate===true,current:null,sorted:{},classified:{},log:[],records:[],support:[]}};
 }
 
 function event(a,type,payload={},origin='learner'){
@@ -103,9 +143,19 @@ function createAttempt(s,visitId){
   const opened=dispatchNetwork(g,{type:'START_CLINIC_PRACTICE'});need(opened.accepted,opened.code,opened.message);g=opened.state;
   const n=g.attempts[g.activeAttemptId];n.id=`${id}.network`;g.activeAttemptId=n.id;g.attempts={[n.id]:n};
   n.events=[];n.messages=[];n.sequence=0;n.observations=[];n.observationSequence=0;n.training.practiceActions=[];
-  n.network=clone(SITE_NETWORK);
+  n.network=clone(visit(visitId).network==='practice'?PRACTICE_NETWORK:SITE_NETWORK);
   const a={id,visitId,networkState:g,technicalRevision:0,sequence:0,observationSequence:0,inspectionSequence:0,observations:[],inspections:[],history:[],playerActions:[],mistakes:[],support:[],held:null,pendingEnd:null,highlight:null,lastResult:null,explanation:{text:'',oral:false,submitted:false,contextRevision:null,observationId:null},faultObservation:null,repairChange:null,policyDecision:null,addressChange:null,finished:false};
-  if(visitId!=='visit.1'){
+  if(visitId==='drill.cables.bench'){
+    // Two separate faults: the switch has no power and the bench computer has no cable.
+    setupChoose(a,'role.records','server');child(a,{type:'SET_SERVICE_STATE',enabled:true},'setup');
+    setupChoose(a,'infra.switch','switch4',false);setupChoose(a,'role.reception','desktop');
+    setupCable(a,'role.records','infra.switch',1);
+  }else if(visitId==='drill.addressing.bench'){
+    setupChoose(a,'role.records','server');child(a,{type:'SET_SERVICE_STATE',enabled:true},'setup');
+    setupChoose(a,'infra.switch','switch4');setupChoose(a,'role.reception','desktop');
+    setupCable(a,'role.records','infra.switch',1);setupCable(a,'role.reception','infra.switch',2);
+    child(a,{type:'SET_STATIC_ADDRESS',deviceId:role(a,'role.reception').id,address:'192.168.0.25',mask:'255.255.255.0'},'setup');
+  }else if(visitId!=='visit.1'){
     setupChoose(a,'role.records','server');child(a,{type:'SET_SERVICE_STATE',enabled:true},'setup');
     setupChoose(a,'infra.switch','switch4');setupChoose(a,'role.reception','desktop');
     setupCable(a,'role.records','infra.switch',1);setupCable(a,'role.reception','infra.switch',2);
@@ -252,6 +302,20 @@ const eventSeq=id=>Number(String(id).split('.').at(-1));
 export function visitChecks(a){
   if(!a)return[];
   const n=net(a),check=(id,label,met,detail)=>({id,label,met:!!met,detail});
+  if(a.visitId==='drill.cables.bench'){
+    const failed=a.observations.some(o=>o.origin==='learner'&&o.testId==='reception'&&!o.pass),sw=role(a,'infra.switch'),t=confirmed(a,'reception');
+    return [check('bench.fail','Run a test before you fix anything',failed,'Read the code the tester gives you.'),
+      check('bench.power','Give the switch power',sw?.powered&&did(a,'POWER_DEVICE',x=>x.deviceId===sw.id),'A switch with no power passes nothing.'),
+      check('bench.cable','Cable the bench computer to the switch',linked(a,'role.reception','infra.switch')&&did(a,'CONNECT_PORTS'),'Ethernet from the computer’s RJ45 port to a free switch port.'),
+      check('bench.pass','Finish with a passing test',t?.pass,t?`${t.code}: ${t.message}`:'No passing test with the current setup yet.')];
+  }
+  if(a.visitId==='drill.addressing.bench'){
+    const pc=role(a,'role.reception'),addr=a.addressChange&&a.addressChange.roleId==='role.reception'?a.addressChange:null,t=confirmed(a,'reception',null,addr?.eventId);
+    return [check('rack.inspect','Inspect the rack computer’s settings',a.inspections.some(i=>i.roleId==='role.reception'),'Use the inspection light, then compare with the practice network card.'),
+      check('rack.address','Apply a valid unused address yourself',!!addr&&t?.pass,addr?`You set ${addr.to}.`:'It still has the address from the other office.'),
+      check('rack.mask','Use the card’s mask',pc?.mask===n.network.mask,`Practice card mask: ${n.network.mask}.`),
+      check('rack.pass','Finish with a passing test after your change',t?.pass,t?`${t.code}: ${t.message}`:'No passing test after your change yet.')];
+  }
   if(a.visitId==='visit.1'){
     const rows=Object.entries(visit('visit.1').roles).map(([roleId])=>{
       const d=role(a,roleId),label={'role.reception':'desk computer','infra.switch':'switch','role.records':'service host'}[roleId];
@@ -303,7 +367,36 @@ function completionRecord(a){
 }
 
 function apply(s,action){
+  const T=s.training;
   switch(action.type){
+    case 'OPEN_TRAINING':
+      need(T,'TRAINING_UNAVAILABLE','The Training Centre is not part of this saved programme.');
+      s.at='training';return{code:'AT_TRAINING',message:'Training Centre. Every drill and retry is free.'};
+    case 'SORT_CABLE':case 'CLASSIFY_ADDRESS':{
+      need(T&&s.at==='training','TRAINING_REQUIRED','Open the Training Centre first.');
+      if(action.type==='SORT_CABLE'){
+        need(CABLE_TYPES.includes(action.cableType)&&SORT_JOBS.includes(action.job),'SORT_INVALID','Choose a cable and a job bin.');
+        const ok=SORT_ANSWER[action.cableType]===action.job;
+        if(ok)T.sorted[action.cableType]=action.job;
+        T.log.push({type:'SORT_CABLE',cableType:action.cableType,job:action.job,correct:ok,revision:s.revision+1});
+        T.last={kind:'sort',code:ok?'SORT_OK':'SORT_WRONG',cableType:action.cableType,job:action.job};
+      }else{
+        const c=ADDRESS_CANDIDATES.find(x=>x.address===action.address);
+        need(c&&ADDRESS_VERDICTS.includes(action.verdict),'CLASSIFY_INVALID','Choose one of the listed addresses and a verdict.');
+        const ok=c.verdict===action.verdict;if(ok)T.classified[c.address]=action.verdict;
+        T.log.push({type:'CLASSIFY_ADDRESS',address:c.address,verdict:action.verdict,correct:ok,revision:s.revision+1});
+        T.last={kind:'classify',code:ok?'CLASSIFY_OK':'CLASSIFY_WRONG',address:c.address,verdict:action.verdict};
+      }
+      if(T.log.length>300)T.log.splice(0,T.log.length-300);
+      return{code:T.last.code,message:T.last.code.endsWith('OK')?'Correct.':'Not quite — try again. Retries are free.'};
+    }
+    case 'START_DRILL':{
+      need(T&&s.at==='training','TRAINING_REQUIRED','Open the Training Centre first.');
+      const d=DRILLS.find(x=>x.id===action.drillId);need(d,'DRILL_UNKNOWN','Choose a listed drill.');
+      const resume=T.current&&T.current.visitId===d.id&&!T.current.finished;
+      if(!resume)T.current=createAttempt(s,d.id);T.last=null;
+      return{code:resume?'DRILL_RESUMED':'DRILL_STARTED',message:resume?'Back at the bench.':'Bench drill ready. Test first.'};
+    }
     case 'PACK_ITEM':case 'UNPACK_ITEM':{
       need(s.at==='yard','YARD_REQUIRED','Pack the bag at the van in the depot yard.');
       need(ITEMS.some(i=>i.id===action.itemId),'ITEM_UNKNOWN','Choose an item from the van shelves.');
@@ -316,6 +409,7 @@ function apply(s,action){
     case 'START_VISIT':{
       const index=VISITS.findIndex(v=>v.id===action.visitId);need(index>=0,'VISIT_UNKNOWN','Choose a listed visit.');
       need(index<=unlockedIndex(s)||completedVisitIds(s).includes(action.visitId),'VISIT_LOCKED','Finish the earlier visit with Mags first.');
+      need(visitGateOpen(s,action.visitId),'TRAINING_CARD_REQUIRED',`Earn the ${(VISIT_CARDS[action.visitId]||[]).filter(c=>!cardEarned(s,c)).map(c=>STATIONS.find(x=>x.card===c).title).join(' and ')} training card first.`);
       need(ESSENTIALS.every(id=>s.packed.includes(id)),'BAG_INCOMPLETE','Pack the essentials first: Ethernet patch cables, power cords, the service tester and the inspection light.');
       const resume=s.current&&s.current.visitId===action.visitId&&!s.current.finished;
       if(!resume)s.current=createAttempt(s,action.visitId);
@@ -328,8 +422,15 @@ function apply(s,action){
       if(!s.truck.claimed){s.truck.claimed=true;s.truck.claimedRevision=s.revision+1;}
       s.at='yard';return{code:'TRUCK_CLAIMED',message:'Van 7 is yours. Independent jobs are open.'};
   }
-  const a=s.current;need(a&&s.at==='site','VISIT_REQUIRED','Start a visit with Mags first.');
-  if(action.type==='RESTART_VISIT'){s.current=createAttempt(s,a.visitId);return{code:'VISIT_RESTARTED',message:'Fresh start on the same visit. Earlier records stay in your history.'};}
+  const inTraining=s.at==='training';
+  if(inTraining&&action.type==='ASK_MENTOR'&&!T.current){
+    need(MENTOR_TOPICS.includes(action.topic),'TOPIC_UNKNOWN','Choose a question for Mags.');
+    T.support.push({topic:action.topic,revision:s.revision+1});if(T.support.length>200)T.support.splice(0,T.support.length-200);
+    T.last={kind:'ask',code:action.topic};return{code:'MENTOR_ASKED',message:'Mags answers. Help is always free.'};
+  }
+  const a=inTraining?T.current:s.current;need(a&&(s.at==='site'||inTraining),inTraining?'DRILL_REQUIRED':'VISIT_REQUIRED',inTraining?'Start a bench drill first.':'Start a visit with Mags first.');
+  if(inTraining)T.last=null;
+  if(action.type==='RESTART_VISIT'){const fresh=createAttempt(s,a.visitId);if(inTraining)T.current=fresh;else s.current=fresh;return{code:'VISIT_RESTARTED',message:'Fresh start. Earlier records stay in your history.'};}
   if(action.type==='ASK_MENTOR'){
     need(MENTOR_TOPICS.includes(action.topic),'TOPIC_UNKNOWN','Choose a question for Mags.');
     const e=event(a,'ASK_MENTOR',{topic:action.topic,cost:0});a.support.push({topic:action.topic,eventId:e.id,technicalRevision:a.technicalRevision});
@@ -363,8 +464,10 @@ function apply(s,action){
     }
     case 'FINISH_VISIT':{
       const missing=visitChecks(a).find(c=>!c.met);need(!missing,'VISIT_INCOMPLETE',missing?`${missing.label}. ${missing.detail}`:'');
-      const record=completionRecord(a);s.completionRecords.push(record);a.finished=true;event(a,'FINISH_VISIT',{recordId:record.id,masteryClaim:false});
+      const record=completionRecord(a);a.finished=true;event(a,'FINISH_VISIT',{recordId:record.id,masteryClaim:false});
       a.lastResult={kind:'finish',code:'VISIT_COMPLETE'};
+      if(isDrill(a.visitId)){T.records.push(record);if(T.records.length>40)T.records.splice(0,T.records.length-40);return{code:'DRILL_COMPLETE',message:'Bench drill recorded.'};}
+      s.completionRecords.push(record);
       return{code:truckEarned(s)?'APPRENTICESHIP_COMPLETE':'VISIT_COMPLETE',message:truckEarned(s)?'All three supervised visits are recorded. Mags has something for you at the depot.':'Visit recorded. Mags will meet you at the depot for the next one.'};
     }
     default:fail('ACTION_UNKNOWN','Choose a supported apprenticeship action.');
@@ -376,6 +479,7 @@ function showTarget(a){
   const firstUnmet=visitChecks(a).find(c=>!c.met);if(!firstUnmet)return null;
   const id=firstUnmet.id,dev=r=>role(a,r)?{deviceId:role(a,r).id}:{roleSlot:r};
   if(id.startsWith('install.'))return dev(id.slice(8));
+  if(id==='bench.power')return dev('infra.switch');
   if(id==='cable.desk'||id==='inspect.desk'||id.startsWith('address')||id==='test.desk')return dev('role.reception');
   if(id==='cable.host')return dev('role.records');
   if(id==='wifi.ap')return dev('infra.ap');
@@ -392,6 +496,15 @@ export function dispatchApprenticeship(state,action){
   }catch(error){if(error.code)return{state,accepted:false,code:error.code,message:error.message};throw error;}
 }
 
+function trainingView(s){
+  const T=s.training;if(!T)return null;
+  return {gate:T.gate,inDrill:!!T.current&&!T.current.finished,drillId:T.current?.visitId||null,sorted:clone(T.sorted),classified:clone(T.classified),last:clone(T.last||null),log:clone(T.log.slice(-30)),support:clone(T.support),
+    stations:STATIONS.map(st=>({...clone(st),earned:st.card?cardEarned(s,st.card):false,
+      parts:st.id==='station.cables'?{sort:sortDone(s),bench:drillDone(s,'drill.cables.bench')}:st.id==='station.addressing'?{classify:classifyDone(s),bench:drillDone(s,'drill.addressing.bench')}:null})),
+    drills:DRILLS.map(d=>({id:d.id,stationId:d.stationId,title:d.title,completed:drillDone(s,d.id)})),
+    candidates:ADDRESS_CANDIDATES.map(c=>({address:c.address,done:T.classified[c.address]===c.verdict})),records:T.records.map(r=>({id:r.id,visitId:r.visitId}))};
+}
+
 /** Staff use the service once the learner's own latest test showed it working and the model still agrees. */
 function staffState(current,learner){
   if(!current)return 'absent';
@@ -402,7 +515,7 @@ function staffState(current,learner){
 const lastLearner=(a,testId)=>[...a.observations].reverse().find(o=>o.origin==='learner'&&o.testId===testId)||null;
 
 export function deriveApprenticeship(state){
-  const a=state.current,v=a?visit(a.visitId):null,done=completedVisitIds(state);
+  const a=state.at==='training'?state.training?.current||null:state.current,v=a?visit(a.visitId):null,done=completedVisitIds(state);
   const child=a?deriveNetwork(a.networkState):null,n=a?net(a):null;
   const current=a?child.currentResults.filter(o=>EXPOSED_TESTS.includes(o.testId)):[];
   const checks=a?visitChecks(a):[];
@@ -418,10 +531,11 @@ export function deriveApprenticeship(state){
   return {
     appId:APP_ID,campaignId:state.campaignId,revision:state.revision,at:state.at,
     items:ITEMS.map(i=>({...i,packed:state.packed.includes(i.id)})),packed:clone(state.packed),bagReady:ESSENTIALS.every(id=>state.packed.includes(id)),yardLog:clone(state.yardLog.slice(-20)),
-    visits:VISITS.map((x,i)=>({id:x.id,number:x.number,title:x.title,support:x.support,unlocked:i<=unlockedIndex(state)||done.includes(x.id),completed:done.includes(x.id),active:a?.visitId===x.id&&!a.finished,records:recordsFor(state,x.id).length})),
+    training:trainingView(state),
+    visits:VISITS.map((x,i)=>({id:x.id,number:x.number,title:x.title,support:x.support,cardsNeeded:(VISIT_CARDS[x.id]||[]).filter(c=>!cardEarned(state,c)&&state.training?.gate),unlocked:(i<=unlockedIndex(state)||done.includes(x.id))&&visitGateOpen(state,x.id),completed:done.includes(x.id),active:a?.visitId===x.id&&!a.finished,records:recordsFor(state,x.id).length})),
     completedVisitIds:done,truckEarned:truckEarned(state),truckClaimed:state.truck.claimed,
     visit:v?{...clone(v),attemptId:a.id,finished:a.finished}:null,
-    network:clone(n?.network||SITE_NETWORK),devices:clone(child?.devices||[]),cables:(child?.cables||[]).map(c=>({...clone(c),state:cableState(c)})),
+    network:clone(n?.network||(state.at==='training'?PRACTICE_NETWORK:SITE_NETWORK)),devices:clone(child?.devices||[]),cables:(child?.cables||[]).map(c=>({...clone(c),state:cableState(c)})),
     policy:clone(child?.policy||POLICIES['policy.roles-separated']),policies:Object.values(POLICIES).map(p=>({id:p.id,label:p.label,description:p.description,acceptable:ACCEPTABLE_POLICIES.includes(p.id)})),
     held:a?.held||null,pendingEnd:clone(a?.pendingEnd||null),highlight:clone(a?.highlight||null),lastResult:clone(a?.lastResult||null),
     lastRun:a?(()=>{const id=[...a.observations].reverse().find(o=>o.origin==='learner')?.eventId;return id?a.observations.filter(o=>o.eventId===id).map(o=>({...clone(o),stale:o.testedTechnicalRevision!==a.technicalRevision})):[];})():[],
@@ -457,6 +571,15 @@ export function createApprenticeshipEvidence(state){
     lines.push(`  Learner tests in order: ${learnerTests.map(o=>`${o.testId}${o.testId==='nurse'&&o.locationId?`@${o.locationId.replace('location.','')}`:''}=${o.code}`).join(', ')||'none'}.`);
     lines.push(`  Plugging mistakes noticed: ${r.mistakes.map(m=>m.kind).join(', ')||'none'}. Questions asked: ${r.support.length}${r.support.length?` (${r.support.map(x=>x.topic).join(', ')})`:''}.`);
     if(v.id==='visit.3')lines.push('  EXACT EXPLANATION:',r.explanation.text||'[No written explanation]',r.explanation.oral?'  Oral explanation pending teacher conversation.':'  Quality pending teacher judgement.');
+  }
+  const T=state.training;
+  if(T){
+    lines.push('','TRAINING CENTRE (practice bench before supervised visits)');
+    for(const st of STATIONS.filter(x=>x.card))lines.push(`${st.title}: card ${cardEarned(state,st.card)?'earned':'not yet earned'}.`);
+    const wrongSorts=T.log.filter(x=>x.type==='SORT_CABLE'&&!x.correct).map(x=>`${x.cableType}→${x.job}`),wrongAddr=T.log.filter(x=>x.type==='CLASSIFY_ADDRESS'&&!x.correct).map(x=>`${x.address}→${x.verdict}`);
+    lines.push(`  Cable sorting first-try errors: ${wrongSorts.join(', ')||'none'}. Address classification errors: ${wrongAddr.join(', ')||'none'}.`);
+    for(const r of T.records)lines.push(`  ${DRILLS.find(d=>d.id===r.visitId)?.title||r.visitId}: completed; tests ${r.observations.map(o=>o.code).join(' → ')}${r.addressChange?`; address ${r.addressChange.from} → ${r.addressChange.to}`:''}.`);
+    if(!T.gate)lines.push('  This progress began before the Training Centre existed, so its supervised visits were not gated by training cards.');
   }
   lines.push('','Game progression only: not an IB grade or professional credential. No names, patient information or accounts are used.');
   return{json,text:lines.join('\n')};
