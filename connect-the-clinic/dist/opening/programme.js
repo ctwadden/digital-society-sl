@@ -1,9 +1,12 @@
 /** Original integrated training/field programme; one persisted, replay-verified authority. */
 import {createShift,dispatchShift,deriveShift,validateShiftSave,createShiftEvidence} from './engine.js';
 import {createBootcamp,dispatchBootcamp,deriveBootcamp,createBootcampEvidence} from '../bootcamp/engine.js';
+import {createApprenticeship,dispatchApprenticeship,deriveApprenticeship,createApprenticeshipEvidence} from '../apprentice/engine.js';
 
 const APP_ID='riverbend.clinic.programme';
-const VERSION='0.8.0';
+const VERSION='0.9.0';
+const LEGACY_VERSION='0.8.0';
+const APPRENTICE_ORIGINS=['new','legacy'];
 const MAX_BYTES=1048576;
 const MAX_ACTIONS=1200;
 const clone=x=>JSON.parse(JSON.stringify(x));
@@ -32,10 +35,15 @@ function rebuildField(campaignId,seed){
   field.imported=seed.fieldImported;field.importProvenance=seed.fieldImportProvenance;return field;
 }
 
-function fromSeed(campaignId,seed){
+// 'legacy' programmes started before the apprenticeship (0.8 or earlier field saves). They keep
+// their original bootcamp route into fieldwork; the apprenticeship is added without any completion.
+function fromSeed(campaignId,seed,apprenticeOrigin='new'){
+  need(APPRENTICE_ORIGINS.includes(apprenticeOrigin),'SAVE_SEED','Unknown apprenticeship origin.');
   const field=rebuildField(campaignId,seed),existing=seed.origin==='opening-0.7';
-  return {appId:APP_ID,schemaVersion:1,buildVersion:VERSION,campaignId:field.campaignId,seed:clone(seed),revision:0,actions:[],screen:existing?'field':'bootcamp',fieldStarted:existing,field,bootcamp:createBootcamp({campaignId:field.campaignId}),imported:false,importProvenance:'none'};
+  return {appId:APP_ID,schemaVersion:1,buildVersion:VERSION,campaignId:field.campaignId,seed:clone(seed),revision:0,actions:[],screen:existing?'field':apprenticeOrigin==='legacy'?'bootcamp':'apprentice',fieldStarted:existing,field,bootcamp:createBootcamp({campaignId:field.campaignId}),apprenticeOrigin,apprentice:createApprenticeship({campaignId:field.campaignId}),imported:false,importProvenance:'none'};
 }
+const legacyBootcampRoute=state=>state.apprenticeOrigin==='legacy'&&deriveBootcamp(state.bootcamp).courseComplete;
+const fieldUnlocked=state=>state.fieldStarted||deriveApprenticeship(state.apprentice).truckEarned||legacyBootcampRoute(state);
 
 export function createProgramme(options={}){
   need(plain(options)&&Object.keys(options).every(k=>['campaignId','fixture'].includes(k)),'OPTIONS_INVALID','Use an anonymous campaign ID and optional clinic fixture.');
@@ -45,17 +53,25 @@ export function createProgramme(options={}){
 
 function actionShape(action){
   need(plain(action)&&typeof action.type==='string','ACTION_INVALID','Choose an available programme action.');
-  if(['OPEN_BOOTCAMP','ENTER_FIELD'].includes(action.type))exactKeys(action,['type'],'ACTION_FIELDS');
+  if(['OPEN_BOOTCAMP','ENTER_FIELD','OPEN_APPRENTICE'].includes(action.type))exactKeys(action,['type'],'ACTION_FIELDS');
+  if(action.type==='APP_ACTION'){exactKeys(action,['type','action'],'ACTION_FIELDS');need(plain(action.action),'ACTION_FIELDS','Choose an apprenticeship action.');}
   if(action.type==='BOOT_ACTION'){exactKeys(action,['type','action'],'ACTION_FIELDS');need(plain(action.action),'ACTION_FIELDS','Choose a training action.');}
   return clone(action);
 }
 
 function apply(state,action){
   if(action.type==='OPEN_BOOTCAMP'){
-    state.screen='bootcamp';return{code:'BOOTCAMP_OPENED',message:'Free bootcamp opened. Your field job, draft scope, spending and delivered evidence remain separate.'};
+    state.screen='bootcamp';return{code:'BOOTCAMP_OPENED',message:'Free practice bench opened. Your apprenticeship, field job and evidence remain separate.'};
+  }
+  if(action.type==='OPEN_APPRENTICE'){
+    state.screen='apprentice';return{code:'APPRENTICE_OPENED',message:'Back at the Lantern Line depot.'};
+  }
+  if(action.type==='APP_ACTION'){
+    need(state.screen==='apprentice','APPRENTICE_SCREEN_REQUIRED','Open the apprenticeship before working on a visit.');
+    const result=dispatchApprenticeship(state.apprentice,action.action);need(result.accepted,result.code,result.message);state.apprentice=result.state;return result;
   }
   if(action.type==='ENTER_FIELD'){
-    need(state.fieldStarted||deriveBootcamp(state.bootcamp).courseComplete,'TRAINING_REQUIRED','Complete the six practical training tasks before taking your first independent client job.');
+    need(fieldUnlocked(state),'TRUCK_REQUIRED',state.apprenticeOrigin==='legacy'?'Complete the six practical training tasks, or earn your own van through the apprenticeship, before your first independent client job.':'Earn your own van by completing the three supervised visits with Mags before taking independent jobs.');
     state.screen='field';const resume=state.fieldStarted;state.fieldStarted=true;
     return{code:resume?'FIELD_RESUMED':'FIELD_OPENED',message:resume?'Returned to your preserved field work.':'Bootcamp task record preserved. Your independent clinic job starts with its own brief, equipment and evidence.'};
   }
@@ -78,8 +94,8 @@ export function dispatchProgramme(state,action){
 }
 
 export function deriveProgramme(state){
-  const bootcamp=deriveBootcamp(state.bootcamp);
-  return{screen:state.screen,campaignId:state.campaignId,revision:state.revision,field:deriveShift(state.field),bootcamp,canEnterField:state.fieldStarted||bootcamp.courseComplete,fieldStarted:state.fieldStarted,migrationNotice:state.seed.origin==='opening-0.7'?'Your earlier Opening Shift field work is preserved. This new bootcamp has its own training record; earlier field work is not labelled as completed training.':null};
+  const bootcamp=deriveBootcamp(state.bootcamp),apprentice=deriveApprenticeship(state.apprentice);
+  return{screen:state.screen,campaignId:state.campaignId,revision:state.revision,field:deriveShift(state.field),bootcamp,apprentice,apprenticeOrigin:state.apprenticeOrigin,legacyBootcampRoute:legacyBootcampRoute(state),canEnterField:fieldUnlocked(state),fieldStarted:state.fieldStarted,migrationNotice:state.seed.origin==='opening-0.7'?'Your earlier Opening Shift field work is preserved. This new bootcamp has its own training record; earlier field work is not labelled as completed training.':null};
 }
 
 // The download must use the same compact representation as the 1 MiB model cap.
@@ -95,7 +111,7 @@ function canonical(value,depth=0){
 
 function migrated(field){
   const seed={origin:'opening-0.7',fieldSeed:clone(field.seed),fieldActions:clone(field.actions),fieldImported:field.imported??false,fieldImportProvenance:field.importProvenance??'none'};
-  const result=fromSeed(field.campaignId,seed);
+  const result=fromSeed(field.campaignId,seed,'legacy');
   need(canonical(result.field)===canonical(field),'SAVE_MIGRATION_MISMATCH','Earlier field reconstruction did not preserve the saved job. Nothing was replaced.');
   need(bytes(result)<=MAX_BYTES,'SAVE_MIGRATION_CAPACITY','This earlier field save is too large to add training within the 1 MiB limit. Your saved file is unchanged; keep its progress and evidence copies.');
   result.imported=field.imported??false;result.importProvenance=field.importProvenance??'none';return result;
@@ -110,25 +126,29 @@ export function validateProgrammeSave(raw){
       const checked=validateShiftSave(saved);if(!checked.valid)return checked;
       return{valid:true,state:migrated(checked.state),migrated:true};
     }
-    need(saved.appId===APP_ID&&saved.schemaVersion===1&&saved.buildVersion===VERSION,'SAVE_VERSION','This is not supported Opening Shift and bootcamp progress. Evidence files are not restorable progress.');
+    need(saved.appId===APP_ID&&saved.schemaVersion===1&&[VERSION,LEGACY_VERSION].includes(saved.buildVersion),'SAVE_VERSION','This is not supported Opening Shift progress. Evidence files are not restorable progress.');
+    const legacySave=saved.buildVersion===LEGACY_VERSION;
+    need(legacySave?saved.apprentice===undefined&&saved.apprenticeOrigin===undefined:APPRENTICE_ORIGINS.includes(saved.apprenticeOrigin),'SAVE_FORMAT','The apprenticeship record is missing or does not match this progress version.');
     need(plain(saved.seed)&&Array.isArray(saved.actions)&&saved.actions.length<=MAX_ACTIONS,'SAVE_ACTION_LIMIT','The programme seed/action log is missing or exceeds its replay limit.');
     need(saved.imported===undefined||typeof saved.imported==='boolean','SAVE_PROVENANCE','Import provenance is invalid.');
     need(saved.importProvenance===undefined||origins.includes(saved.importProvenance),'SAVE_PROVENANCE','Import provenance is invalid.');
-    let reconstructed=fromSeed(saved.campaignId,saved.seed);
+    let reconstructed=fromSeed(saved.campaignId,saved.seed,legacySave?'legacy':saved.apprenticeOrigin);
     for(let i=0;i<saved.actions.length;i++){
       const result=dispatchProgramme(reconstructed,saved.actions[i]);need(result.accepted,'SAVE_REPLAY_REJECTED',`Saved programme action ${i+1} was rejected: ${result.code}. Current work is unchanged.`);reconstructed=result.state;
     }
     const comparison=clone(saved),expected=clone(reconstructed);
     for(const key of ['imported','importProvenance']){delete comparison[key];delete expected[key];}
+    // A 0.8 save is compared with its replay as 0.8 recorded it; the apprenticeship starts empty.
+    if(legacySave){delete expected.apprentice;delete expected.apprenticeOrigin;expected.buildVersion=LEGACY_VERSION;}
     need(canonical(comparison)===canonical(expected),'SAVE_REPLAY_MISMATCH','Saved training, network, evidence or payment does not match the actual action replay. Current work is unchanged.');
     reconstructed.imported=saved.imported??false;reconstructed.importProvenance=saved.importProvenance??'none';
-    return{valid:true,state:reconstructed};
+    return legacySave?{valid:true,state:reconstructed,migrated:true}:{valid:true,state:reconstructed};
   }catch(error){return{valid:false,code:error.code||'SAVE_INVALID',error:error.code?error.message:'This is not valid bounded programme JSON. Current progress is unchanged.'};}
 }
 
 export function createProgrammeEvidence(state){
-  const training=createBootcampEvidence(state.bootcamp),field=createShiftEvidence(state.field),view=deriveShift(state.field);
-  const json={format:'riverbend-programme-evidence',schemaVersion:1,buildVersion:VERSION,campaignId:state.campaignId,imported:state.imported??false,importProvenance:state.importProvenance??'none',fieldStarted:state.fieldStarted,migrationSource:state.seed.origin,training:training.json,field:field.json,programmeActionLog:clone(state.actions),evidenceNotice:'Training, demonstrations and independent field evidence are distinct. Local action replay checks consistency, not identity or mastery.'};
+  const apprenticeship=createApprenticeshipEvidence(state.apprentice),training=createBootcampEvidence(state.bootcamp),field=createShiftEvidence(state.field),view=deriveShift(state.field);
+  const json={format:'riverbend-programme-evidence',schemaVersion:1,buildVersion:VERSION,campaignId:state.campaignId,imported:state.imported??false,importProvenance:state.importProvenance??'none',fieldStarted:state.fieldStarted,migrationSource:state.seed.origin,apprenticeOrigin:state.apprenticeOrigin,apprenticeship:apprenticeship.json,training:training.json,field:field.json,programmeActionLog:clone(state.actions),evidenceNotice:'Training, demonstrations and independent field evidence are distinct. Local action replay checks consistency, not identity or mastery.'};
   const roles={'role.reception':'workstation','role.records':'service host','infra.switch':'switch','role.nurse':'mobile device','infra.ap':'access point'};
   const kinds={desktop:'desktop',server:'server',switch4:'4-port switch',switch8:'8-port switch',laptop:'laptop','access-point':'wireless access point'};
   const requiredTests={'boot.kit':[],'boot.cables':['reception'],'boot.address':['reception'],'boot.wireless':['nurse'],'boot.access':['reception','nurse','nurse-bookings','access-reception','access-outsider-bookings','access-outsider-workspace'],'boot.transfer':['nurse','reception']};
@@ -170,7 +190,7 @@ export function createProgrammeEvidence(state){
   const readableTraining=trainingLines.join('\n')+training.text.slice(training.text.indexOf('\n\nEXACT TRANSFER EXPLANATION\n'));
   const latest=new Map();for(const o of view.observations){const key=`${o.testId}|${o.locationId}`;if(!latest.has(key))latest.set(key,o);}
   const failures=[...new Set(view.observations.filter(o=>!o.pass).map(o=>`${o.code}: ${o.message}`))];
-  const lines=['OPENING SHIFT — TRAINING AND FIELD REVIEW',`Campaign ${state.campaignId}. Import provenance: ${state.importProvenance??'none'}.`,state.seed.origin==='opening-0.7'?'Earlier field work was migrated without claiming new bootcamp completion.':'New programme: training and field have separate evidence.','',readableTraining,'','INDEPENDENT FIELD RECORD',state.fieldStarted?`${view.mode==='practice'?'Free field rehearsal':'Client job'} — ${view.phase}.`:'Independent field work has not started.',`Equipment choice: ${field.json.current.equipmentDecision?.itemId||'not recorded'}. Access policy: ${view.policy.label}; explicit decision ${view.policyDecision?'recorded':'not recorded'}.`,`Equipment allowance ${view.economy.allowance}; spent ${view.economy.spent}; unused ${view.economy.remaining}. Contractor fee ${view.economy.gross}; guidance ${view.economy.reserved}; simulated minutes ${view.economy.minutes}; campaign wallet ${view.economy.wallet}. Unused client funds are not earnings.`,`Field delivery: ${field.json.delivered?'frozen':'not recorded'}; settlement: ${field.json.settlement?'recorded once':'not recorded'}.`,'','LATEST ACTUAL FIELD TESTS BY CHECK AND ROOM'];
+  const lines=['OPENING SHIFT — TRAINING AND FIELD REVIEW',`Campaign ${state.campaignId}. Import provenance: ${state.importProvenance??'none'}.`,state.seed.origin==='opening-0.7'?'Earlier field work was migrated without claiming new bootcamp completion.':'New programme: training and field have separate evidence.',state.apprenticeOrigin==='legacy'?'This progress began before the apprenticeship existed; no apprenticeship visits were credited from earlier work.':'','',apprenticeship.text,'','OPTIONAL PRACTICE BENCH (BOOTCAMP)',readableTraining,'','INDEPENDENT FIELD RECORD',state.fieldStarted?`${view.mode==='practice'?'Free field rehearsal':'Client job'} — ${view.phase}.`:'Independent field work has not started.',`Equipment choice: ${field.json.current.equipmentDecision?.itemId||'not recorded'}. Access policy: ${view.policy.label}; explicit decision ${view.policyDecision?'recorded':'not recorded'}.`,`Equipment allowance ${view.economy.allowance}; spent ${view.economy.spent}; unused ${view.economy.remaining}. Contractor fee ${view.economy.gross}; guidance ${view.economy.reserved}; simulated minutes ${view.economy.minutes}; campaign wallet ${view.economy.wallet}. Unused client funds are not earnings.`,`Field delivery: ${field.json.delivered?'frozen':'not recorded'}; settlement: ${field.json.settlement?'recorded once':'not recorded'}.`,'','LATEST ACTUAL FIELD TESTS BY CHECK AND ROOM'];
   if(!latest.size)lines.push('No field player tests recorded.');
   for(const o of latest.values())lines.push(`${o.testId} at ${o.locationId}: ${o.code}; ${o.pass?'required result passed':'needs attention'}; ${o.stale?'stale':'current'}.`);
   if(failures.length)lines.push('','EARLIER OR CURRENT FIELD FAILURES',...failures);

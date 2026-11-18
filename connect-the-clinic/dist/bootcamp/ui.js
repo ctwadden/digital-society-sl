@@ -186,7 +186,7 @@ export function mountBootcampUI(root, handlers) {
   }
 
   function header() {
-    return `<div class='bc-topbar'><div class='bc-brand'><span class='bc-brand-mark' aria-hidden='true'>↗</span><div><strong>Opening Shift</strong><span>Training bench · with Jo</span></div></div><div class='bc-top-actions'>${button('materials','Equipment & cable guide','','bc-quiet')}${button('howto','How-to','','bc-quiet')}${button('progress','Progress','','bc-quiet')}${view.canEnterField ? button('field',view.fieldStarted ? 'Return to field job →' : 'Go to first client →',disabled(false,true),'bc-outline') : ''}</div></div>`;
+    return `<div class='bc-topbar'><div class='bc-brand'><span class='bc-brand-mark' aria-hidden='true'>↗</span><div><strong>Opening Shift</strong><span>Optional practice bench · with Jo</span></div></div><div class='bc-top-actions'>${button('depot','← Lantern Line depot','','bc-quiet')}${button('materials','Equipment & cable guide','','bc-quiet')}${button('howto','How-to','','bc-quiet')}${button('progress','Progress','','bc-quiet')}${view.canEnterField ? button('field',view.fieldStarted ? 'Return to field job →' : 'Go to first client →',disabled(false,true),'bc-outline') : ''}</div></div>`;
   }
   function storage() {
     const s = view.storage || {mode:'memory',label:'Progress stays in this browser',detail:'Download a copy before closing this tab.'};
@@ -428,6 +428,7 @@ export function mountBootcampUI(root, handlers) {
     if (a === 'apply-retry') return replacement(onReset);
     if (a === 'finish') return boot({type:'COMPLETE_LESSON'});
     if (a === 'field') { saveDrafts(); return run({type:'ENTER_FIELD'}); }
+    if (a === 'depot') { saveDrafts(); return run({type:'OPEN_APPRENTICE'}); }
     if (a === 'hint') return boot({type:'REVEAL_HINT',tier:Number(d.tier)});
     if (a === 'inspect') return boot({type:'INSPECT_DEVICE',deviceId:d.deviceId});
     if (a === 'inspect-cable') return boot({type:'INSPECT_CABLE',cableId:d.cableId});

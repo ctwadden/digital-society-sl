@@ -2,9 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createProgramme,dispatchProgramme,deriveProgramme,validateProgrammeSave,createProgrammeEvidence} from '../../dist/opening/programme.js';
 import {createShift,dispatchShift,deriveShift} from '../../dist/opening/engine.js';
+import {withTruck,onBench} from '../apprentice/helpers.js';
 
 const clone=x=>JSON.parse(JSON.stringify(x));
-function driver(state=createProgramme({campaignId:'test.bootcamp'})){
+function driver(state=withTruck(createProgramme({campaignId:'test.bootcamp'}))){
   return {state,get view(){return deriveProgramme(this.state);},get training(){return this.view.bootcamp;},send(action){const result=dispatchProgramme(this.state,action);assert.equal(result.accepted,true,`${action.type}: ${result.code} ${result.message}`);this.state=result.state;return result;},boot(action){return this.send({type:'BOOT_ACTION',action});},net(action){return this.boot({type:'NETWORK_ACTION',action});},reject(action,code){const before=this.state,encoded=JSON.stringify(before),result=dispatchProgramme(before,action);assert.equal(result.accepted,false);assert.equal(result.state,before);assert.equal(JSON.stringify(before),encoded);if(code)assert.equal(result.code,code);return result;}};
 }
 function open(d,id,demo=false){d.boot({type:'START_LESSON',lessonId:id});if(demo){d.boot({type:'START_DEMO'});while(d.training.demo.nextStepId)d.boot({type:'NEXT_DEMO'});}d.boot({type:'START_PRACTICE'});}
@@ -24,8 +25,9 @@ function readyForAccess(){const d=through(driver(),4);open(d,'boot.access');retu
 function readyForTransfer(){const d=through(driver(),5);open(d,'boot.transfer');return d;}
 
 test('B1 new programme starts in training; later lesson and field bypasses reject atomically',()=>{
-  const d=driver();assert.equal(d.view.screen,'bootcamp');assert.equal(d.training.phase,'welcome');assert.equal(d.view.canEnterField,false);
-  d.reject({type:'ENTER_FIELD'},'TRAINING_REQUIRED');d.reject({type:'BOOT_ACTION',action:{type:'START_LESSON',lessonId:'boot.address'}},'LESSON_LOCKED');d.reject({type:'BUY_ITEM',sku:'tablet'},'FIELD_SCREEN_REQUIRED');
+  assert.equal(deriveProgramme(createProgramme({campaignId:'test.bootcamp'})).screen,'apprentice','0.9 programmes open at the apprenticeship depot');
+  const d=driver(onBench(createProgramme({campaignId:'test.bootcamp'})));assert.equal(d.view.screen,'bootcamp');assert.equal(d.training.phase,'welcome');assert.equal(d.view.canEnterField,false);
+  d.reject({type:'ENTER_FIELD'},'TRUCK_REQUIRED');d.reject({type:'BOOT_ACTION',action:{type:'START_LESSON',lessonId:'boot.address'}},'LESSON_LOCKED');d.reject({type:'BUY_ITEM',sku:'tablet'},'FIELD_SCREEN_REQUIRED');
   d.reject({type:'BOOT_ACTION',action:{type:'START_LESSON',lessonId:'boot.kit',complete:true}},'ACTION_FIELDS');
 });
 
@@ -216,4 +218,14 @@ test('B5/B7 field and training actions cannot cross screens; field can resume af
 
 test('B2 completion freezes the active lesson and another practice is explicit',()=>{
   const d=driver();kit(d);const id=d.training.workstationDeviceId;d.reject({type:'BOOT_ACTION',action:{type:'NETWORK_ACTION',action:{type:'POWER_DEVICE',deviceId:id,on:false}}},'PRACTICE_REQUIRED');assert.equal(d.training.phase,'complete');d.boot({type:'RESTART_PRACTICE'});assert.equal(d.training.phase,'practice');assert.equal(d.training.devices.length,0);assert.equal(d.training.completedLessonIds.length,1);
+});
+
+test('0.9 bench completion alone does not open independent work; only the earned van does',()=>{
+  const d=through(driver(onBench(createProgramme({campaignId:'test.bench.only'}))),6);
+  assert.equal(d.training.courseComplete,true);assert.equal(d.view.canEnterField,false);d.reject({type:'ENTER_FIELD'},'TRUCK_REQUIRED');
+  const forged=clone(d.state);forged.apprentice.completionRecords.push({visitId:'visit.1',origin:'learner-practice'});
+  assert.equal(validateProgrammeSave(JSON.stringify(forged)).valid,false,'an edited completion record is rejected by replay');
+  const flagged=clone(d.state);flagged.apprenticeOrigin='legacy';const checked=validateProgrammeSave(JSON.stringify(flagged));
+  // Local files are editable; an origin edit must still never award the van or visit completion.
+  if(checked.valid){const view=deriveProgramme(checked.state).apprentice;assert.equal(view.truckEarned,false);assert.equal(view.completedVisitIds.length,0);}
 });

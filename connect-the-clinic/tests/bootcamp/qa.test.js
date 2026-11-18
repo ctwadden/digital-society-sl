@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createProgramme, dispatchProgramme, deriveProgramme, validateProgrammeSave, createProgrammeEvidence, serializeProgrammeProgress} from '../../dist/opening/programme.js';
+import {withTruck,onBench} from '../apprentice/helpers.js';
 import {createShift, dispatchShift, deriveShift} from '../../dist/opening/engine.js';
 import {createPersistence} from '../../dist/persistence.js';
 
@@ -8,7 +9,7 @@ import {createPersistence} from '../../dist/persistence.js';
 // inventory. No internal completion flags or builder test helpers seed a pass.
 const copy = value => JSON.parse(JSON.stringify(value));
 const ids = ['boot.kit','boot.cables','boot.address','boot.wireless','boot.access','boot.transfer'];
-function session(state = createProgramme({campaignId:'qa.independent.bootcamp'})) {
+function session(state = withTruck(createProgramme({campaignId:'qa.independent.bootcamp'}))) {
   return {
     state,
     get view() { return deriveProgramme(this.state); },
@@ -102,8 +103,8 @@ function allTraining({demos=false}={}) {
 }
 
 test('B1/B2 independent: entry and nested command bypasses cannot create practice credit',()=>{
-  const d=session();
-  d.reject({type:'ENTER_FIELD'},'TRAINING_REQUIRED');
+  const d=session(onBench(createProgramme({campaignId:'qa.independent.bootcamp'})));
+  d.reject({type:'ENTER_FIELD'},'TRUCK_REQUIRED');
   for(const id of ids.slice(1)) d.rejectBoot({type:'START_LESSON',lessonId:id},'LESSON_LOCKED');
   start(d,'boot.kit');
   for(const type of ['COMPLETE_TRAINING','SETTLE_CONTRACT','START_CLIENT','RUN_PROBE']) {
@@ -340,7 +341,7 @@ test('B5 independent: a real 0.7 field seed with paid help and rehearsal migrate
 
 test('B5 independent: action-cap rejection is atomic and the last accepted bounded programme still replays',()=>{
   const d=session();
-  for(let index=0;index<1200;index++) d.send({type:'OPEN_BOOTCAMP'});
+  for(let index=d.state.actions.length;index<1200;index++) d.send({type:'OPEN_BOOTCAMP'});
   d.reject({type:'OPEN_BOOTCAMP'},'ACTION_CAPACITY');
   assert.equal(validateProgrammeSave(d.state).valid,true);
   const oversized=copy(d.state); oversized.actions.push({type:'OPEN_BOOTCAMP'});
@@ -453,6 +454,7 @@ test('B5 independent adapter: corrupted imports preserve memory/disk; takeover r
 test('B5 independent adapter: denied storage remains explicit memory mode with usable progress export',async()=>{
   mockedStorage({failWrites:true}); const store=await persistence();
   assert.equal(store.getStatus().mode,'memory');
+  assert.equal((await store.send({type:'OPEN_BOOTCAMP'})).accepted,true);
   const result=await store.send({type:'BOOT_ACTION',action:{type:'START_LESSON',lessonId:'boot.kit'}});
   assert.equal(result.accepted,true);
   assert.equal(store.getStatus().mode,'memory');
