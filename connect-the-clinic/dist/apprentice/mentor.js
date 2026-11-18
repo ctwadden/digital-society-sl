@@ -74,6 +74,11 @@ function nextStep(view,level){
     'bench.power':['The tester named the problem.','Something on the route has no power. Which box is dark?','Hold a power cord and plug it into the switch’s power inlet. Then test again.'],
     'bench.cable':['One fault down. Test again — there may be another.','The bench computer isn’t cabled to anything.','Patch cable: bench computer RJ45 → a free switch port. Then test.'],
     'bench.pass':['Prove it works.','Run the test again after your last change.','Test from the bench computer. You want Service available.'],
+    'kit.desk':['The desk spot is empty, or holds the wrong thing.','Who sits there, and do they move? Fetch the computer built for that from the locker.','Click the desk spot and choose the desktop: a fixed desk, lots of typing, and it has an Ethernet port.'],
+    'kit.host':['Every computer will depend on the host spot.','Nobody sits at it and everyone relies on it. Which type is built for that?','Click the host spot and choose the server.'],
+    'kit.power':['Fetched isn’t running.','Both computers need power.','Hold a power cord and plug each computer’s power inlet.'],
+    'kit.cable':['They’re on islands.','Each computer needs Ethernet to the switch.','Patch cable: computer RJ45 → a free switch port. Do it for both.'],
+    'kit.pass':['Prove the kit works.','Run the booking test from the desk computer.','Open the tester and choose “Test from the desk computer”.'],
     'rack.inspect':['Look before you change anything.','Inspect the rack computer and compare its address with the practice card.','Use the inspection light on the rack computer. Compare with 172.20.8.0/24.'],
     'rack.address':['That address came from another office.','Choose a valid, unused address on the practice network and apply it with the card’s mask.','Keep 172.20.8 for this /24, choose an unused last number from 1 to 254 (not .10), mask 255.255.255.0.'],
     'rack.mask':['Check the mask matches the card.','The practice card says 255.255.255.0.','Set the mask to exactly 255.255.255.0.'],
@@ -96,6 +101,8 @@ const TOPICS={
   cables:'Ethernet patch cable: RJ45 plug — this job’s network link. Power cord: power only. HDMI: picture to a screen. USB: peripherals such as keyboards and drives. Phone cord: RJ11, narrower than RJ45 — not a network link here.',
   address:'Read the network card: network 10.12.1.0, mask 255.255.255.0 (/24). With this /24 mask, the first three numbers stay 10.12.1 and you pick the last one: 1–254, not one already in use. That shortcut only works because the mask is /24 — another mask changes the rule. In my notebook I use 192.168.5.0/24 as an example: 192.168.5.42 would be fine there, but not here.',
   wireless:'Three separate things: the access point needs power, it needs an Ethernet uplink to the switch, and the tablet must associate (join) with it. Then test where the person actually works — room A isn’t room B.',
+  devices:'Match the computer to the job. Who uses it, where, and for how long? A fixed desk suits a desktop. Moving between rooms suits a tablet. Long typing on the move suits a laptop. If everyone relies on it and nobody sits at it, use a server. A wristband doing one job is an embedded wearable. Every choice has a cost: name it.',
+  parts:'Follow the data. Input comes in (keyboard), the CPU processes it, RAM holds what’s in use right now and forgets it without power, storage like an SSD keeps it for later, output shows the result (screen). The power supply feeds them all.',
   access:'Access is a decision about roles, not cables. Reception needs bookings. The nurse needs the clinical workspace. The outsider role needs neither. “Open to everyone” is easy, but it gives each role services beyond its job — including the front desk opening the clinical workspace.'
 };
 
@@ -112,13 +119,43 @@ const VERDICT_LINES={
   broadcast:'.255 is the broadcast address on a /24 — it means “everyone”.',
   taken:'The card says .10 is the service host. Two devices can’t share an address.',
   'other-network':'With a /24 mask the first three numbers must match 172.20.8. That one doesn’t — different network.'};
+const PART_LINES={
+  'part.keyboard':{ok:'Input. Data comes in through the keyboard.',bad:'Someone presses keys — the data is coming in. Which job is that?'},
+  'part.cpu':{ok:'Process. The CPU carries out the program’s instructions.',bad:'The CPU doesn’t keep anything for later. It follows instructions and changes data.'},
+  'part.ram':{ok:'Memory. RAM holds what’s in use right now, and empties when the power goes. That’s why unsaved work disappears.',bad:'RAM forgets everything when the power goes off, so it can’t be long-term storage. It holds what’s in use right now.'},
+  'part.ssd':{ok:'Storage. The SSD keeps files with the power off.',bad:'The SSD keeps files when the power is off. That’s long-term storage, not working memory.'},
+  'part.screen':{ok:'Output. The result shows on the screen.',bad:'The screen shows a result to a person. Which way is the data going?'},
+  'part.psu':{ok:'Power. The PSU turns wall power into what the parts need.',bad:'The power supply doesn’t process or store anything. It feeds every other part.'}};
+const TRACE_HINT={
+  'trace.type':'Nothing happens until someone types. Start with the input.',
+  'trace.cpu':'The desk computer has to do something with what Theo typed before anything leaves it.',
+  'trace.send':'The request is built. How does it get to the service host?',
+  'trace.lookup':'The request has arrived at the host. Where’s the booking kept?',
+  'trace.show':'The host found it. What’s left for Theo to see?'};
+const KIND_LINES={
+  desktop:{ok:'Desktop. One fixed desk, a big keyboard and screen, easy to repair. It just doesn’t move.',why:'He never leaves that desk and types all day.'},
+  tablet:{ok:'Tablet. Light and goes room to room. The cost: battery, and long typing is slow.',why:'She’s on her feet between rooms.'},
+  server:{ok:'Server. Built to run all day for everyone else. But when it’s down, everyone waits.',why:'Nobody sits at it; every other computer depends on it.'},
+  laptop:{ok:'Laptop. A full keyboard that travels. Battery, theft risk and no Ethernet port on ours are the trade-offs.',why:'Long typing, and it has to travel.'},
+  wearable:{ok:'Wearable. A small embedded computer built for one job. It can’t replace a workstation.',why:'It’s worn on the body and does one small job.'}};
 function trainingLine(view){
   const t=view.training,last=t?.last;
   if(!last){
-    const cards=t.stations.filter(s=>s.card),earned=cards.filter(s=>s.earned).length;
+    const cards=t.stations.filter(s=>s.card&&(t.gate!==true||s.unlocks.length)),earned=cards.filter(s=>s.earned).length;
+    if(t.gate==='full'&&!earned)return {mood:'explaining',text:'Training Centre. Before you ride with me, you earn cards here: the Cable wall and Device locker open the first visit, the Network rack opens the second, and the Parts bench comes before your own van. Read the handbook page, do the practical, ask me anything. Nothing here costs you.'};
     if(!earned)return {mood:'explaining',text:'Training Centre. Before you ride with me, you earn two cards: the Cable wall and the Network rack. Read the handbook page, do the practical, and ask me anything. Nothing here costs you.'};
-    if(earned<cards.length)return {mood:'pleased',text:`${earned} card earned. The next one unlocks the next ride-along.`};
-    return {mood:'pleased',text:'Both cards. You’re ready to ride along. The other stations open later in the course.'};
+    if(earned<cards.length)return {mood:'pleased',text:`${earned} of ${cards.length} cards earned. Each one opens something at the depot.`};
+    return {mood:'pleased',text:t.gate==='full'?'Every card I need from you. You’re ready to ride along.':'Both cards. You’re ready to ride along. The other stations are extra practice.'};
+  }
+  if(last.kind==='part'){const l=PART_LINES[last.partId];return {mood:last.code==='PART_OK'?'pleased':'thinking',text:last.code==='PART_OK'?l.ok:l.bad};}
+  if(last.kind==='trace'){
+    if(last.code==='TRACE_OK')return {mood:'pleased',text:t.trace.done?'Keyboard, CPU, network, host storage, screen. Input, process, storage, output — and the network in the middle. That’s every booking Theo makes.':'Yes. What happens next?'};
+    return {mood:'thinking',text:`Not yet. ${TRACE_HINT[last.expected]||'Think about what has to happen first.'}`};
+  }
+  if(last.kind==='match'){
+    if(last.code==='MATCH_OK')return {mood:'pleased',text:KIND_LINES[last.choice]?.ok||'Right.'};
+    const best={'job.front-desk':'desktop','job.rounds':'tablet','job.shared':'server','job.reports':'laptop','job.wristband':'wearable'}[last.jobId];
+    return {mood:'thinking',text:`Not the best fit. Read the job again: ${KIND_LINES[best]?.why||'who uses it, and where?'}`};
   }
   if(last.kind==='sort'){const l=SORT_LINES[last.cableType];return {mood:last.code==='SORT_OK'?'pleased':'concerned',text:last.code==='SORT_OK'?l.ok:l.bad};}
   if(last.kind==='classify'){const c=t.candidates.find(x=>x.address===last.address);const right=view.trainingAnswers?.[last.address];
@@ -150,6 +187,7 @@ export function mentorLine(view){
     if(r.pass){
       const pc=dev(view,'role.reception');
       if(pc&&pc.mask&&pc.mask!==view.network.mask&&['visit.2','drill.addressing.bench'].includes(v.id))return {mood:'thinking',text:`It answered — but your mask is ${pc.mask} and the card says ${view.network.mask}. A wrong mask can work on a small bench and cause trouble later. Match the card.`};
+      if(v.id==='drill.devices.bench'&&view.checks.some(c=>c.id==='kit.host'&&!c.met))return {mood:'thinking',text:'It answered, so the cables and power are right. But the host is a desktop. It works today. Is it the computer built to serve everyone, all day? Swap it, then test again.'};
       if(v.id==='visit.1')return {mood:'pleased',text:`${base} Look at Theo.`};
       if(r.testId==='nurse'&&t)return {mood:'pleased',text:`Tablet works in ${t.locationId==='location.exam-b'?'room B':'room A'}. ${unmet(view)?.id==='test.roomB'?'Now the other room.':''}`.trim()};
       return {mood:'pleased',text:level===0?'Good. Keep going.':base};
@@ -171,6 +209,12 @@ export function mentorLine(view){
   if(r.kind==='change'){
     if(r.code==='CHOOSE_DEVICE'){
       const desk=dev(view,'role.reception');
+      if(v.id==='drill.devices.bench'){
+        const e=[...view.history].reverse().find(x=>x.type==='CHOOSE_DEVICE'),d=e&&dev(view,e.payload.roleId);
+        if(d&&!d.ports.some(p=>p.medium==='ethernet'))return {mood:'concerned',text:`Look at the back of that ${d.kind}: no Ethernet port, and this bench has no Wi-Fi. It can’t join the switch. Is it built for this job anyway?`};
+        if(d&&d.roleId==='role.records'&&d.kind==='desktop')return {mood:'thinking',text:'A desktop will run the booking service, sure. But every computer here depends on it, all day, with nobody sitting at it. What’s built for that?'};
+        if(d)return {mood:'pleased',text:d.roleId==='role.records'?'A server. Built to serve everyone else. Now power and cable it.':'A desktop for a fixed desk. Good. Power, then Ethernet.'};
+      }
       if(desk&&desk.kind==='laptop'&&unmet(view)?.id?.startsWith('install'))return {mood:'concerned',text:'A laptop at a fixed desk? Look at its ports — no Ethernet socket. Theo doesn’t walk around with it. I’d swap it for the desktop.'};
       return {mood:'neutral',text:level===2?'Good. Now it needs power — hold a power cord and find its power inlet.':'Installed.'};
     }
@@ -198,6 +242,7 @@ function holdLine(type){
 function arrival(view){
   const id=view.visit.id;
   if(id==='drill.cables.bench')return 'Bench drill. Someone left this broken on purpose. Rule one: test before you touch anything. Then fix one thing, and test again.';
+  if(id==='drill.devices.bench')return 'Empty bench, powered switch, full locker. Two jobs: a fixed booking desk, and the host every computer relies on. Fetch what’s built for each, then prove it works.';
   if(id==='drill.addressing.bench')return 'The cable and power are fine on this one — I checked. The address isn’t. Read the practice card, then the computer.';
   if(id==='visit.1')return 'Here we are. Theo opens the front desk in an hour and the booking service is unavailable — nothing’s installed. You do the hands-on work; I’ll be right here. Start with the desk.';
   if(id==='visit.2')return 'Two jobs today. Theo’s new desk computer still has its old office’s address, and Ana needs her tablet working in both exam rooms. I’ll help when you ask — and I’ll speak up if you get stuck.';
@@ -214,10 +259,11 @@ function finishLine(view){
 
 function yardLine(view){
   if(view.truckClaimed)return {mood:'pleased',text:'Van 7’s yours. I’ll still pick up the phone if you call.'};
+  if(view.visitsDone&&!view.truckEarned)return {mood:'explaining',text:'Three visits, all your own work. One more thing before I hand over keys: the Parts bench card. If you’re going alone, you need to know what’s inside the box.'};
   if(view.truckEarned)return {mood:'pleased',text:'Three visits, all your own work. Come round the side of the shed — there’s something with your unit number on it.'};
   const done=view.completedVisitIds.length;
   const needCards=view.training?.gate&&view.training.stations.some(s=>s.card&&!s.earned);
-  if(!view.packed.length&&!done&&needCards)return {mood:'explaining',text:'Morning. I’m Mags. Nobody rides in my van until they’ve passed the Training Centre — cables first, then addresses. Head inside. Pack the tool bag while you’re out here, too.'};
+  if(!view.packed.length&&!done&&needCards)return {mood:'explaining',text:view.training.gate==='full'?'Morning. I’m Mags. Nobody rides in my van until they’ve passed the Training Centre: cables and devices first, then addresses. Head inside. Pack the tool bag while you’re out here, too.':'Morning. I’m Mags. Nobody rides in my van until they’ve passed the Training Centre — cables first, then addresses. Head inside. Pack the tool bag while you’re out here, too.'};
   if(!view.packed.length&&!done)return {mood:'explaining',text:'Morning. I’m Mags. You’re riding with me this week. First job: pack the tool bag. Take what we need — not everything on the shelf.'};
   const last=view.yardLog.at(-1);
   if(last&&!view.bagReady){
@@ -225,7 +271,7 @@ function yardLine(view){
     if(last.type==='PACK_ITEM'&&item&&!item.essential)return {mood:'thinking',text:`${item.label}? ${item.use} Bring it if you like, but it won’t fix a network.`};
     if(last.type==='PACK_ITEM'&&item)return {mood:'neutral',text:`${item.label}. ${item.use}`};
   }
-  if(view.bagReady&&done===0&&view.visits[0]?.cardsNeeded?.length)return {mood:'neutral',text:'Good bag. Now the Cable wall card — then we ride.'};
+  if(view.bagReady&&done===0&&view.visits[0]?.cardsNeeded?.length){const n=view.visits[0].cardsNeeded.map(c=>view.training.stations.find(s=>s.card===c)?.title).filter(Boolean);return {mood:'neutral',text:`Good bag. Now the ${n.join(' and ')} card${n.length>1?'s':''} — then we ride.`};}
   if(view.bagReady&&done===0)return {mood:'pleased',text:'That’s a proper bag. In the van — Harbour Street Clinic.'};
   if(done===1)return {mood:'pleased',text:'Back for day two. Same clinic, new problems. I’ll step back a little.'};
   if(done===2)return {mood:'neutral',text:'Day three. You lead; I drive.'};

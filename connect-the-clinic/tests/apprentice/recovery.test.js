@@ -101,7 +101,7 @@ test('R6 real 0.8 save migrates on automatic persistence restore and manual impo
   let store=await createPersistence(options('recovery.legacy.auto'));
   let view=deriveProgramme(store.getState());
   assert.equal(view.apprenticeOrigin,'legacy');assert.deepEqual(view.apprentice.completedVisitIds,[]);assert.equal(view.apprentice.truckEarned,false);
-  assert.equal(store.getState().buildVersion,'0.10.0');store.dispose();await tick();
+  assert.equal(store.getState().buildVersion,'0.11.0');store.dispose();await tick();
   browserStorage();store=await createPersistence(options('recovery.legacy.manual'));
   assert.equal((await store.importProgress(legacy)).accepted,true);view=deriveProgramme(store.getState());
   assert.equal(view.apprenticeOrigin,'legacy');assert.deepEqual(view.apprentice.completedVisitIds,[]);assert.equal(store.getState().importProvenance,'manual-file');

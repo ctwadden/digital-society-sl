@@ -20,7 +20,21 @@ export function train(d){
   for(const [address,verdict] of [['172.20.8.0','network'],['172.20.8.77','usable'],['172.20.8.10','taken'],['172.20.9.5','other-network'],['172.20.8.255','broadcast'],['10.12.1.40','other-network']])d.act({type:'CLASSIFY_ADDRESS',address,verdict});
   d.act({type:'START_DRILL',drillId:'drill.addressing.bench'});const pc=dev(d,'role.reception');d.act({type:'INSPECT_DEVICE',deviceId:pc.id});
   d.act({type:'NETWORK_ACTION',action:{type:'SET_STATIC_ADDRESS',deviceId:pc.id,address:'172.20.8.77',mask:'255.255.255.0'}});d.act({type:'RUN_TEST',testId:'reception'});d.act({type:'FINISH_VISIT'});
+  parts(d);devices(d);
   d.act({type:'RETURN_TO_YARD'});return d;
+}
+export const PART_ANSWERS=[['part.keyboard','input'],['part.cpu','process'],['part.ram','memory'],['part.ssd','storage'],['part.screen','output'],['part.psu','power']];
+export const TRACE_ORDER=['trace.type','trace.cpu','trace.send','trace.lookup','trace.show'];
+export const DEVICE_ANSWERS=[['job.front-desk','desktop'],['job.rounds','tablet'],['job.shared','server'],['job.reports','laptop'],['job.wristband','wearable']];
+/** Parts bench card: sort the parts, then trace a booking in order. */
+export function parts(d){for(const [partId,job] of PART_ANSWERS)d.act({type:'SORT_PART',partId,job});for(const stepId of TRACE_ORDER)d.act({type:'TRACE_STEP',stepId});return d;}
+/** Device locker card: match the jobs, then kit out the bench with a desktop and a server. */
+export function devices(d){
+  for(const [jobId,kind] of DEVICE_ANSWERS)d.act({type:'MATCH_DEVICE',jobId,kind});
+  d.act({type:'START_DRILL',drillId:'drill.devices.bench'});
+  for(const [roleId,kind] of [['role.reception','desktop'],['role.records','server']]){d.act({type:'NETWORK_ACTION',action:{type:'CHOOSE_DEVICE',roleId,kind}});power(d,dev(d,roleId));}
+  cable(d,dev(d,'role.reception'),1,dev(d,'infra.switch'),2);cable(d,dev(d,'role.records'),1,dev(d,'infra.switch'),1);
+  d.act({type:'RUN_TEST',testId:'reception'});d.act({type:'FINISH_VISIT'});return d;
 }
 export function pack(d){const t=d.view.training;if(t?.gate&&!t.stations.every(s=>!s.card||s.earned))train(d);for(const itemId of ['item.patch-cable','item.power-cord','item.link-tester','item.port-light'])d.act({type:'PACK_ITEM',itemId});return d;}
 export function cable(d,a,ai,b,bi){d.act({type:'HOLD_CABLE',cableType:'ethernet'});d.act({type:'PLUG',deviceId:a.id,socketId:eth(a,ai)});d.act({type:'PLUG',deviceId:b.id,socketId:eth(b,bi)});return d;}

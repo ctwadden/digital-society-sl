@@ -108,7 +108,7 @@ export const HANDBOOK = [
     stationId: 'station.parts',
     title: 'Follow data through a computer',
     lessonRef: 'Course 3.3B Components of a computer — Inside the box, Follow the data, and Software layers',
-    status: 'explained',
+    status: 'practised',
     summary: 'Computers combine input, processing, storage, and output through connected hardware controlled by layers of software.',
     sections: [
       {
@@ -153,14 +153,15 @@ export const HANDBOOK = [
     notPractised: [
       'Opening, installing, upgrading, or repairing components inside a computer.',
       'Tracing real electrical signals or measuring CPU, RAM, or storage performance.',
-      'Installing operating systems, drivers, applications, or utilities.'
+      'Installing operating systems, drivers, applications, or utilities.',
+      'The parts sort and booking trace are practised as reasoning tasks; the network simulation does not model what happens inside a computer.'
     ]
   },
   {
     stationId: 'station.devices',
     title: 'Choose a computer for the job',
     lessonRef: 'Course 3.3A Types of computers — Comparing computer types and trade-offs',
-    status: 'explained',
+    status: 'practised',
     summary: 'A suitable computer type fits the task, users, location, and trade-offs rather than simply being the most powerful.',
     sections: [
       {
@@ -202,7 +203,8 @@ export const HANDBOOK = [
     notPractised: [
       'Selecting, buying, benchmarking, or repairing real computer hardware.',
       'Operating an embedded system, wearable, mainframe, or data centre.',
-      'Testing battery life, processing power, durability, or total cost.'
+      'Testing battery life, processing power, durability, or total cost.',
+      'In the bench drill, the game checks real ports and power; whether a desktop or server is the better host is judged by job fit, not measured.'
     ]
   },
   {
