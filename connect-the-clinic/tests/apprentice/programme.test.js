@@ -59,7 +59,7 @@ test('a real 0.8 save with an unfinished bench migrates without inventing appren
   const v=deriveProgramme(r.state);
   assert.equal(v.screen,'bootcamp');assert.equal(v.apprenticeOrigin,'legacy');
   assert.equal(v.apprentice.completedVisitIds.length,0);assert.equal(v.apprentice.truckEarned,false);
-  assert.equal(r.state.buildVersion,'0.10.0');
+  assert.equal(r.state.buildVersion,'0.11.0');
   // The migrated programme keeps replaying under 0.9 rules after further play.
   let s=send(r.state,{type:'OPEN_APPRENTICE'});
   const again=validateProgrammeSave(serializeProgrammeProgress(s));assert.equal(again.valid,true,again.error);
@@ -83,7 +83,7 @@ test('a real 0.8 save with field work in progress resumes it exactly',()=>{
 test('a real published 0.9 save keeps ungated visits and gains the Training Centre without credit',()=>{
   const r=validateProgrammeSave(fixture('v09-visit1-done.json'));
   assert.equal(r.valid,true,r.error);assert.equal(r.migrated,true);
-  assert.equal(r.state.buildVersion,'0.10.0');assert.equal(r.state.apprenticeRules,'ungated');
+  assert.equal(r.state.buildVersion,'0.11.0');assert.equal(r.state.apprenticeRules,'ungated');
   const v=deriveProgramme(r.state).apprentice;
   assert.deepEqual(v.completedVisitIds,['visit.1']);assert.equal(v.training.gate,false);
   assert.ok(v.training.stations.every(s=>!s.earned),'no training card is invented by migration');
@@ -95,9 +95,9 @@ test('a real published 0.9 save keeps ungated visits and gains the Training Cent
   assert.equal(validateProgrammeSave(JSON.stringify(flipped)).valid,false,'a gated replay rejects the ungated visit start');
 });
 
-test('new 0.10 programmes gate visits on training cards earned by real drills',()=>{
+test('new programmes gate visits on training cards earned by real drills',()=>{
   const d=programmeDriver(createProgramme({campaignId:'p.gate'}));
-  assert.equal(d.state.apprenticeRules,'gated');
+  assert.equal(d.state.apprenticeRules,'gated-full');
   for(const itemId of ['item.patch-cable','item.power-cord','item.link-tester','item.port-light'])d.act({type:'PACK_ITEM',itemId});
   d.act({type:'START_VISIT',visitId:'visit.1'},false);
   d.act({type:'OPEN_TRAINING'});

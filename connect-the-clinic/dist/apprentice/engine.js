@@ -53,12 +53,36 @@ export const VISITS=Object.freeze([
 export const STATIONS=Object.freeze([
   {id:'station.cables',title:'Cable wall',card:'card.cables',lesson:'Course 3.4 Networks',open:true,unlocks:['visit.1']},
   {id:'station.addressing',title:'Network rack',card:'card.addressing',lesson:'Course 3.4 Networks',open:true,unlocks:['visit.2']},
-  {id:'station.parts',title:'Parts bench',card:null,lesson:'Course 3.3B Components',open:false,unlocks:[]},
-  {id:'station.devices',title:'Device locker',card:null,lesson:'Course 3.3A Types of computers',open:false,unlocks:[]},
+  {id:'station.parts',title:'Parts bench',card:'card.parts',lesson:'Course 3.3B Components',open:true,unlocks:['van']},
+  {id:'station.devices',title:'Device locker',card:'card.devices',lesson:'Course 3.3A Types of computers',open:true,unlocks:['visit.1']},
   {id:'station.speed',title:'Speed lab',card:null,lesson:'Course 3.4 Networks',open:false,unlocks:[]},
   {id:'station.security',title:'Security desk',card:null,lesson:'Course 3.4 Networks',open:false,unlocks:[]}
 ]);
+/** Training rules: gate false (0.9 saves), true (0.10 saves: two cards) or 'full' (0.11+: four cards, Parts bench before the van). */
 export const VISIT_CARDS=Object.freeze({'visit.1':['card.cables'],'visit.2':['card.addressing'],'visit.3':['card.cables','card.addressing']});
+export const VISIT_CARDS_FULL=Object.freeze({'visit.1':['card.cables','card.devices'],'visit.2':['card.addressing'],'visit.3':['card.cables','card.addressing']});
+export const VAN_CARDS_FULL=Object.freeze(['card.parts']);
+/** Parts bench: what each part does (Course 3.3B), then the order a booking request travels. */
+export const PARTS=Object.freeze([
+  {id:'part.keyboard',label:'Keyboard',job:'input'},{id:'part.cpu',label:'Processor (CPU)',job:'process'},{id:'part.ram',label:'Memory (RAM)',job:'memory'},
+  {id:'part.ssd',label:'Solid-state drive (SSD)',job:'storage'},{id:'part.screen',label:'Screen',job:'output'},{id:'part.psu',label:'Power supply (PSU)',job:'power'}]);
+export const PART_JOBS=Object.freeze(['input','process','memory','storage','output','power']);
+export const TRACE_STEPS=Object.freeze([
+  {id:'trace.type',text:'Theo types a name into the booking screen.',function:'input'},
+  {id:'trace.cpu',text:'The desk computer’s CPU runs the booking app, held in RAM, and builds a request.',function:'process'},
+  {id:'trace.send',text:'The request leaves through the Ethernet port and crosses the switch.',function:'network'},
+  {id:'trace.lookup',text:'The service host’s CPU finds the booking on its storage drive.',function:'process and storage'},
+  {id:'trace.show',text:'The reply comes back and the desk screen shows the booking.',function:'output'}]);
+/** Fixed, shuffled display order so the task is the same for everyone and replays exactly. */
+export const TRACE_DISPLAY=Object.freeze(['trace.lookup','trace.show','trace.type','trace.send','trace.cpu']);
+/** Device locker: match a job to the computer type built for it (Course 3.3A). */
+export const DEVICE_JOBS=Object.freeze([
+  {id:'job.front-desk',text:'Theo books appointments at one fixed desk all day, with lots of typing.',kind:'desktop'},
+  {id:'job.rounds',text:'Ana carries the clinical workspace between exam rooms and taps short notes.',kind:'tablet'},
+  {id:'job.shared',text:'Every computer in the clinic reads the same booking list, even when nobody sits at it.',kind:'server'},
+  {id:'job.reports',text:'A visiting specialist types long reports in different rooms and on the train home.',kind:'laptop'},
+  {id:'job.wristband',text:'A wristband counts steps for a week and sends the totals when it is docked.',kind:'wearable'}]);
+export const DEVICE_KINDS=Object.freeze(['desktop','laptop','tablet','server','wearable']);
 export const SORT_JOBS=Object.freeze(['network','power','display','peripheral','phone-line']);
 const SORT_ANSWER={ethernet:'network',power:'power',hdmi:'display',usb:'peripheral',phone:'phone-line'};
 export const PRACTICE_NETWORK=Object.freeze({base:'172.20.8',cidr:'172.20.8.0/24',mask:'255.255.255.0',serverAddress:'172.20.8.10',receptionAddress:'172.20.8.20',inheritedNurseAddress:'172.20.8.30'});
@@ -74,13 +98,17 @@ export const DRILLS=Object.freeze([
   {id:'drill.addressing.bench',stationId:'station.addressing',number:0,support:'alongside',title:'Rack fault: the wrong address',
    brief:'The rack computer was moved here from another office. Its cable and power are fine. Read the practice network card, give it a valid unused address with the right mask, and test.',
    goal:'Inspect the computer, apply a valid unused address with the card’s mask, and finish with a passing test.',
-   roles:{},actions:['POWER_DEVICE','CONNECT_PORTS','DISCONNECT_CABLE','SET_STATIC_ADDRESS'],tests:['reception'],network:'practice'}
+   roles:{},actions:['POWER_DEVICE','CONNECT_PORTS','DISCONNECT_CABLE','SET_STATIC_ADDRESS'],tests:['reception'],network:'practice'},
+  {id:'drill.devices.bench',stationId:'station.devices',number:0,support:'alongside',title:'Kit out the bench',
+   brief:'The bench has a powered switch and two empty spots: a fixed booking desk and the service host every computer relies on. Fetch a computer for each from the locker, power and cable them, and prove the booking service works.',
+   goal:'Choose the computer built for each job, power and cable both to the switch, and finish with a passing test.',
+   roles:{'role.reception':['tablet','laptop','desktop'],'role.records':['laptop','desktop','server']},actions:['CHOOSE_DEVICE','POWER_DEVICE','CONNECT_PORTS','DISCONNECT_CABLE'],tests:['reception'],network:'practice'}
 ]);
 const visit=id=>VISITS.find(v=>v.id===id)||DRILLS.find(d=>d.id===id);
 const isDrill=id=>DRILLS.some(d=>d.id===id);
-const ACTION_FIELDS={OPEN_TRAINING:[],START_DRILL:['drillId'],SORT_CABLE:['cableType','job'],CLASSIFY_ADDRESS:['address','verdict'],PACK_ITEM:['itemId'],UNPACK_ITEM:['itemId'],START_VISIT:['visitId'],RESTART_VISIT:[],RETURN_TO_YARD:[],HOLD_CABLE:['cableType'],RELEASE_CABLE:[],PLUG:['deviceId','socketId'],NETWORK_ACTION:['action'],INSPECT_DEVICE:['deviceId'],RUN_TEST:['testId'],ASK_MENTOR:['topic'],SAVE_EXPLANATION:['text','oral'],FINISH_VISIT:[],CLAIM_TRUCK:[]};
+const ACTION_FIELDS={OPEN_TRAINING:[],START_DRILL:['drillId'],SORT_CABLE:['cableType','job'],CLASSIFY_ADDRESS:['address','verdict'],SORT_PART:['partId','job'],TRACE_STEP:['stepId'],MATCH_DEVICE:['jobId','kind'],PACK_ITEM:['itemId'],UNPACK_ITEM:['itemId'],START_VISIT:['visitId'],RESTART_VISIT:[],RETURN_TO_YARD:[],HOLD_CABLE:['cableType'],RELEASE_CABLE:[],PLUG:['deviceId','socketId'],NETWORK_ACTION:['action'],INSPECT_DEVICE:['deviceId'],RUN_TEST:['testId'],ASK_MENTOR:['topic'],SAVE_EXPLANATION:['text','oral'],FINISH_VISIT:[],CLAIM_TRUCK:[]};
 const NETWORK_FIELDS={CHOOSE_DEVICE:['roleId','kind'],POWER_DEVICE:['deviceId','on'],CONNECT_PORTS:['fromDeviceId','fromPortId','toDeviceId','toPortId'],DISCONNECT_CABLE:['cableId'],SET_STATIC_ADDRESS:['deviceId','address','mask'],ASSOCIATE_WIFI:['deviceId','apDeviceId'],MOVE_NURSE:['locationId'],SET_PERMISSIONS:['policyId']};
-const MENTOR_TOPICS=['next','why','show','cables','address','wireless','access'];
+const MENTOR_TOPICS=['next','why','show','cables','address','wireless','access','devices','parts'];
 const SOCKET_KINDS=['ethernet','power','hdmi','usb','audio'];
 
 const net=a=>a.networkState.attempts[a.networkState.activeAttemptId];
@@ -88,8 +116,16 @@ const role=(a,id)=>Object.values(net(a).devices).find(d=>d.roleId===id)||null;
 const recordsFor=(s,id)=>s.completionRecords.filter(r=>r.visitId===id);
 const completedVisitIds=s=>[...new Set(s.completionRecords.map(r=>r.visitId))];
 const unlockedIndex=s=>Math.min(VISITS.length-1,VISITS.findIndex(v=>!completedVisitIds(s).includes(v.id))<0?VISITS.length-1:VISITS.findIndex(v=>!completedVisitIds(s).includes(v.id)));
-export const truckEarned=s=>VISITS.every(v=>recordsFor(s,v.id).some(r=>r.origin==='learner-practice'));
-const training=s=>s.training||{gate:false,current:null,sorted:{},classified:{},log:[],records:[],support:[]};
+const visitsDone=s=>VISITS.every(v=>recordsFor(s,v.id).some(r=>r.origin==='learner-practice'));
+export const truckEarned=s=>visitsDone(s)&&(training(s).gate!=='full'||VAN_CARDS_FULL.every(c=>cardEarned(s,c)));
+const EMPTY_KIT=()=>({parts:{},trace:[],devices:{}});
+const training=s=>s.training||{gate:false,current:null,sorted:{},classified:{},log:[],records:[],support:[],kit:EMPTY_KIT()};
+/** 0.10 saves have no kit record; their replay creates one only when the learner uses the new stations. */
+const kit=s=>training(s).kit||EMPTY_KIT();
+const partsDone=s=>PARTS.every(p=>kit(s).parts[p.id]===p.job);
+const traceDone=s=>kit(s).trace.length===TRACE_STEPS.length;
+const devicesMatched=s=>DEVICE_JOBS.every(j=>kit(s).devices[j.id]===j.kind);
+const visitCards=(s,visitId)=>((training(s).gate==='full'?VISIT_CARDS_FULL:VISIT_CARDS)[visitId]||[]);
 const sortDone=s=>Object.entries(SORT_ANSWER).every(([type,job])=>training(s).sorted[type]===job);
 const classifyDone=s=>ADDRESS_CANDIDATES.every(c=>training(s).classified[c.address]===c.verdict);
 const drillDone=(s,id)=>training(s).records.some(r=>r.visitId===id&&r.origin==='learner-practice');
@@ -97,14 +133,18 @@ const drillDone=(s,id)=>training(s).records.some(r=>r.visitId===id&&r.origin==='
 export function cardEarned(s,cardId){
   if(cardId==='card.cables')return sortDone(s)&&drillDone(s,'drill.cables.bench');
   if(cardId==='card.addressing')return classifyDone(s)&&drillDone(s,'drill.addressing.bench');
+  if(cardId==='card.parts')return partsDone(s)&&traceDone(s);
+  if(cardId==='card.devices')return devicesMatched(s)&&drillDone(s,'drill.devices.bench');
   return false;
 }
-const visitGateOpen=(s,visitId)=>!training(s).gate||(VISIT_CARDS[visitId]||[]).every(c=>cardEarned(s,c));
+const visitGateOpen=(s,visitId)=>!training(s).gate||visitCards(s,visitId).every(c=>cardEarned(s,c));
+const cardTitle=c=>STATIONS.find(x=>x.card===c).title;
 
-export function createApprenticeship({campaignId='apprentice.local',trainingGate=true}={}){
+export function createApprenticeship({campaignId='apprentice.local',trainingGate='full'}={}){
+  need([true,false,'full'].includes(trainingGate),'TRAINING_RULES','Unknown training rules.');
   need(typeof campaignId==='string'&&/^[A-Za-z0-9._:-]{1,120}$/.test(campaignId),'CAMPAIGN_INVALID','Use an anonymous campaign identifier.');
   return {appId:APP_ID,schemaVersion:1,campaignId,revision:0,at:'yard',packed:[],yardLog:[],attemptSequence:0,current:null,completionRecords:[],truck:{claimed:false,claimedRevision:null},
-    training:{gate:trainingGate===true,current:null,sorted:{},classified:{},log:[],records:[],support:[]}};
+    training:{gate:trainingGate,current:null,sorted:{},classified:{},log:[],records:[],support:[],...(trainingGate==='full'?{kit:EMPTY_KIT()}:{})}};
 }
 
 function event(a,type,payload={},origin='learner'){
@@ -155,6 +195,9 @@ function createAttempt(s,visitId){
     setupChoose(a,'infra.switch','switch4');setupChoose(a,'role.reception','desktop');
     setupCable(a,'role.records','infra.switch',1);setupCable(a,'role.reception','infra.switch',2);
     child(a,{type:'SET_STATIC_ADDRESS',deviceId:role(a,'role.reception').id,address:'192.168.0.25',mask:'255.255.255.0'},'setup');
+  }else if(visitId==='drill.devices.bench'){
+    // Only the switch is installed; the learner fetches both computers from the locker.
+    setupChoose(a,'infra.switch','switch4');
   }else if(visitId!=='visit.1'){
     setupChoose(a,'role.records','server');child(a,{type:'SET_SERVICE_STATE',enabled:true},'setup');
     setupChoose(a,'infra.switch','switch4');setupChoose(a,'role.reception','desktop');
@@ -316,6 +359,17 @@ export function visitChecks(a){
       check('rack.mask','Use the card’s mask',pc?.mask===n.network.mask,`Practice card mask: ${n.network.mask}.`),
       check('rack.pass','Finish with a passing test after your change',t?.pass,t?`${t.code}: ${t.message}`:'No passing test after your change yet.')];
   }
+  if(a.visitId==='drill.devices.bench'){
+    // The passing test must come after the latest equipment choice, so it exercised what is installed now.
+    const lastChoice=[...a.playerActions].reverse().find(x=>x.type==='CHOOSE_DEVICE');
+    const pc=role(a,'role.reception'),host=role(a,'role.records'),t=confirmed(a,'reception',null,lastChoice?.eventId);
+    const fit=(d,want,why)=>!d?'Nothing fetched yet.':d.kind===want?`${CATALOG[d.kind].label}: ${why}`:CATALOG[d.kind].ethernet?`${CATALOG[d.kind].label} can work, but ${why}`:`${CATALOG[d.kind].label}: no Ethernet port, and this bench has no Wi-Fi.`;
+    return [check('kit.desk','Fetch the computer built for a fixed desk',pc?.kind==='desktop'&&did(a,'CHOOSE_DEVICE',x=>x.roleId==='role.reception'),fit(pc,'desktop','a desktop suits one fixed desk with lots of typing.')),
+      check('kit.host','Fetch the computer built to serve the others',host?.kind==='server'&&did(a,'CHOOSE_DEVICE',x=>x.roleId==='role.records'),fit(host,'server','a server is built to run all day for every other computer.')),
+      check('kit.power','Power both computers',pc?.powered&&host?.powered&&did(a,'POWER_DEVICE',x=>x.deviceId===pc.id)&&did(a,'POWER_DEVICE',x=>x.deviceId===host.id),'A power cord into each power inlet.'),
+      check('kit.cable','Cable both computers to the switch',linked(a,'role.reception','infra.switch')&&linked(a,'role.records','infra.switch'),'Ethernet from each RJ45 port to a free switch port.'),
+      check('kit.pass','Finish with a passing test',t?.pass,t?`${t.code}: ${t.message}`:'No passing test with the current setup yet.')];
+  }
   if(a.visitId==='visit.1'){
     const rows=Object.entries(visit('visit.1').roles).map(([roleId])=>{
       const d=role(a,roleId),label={'role.reception':'desk computer','infra.switch':'switch','role.records':'service host'}[roleId];
@@ -390,6 +444,28 @@ function apply(s,action){
       if(T.log.length>300)T.log.splice(0,T.log.length-300);
       return{code:T.last.code,message:T.last.code.endsWith('OK')?'Correct.':'Not quite — try again. Retries are free.'};
     }
+    case 'SORT_PART':case 'TRACE_STEP':case 'MATCH_DEVICE':{
+      need(T&&s.at==='training','TRAINING_REQUIRED','Open the Training Centre first.');
+      if(!T.kit)T.kit=EMPTY_KIT();const K=T.kit;let entry;
+      if(action.type==='SORT_PART'){
+        const part=PARTS.find(x=>x.id===action.partId);need(part&&PART_JOBS.includes(action.job),'SORT_INVALID','Choose a part and a job.');
+        const ok=part.job===action.job;if(ok)K.parts[part.id]=action.job;
+        entry={type:'SORT_PART',partId:part.id,job:action.job,correct:ok};T.last={kind:'part',code:ok?'PART_OK':'PART_WRONG',partId:part.id,job:action.job};
+      }else if(action.type==='TRACE_STEP'){
+        need(TRACE_STEPS.some(x=>x.id===action.stepId),'TRACE_INVALID','Choose one of the listed steps.');
+        need(!traceDone(s),'TRACE_COMPLETE','The booking trace is already complete.');
+        const expected=TRACE_STEPS[K.trace.length],ok=expected.id===action.stepId;
+        need(!K.trace.includes(action.stepId),'TRACE_ALREADY_PLACED','That step is already in your trace.');
+        if(ok)K.trace.push(action.stepId);
+        entry={type:'TRACE_STEP',stepId:action.stepId,position:K.trace.length+(ok?0:1),correct:ok};T.last={kind:'trace',code:ok?'TRACE_OK':'TRACE_WRONG',stepId:action.stepId,expected:ok?null:expected.id};
+      }else{
+        const job=DEVICE_JOBS.find(x=>x.id===action.jobId);need(job&&DEVICE_KINDS.includes(action.kind),'MATCH_INVALID','Choose a job and a computer type.');
+        const ok=job.kind===action.kind;if(ok)K.devices[job.id]=action.kind;
+        entry={type:'MATCH_DEVICE',jobId:job.id,kind:action.kind,correct:ok};T.last={kind:'match',code:ok?'MATCH_OK':'MATCH_WRONG',jobId:job.id,choice:action.kind};
+      }
+      T.log.push({...entry,revision:s.revision+1});if(T.log.length>300)T.log.splice(0,T.log.length-300);
+      return{code:T.last.code,message:T.last.code.endsWith('OK')?'Correct.':'Not quite — try again. Retries are free.'};
+    }
     case 'START_DRILL':{
       need(T&&s.at==='training','TRAINING_REQUIRED','Open the Training Centre first.');
       const d=DRILLS.find(x=>x.id===action.drillId);need(d,'DRILL_UNKNOWN','Choose a listed drill.');
@@ -409,7 +485,7 @@ function apply(s,action){
     case 'START_VISIT':{
       const index=VISITS.findIndex(v=>v.id===action.visitId);need(index>=0,'VISIT_UNKNOWN','Choose a listed visit.');
       need(index<=unlockedIndex(s)||completedVisitIds(s).includes(action.visitId),'VISIT_LOCKED','Finish the earlier visit with Mags first.');
-      need(visitGateOpen(s,action.visitId),'TRAINING_CARD_REQUIRED',`Earn the ${(VISIT_CARDS[action.visitId]||[]).filter(c=>!cardEarned(s,c)).map(c=>STATIONS.find(x=>x.card===c).title).join(' and ')} training card first.`);
+      need(visitGateOpen(s,action.visitId),'TRAINING_CARD_REQUIRED',`Earn the ${visitCards(s,action.visitId).filter(c=>!cardEarned(s,c)).map(cardTitle).join(' and ')} training card${visitCards(s,action.visitId).filter(c=>!cardEarned(s,c)).length>1?'s':''} first.`);
       need(ESSENTIALS.every(id=>s.packed.includes(id)),'BAG_INCOMPLETE','Pack the essentials first: Ethernet patch cables, power cords, the service tester and the inspection light.');
       const resume=s.current&&s.current.visitId===action.visitId&&!s.current.finished;
       if(!resume)s.current=createAttempt(s,action.visitId);
@@ -418,7 +494,8 @@ function apply(s,action){
     }
     case 'RETURN_TO_YARD':s.at='yard';return{code:'AT_YARD',message:'Back at the depot. Your visit is saved where you left it.'};
     case 'CLAIM_TRUCK':
-      need(truckEarned(s),'TRUCK_NOT_EARNED','Complete all three supervised visits yourself to earn your own van.');
+      need(visitsDone(s),'TRUCK_NOT_EARNED','Complete all three supervised visits yourself to earn your own van.');
+      need(truckEarned(s),'TRAINING_CARD_REQUIRED','Earn the Parts bench card before Mags hands over the keys.');
       if(!s.truck.claimed){s.truck.claimed=true;s.truck.claimedRevision=s.revision+1;}
       s.at='yard';return{code:'TRUCK_CLAIMED',message:'Van 7 is yours. Independent jobs are open.'};
   }
@@ -468,7 +545,7 @@ function apply(s,action){
       a.lastResult={kind:'finish',code:'VISIT_COMPLETE'};
       if(isDrill(a.visitId)){T.records.push(record);if(T.records.length>40)T.records.splice(0,T.records.length-40);return{code:'DRILL_COMPLETE',message:'Bench drill recorded.'};}
       s.completionRecords.push(record);
-      return{code:truckEarned(s)?'APPRENTICESHIP_COMPLETE':'VISIT_COMPLETE',message:truckEarned(s)?'All three supervised visits are recorded. Mags has something for you at the depot.':'Visit recorded. Mags will meet you at the depot for the next one.'};
+      return{code:truckEarned(s)?'APPRENTICESHIP_COMPLETE':'VISIT_COMPLETE',message:truckEarned(s)?'All three supervised visits are recorded. Mags has something for you at the depot.':visitsDone(s)?'All three visits are recorded. Earn the Parts bench card to collect your van.':'Visit recorded. Mags will meet you at the depot for the next one.'};
     }
     default:fail('ACTION_UNKNOWN','Choose a supported apprenticeship action.');
   }
@@ -480,6 +557,9 @@ function showTarget(a){
   const id=firstUnmet.id,dev=r=>role(a,r)?{deviceId:role(a,r).id}:{roleSlot:r};
   if(id.startsWith('install.'))return dev(id.slice(8));
   if(id==='bench.power')return dev('infra.switch');
+  if(id==='kit.desk')return dev('role.reception');
+  if(id==='kit.host')return dev('role.records');
+  if(id==='kit.power'||id==='kit.cable'){const pc=role(a,'role.reception');return pc&&(!pc.powered||!linked(a,'role.reception','infra.switch'))?dev('role.reception'):dev('role.records');}
   if(id==='cable.desk'||id==='inspect.desk'||id.startsWith('address')||id==='test.desk')return dev('role.reception');
   if(id==='cable.host')return dev('role.records');
   if(id==='wifi.ap')return dev('infra.ap');
@@ -498,9 +578,17 @@ export function dispatchApprenticeship(state,action){
 
 function trainingView(s){
   const T=s.training;if(!T)return null;
+  const K=kit(s);
+  // What each card opens under this save's rules (0.10 saves keep their two-card gate).
+  const unlocks=card=>{if(!T.gate)return[];const first=VISITS.find(v=>visitCards(s,v.id).includes(card));return [...(first?[first.id]:[]),...(T.gate==='full'&&VAN_CARDS_FULL.includes(card)?['van']:[])];};
+  const partsOf={'station.cables':{sort:sortDone(s),bench:drillDone(s,'drill.cables.bench')},'station.addressing':{classify:classifyDone(s),bench:drillDone(s,'drill.addressing.bench')},
+    'station.parts':{sort:partsDone(s),trace:traceDone(s)},'station.devices':{match:devicesMatched(s),bench:drillDone(s,'drill.devices.bench')}};
   return {gate:T.gate,inDrill:!!T.current&&!T.current.finished,drillId:T.current?.visitId||null,sorted:clone(T.sorted),classified:clone(T.classified),last:clone(T.last||null),log:clone(T.log.slice(-30)),support:clone(T.support),
-    stations:STATIONS.map(st=>({...clone(st),earned:st.card?cardEarned(s,st.card):false,
-      parts:st.id==='station.cables'?{sort:sortDone(s),bench:drillDone(s,'drill.cables.bench')}:st.id==='station.addressing'?{classify:classifyDone(s),bench:drillDone(s,'drill.addressing.bench')}:null})),
+    kit:clone(K),parts:PARTS.map(p=>({id:p.id,label:p.label,done:K.parts[p.id]===p.job,job:K.parts[p.id]===p.job?p.job:null})),
+    trace:{placed:K.trace.map(id=>clone(TRACE_STEPS.find(x=>x.id===id))),remaining:TRACE_DISPLAY.filter(id=>!K.trace.includes(id)).map(id=>({id,text:TRACE_STEPS.find(x=>x.id===id).text})),done:traceDone(s)},
+    deviceJobs:DEVICE_JOBS.map(j=>({id:j.id,text:j.text,done:K.devices[j.id]===j.kind,kind:K.devices[j.id]===j.kind?j.kind:null})),
+    vanCards:T.gate==='full'?clone(VAN_CARDS_FULL):[],
+    stations:STATIONS.map(st=>({...clone(st),unlocks:st.card?unlocks(st.card):[],earned:st.card?cardEarned(s,st.card):false,parts:partsOf[st.id]||null})),
     drills:DRILLS.map(d=>({id:d.id,stationId:d.stationId,title:d.title,completed:drillDone(s,d.id)})),
     candidates:ADDRESS_CANDIDATES.map(c=>({address:c.address,done:T.classified[c.address]===c.verdict})),records:T.records.map(r=>({id:r.id,visitId:r.visitId}))};
 }
@@ -532,8 +620,8 @@ export function deriveApprenticeship(state){
     appId:APP_ID,campaignId:state.campaignId,revision:state.revision,at:state.at,
     items:ITEMS.map(i=>({...i,packed:state.packed.includes(i.id)})),packed:clone(state.packed),bagReady:ESSENTIALS.every(id=>state.packed.includes(id)),yardLog:clone(state.yardLog.slice(-20)),
     training:trainingView(state),
-    visits:VISITS.map((x,i)=>({id:x.id,number:x.number,title:x.title,support:x.support,cardsNeeded:(VISIT_CARDS[x.id]||[]).filter(c=>!cardEarned(state,c)&&state.training?.gate),unlocked:(i<=unlockedIndex(state)||done.includes(x.id))&&visitGateOpen(state,x.id),completed:done.includes(x.id),active:a?.visitId===x.id&&!a.finished,records:recordsFor(state,x.id).length})),
-    completedVisitIds:done,truckEarned:truckEarned(state),truckClaimed:state.truck.claimed,
+    visits:VISITS.map((x,i)=>({id:x.id,number:x.number,title:x.title,support:x.support,cardsNeeded:visitCards(state,x.id).filter(c=>!cardEarned(state,c)&&state.training?.gate),unlocked:(i<=unlockedIndex(state)||done.includes(x.id))&&visitGateOpen(state,x.id),completed:done.includes(x.id),active:a?.visitId===x.id&&!a.finished,records:recordsFor(state,x.id).length})),
+    completedVisitIds:done,visitsDone:visitsDone(state),truckEarned:truckEarned(state),truckClaimed:state.truck.claimed,vanCardsNeeded:visitsDone(state)&&!truckEarned(state)?VAN_CARDS_FULL.filter(c=>!cardEarned(state,c)):[],
     visit:v?{...clone(v),attemptId:a.id,finished:a.finished}:null,
     network:clone(n?.network||(state.at==='training'?PRACTICE_NETWORK:SITE_NETWORK)),devices:clone(child?.devices||[]),cables:(child?.cables||[]).map(c=>({...clone(c),state:cableState(c)})),
     policy:clone(child?.policy||POLICIES['policy.roles-separated']),policies:Object.values(POLICIES).map(p=>({id:p.id,label:p.label,description:p.description,acceptable:ACCEPTABLE_POLICIES.includes(p.id)})),
@@ -578,7 +666,9 @@ export function createApprenticeshipEvidence(state){
     for(const st of STATIONS.filter(x=>x.card))lines.push(`${st.title}: card ${cardEarned(state,st.card)?'earned':'not yet earned'}.`);
     const wrongSorts=T.log.filter(x=>x.type==='SORT_CABLE'&&!x.correct).map(x=>`${x.cableType}→${x.job}`),wrongAddr=T.log.filter(x=>x.type==='CLASSIFY_ADDRESS'&&!x.correct).map(x=>`${x.address}→${x.verdict}`);
     lines.push(`  Cable sorting first-try errors: ${wrongSorts.join(', ')||'none'}. Address classification errors: ${wrongAddr.join(', ')||'none'}.`);
-    for(const r of T.records)lines.push(`  ${DRILLS.find(d=>d.id===r.visitId)?.title||r.visitId}: completed; tests ${r.observations.map(o=>o.code).join(' → ')}${r.addressChange?`; address ${r.addressChange.from} → ${r.addressChange.to}`:''}.`);
+    const wrong=type=>T.log.filter(x=>x.type===type&&!x.correct);
+    lines.push(`  Parts sorting errors: ${wrong('SORT_PART').map(x=>`${x.partId.slice(5)}→${x.job}`).join(', ')||'none'}. Booking-trace steps placed too early: ${wrong('TRACE_STEP').map(x=>`${x.stepId.slice(6)} at step ${x.position}`).join(', ')||'none'}. Device matching errors: ${wrong('MATCH_DEVICE').map(x=>`${x.jobId.slice(4)}→${x.kind}`).join(', ')||'none'}.`);
+    for(const r of T.records)lines.push(`  ${DRILLS.find(d=>d.id===r.visitId)?.title||r.visitId}: completed; tests ${r.observations.map(o=>o.code).join(' → ')}${r.addressChange?`; address ${r.addressChange.from} → ${r.addressChange.to}`:''}${r.visitId==='drill.devices.bench'?`; final choice ${r.devices.filter(d=>['role.reception','role.records'].includes(d.roleId)).map(d=>d.kind).join(' and ')}`:''}.`);
     if(!T.gate)lines.push('  This progress began before the Training Centre existed, so its supervised visits were not gated by training cards.');
   }
   lines.push('','Game progression only: not an IB grade or professional credential. No names, patient information or accounts are used.');
