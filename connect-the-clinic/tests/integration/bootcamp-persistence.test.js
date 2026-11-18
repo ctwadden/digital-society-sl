@@ -93,8 +93,9 @@ test('B5 persisted 0.7 field work migrates without earning training, survives tr
 test('B5 a new programme remains training-only through save and reload until real lesson tasks are completed', async () => {
   browserStorage();
   const first=await createPersistence(programmeOptions());
-  assert.equal(deriveProgramme(first.getState()).screen,'bootcamp');
+  assert.equal(deriveProgramme(first.getState()).screen,'apprentice');
   assert.equal((await first.send({type:'ENTER_FIELD'})).accepted,false);
+  assert.equal((await first.send({type:'OPEN_BOOTCAMP'})).accepted,true);
   assert.equal((await first.send({type:'BOOT_ACTION',action:{type:'START_LESSON',lessonId:'boot.kit'}})).accepted,true);
   assert.equal((await first.send({type:'BOOT_ACTION',action:{type:'START_PRACTICE'}})).accepted,true);
   const attempt=deriveProgramme(first.getState()).bootcamp.attemptId;

@@ -1,9 +1,9 @@
 {
   "name": "connect-the-clinic",
-  "version": "0.8.0-review",
+  "version": "0.9.0-review",
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test tests/simulation/*.test.js tests/integration/*.test.js tests/qa/*.test.js tests/opening/*.test.js tests/bootcamp/*.test.js"
+    "test": "node --test tests/simulation/*.test.js tests/integration/*.test.js tests/qa/*.test.js tests/opening/*.test.js tests/bootcamp/*.test.js tests/apprentice/*.test.js"
   }
 }

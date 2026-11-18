@@ -2,8 +2,9 @@ import {createProgramme, dispatchProgramme, deriveProgramme, validateProgrammeSa
 import {createPersistence} from '../persistence.js';
 import {mountOpeningUI} from './ui.js';
 import {mountBootcampUI} from '../bootcamp/ui.js';
+import {mountApprenticeUI} from '../apprentice/ui.js';
 
-const BUILD_VERSION = '0.8.0-review';
+const BUILD_VERSION = '0.9.0-review';
 const root = document.querySelector('#app');
 let store = null, ui = null, mountedScreen = null;
 
@@ -18,6 +19,8 @@ function download(data, type, filename) {
 function getView(screen) {
   const programme = deriveProgramme(store.getState());
   const common = {storage:store.getStatus(), buildVersion:BUILD_VERSION};
+  if (screen === 'apprentice') return {...programme.apprentice, ...common, canEnterField:programme.canEnterField,
+    fieldStarted:programme.fieldStarted, apprenticeOrigin:programme.apprenticeOrigin};
   if (screen === 'bootcamp') return {...programme.bootcamp, ...common,
     canEnterField:programme.canEnterField, fieldStarted:programme.fieldStarted,
     migrationNotice:programme.migrationNotice};
@@ -63,8 +66,8 @@ function handlers(screen) {
         return report({accepted:false, message:'That progress file could not be read. Current work is unchanged.'});
       }
     },
-    onReset:async () => report(await store.send(screen === 'bootcamp'
-      ? {type:'BOOT_ACTION', action:{type:'RESTART_PRACTICE'}} : {type:'RESET_SHIFT'})),
+    onReset:async () => report(await store.send(screen === 'apprentice' ? {type:'APP_ACTION', action:{type:'RESTART_VISIT'}}
+      : screen === 'bootcamp' ? {type:'BOOT_ACTION', action:{type:'RESTART_PRACTICE'}} : {type:'RESET_SHIFT'})),
     onClear:async () => report(await store.clear()),
     onTakeControl:async () => report(await store.takeControl()),
     onRecover:async () => report(await store.recover())
@@ -81,8 +84,8 @@ function renderApp() {
     host.dataset.programmeScreen = screen;
     root.replaceChildren(host);
     mountedScreen = screen;
-    ui = screen === 'bootcamp'
-      ? mountBootcampUI(host, handlers(screen)) : mountOpeningUI(host, handlers(screen));
+    ui = screen === 'apprentice' ? mountApprenticeUI(host, handlers(screen))
+      : screen === 'bootcamp' ? mountBootcampUI(host, handlers(screen)) : mountOpeningUI(host, handlers(screen));
     focusScreenHeading();
   } else {
     // A persistence notification and report() can render the new screen twice.
