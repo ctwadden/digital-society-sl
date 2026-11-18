@@ -3,9 +3,11 @@
  * Every state shown here comes from the derived engine view. The UI never decides success.
  */
 import {mentorLine,staffLines,MENTOR,GOALS,phoneMessages} from './mentor.js';
+import {HANDBOOK} from './handbook.js';
 
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
 const ROLE_LABEL={'role.reception':'Desk computer','role.records':'Service host','infra.switch':'Network switch','infra.ap':'Wireless access point','role.nurse':'Ana’s tablet'};
+const BENCH_LABEL={'role.reception':'Bench computer','infra.switch':'Bench switch','role.records':'Bench service host'};
 const ROLE_ROOM={'role.reception':'reception','role.records':'closet','infra.switch':'closet','infra.ap':'corridor','role.nurse':'examA'};
 const ROOM_LABEL={'location.exam-a':'exam room A','location.exam-b':'exam room B','location.reception':'reception','location.equipment':'equipment closet'};
 const CABLES=[
@@ -23,10 +25,13 @@ function outcome(o){
 }
 const reduceMotion=()=>window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
-let art=null;
+let art=null,trainArt=null;
 async function loadArt(){
   try{art=await import('./art.js');}catch(error){console.warn('Scene art unavailable; using the plain fallback.',error);art=null;}
+  try{trainArt=await import('./art-training.js');}catch(error){console.warn('Training art unavailable; using the plain fallback.',error);trainArt=null;}
 }
+const SORT_JOB_LABEL={network:'Network link',power:'Power',display:'Display','peripheral':'Peripherals','phone-line':'Phone line'};
+const VERDICT_LABEL={usable:'Usable','network':'Network address',broadcast:'Broadcast',taken:'Already taken','other-network':'Other network'};
 
 function fallbackScene(view,kind){
   const rows=kind==='yard'?view.items.map(i=>`<text x="60" y="${80+view.items.indexOf(i)*40}" font-size="22" fill="#173b40">${esc(i.label)}${i.packed?' ✓':''}</text>`).join(''):
@@ -36,6 +41,7 @@ function fallbackScene(view,kind){
 
 export function mountApprenticeUI(root,handlers){
   const {getView,send,onExport,onImport,onReset,onClear,onTakeControl,onRecover}=handlers;
+  let station=null;
   let view=getView(),panel=null,selected=null,closed=false,busy=false,modal=null,status=null,driving=false,ceremony=false,lastLineKey='',draft=null,addrDraft={};
   root.innerHTML=`<div class="ll-game"><a class="ll-skip" href="#ll-panel-region">Skip to controls</a><header class="ll-hud" data-r="hud"></header><div class="ll-storage" data-r="storage"></div><main class="ll-stage" id="ll-main"><section class="ll-scene-wrap" aria-label="Scene"><div class="ll-scene" data-r="scene"></div><div class="ll-hotspots" data-r="hotspots"></div><div class="ll-bubbles" data-r="bubbles" aria-hidden="true"></div><div class="ll-bag" data-r="bag"></div></section><aside class="ll-side"><section class="ll-mentor" data-r="mentor" aria-label="Mags, your mentor"></section><section class="ll-panel" id="ll-panel-region" data-r="panel" tabindex="-1"></section></aside></main><div class="ll-live" aria-live="polite" data-r="live"></div><div data-r="overlay"></div></div>`;
   const R=n=>root.querySelector(`[data-r=${n}]`);
@@ -59,11 +65,11 @@ export function mountApprenticeUI(root,handlers){
 
   // ---------- HUD ----------
   function hud(){
-    const v=view.visit,site=view.at==='site'&&v;
+    const v=view.visit,site=view.at==='site'&&v,trainingAt=view.at==='training',drill=trainingAt&&v&&!v.finished;
     const pips=view.visits.map(x=>`<li class="${x.completed?'done':x.active?'now':''}" title="Visit ${x.number}: ${esc(x.title)}"><span class="ll-sr">Visit ${x.number} ${x.completed?'completed':x.unlocked?'open':'locked'}</span></li>`).join('')+`<li class="van ${view.truckEarned?'done':''}" title="Your own van"><span class="ll-sr">Own van ${view.truckEarned?'earned':'not yet earned'}</span></li>`;
-    return `<div class="ll-brand"><span class="ll-lantern" aria-hidden="true"></span><div><strong>Lantern Line</strong><span>${site?`Harbour Street Clinic · Visit ${v.number} of 3`:'Depot yard'}</span></div></div>
+    return `<div class="ll-brand"><span class="ll-lantern" aria-hidden="true"></span><div><strong>Lantern Line</strong><span>${site?`Harbour Street Clinic · Visit ${v.number} of 3`:trainingAt?`Training Centre${drill?` · ${esc(v.title)}`:''}`:'Depot yard'}</span></div></div>
       <ol class="ll-pips" aria-label="Apprenticeship progress">${pips}</ol>
-      <nav class="ll-hud-actions" aria-label="Game menu">${site?btn('panel','Job sheet','data-panel="job"','ll-btn ll-quiet')+btn('panel','Network card','data-panel="card"','ll-btn ll-quiet'):''}${btn('panel',`Phone <span class="ll-badge">${phoneMessages(view).length}</span>`,'data-panel="phone" aria-label="Phone messages"','ll-btn ll-quiet')}${btn('panel','Cable guide','data-panel="guide"','ll-btn ll-quiet')}${site?btn('yard','Depot',dis(),'ll-btn ll-quiet'):''}${btn('modal','Progress','data-modal="progress"','ll-btn ll-quiet')}</nav>`;
+      <nav class="ll-hud-actions" aria-label="Game menu">${site||drill?btn('panel','Job sheet','data-panel="job"','ll-btn ll-quiet')+btn('panel',drill?'Practice card':'Network card','data-panel="card"','ll-btn ll-quiet'):''}${trainingAt?btn('panel','Stations','data-panel="overview"','ll-btn ll-quiet'):''}${btn('panel',`Phone <span class="ll-badge">${phoneMessages(view).length}</span>`,'data-panel="phone" aria-label="Phone messages"','ll-btn ll-quiet')}${btn('panel','Cable guide','data-panel="guide"','ll-btn ll-quiet')}${site||trainingAt?btn('yard','Depot',dis(),'ll-btn ll-quiet'):''}${btn('modal','Progress','data-modal="progress"','ll-btn ll-quiet')}</nav>`;
   }
   function storage(){
     const s=view.storage||{};if(!s.mode||s.mode==='saved')return '';
@@ -86,19 +92,35 @@ export function mountApprenticeUI(root,handlers){
       highlight:view.highlight,testPulse:latest&&latest.pathIds?.length?{ids:latest.pathIds.filter((_,i)=>i%2===0),pass:latest.pass}:null,
       timeOfDay:view.visit?.number===3?'afternoon':'morning',vanParked:true,reducedMotion:reduceMotion()};
   }
+  const inDrill=()=>view.at==='training'&&view.visit&&!view.visit.finished;
+  function trainingScene(){
+    const t=view.training,line=mentorLine(view);
+    const stations=t.stations.map(st=>({id:st.id,state:!st.open?'locked':st.earned?'done':'open'}));
+    const bench=inDrill()?{devices:view.devices.map(d=>({id:d.id,roleId:d.roleId,kind:d.kind,powered:d.powered,selected:d.id===selected})),cables:view.cables.map(c=>({id:c.id,fromDeviceId:c.fromDeviceId,toDeviceId:c.toDeviceId,state:c.state}))}:null;
+    const where=inDrill()?view.visit.stationId||(view.visit.id.includes('cables')?'station.cables':'station.addressing'):station||'station.cables';
+    const sorted={};SORTED_ORDER.forEach((type,i)=>{if(t.sorted[type])sorted[type]=i;});
+    return trainArt.renderTraining({stations,bench,cableWall:{sorted},focus:station,mentor:{stationId:where,pose:line.mood==='pleased'?'thumbs':line.mood==='thinking'?'thinking':'pointing'},player:{stationId:where}});
+  }
   function scene(){
+    if(view.at==='training')return trainArt?trainingScene():`<svg viewBox="0 0 1600 1000" role="img" aria-label="Training Centre"><rect width="1600" height="1000" fill="#efe6d0"/><text x="60" y="90" font-size="32" fill="#173b40">Lantern Line Training Centre</text></svg>`;
     if(view.at==='yard'){
       const line=mentorLine(view);
       return art?art.renderYard({packed:view.packed,highlight:null,mentorPose:line.mood==='pleased'?'thumbs':'idle',showPlayer:true}):fallbackScene(view,'yard');
     }
     return art?art.renderSite(sceneModel()):fallbackScene(view,'site');
   }
+  const SORTED_ORDER=['ethernet','power','hdmi','usb','phone'];
   function anchorPct(x,y,w=1600,h=1000){return `left:${(x/w*100).toFixed(2)}%;top:${(y/h*100).toFixed(2)}%`;}
   function hotspots(){
     if(view.at==='yard'){
       const items=art?.YARD_ITEMS||[];
       return view.items.map((i,n)=>{const a=items.find(x=>x.id===i.id)||{x:300+n*150,y:820};
         return `<button type="button" class="ll-hot ${i.packed?'is-packed':''}" style="${anchorPct(a.x,a.y)}" data-act="${i.packed?'unpack':'pack'}" data-item="${esc(i.id)}" aria-pressed="${i.packed}" ${dis()}><span>${esc(i.label)}${i.packed?' · in bag':''}</span></button>`;}).join('');
+    }
+    if(view.at==='training'){
+      const slots=trainArt?.TRAINING_SLOTS||{};
+      if(inDrill())return view.devices.map((d,i)=>{const p=slots[d.roleId]||{x:700+i*120,y:420};return `<button type="button" class="ll-hot ${selected===d.id?'is-selected':''} ${view.highlight?.deviceId===d.id?'is-highlight':''}" style="${anchorPct(p.x,p.y)}" data-act="select" data-device="${esc(d.id)}"><span>${esc(BENCH_LABEL[d.roleId]||d.label)}${d.powered?'':' (no power)'}</span></button>`;}).join('');
+      return view.training.stations.map((st,i)=>{const p=slots[st.id]||{x:300+i*180,y:500};return `<button type="button" class="ll-hot ${st.open?'':'is-empty'} ${st.earned?'is-packed':''} ${station===st.id?'is-selected':''}" style="${anchorPct(p.x,p.y)}" data-act="station" data-station="${st.id}"><span>${esc(st.title)}${st.earned?' · card earned':st.open?'':' · opens later'}</span></button>`;}).join('');
     }
     const v=view.visit;if(!v)return '';
     const roles=['role.reception','infra.switch','role.records','infra.ap','role.nurse'];
@@ -120,7 +142,7 @@ export function mountApprenticeUI(root,handlers){
     return staffLines(view).map(s=>{const p=pos[s.person];if(!p)return '';return `<div class="ll-bubble mood-${s.mood} who-${s.person}" style="${anchorPct(p.x,p.y-(art?.SITE_SLOTS?28:110))}"><b>${esc(s.name)}</b> ${esc(s.text)}</div>`;}).join('');
   }
   function bag(){
-    if(view.at!=='site'||!view.visit||view.visit.finished)return '';
+    if(!(view.at==='site'||view.at==='training')||!view.visit||view.visit.finished)return '';
     const held=view.held;
     const cables=CABLES.map(c=>`<button type="button" class="ll-cable ${held===c.type?'is-held':''} c-${c.type}" data-act="hold" data-cable="${c.type}" aria-pressed="${held===c.type}" ${dis()}><i aria-hidden="true"></i><span>${c.label}<small>${c.hint}</small></span></button>`).join('');
     const pending=view.pendingEnd?`One end in ${esc(ROLE_LABEL[byId(view.pendingEnd.deviceId)?.roleId]||'a device')}. Choose the other device’s port.`:held?`Holding: ${esc(CABLES.find(c=>c.type===held)?.label)}. Choose a device, then a socket.`:'Pick a cable, or use a tool.';
@@ -132,10 +154,12 @@ export function mountApprenticeUI(root,handlers){
     const line=mentorLine(view);
     const portrait=art?.renderMentorPortrait?art.renderMentorPortrait(line.mood):'<div class="ll-portrait-fallback">M</div>';
     let asks='';
-    if(view.at==='site'&&view.visit){
+    if(view.at==='training'&&!inDrill()){
+      asks=`<div class="ll-asks" role="group" aria-label="Ask Mags">${[['cables','Which cable is which?'],['address','How do addresses work?']].map(([t,l])=>btn('ask',esc(l),`data-topic="${t}" ${dis()}`,'ll-chip')).join('')}</div><p class="ll-support">Training is untimed, and retries and questions are always free.</p>`;
+    }else if((view.at==='site'||view.at==='training')&&view.visit){
       const topics=[['next','What should I do next?'],['why','Why does this work?'],['show','Show me where']];
-      const extra={'visit.1':[['cables','Which cable is which?']],'visit.2':[['address','How do I pick an address?'],['wireless','How does Wi-Fi connect?']],'visit.3':[['access','Who should get access?'],['cables','Cable guide']]}[view.visit.id]||[];
-      asks=`<div class="ll-asks" role="group" aria-label="Ask Mags">${[...topics,...extra].map(([t,l])=>btn('ask',esc(l),`data-topic="${t}" ${dis()}`,'ll-chip')).join('')}</div><p class="ll-support">${{alongside:'Mags works alongside you today.',supported:'Mags steps in when you ask or get stuck.',lead:'You lead. Mags answers if you ask.'}[view.visit.support]} Asking is always free.</p>`;
+      const extra={'drill.cables.bench':[['cables','Which cable is which?']],'drill.addressing.bench':[['address','How do I pick an address?']],'visit.1':[['cables','Which cable is which?']],'visit.2':[['address','How do I pick an address?'],['wireless','How does Wi-Fi connect?']],'visit.3':[['access','Who should get access?'],['cables','Cable guide']]}[view.visit.id]||[];
+      asks=`<div class="ll-asks" role="group" aria-label="Ask Mags">${[...topics,...extra].map(([t,l])=>btn('ask',esc(l),`data-topic="${t}" ${dis()}`,'ll-chip')).join('')}</div><p class="ll-support">${{alongside:'Mags works alongside you today.',supported:'Mags steps in when you ask or get stuck.',lead:'You lead. Mags answers if you ask.'}[view.visit.support]||''} Asking is always free.</p>`;
     }
     return `<div class="ll-mentor-head"><div class="ll-portrait" aria-hidden="true">${portrait}</div><div><strong>${MENTOR.name}</strong><span>${esc(MENTOR.role)}</span></div></div><blockquote class="ll-say mood-${line.mood}"><p>${esc(line.text)}</p></blockquote>${asks}${status?`<p class="ll-status ${status.tone}" role="alert">${esc(status.text)}</p>`:''}`;
   }
@@ -143,10 +167,12 @@ export function mountApprenticeUI(root,handlers){
   // ---------- PANELS ----------
   function yardPanel(){
     const ready=view.bagReady;
-    const cards=view.visits.map(x=>`<li class="ll-visit ${x.completed?'done':''} ${x.unlocked?'':'locked'}"><span class="ll-visit-no">Visit ${x.number}</span><strong>${esc(x.title)}</strong><span class="ll-visit-support">${{alongside:'Mags works alongside you',supported:'Supported: you configure',lead:'You lead the job'}[x.support]}</span>${x.completed?`<span class="ll-tag ok">Completed</span>${btn('start','Practise again',`data-visit="${x.id}" ${dis()}`,'ll-btn ll-quiet')}`:x.unlocked?btn('start',x.active?'Continue visit':'Ride to the clinic',`data-visit="${x.id}" ${ready?'':'disabled'} ${dis()}`,'ll-btn ll-primary'):'<span class="ll-tag">Locked</span>'}</li>`).join('');
+    const cards=view.visits.map(x=>`<li class="ll-visit ${x.completed?'done':''} ${x.unlocked?'':'locked'}"><span class="ll-visit-no">Visit ${x.number}</span><strong>${esc(x.title)}</strong><span class="ll-visit-support">${{alongside:'Mags works alongside you',supported:'Supported: you configure',lead:'You lead the job'}[x.support]}</span>${x.completed?`<span class="ll-tag ok">Completed</span>${btn('start','Practise again',`data-visit="${x.id}" ${dis()}`,'ll-btn ll-quiet')}`:x.unlocked?btn('start',x.active?'Continue visit':'Ride to the clinic',`data-visit="${x.id}" ${ready?'':'disabled'} ${dis()}`,'ll-btn ll-primary'):`<span class="ll-tag">${x.cardsNeeded?.length?`Needs the ${x.cardsNeeded.map(c=>c==='card.cables'?'Cable wall':'Network rack').join(' + ')} card`:'Locked'}</span>`}</li>`).join('');
+    const t=view.training,cardsTotal=t?t.stations.filter(s=>s.card).length:0,cardsEarned=t?t.stations.filter(s=>s.earned).length:0;
+    const trainingCard=t?`<div class="ll-traincall"><strong>Training Centre</strong><span>${cardsEarned} of ${cardsTotal} training cards earned${t.gate?'':' · optional for your saved progress'}</span>${btn('training',cardsEarned<cardsTotal?'Go to training →':'Practise in training',dis(),cardsEarned<cardsTotal&&t.gate?'ll-btn ll-primary':'ll-btn ll-quiet')}</div>`:'';
     const bagList=view.items.map(i=>`<li class="${i.packed?'in':''}"><button type="button" class="ll-bagitem" data-act="${i.packed?'unpack':'pack'}" data-item="${esc(i.id)}" aria-pressed="${i.packed}" ${dis()}><b>${esc(i.label)}</b><small>${esc(i.use)}</small></button></li>`).join('');
     const truck=view.truckEarned?`<div class="ll-truckcall"><strong>${view.truckClaimed?'Van 7 is yours':'Something is waiting by the shed'}</strong>${view.truckClaimed?`<p>Independent jobs are open.</p>${btn('field','Take your first solo job →',dis(),'ll-btn ll-primary')}`:btn('ceremony','Go and see →',dis(),'ll-btn ll-primary')}</div>`:'';
-    return `<div class="ll-phone-latest" aria-label="Latest phone message">${phoneCard(phoneMessages(view),1)}</div><h2>Today’s work</h2>${truck}<ol class="ll-visits">${cards}</ol>${ready?'':'<p class="ll-note">Pack the essentials before you leave. Click items on the van shelves or choose them here.</p>'}<details class="ll-details" ${ready?'':'open'}><summary>Tool bag (${view.packed.length} items)</summary><ul class="ll-baglist">${bagList}</ul></details><div class="ll-links">${btn('bench','Optional practice bench',dis(),'ll-btn ll-quiet')}${view.canEnterField&&!view.truckEarned?btn('field','Return to field job',dis(),'ll-btn ll-quiet'):''}</div><p class="ll-fine">${esc(view.notice)}</p>`;
+    return `<div class="ll-phone-latest" aria-label="Latest phone message">${phoneCard(phoneMessages(view),1)}</div><h2>Today’s work</h2>${truck}${trainingCard}<ol class="ll-visits">${cards}</ol>${ready?'':'<p class="ll-note">Pack the essentials before you leave. Click items on the van shelves or choose them here.</p>'}<details class="ll-details" ${ready?'':'open'}><summary>Tool bag (${view.packed.length} items)</summary><ul class="ll-baglist">${bagList}</ul></details><div class="ll-links">${btn('bench','Optional practice bench',dis(),'ll-btn ll-quiet')}${view.canEnterField&&!view.truckEarned?btn('field','Return to field job',dis(),'ll-btn ll-quiet'):''}</div><p class="ll-fine">${esc(view.notice)}</p>`;
   }
 
   function devicePanel(){
@@ -200,6 +226,7 @@ export function mountApprenticeUI(root,handlers){
   }
   function cardPanel(){
     const n=view.network;
+    if(view.at==='training')return `<header class="ll-panel-head"><h2>Practice network card</h2><p>Pinned above the network rack.</p>${btn('close-panel','Close','aria-label="Close panel"','ll-btn ll-text')}</header><div class="ll-netcard"><dl><dt>Network</dt><dd>${esc(n.cidr)}</dd><dt>Subnet mask</dt><dd>${esc(n.mask)}</dd><dt>Service host</dt><dd>${esc(n.serverAddress)}</dd><dt>Usable</dt><dd>${esc(n.base)}.1 – ${esc(n.base)}.254</dd></dl><p>Each device needs its own address. With this /24 mask the first three numbers stay ${esc(n.base)}. That shortcut is only true for a /24 mask.</p></div>`;
     return `<header class="ll-panel-head"><h2>Network card</h2><p>Taped inside the equipment closet door.</p>${btn('close-panel','Close','aria-label="Close panel"','ll-btn ll-text')}</header><div class="ll-netcard"><dl><dt>Network</dt><dd>${esc(n.cidr)}</dd><dt>Subnet mask</dt><dd>${esc(n.mask)}</dd><dt>Service host</dt><dd>${esc(n.serverAddress)}</dd><dt>Ana’s tablet</dt><dd>${esc(n.inheritedNurseAddress)}</dd><dt>Usable</dt><dd>${esc(n.base)}.1 – ${esc(n.base)}.254</dd></dl><p>Each device needs its own address. With this /24 mask the first three numbers stay ${esc(n.base)}. That shortcut is only true for a /24 mask.</p></div>`;
   }
   function accessPanel(){
@@ -210,9 +237,9 @@ export function mountApprenticeUI(root,handlers){
     const x=view.explanation;
     const explain=v.id==='visit.3'?`<form class="ll-form" data-form="explain"><h3>Explain the job</h3><label>What was wrong, what you changed, and who it helps or restricts<textarea name="text" rows="5" maxlength="2000" ${v.finished?'disabled':''} ${dis()}>${esc(draft??x?.text??'')}</textarea></label><label class="ll-check"><input type="checkbox" name="oral" ${x?.oral?'checked':''} ${v.finished?'disabled':''} ${dis()}> I will explain this aloud to my teacher</label>${x?.submitted?`<p class="ll-note">${x.stale?'Saved before your last change — save again.':'Saved exactly as written.'}</p>`:''}<button class="ll-btn" ${v.finished?'disabled':''} ${dis()}>Save explanation</button></form>`:'';
     const access=v.id==='visit.3'?btn('panel','Open access rules','data-panel="access"','ll-btn ll-quiet'):'';
-    return `<header class="ll-panel-head"><h2>Job sheet · Visit ${v.number}</h2><p>${esc(v.brief)}</p>${btn('close-panel','Close','aria-label="Close panel"','ll-btn ll-text')}</header><p class="ll-goal"><b>Goal:</b> ${esc(v.goal)}</p><details class="ll-details ll-ican"><summary>Today’s I-can goals</summary><ul>${(GOALS[v.id]||[]).map(([,t])=>`<li>${esc(t)}</li>`).join('')}</ul><p class="ll-fine">Goals for reflection with your teacher. Finishing the visit is not a grade.</p></details><ul class="ll-checks">${checks}</ul>${access}${explain}
-      ${v.finished?`<p class="ll-done">Visit recorded.</p>${btn('yard','Back to the depot →',dis(),'ll-btn ll-primary')}`:btn('finish','Sign off the job',`${view.canFinish?'':'aria-describedby="ll-finish-note"'} ${dis()}`,'ll-btn ll-primary')+(view.canFinish?'':'<p id="ll-finish-note" class="ll-fine">Mags signs only when the checks above are met by your own work.</p>')}
-      ${btn('restart','Start this visit over',dis(),'ll-btn ll-text')}`;
+    return `<header class="ll-panel-head"><h2>Job sheet · Visit ${v.number}</h2><p>${esc(v.brief)}</p>${btn('close-panel','Close','aria-label="Close panel"','ll-btn ll-text')}</header><p class="ll-goal"><b>Goal:</b> ${esc(v.goal)}</p>${GOALS[v.id]?'':''}<details class="ll-details ll-ican" ${GOALS[v.id]?'':'hidden'}><summary>Today’s I-can goals</summary><ul>${(GOALS[v.id]||[]).map(([,t])=>`<li>${esc(t)}</li>`).join('')}</ul><p class="ll-fine">Goals for reflection with your teacher. Finishing the visit is not a grade.</p></details><ul class="ll-checks">${checks}</ul>${access}${explain}
+      ${v.finished?(view.at==='training'?`<p class="ll-done">Drill recorded.</p>${btn('panel','Back to the stations →','data-panel="overview"','ll-btn ll-primary')}`:`<p class="ll-done">Visit recorded.</p>${btn('yard','Back to the depot →',dis(),'ll-btn ll-primary')}`):btn('finish','Sign off the job',`${view.canFinish?'':'aria-describedby="ll-finish-note"'} ${dis()}`,'ll-btn ll-primary')+(view.canFinish?'':'<p id="ll-finish-note" class="ll-fine">Mags signs only when the checks above are met by your own work.</p>')}
+      ${btn('restart',view.at==='training'?'Start this drill over':'Start this visit over',dis(),'ll-btn ll-text')}${view.at==='training'?btn('panel','Back to the stations','data-panel="overview"','ll-btn ll-text'):''}`;
   }
   function guidePanel(){
     return `<header class="ll-panel-head"><h2>Cable &amp; connector guide</h2>${btn('close-panel','Close','aria-label="Close panel"','ll-btn ll-text')}</header><ul class="ll-guide">
@@ -227,8 +254,42 @@ export function mountApprenticeUI(root,handlers){
   }
   function phoneCard(msgs,limit){return `<ol class="ll-phone">${msgs.slice(0,limit).map(x=>`<li><span class="ll-phone-from">${esc(x.from)} <small>${esc(x.when)}</small></span><p>${esc(x.text)}</p></li>`).join('')}</ol>`;}
   function phonePanel(){return `<header class="ll-panel-head"><h2>Phone</h2><p>Messages from clients and Mags.</p>${btn('close-panel','Close','aria-label="Close panel"','ll-btn ll-text')}</header>${phoneCard(phoneMessages(view),20)}`;}
+  function overviewPanel(){
+    const t=view.training;
+    return `<header class="ll-panel-head"><h2>Training Centre</h2><p>Earn a training card at each open station before the matching ride-along with Mags.</p></header><ul class="ll-stations">${t.stations.map(st=>`<li class="${st.earned?'done':''} ${st.open?'':'locked'}">${btn('station',`<b>${esc(st.title)}</b><small>${esc(st.lesson)}${st.open?'':' · opens later in the course'}</small><span class="ll-tag ${st.earned?'ok':''}">${st.earned?'Card earned':st.open?(st.unlocks.length?`Unlocks visit ${st.unlocks.map(u=>u.slice(-1)).join(', ')}`:''):'Handbook only'}</span>`,`data-station="${st.id}"`,'ll-stationbtn')}</li>`).join('')}</ul>${t.gate?'':'<p class="ll-fine">Your saved progress started before the Training Centre, so training is optional for you.</p>'}${btn('yard','Back to the depot',dis(),'ll-btn ll-quiet')}`;
+  }
+  function stationPanel(){
+    const t=view.training,st=t.stations.find(x=>x.id===station);if(!st)return overviewPanel();
+    const page=HANDBOOK.find(h=>h.stationId===st.id);
+    const head=`<header class="ll-panel-head"><h2>${esc(st.title)}</h2><p>${esc(page?.lessonRef||st.lesson)}</p>${btn('panel','All stations','data-panel="overview"','ll-btn ll-text')}</header>`;
+    const read=page?`<div class="ll-hb-summary"><p>${esc(page.summary)}</p>${btn('panel','Read the handbook page','data-panel="handbook"','ll-btn')}</div>`:'';
+    if(!st.open)return `${head}${read}<p class="ll-note">This station opens later in the course. You can read its handbook page now.</p>`;
+    let part1='';
+    if(st.id==='station.cables'){
+      part1=`<h3>1 · Sort the cable wall ${t.stations.find(x=>x.id===st.id).parts.sort?'✓':''}</h3><p class="ll-help">Put each cable in the bin for its job. Wrong answers are not counted against you; try again.</p><ul class="ll-sortlist">${SORTED_ORDER.map(type=>{const done=t.sorted[type];return `<li class="${done?'done':''}"><span class="ll-sortname"><i class="s-${type}" aria-hidden="true"></i>${esc(CABLES.find(c=>c.type===type).label)}</span>${done?`<span class="ll-tag ok">${esc(SORT_JOB_LABEL[done])} ✓</span>`:`<span class="ll-choicebar" role="group" aria-label="Job for ${esc(CABLES.find(c=>c.type===type).label)}">${Object.entries(SORT_JOB_LABEL).map(([job,l])=>btn('sort',esc(l),`data-cable="${type}" data-job="${job}" ${dis()}`,'ll-chip')).join('')}</span>`}</li>`;}).join('')}</ul>`;
+    }else{
+      part1=`<h3>1 · Read the practice card ${st.parts.classify?'✓':''}</h3><p class="ll-help">Practice network ${esc(view.network.cidr)}, mask 255.255.255.0. The service host already uses .10. Classify each address.</p><ul class="ll-sortlist">${t.candidates.map(c=>`<li class="${c.done?'done':''}"><span class="ll-sortname ll-mono">${esc(c.address)}</span>${c.done?`<span class="ll-tag ok">${esc(VERDICT_LABEL[t.classified[c.address]])} ✓</span>`:`<span class="ll-choicebar" role="group" aria-label="Verdict for ${esc(c.address)}">${Object.entries(VERDICT_LABEL).map(([v,l])=>btn('classify',esc(l),`data-address="${esc(c.address)}" data-verdict="${v}" ${dis()}`,'ll-chip')).join('')}</span>`}</li>`).join('')}</ul>`;
+    }
+    const drill=t.drills.find(d=>d.stationId===st.id),active=t.inDrill&&t.drillId===drill.id;
+    const part2=`<h3>2 · Bench drill ${drill.completed?'✓':''}</h3><p class="ll-help">${esc(drill.title)}.</p>${btn('drill',drill.completed?'Do the drill again':active?'Continue the drill':'Start the bench drill',`data-drill="${drill.id}" ${dis()}`,drill.completed?'ll-btn ll-quiet':'ll-btn ll-primary')}`;
+    const card=st.earned?`<p class="ll-cardearned">Training card earned. ${st.unlocks.length?`Visit ${st.unlocks.map(u=>u.slice(-1)).join(', ')} is open at the depot.`:''}</p>`:'';
+    return `${head}${card}${read}${part1}${part2}<details class="ll-details ll-ican"><summary>I-can goals</summary><ul>${(page?.ican||[]).map(i=>`<li>${esc(i.text)}</li>`).join('')}</ul><p class="ll-fine">Proposed goals for reflection with your teacher; not official IB codes and not a grade.</p></details>`;
+  }
+  function handbookPanel(){
+    const page=HANDBOOK.find(h=>h.stationId===station);if(!page)return overviewPanel();
+    return `<header class="ll-panel-head"><h2>${esc(page.title)}</h2><p>${esc(page.lessonRef)} · ${page.status==='practised'?'Practised in the game':'Explained here; practised later'}</p>${btn('panel','Back','data-panel="station"','ll-btn ll-text')}</header><article class="ll-handbook">${page.sections.map(sec=>`<h3>${esc(sec.heading)}</h3>${sec.paragraphs.map(p=>`<p>${esc(p)}</p>`).join('')}`).join('')}<h3>Key terms</h3><dl class="ll-terms">${page.terms.map(([t,d])=>`<dt>${esc(t)}</dt><dd>${esc(d)}</dd>`).join('')}</dl><h3>Check yourself</h3><ul>${page.checkYourself.map(q=>`<li>${esc(q)}</li>`).join('')}</ul>${page.notPractised?.length?`<p class="ll-fine"><b>Explained, not simulated in this game:</b> ${page.notPractised.map(esc).join(' ')}</p>`:''}</article>`;
+  }
   function panelHtml(){
     if(panel==='phone')return phonePanel();
+    if(view.at==='training'){
+      if(panel==='guide')return guidePanel();
+      if(panel==='handbook')return handbookPanel();
+      if(inDrill()&&!['overview','station'].includes(panel)){
+        if(panel==='device')return devicePanel();if(panel==='tester')return testerPanel();if(panel==='card')return cardPanel();return jobPanel();
+      }
+      if(panel==='job'&&view.visit?.finished)return jobPanel();
+      return station&&panel!=='overview'?stationPanel():overviewPanel();
+    }
     if(view.at==='yard')return panel==='guide'?guidePanel():yardPanel();
     if(!view.visit)return '';
     if(panel==='device')return devicePanel();
@@ -259,6 +320,7 @@ export function mountApprenticeUI(root,handlers){
     if(closed)return;
     view=getView();
     if(view.at==='yard'&&!['guide','phone'].includes(panel))panel=null;
+    if(view.at!=='training')station=null;
     if(selected&&!selected.startsWith('slot:')&&!byId(selected)){selected=null;if(panel==='device')panel=null;}
     const keyEl=document.activeElement?.closest?.('[data-act],[name]');
     const focusKey=keyEl&&root.contains(keyEl)?focusSignature(keyEl):null;
@@ -266,25 +328,31 @@ export function mountApprenticeUI(root,handlers){
     const sceneHtml=scene();const sceneEl=R('scene');if(sceneEl.dataset.sig!==String(sceneHtml.length)+view.revision){sceneEl.innerHTML=sceneHtml;sceneEl.dataset.sig=String(sceneHtml.length)+view.revision;}
     set('hotspots',hotspots());set('bubbles',bubbles());set('bag',bag());set('mentor',mentor());set('panel',panelHtml());set('overlay',overlay());
     root.querySelector('.ll-game').classList.toggle('is-yard',view.at==='yard');
+    root.querySelector('.ll-game').classList.toggle('is-training',view.at==='training');
     const line=mentorLine(view).text;if(line&&line!==lastLineKey){lastLineKey=line;R('live').textContent=`Mags: ${line}`;}
     if(focusKey){const again=[...root.querySelectorAll('[data-act],[name]')].find(el=>focusSignature(el)===focusKey);if(again&&document.activeElement!==again)again.focus({preventScroll:true});}
     const dialog=root.querySelector('[role=dialog],[role=alertdialog]');
     for(const el of [R('hud'),R('storage'),root.querySelector('.ll-stage'),root.querySelector('.ll-skip')])if(el){if(dialog)el.setAttribute('inert','');else el.removeAttribute('inert');}
     if(dialog&&!dialog.contains(document.activeElement))dialog.querySelector('button,input')?.focus();
   }
-  function focusSignature(el){return [el.dataset.act,el.dataset.panel,el.dataset.item,el.dataset.device,el.dataset.socket,el.dataset.cable,el.dataset.topic,el.dataset.test,el.dataset.visit,el.getAttribute('name')].join('|');}
+  function focusSignature(el){return [el.dataset.act,el.dataset.panel,el.dataset.item,el.dataset.device,el.dataset.socket,el.dataset.cable,el.dataset.topic,el.dataset.test,el.dataset.visit,el.dataset.station,el.dataset.job,el.dataset.address,el.dataset.verdict,el.dataset.drill,el.getAttribute('name')].join('|');}
   function openPanel(name){panel=name;render();R('panel').focus({preventScroll:true});}
 
   // ---------- EVENTS ----------
   root.addEventListener('click',async e=>{
     const t=e.target.closest('[data-act]');if(!t||t.disabled||!root.contains(t))return;
     const d=t.dataset,a=d.act;
-    if(a==='panel')return openPanel(d.panel);
+    if(a==='panel'){if(d.panel==='overview')station=null;return openPanel(d.panel);}
     if(a==='close-panel'){panel=null;selected=null;return render();}
     if(a==='modal')return openDialog(()=>{modal=d.modal;render();});
     if(a==='close-modal')return closeDialogs();
     if(a==='select'){selected=d.device;return openPanel('device');}
     if(a==='slot'){selected=`slot:${d.role}`;return openPanel('device');}
+    if(a==='training'){station=null;panel='overview';return act({type:'OPEN_TRAINING'});}
+    if(a==='station'){station=d.station;return openPanel('station');}
+    if(a==='sort')return act({type:'SORT_CABLE',cableType:d.cable,job:d.job});
+    if(a==='classify')return act({type:'CLASSIFY_ADDRESS',address:d.address,verdict:d.verdict});
+    if(a==='drill'){selected=null;const r=await act({type:'START_DRILL',drillId:d.drill});if(r?.accepted)openPanel('job');return;}
     if(a==='pack')return act({type:'PACK_ITEM',itemId:d.item});
     if(a==='unpack')return act({type:'UNPACK_ITEM',itemId:d.item});
     if(a==='start'){
@@ -334,8 +402,8 @@ export function mountApprenticeUI(root,handlers){
       if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}else if(!dialog.contains(document.activeElement)){e.preventDefault();first.focus();}return;}
     if(e.key!=='Escape')return;
     if(modal||ceremony){closeDialogs();return;}
-    if(panel&&view.at==='site'){panel=null;selected=null;render();}
-    else if(view.held&&view.at==='site')act({type:'RELEASE_CABLE'});
+    if(panel&&(view.at==='site'||view.at==='training')){panel=null;selected=null;render();}
+    else if(view.held&&(view.at==='site'||view.at==='training'))act({type:'RELEASE_CABLE'});
   });
   // Sockets drawn in the close-up work like the socket buttons listed beneath it.
   root.addEventListener('click',e=>{
@@ -346,6 +414,8 @@ export function mountApprenticeUI(root,handlers){
   });
   // Clicking a device drawn in the SVG works like its hotspot button.
   root.addEventListener('click',e=>{
+    const stEl=e.target.closest('.ll-scene [data-station-id]');
+    if(stEl&&view.at==='training'&&!e.target.closest('.ll-scene [data-device-id]')){station=stEl.dataset.stationId;openPanel('station');return;}
     const g=e.target.closest('.ll-scene [data-device-id],.ll-scene [data-item-id],.ll-scene [data-role-slot]');if(!g)return;
     if(g.dataset.itemId){const it=view.items.find(i=>i.id===g.dataset.itemId);if(it)act({type:it.packed?'UNPACK_ITEM':'PACK_ITEM',itemId:it.id});return;}
     if(g.dataset.deviceId&&byId(g.dataset.deviceId)){selected=g.dataset.deviceId;openPanel('device');return;}

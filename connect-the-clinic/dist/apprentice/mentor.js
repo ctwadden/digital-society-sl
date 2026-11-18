@@ -70,6 +70,14 @@ function nextStep(view,level){
     'fault.repaired':['You know where it breaks.','Fix the physical cause, then retest through it.','The access point’s uplink is missing. Patch it to the switch and test the tablet.'],
     'access.decision':['Ms. Ruiz asked for “everything open.”','Who needs bookings? Who needs the clinical workspace? Who needs neither?','Open the access rules and choose one that keeps Theo booking and the clinical workspace restricted.'],
     'access.tested':['Rules on paper aren’t rules in practice.','Run the access checks after your last change.','Choose “Check access” in the tester.'],
+    'bench.fail':['Before you fix anything, find out what’s wrong.','Run a test from the bench computer and read the code.','Open the service tester and choose “Test from the desk computer”. Read the result.'],
+    'bench.power':['The tester named the problem.','Something on the route has no power. Which box is dark?','Hold a power cord and plug it into the switch’s power inlet. Then test again.'],
+    'bench.cable':['One fault down. Test again — there may be another.','The bench computer isn’t cabled to anything.','Patch cable: bench computer RJ45 → a free switch port. Then test.'],
+    'bench.pass':['Prove it works.','Run the test again after your last change.','Test from the bench computer. You want Service available.'],
+    'rack.inspect':['Look before you change anything.','Inspect the rack computer and compare its address with the practice card.','Use the inspection light on the rack computer. Compare with 172.20.8.0/24.'],
+    'rack.address':['That address came from another office.','Choose a valid, unused address on the practice network and apply it with the card’s mask.','Keep 172.20.8 for this /24, choose an unused last number from 1 to 254 (not .10), mask 255.255.255.0.'],
+    'rack.mask':['Check the mask matches the card.','The practice card says 255.255.255.0.','Set the mask to exactly 255.255.255.0.'],
+    'rack.pass':['Test after your change.','Run the service test from the rack computer.','Choose “Test from the desk computer” in the tester.'],
     'explain':['Tell me what you did.','Write what was wrong, what you changed, and who it helps or restricts.','Two or three sentences in the job sheet. Or mark it to explain aloud to your teacher.']
   };
   const t=tips[c.id]||[c.label,c.detail,c.detail];
@@ -92,8 +100,36 @@ const TOPICS={
 };
 
 /** The single current line Mags says, chosen from the latest recorded result. */
+const SORT_LINES={
+  ethernet:{ok:'Right — Ethernet carries network traffic. That’s the one we plug into switches.',bad:'Ethernet is the network link: RJ45 plug, into a switch.'},
+  power:{ok:'Power only. A power light tells you it’s on, not that it’s connected.',bad:'That’s a power cord. It only powers things.'},
+  hdmi:{ok:'Display. HDMI sends a picture to a screen.',bad:'HDMI carries a picture to a screen. Which bin is that?'},
+  usb:{ok:'Peripherals — keyboards, drives, that sort of thing.',bad:'USB is for peripherals like keyboards and drives.'},
+  phone:{ok:'Phone line. RJ11 looks like RJ45 but it’s narrower — the trap that catches everyone once.',bad:'Look at the plug: RJ11, narrower than Ethernet. It’s a phone cord.'}};
+const VERDICT_LINES={
+  usable:'On the network, not .0 or .255, and nobody else has it. Usable.',
+  network:'.0 names the network itself. No device gets that one.',
+  broadcast:'.255 is the broadcast address on a /24 — it means “everyone”.',
+  taken:'The card says .10 is the service host. Two devices can’t share an address.',
+  'other-network':'With a /24 mask the first three numbers must match 172.20.8. That one doesn’t — different network.'};
+function trainingLine(view){
+  const t=view.training,last=t?.last;
+  if(!last){
+    const cards=t.stations.filter(s=>s.card),earned=cards.filter(s=>s.earned).length;
+    if(!earned)return {mood:'explaining',text:'Training Centre. Before you ride with me, you earn two cards: the Cable wall and the Network rack. Read the handbook page, do the practical, and ask me anything. Nothing here costs you.'};
+    if(earned<cards.length)return {mood:'pleased',text:`${earned} card earned. The next one unlocks the next ride-along.`};
+    return {mood:'pleased',text:'Both cards. You’re ready to ride along. The other stations open later in the course.'};
+  }
+  if(last.kind==='sort'){const l=SORT_LINES[last.cableType];return {mood:last.code==='SORT_OK'?'pleased':'concerned',text:last.code==='SORT_OK'?l.ok:l.bad};}
+  if(last.kind==='classify'){const c=t.candidates.find(x=>x.address===last.address);const right=view.trainingAnswers?.[last.address];
+    return {mood:last.code==='CLASSIFY_OK'?'pleased':'thinking',text:last.code==='CLASSIFY_OK'?VERDICT_LINES[last.verdict]:'Not that one. Check: same first three numbers as 172.20.8? Is it .0 or .255? Is it already on the card?'};}
+  if(last.kind==='ask')return {mood:'explaining',text:TOPICS[last.code]||why({visit:{id:'training'}})};
+  return {mood:'neutral',text:''};
+}
+
 export function mentorLine(view){
   if(view.at==='yard')return yardLine(view);
+  if(view.at==='training'&&(!view.visit||view.training?.last||view.visit.finished))return trainingLine(view);
   if(!view.visit)return {mood:'neutral',text:'Ready when you are.'};
   const v=view.visit,level=v.support==='alongside'?2:v.support==='supported'?1:0,r=view.lastResult;
   const asks=view.support.length;
@@ -112,6 +148,8 @@ export function mentorLine(view){
   if(r.kind==='test'){
     const t=view.latestTest;const base=TEST_LINES[r.code]||t?.message||'Read the result.';
     if(r.pass){
+      const pc=dev(view,'role.reception');
+      if(pc&&pc.mask&&pc.mask!==view.network.mask&&['visit.2','drill.addressing.bench'].includes(v.id))return {mood:'thinking',text:`It answered — but your mask is ${pc.mask} and the card says ${view.network.mask}. A wrong mask can work on a small bench and cause trouble later. Match the card.`};
       if(v.id==='visit.1')return {mood:'pleased',text:`${base} Look at Theo.`};
       if(r.testId==='nurse'&&t)return {mood:'pleased',text:`Tablet works in ${t.locationId==='location.exam-b'?'room B':'room A'}. ${unmet(view)?.id==='test.roomB'?'Now the other room.':''}`.trim()};
       return {mood:'pleased',text:level===0?'Good. Keep going.':base};
@@ -123,7 +161,7 @@ export function mentorLine(view){
   if(r.kind==='inspection'){
     const d=view.devices.find(x=>x.id===r.deviceId);if(!d)return {mood:'neutral',text:'Nothing there to inspect.'};
     if(d.roleId==='infra.ap'&&view.fault.uplinkMissing)return {mood:level===0?'thinking':'pleased',text:level===0?'What did you notice about its ports?':'Look at that: the access point’s Ethernet port is empty. Wi-Fi has nowhere to go.'};
-    if(d.roleId==='role.reception'&&v.id==='visit.2')return {mood:'explaining',text:`Address ${d.address}, mask ${d.mask}. The card says ${view.network.cidr}, mask ${view.network.mask}. Does this computer belong on that network?`};
+    if(d.roleId==='role.reception'&&(v.id==='visit.2'||v.id==='drill.addressing.bench'))return {mood:'explaining',text:`Address ${d.address}, mask ${d.mask}. The card says ${view.network.cidr}, mask ${view.network.mask}. Does this computer belong on that network?`};
     if(d.roleId==='role.nurse')return {mood:'explaining',text:level===0?'Noted.':`Tablet address ${d.address}. ${d.address.startsWith(view.network.base+'.')?'That fits the card.':'That doesn’t fit the card.'}`};
     return {mood:'neutral',text:level===0?'Noted.':`${d.label}: power ${d.powered?'on':'off'}, ${d.ports.filter(p=>p.cableId).length} cable${d.ports.filter(p=>p.cableId).length===1?'':'s'} connected.`};
   }
@@ -159,6 +197,8 @@ function holdLine(type){
 
 function arrival(view){
   const id=view.visit.id;
+  if(id==='drill.cables.bench')return 'Bench drill. Someone left this broken on purpose. Rule one: test before you touch anything. Then fix one thing, and test again.';
+  if(id==='drill.addressing.bench')return 'The cable and power are fine on this one — I checked. The address isn’t. Read the practice card, then the computer.';
   if(id==='visit.1')return 'Here we are. Theo opens the front desk in an hour and the booking service is unavailable — nothing’s installed. You do the hands-on work; I’ll be right here. Start with the desk.';
   if(id==='visit.2')return 'Two jobs today. Theo’s new desk computer still has its old office’s address, and Ana needs her tablet working in both exam rooms. I’ll help when you ask — and I’ll speak up if you get stuck.';
   return 'Your job today. I’m just the driver. Ana’s tablet can’t reach the workspace, and Ms. Ruiz wants a word about access. Find out before you fix.';
@@ -166,6 +206,7 @@ function arrival(view){
 
 function finishLine(view){
   const id=view.visit.id;
+  if(id.startsWith('drill.'))return 'Drill recorded. Back to the station — if both parts are done, that card is yours.';
   if(id==='visit.1')return 'That’s Theo’s booking task working — because you built the path and tested the service. Good first day.';
   if(id==='visit.2')return 'Desk on the right network, tablet working in both rooms. You read the card instead of guessing. That’s the habit.';
   return 'You found it, fixed it and retested it, and you chose and checked who gets access. Your teacher will read your reasons. I didn’t have to say much today.';
@@ -175,6 +216,8 @@ function yardLine(view){
   if(view.truckClaimed)return {mood:'pleased',text:'Van 7’s yours. I’ll still pick up the phone if you call.'};
   if(view.truckEarned)return {mood:'pleased',text:'Three visits, all your own work. Come round the side of the shed — there’s something with your unit number on it.'};
   const done=view.completedVisitIds.length;
+  const needCards=view.training?.gate&&view.training.stations.some(s=>s.card&&!s.earned);
+  if(!view.packed.length&&!done&&needCards)return {mood:'explaining',text:'Morning. I’m Mags. Nobody rides in my van until they’ve passed the Training Centre — cables first, then addresses. Head inside. Pack the tool bag while you’re out here, too.'};
   if(!view.packed.length&&!done)return {mood:'explaining',text:'Morning. I’m Mags. You’re riding with me this week. First job: pack the tool bag. Take what we need — not everything on the shelf.'};
   const last=view.yardLog.at(-1);
   if(last&&!view.bagReady){
@@ -182,6 +225,7 @@ function yardLine(view){
     if(last.type==='PACK_ITEM'&&item&&!item.essential)return {mood:'thinking',text:`${item.label}? ${item.use} Bring it if you like, but it won’t fix a network.`};
     if(last.type==='PACK_ITEM'&&item)return {mood:'neutral',text:`${item.label}. ${item.use}`};
   }
+  if(view.bagReady&&done===0&&view.visits[0]?.cardsNeeded?.length)return {mood:'neutral',text:'Good bag. Now the Cable wall card — then we ride.'};
   if(view.bagReady&&done===0)return {mood:'pleased',text:'That’s a proper bag. In the van — Harbour Street Clinic.'};
   if(done===1)return {mood:'pleased',text:'Back for day two. Same clinic, new problems. I’ll step back a little.'};
   if(done===2)return {mood:'neutral',text:'Day three. You lead; I drive.'};

@@ -22,7 +22,7 @@ export function train(d){
   d.act({type:'NETWORK_ACTION',action:{type:'SET_STATIC_ADDRESS',deviceId:pc.id,address:'172.20.8.77',mask:'255.255.255.0'}});d.act({type:'RUN_TEST',testId:'reception'});d.act({type:'FINISH_VISIT'});
   d.act({type:'RETURN_TO_YARD'});return d;
 }
-export function pack(d){if(d.state.training?.gate&&!d.view.training.stations.every(s=>!s.card||s.earned))train(d);for(const itemId of ['item.patch-cable','item.power-cord','item.link-tester','item.port-light'])d.act({type:'PACK_ITEM',itemId});return d;}
+export function pack(d){const t=d.view.training;if(t?.gate&&!t.stations.every(s=>!s.card||s.earned))train(d);for(const itemId of ['item.patch-cable','item.power-cord','item.link-tester','item.port-light'])d.act({type:'PACK_ITEM',itemId});return d;}
 export function cable(d,a,ai,b,bi){d.act({type:'HOLD_CABLE',cableType:'ethernet'});d.act({type:'PLUG',deviceId:a.id,socketId:eth(a,ai)});d.act({type:'PLUG',deviceId:b.id,socketId:eth(b,bi)});return d;}
 export function power(d,x){d.act({type:'HOLD_CABLE',cableType:'power'});d.act({type:'PLUG',deviceId:x.id,socketId:`${x.id}.power`});return d;}
 export function visit1(d){

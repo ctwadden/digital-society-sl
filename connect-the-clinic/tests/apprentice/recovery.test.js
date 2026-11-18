@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createPersistence} from '../../dist/persistence.js';
 import {createProgramme,dispatchProgramme,deriveProgramme,validateProgrammeSave,serializeProgrammeProgress,createProgrammeEvidence} from '../../dist/opening/programme.js';
-import {programmeDriver,pack,visit1,visit2,visit3} from './helpers.js';
+import {programmeDriver,pack,visit1,visit2,visit3,train} from './helpers.js';
 
 const namespace='riverbend.clinic.opening.v1.';
 const tick=()=>new Promise(resolve=>setImmediate(resolve));
@@ -32,6 +32,9 @@ const envelope=(state,stamp='fixture:1')=>JSON.stringify({format:'riverbend-save
 
 test('R6 reload resumes a visit with its held cable and pending first end exactly',async()=>{
   browserStorage();let store=await createPersistence(options('recovery.mid-visit'));
+  // Earn the cable card through real drills first, replayed through the persistence adapter.
+  const trainee=programmeDriver(store.getState());train(trainee);
+  for(const action of trainee.state.actions)assert.equal((await store.send(action)).accepted,true);
   for(const itemId of ['item.patch-cable','item.power-cord','item.link-tester','item.port-light'])assert.equal((await store.send({type:'APP_ACTION',action:{type:'PACK_ITEM',itemId}})).accepted,true);
   assert.equal((await store.send({type:'APP_ACTION',action:{type:'START_VISIT',visitId:'visit.1'}})).accepted,true);
   assert.equal((await store.send({type:'APP_ACTION',action:{type:'NETWORK_ACTION',action:{type:'CHOOSE_DEVICE',roleId:'role.reception',kind:'desktop'}}})).accepted,true);
@@ -98,7 +101,7 @@ test('R6 real 0.8 save migrates on automatic persistence restore and manual impo
   let store=await createPersistence(options('recovery.legacy.auto'));
   let view=deriveProgramme(store.getState());
   assert.equal(view.apprenticeOrigin,'legacy');assert.deepEqual(view.apprentice.completedVisitIds,[]);assert.equal(view.apprentice.truckEarned,false);
-  assert.equal(store.getState().buildVersion,'0.9.0');store.dispose();await tick();
+  assert.equal(store.getState().buildVersion,'0.10.0');store.dispose();await tick();
   browserStorage();store=await createPersistence(options('recovery.legacy.manual'));
   assert.equal((await store.importProgress(legacy)).accepted,true);view=deriveProgramme(store.getState());
   assert.equal(view.apprenticeOrigin,'legacy');assert.deepEqual(view.apprentice.completedVisitIds,[]);assert.equal(store.getState().importProvenance,'manual-file');

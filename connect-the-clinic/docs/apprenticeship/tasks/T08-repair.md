@@ -1,0 +1,9 @@
+Task ID and role: T08-R — focused repair for Codex job 05 (Training Centre art). Same worktree, same contract and editable files as docs/apprenticeship/tasks/T08.md (dist/apprentice/art-training.js and art-training-preview.html only).
+The lead rendered your scene in headless Chrome at 1600×1000. Screenshots: docs/apprenticeship/results/T08-screens/tr-all-open.png, tr-progress.png, tr-bench-fail.png, tr-sorted-three.png. Open and look at them (you can view PNG files).
+Fix exactly these, keeping style, exports and data-* contract:
+1. Cable wall: the five hanging cables are drawn in the air ABOVE the pegboard (around y≈100–200 near x≈780–960) instead of hanging ON the pegboard face. Hang each cable from a peg on the pegboard plane itself, drawn in the same iso projection as the board, so they read as hanging on it. Update TRAINING_SLOTS wall.* to the new positions.
+2. The 'done' rosette for station.cables is drawn near the far-left wall (≈708,200), detached from its station. Place every station's done rosette and locked rope barrier directly at/above its own station footprint.
+3. Framing: the room fills the canvas but ~40% is empty floor; stations read small at a 1366-wide browser (scene drawn at ~900px wide). Scale/arrange the composition (larger projection unit and/or tighter room) so the six stations and figures are about 1.3–1.5× their current on-screen size, keeping all six stations fully visible. Update TRAINING_SLOTS accordingly.
+4. The bench devices on the network rack overlap the mentor figure; when bench is present, keep devices clearly separated and the bench PC monitor visible.
+Verify: node import works; preview renders all cases without throwing; data-* wrappers still present. If you can run a browser, screenshot again; otherwise say not_tested and list the coordinates you changed.
+Return the WORKER_CONTRACT result block. No other files, no commits, no further agents.

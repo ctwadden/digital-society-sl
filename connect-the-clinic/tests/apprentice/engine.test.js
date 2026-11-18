@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createApprenticeship,dispatchApprenticeship,deriveApprenticeship,createApprenticeshipEvidence,VISITS} from '../../dist/apprentice/engine.js';
 
-import {engineDriver,pack as packD,visit1,visit2,visit3} from './helpers.js';
+import {engineDriver,pack as packD,visit1,visit2,visit3,train} from './helpers.js';
 function run(state,action,expectAccepted=true){
   const r=dispatchApprenticeship(state,action);
   assert.equal(r.accepted,expectAccepted,`${action.type} → ${r.code}: ${r.message}`);
@@ -23,6 +23,8 @@ function power(s,d){s=run(s,{type:'HOLD_CABLE',cableType:'power'}).state;return 
 
 test('departure requires the essential kit; distractors are allowed but recorded',()=>{
   let s=createApprenticeship({campaignId:'t.1'});
+  assert.equal(run(s,{type:'START_VISIT',visitId:'visit.1'},false).code,'TRAINING_CARD_REQUIRED','training comes before the first ride-along');
+  s=train(engineDriver(s)).state;
   assert.equal(run(s,{type:'START_VISIT',visitId:'visit.1'},false).code,'BAG_INCOMPLETE');
   s=run(s,{type:'PACK_ITEM',itemId:'item.phone-cord'}).state;
   s=pack(s);assert.ok(v(s).bagReady);
@@ -169,4 +171,23 @@ test('QA T07: mentor names an irrelevant IP change in the lead visit',async()=>{
   s=run(s,{type:'NETWORK_ACTION',action:{type:'SET_STATIC_ADDRESS',deviceId:dev(s,'role.nurse').id,address:'10.12.1.31',mask:'255.255.255.0'}}).state;
   s=run(s,{type:'RUN_TEST',testId:'nurse'}).state;
   assert.match(mentorLine(v(s)).text,/address change can’t replace a missing cable/);
+});
+
+test('training: bench drills earn cards only from real repairs; a wrong mask is flagged even when the test passes',async()=>{
+  const {mentorLine}=await import('../../dist/apprentice/mentor.js');
+  let s=createApprenticeship({campaignId:'t.train'});
+  s=run(s,{type:'OPEN_TRAINING'}).state;
+  s=run(s,{type:'START_DRILL',drillId:'drill.cables.bench'}).state;
+  assert.equal(run(s,{type:'FINISH_VISIT'},false).code,'VISIT_INCOMPLETE');
+  s=run(s,{type:'RUN_TEST',testId:'reception'}).state;assert.equal(v(s).latestTest.code,'SWITCH_OFF');
+  s=power(s,dev(s,'infra.switch'));s=run(s,{type:'RUN_TEST',testId:'reception'}).state;assert.equal(v(s).latestTest.code,'PORT_DISCONNECTED');
+  s=plugCable(s,dev(s,'role.reception'),1,dev(s,'infra.switch'),3);s=run(s,{type:'RUN_TEST',testId:'reception'}).state;
+  s=run(s,{type:'FINISH_VISIT'}).state;
+  assert.equal(v(s).training.stations.find(x=>x.id==='station.cables').earned,false,'sorting is still required');
+  s=run(s,{type:'START_DRILL',drillId:'drill.addressing.bench'}).state;
+  const pc=dev(s,'role.reception');
+  s=run(s,{type:'NETWORK_ACTION',action:{type:'SET_STATIC_ADDRESS',deviceId:pc.id,address:'172.20.8.44',mask:'255.255.0.0'}}).state;
+  s=run(s,{type:'RUN_TEST',testId:'reception'}).state;
+  assert.match(mentorLine(v(s)).text,/mask/);
+  assert.equal(v(s).checks.find(c=>c.id==='rack.mask').met,false);
 });
