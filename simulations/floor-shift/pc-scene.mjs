@@ -1,4 +1,11 @@
-import { createHardwareKit, buildHardware } from './assets/scene/hardware.mjs';
+const sceneUrl = new URL(import.meta.url);
+
+function dependencyUrl(path) {
+  const url = new URL(path, sceneUrl);
+  const retry = sceneUrl.searchParams.get('retry');
+  if (retry && /^[1-9]\d*$/.test(retry)) url.searchParams.set('retry', retry);
+  return url.href;
+}
 
 const PARTS = {
   cpu: {
@@ -270,9 +277,13 @@ export async function createPCScene(container, { onSelect, reducedMotion = false
 
   syncText();
   try {
-    const T = await import('./vendor/three-r149.module.mjs');
+    // An explicit retry must bypass failed browser module entries for the dependencies too.
+    const [T, hardware] = await Promise.all([
+      import(dependencyUrl('./vendor/three-r149.module.mjs')),
+      import(dependencyUrl('./assets/scene/hardware.mjs')),
+    ]);
     if (!disposed) {
-      view = openHardwareView(T, stage, reticle, { selectPart, fallback, listen });
+      view = openHardwareView(T, hardware, stage, reticle, { selectPart, fallback, listen });
       view.show(kind, exploded);
       view.select(selected);
       stage.dataset.mode = '3d';
@@ -291,7 +302,7 @@ export async function createPCScene(container, { onSelect, reducedMotion = false
   };
 }
 
-function openHardwareView(T, stage, reticle, { selectPart, fallback, listen }) {
+function openHardwareView(T, { createHardwareKit, buildHardware }, stage, reticle, { selectPart, fallback, listen }) {
   const canvas = element('canvas', {
     tabindex: '0',
     'aria-label': 'Computer cutaway. Arrow keys orbit, plus and minus zoom, zero resets the camera. Use the part buttons for descriptions.',
