@@ -39,6 +39,7 @@ def build(config=None):
             sections.append(f'<section class="section" id="{key}" aria-labelledby="{key}-title"><h2 id="{key}-title">{esc(title)}</h2>{content}</section>')
 
     cards = [
+        ('Floor Shift · computer adviser', 'Interview customers, compare computer specifications and complete cost, explain your advice, then adapt when the brief changes. Includes a 3D parts workbench and registered submission route.', 'simulations/floor-shift/', '3.3B · Computer components · Formative simulation'),
         ('Economics business growth lab', 'Connect your Netflix or Amazon inquiry to four business growth strategies, test a fictional shop, and begin Supply Chain Detective.', 'lessons/economics-business-growth/', 'Economics presentation and follow-up'),
         ('Four lenses → Criterion B', 'Watch one TED talk, build a study infographic, then rank your own IA sources and select a provisional top three.', 'lessons/source-power-criterion-b/', 'Independent lesson · 70 minutes'),
         ('Identity under the lens', 'Reconnect Identity with Power, Systems and Values & Ethics through guided analysis, source work and independent transfer.', 'sprints/identity-connected-concepts/', 'Sprint 2 workbook'),

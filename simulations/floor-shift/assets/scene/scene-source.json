@@ -1,0 +1,21 @@
+{
+  "scene_id": "floor-shift-hardware-inspector",
+  "build": "advisor-0.1",
+  "authorship": "Original procedural geometry, material palettes and display art authored for Floor Shift",
+  "editable_source": "hardware.mjs",
+  "runtime_source": "../../pc-scene.mjs",
+  "representation": "Illustrative desktop and laptop component placement, contacts, cooling and connection. Dimensions and layout are not product models. Catalogue text is displayed separately.",
+  "three": {
+    "package": "three",
+    "version": "0.149.0",
+    "release": "https://registry.npmjs.org/three/-/three-0.149.0.tgz",
+    "package_sha256": "ab8b7c131f6ce72e05081dff4882046584e4a4ce5ad864f9f2a0e3146cc3997c",
+    "source_entry": "package/build/three.module.js",
+    "vendored_module": "../../vendor/three-r149.module.mjs",
+    "module_sha256": "450d60513f2a2148c9648d89418c5507908455458b191747be2492262791693c",
+    "license": "MIT",
+    "license_file": "../../vendor/three-LICENSE.txt",
+    "license_sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d"
+  },
+  "reference_architecture": "The supplied Stage and Kit were reviewed. This scene uses its own local rendering and input lifecycle under API_CONTRACT.md."
+}

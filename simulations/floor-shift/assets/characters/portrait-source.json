@@ -1,0 +1,81 @@
+{
+  "assetKey": "customer-portraits",
+  "file": "customer-portraits.png",
+  "format": "image/png",
+  "sha256": "e3b1562d477d06133474a913110cf717e5ad67059a49dc7c9e21183742344565",
+  "bytes": 2615891,
+  "width": 1536,
+  "height": 1024,
+  "grid": {
+    "columns": 3,
+    "rows": 2,
+    "tileWidth": 512,
+    "tileHeight": 512,
+    "gutter": 0
+  },
+  "crops": [
+    {
+      "placement": "Older learner",
+      "x": 0,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "backgroundPosition": "0% 0%"
+    },
+    {
+      "placement": "Mobile business professional",
+      "x": 512,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "backgroundPosition": "50% 0%"
+    },
+    {
+      "placement": "Design student",
+      "x": 1024,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "backgroundPosition": "100% 0%"
+    },
+    {
+      "placement": "Independent designer",
+      "x": 0,
+      "y": 512,
+      "width": 512,
+      "height": 512,
+      "backgroundPosition": "0% 100%"
+    },
+    {
+      "placement": "Video creator",
+      "x": 512,
+      "y": 512,
+      "width": 512,
+      "height": 512,
+      "backgroundPosition": "50% 100%"
+    },
+    {
+      "placement": "Budget-conscious learner",
+      "x": 1024,
+      "y": 512,
+      "width": 512,
+      "height": 512,
+      "backgroundPosition": "100% 100%"
+    }
+  ],
+  "source": {
+    "method": "OpenAI built-in image generation",
+    "originalResult": "exec-288dbee1-def4-47b3-82d8-85a0cc59f0d7.png",
+    "synthetic": true,
+    "attribution": "Original AI-generated artwork for Floor Shift, depicting fictional customers.",
+    "rights": "Generated for this local simulation. No source images, third-party artwork, likeness references or brand marks were supplied. Package publication approval is pending.",
+    "prompt": "Use case: stylized-concept\nAsset type: original 3:2 landscape in-game customer portrait atlas for a high-school computer-store role-playing simulation, “Floor Shift.”\nCreate a beautifully finished cast of six fictional people, on a perfectly regular 3 columns × 2 rows edge-to-edge atlas. Exactly six equal square tiles. Sharp straight tile boundaries at exactly 1/3 and 2/3 width and half height. ZERO gutters, borders, decoration, stripes, panel overlaps, text, watermarks or lettering. A distinct solid-color background with subtle lit gradient fills each square all the way to its edges. Exactly one person in each tile, centered with head around 45% of the width, haircut completely inside the tile, generous top headroom and side margins, chest-up to waist-up framing, hands below bottom edge. Aim for coherent head scale across all six and leave enough space for square crops. Three-quarter portrait orientation with attentive lens eye contact and expressive, varied brows and conversational expressions.\nTop left: late 60s warm-skinned woman, pearl-grey wavy chin-length hair, teal knit over pale shirt, a small amused confident smile, wheat backdrop.\nTop middle: early 30s dark-skinned man with close-cropped curls, olive overshirt over striped ecru tee, deciding with lifted eyebrow, cool slate-teal backdrop.\nTop right: late-teen East Asian androgynous student with a short straight dark bob, bright marigold shirt over light blue tee, alert friendly expectant look, faded periwinkle backdrop.\nBottom left: 40s medium-brown-skinned woman, naturally coiled shoulder-length dark hair, berry structured jacket, faint dimpled knowing smile and tilted head, clay-peach backdrop.\nBottom middle: 20s olive-skinned man, curly side-parted dark hair, polished sky-blue chore jacket, confident curious grin, yellow-green backdrop.\nBottom right: late-teen freckled light-skinned girl with warm auburn curls gathered loosely, lavender utility hoodie, engaged and self-assured, muted rose backdrop.\nArt direction: high-end original stylized 3D editorial characterization, sophisticated animated feature-level finish with fresh character design, distinct facial geometry, humane proportion, perceptive subtly asymmetrical expressions, broad sculptural forms and realistic material detail in fabrics and hair. Rich but controlled color, creamy rendered key light from upper left, colored bounce, soft feathered shadows, consistent studio lens, gentle depth, simple premium matte materials with intentional glints. Ages appropriate to their character. Everyday clothes, simple accessories, minimal eye highlights. Direct, charming, lively, tactility and character over visual noise. No work props, devices or cues implying needs or income; the player's interview supplies those. No brand, logo, words, cartoon icons, mascot, visual embellishment outside the portraits or references to a real person or media franchise. Keep exactly six squares on a 3:2 canvas."
+  },
+  "accessibility": "Decorative portrait beside the customer’s name and spoken brief. Keep the portrait out of the accessibility tree. Present all customer requirements, conversations and feedback as readable text.",
+  "review": {
+    "author": "Graphic art specialist",
+    "result": "Asset inspected",
+    "evidence": "Native image-generation preview and saved 1536 × 1024 project PNG inspected. Six square panels, six subjects, clean tile boundaries, legible facial expressions, intentional colour and complete heads. No apparent text, logos or anatomical defects.",
+    "scope": "Source artwork only. Review the embedded crops in the rendered simulation at desktop and phone sizes and record independent review before approval."
+  }
+}
