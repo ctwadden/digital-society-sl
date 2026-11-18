@@ -7,6 +7,7 @@ import {HANDBOOK} from './handbook.js';
 
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
 const ROLE_LABEL={'role.reception':'Desk computer','role.records':'Service host','infra.switch':'Network switch','infra.ap':'Wireless access point','role.nurse':'Ana’s tablet'};
+const ART_BUILD='0.11.0';
 const BENCH_LABEL={'role.reception':'Bench computer','infra.switch':'Bench switch','role.records':'Bench service host'};
 const SLOT_LABEL={'role.reception':'fixed booking desk','role.records':'service host for every computer'};
 const ROLE_ROOM={'role.reception':'reception','role.records':'closet','infra.switch':'closet','infra.ap':'corridor','role.nurse':'examA'};
@@ -28,8 +29,9 @@ const reduceMotion=()=>window.matchMedia?.('(prefers-reduced-motion: reduce)').m
 
 let art=null,trainArt=null;
 async function loadArt(){
-  try{art=await import('./art.js');}catch(error){console.warn('Scene art unavailable; using the plain fallback.',error);art=null;}
-  try{trainArt=await import('./art-training.js');}catch(error){console.warn('Training art unavailable; using the plain fallback.',error);trainArt=null;}
+  // The build tag keeps a release's art in step with its UI despite browser caching.
+  try{art=await import(`./art.js?v=${ART_BUILD}`);}catch(error){console.warn('Scene art unavailable; using the plain fallback.',error);art=null;}
+  try{trainArt=await import(`./art-training.js?v=${ART_BUILD}`);}catch(error){console.warn('Training art unavailable; using the plain fallback.',error);trainArt=null;}
 }
 const SORT_JOB_LABEL={network:'Network link',power:'Power',display:'Display','peripheral':'Peripherals','phone-line':'Phone line'};
 const PART_JOB_LABEL={input:'Input',process:'Process',memory:'Working memory',storage:'Long-term storage',output:'Output',power:'Power'};

@@ -21,6 +21,11 @@ const DEV = {
   'infra.switch': [7.25, 3.5, 1.05],
   'role.records': [8.55, 3.25, 1.0]
 };
+const DEVICE_BENCH = {
+  'role.reception': [2.05, 8.72, 1.03],
+  'infra.switch': [3.75, 8.72, 1.03],
+  'role.records': [5.35, 8.62, 1.03]
+};
 const BINS = [[1.35, 4.1], [1.9, 4.1], [2.45, 4.1], [3.0, 4.1], [3.55, 4.1]];
 const WALL = { ethernet: 1.25, power: 1.85, hdmi: 2.45, usb: 3.05, phone: 3.65 };
 const pslot = (x, y, z = 0) => { const p = I.P(x, y, z); return Object.freeze({ x: r1(p[0]), y: r1(p[1]) }); };
@@ -33,6 +38,13 @@ export const TRAINING_SLOTS = Object.freeze({
   ...Object.fromEntries(BINS.map((v, i) => [`bin.${i}`, pslot(v[0], v[1], 0.55)])),
   ...Object.fromEntries(Object.entries(WALL).map(([k, x]) => [`wall.${k}`, pslot(x, 0.012, .58)]))
 });
+
+/** Centre of a device position for HTML controls. Unknown stations use the legacy rack. */
+export function benchSlot(stationId, roleId) {
+  const role = ['role.reception', 'infra.switch', 'role.records'].includes(roleId) ? roleId : 'role.reception';
+  if (stationId !== 'station.devices') return TRAINING_SLOTS[role];
+  return pslot(...DEVICE_BENCH[role]);
+}
 
 const B = (x, y, z, w, d, h, c, o = {}) => I.box(x, y, z, w, d, h, { color: c, stroke: shade(c, -0.28), sw: 0.65, ...o });
 const sh = (x, y, rx, ry, op = .55) => { const p = I.P(x, y, 0); return softShadow(p[0], p[1], rx * U, ry * U / 2, op); };
@@ -74,43 +86,68 @@ function cableWall(sorted) {
 }
 
 function led(p, on, c = '#4fd17f') { return `<circle cx="${r1(p[0])}" cy="${r1(p[1])}" r="4" fill="${on ? c : '#394047'}" stroke="#f4ead4" stroke-width="1"/>`; }
-function device(d, role, index) {
-  const pos = DEV[role] || [6 + index, 3.4, 1], powered = !!d.powered, selected = !!d.selected;
-  const [x,y,z] = pos; let a = '';
-  if (role === 'role.reception') {
-    a += B(x-.38,y-.28,z-.05,.5,.46,.58,'#4b5660') + B(x+.05,y-.22,z+.32,.65,.12,.48,'#3b454d');
-    const p=I.P(x+.38,y-.1,z+.55); a += `<g transform="translate(${r1(p[0])} ${r1(p[1])}) scale(.36)">${screenArt(powered ? 'ok' : 'off')}</g>`;
-  } else if (role === 'role.records') {
-    a += B(x-.32,y-.28,z-.2,.72,.58,1.08,'#59646c'); for(let j=0;j<3;j++) a += B(x-.25,y+.31,z-.05+j*.26,.58,.025,.16,'#2c343b') + led(I.P(x+.22,y+.34,z+.03+j*.26), powered);
+function device(d, role, index, positions = DEV, wrap = true) {
+  const pos = positions[role] || [6 + index, 3.4, 1], powered = !!d.powered, selected = !!d.selected;
+  const [x,y,z] = pos, kind = ['desktop','laptop','tablet','server','switch4','switch8'].includes(d.kind) ? d.kind : (role==='infra.switch'?'switch4':role==='role.records'?'server':'desktop'); let a = '';
+  if (kind === 'desktop') {
+    a += B(x-.47,y-.3,z-.08,.32,.42,.62,'#4b5660') + B(x-.04,y-.24,z+.12,.12,.12,.28,'#59646c') + B(x-.3,y-.13,z+.02,.72,.48,.04,'#d9dcdc') + B(x-.12,y-.27,z+.35,.7,.12,.52,'#303941');
+    const p=I.P(x+.24,y-.14,z+.62); a += `<g transform="translate(${r1(p[0])} ${r1(p[1])}) scale(.33)">${screenArt(powered ? 'ok' : 'off')}</g>` + led(I.P(x-.2,y+.13,z+.34),powered);
+  } else if (kind === 'laptop') {
+    a += B(x-.48,y-.3,z-.05,.92,.62,.055,'#9aa6ae') + I.poly([[x-.45,y-.27,z+.01],[x+.4,y-.27,z+.01],[x+.4,y-.25,z+.62],[x-.45,y-.25,z+.62]],'#303941',' stroke="#17202b" stroke-width="1"');
+    const p=I.P(x,y-.24,z+.34); a += `<g transform="translate(${r1(p[0])} ${r1(p[1])}) scale(.27)">${screenArt(powered?'ok':'off')}</g>`;
+  } else if (kind === 'tablet') {
+    a += B(x-.1,y-.03,z-.05,.2,.18,.38,'#68747c') + I.poly([[x-.43,y-.18,z+.23],[x+.38,y-.18,z+.23],[x+.38,y-.15,z+.76],[x-.43,y-.15,z+.76]],'#252d33',' stroke="#9aa6ae" stroke-width="2"');
+    const p=I.P(x,y-.14,z+.49); a += `<g transform="translate(${r1(p[0])} ${r1(p[1])}) scale(.25)">${screenArt(powered?'ok':'off')}</g>`;
+  } else if (kind === 'server') {
+    a += B(x-.46,y-.29,z-.05,.92,.55,.4,'#59646c'); for(let j=0;j<2;j++) a += B(x-.39,y+.25,z+.01+j*.16,.7,.025,.11,'#242c32') + led(I.P(x+.35,y+.28,z+.07+j*.16),powered);
   } else {
-    const ports = String(d.kind || '').includes('8') ? 8 : 4; a += B(x-.52,y-.28,z-.05,1.05,.48,.28,'#3e5961');
+    const ports = kind === 'switch8' ? 8 : 4; a += B(x-.52,y-.28,z-.05,1.05,.48,.28,'#3e5961');
     for(let j=0;j<ports;j++){ const p=I.P(x-.38+j*(.76/Math.max(ports-1,1)),y+.22,z+.05); a += `<rect x="${r1(p[0]-3)}" y="${r1(p[1]-2)}" width="6" height="4" fill="#17252b"/>`; }
     a += led(I.P(x+.4,y+.24,z+.17), powered);
   }
   if (selected) { const p=I.P(x,y,z); a += `<ellipse cx="${r1(p[0])}" cy="${r1(p[1])}" rx="48" ry="27" fill="none" stroke="#ffd23f" stroke-width="5"/>`; }
-  return `<g class="ap-device" data-device-id="${esc(d.id)}" data-role-id="${esc(role)}" data-powered="${powered ? 'true':'false'}"${selected?' data-selected="true"':''}>${a}</g>`;
+  return wrap ? `<g class="ap-device" data-device-id="${esc(d.id)}" data-role-id="${esc(role)}" data-powered="${powered ? 'true':'false'}"${selected?' data-selected="true"':''}>${a}</g>` : a;
+}
+function slotFoot(role, positions) { const [x,y,z]=positions[role]; const w=role==='infra.switch'?1.1:.9, d=.58; return I.poly([[x-w/2,y-d/2,z-.04],[x+w/2,y-d/2,z-.04],[x+w/2,y+d/2,z-.04],[x-w/2,y+d/2,z-.04]],'none',' stroke="#1f2a33" stroke-width="2" stroke-dasharray="7 5" opacity=".7"'); }
+function benchContents(bench, positions) {
+  const devices=arr(obj(bench).devices), roles=new Set(); let s='';
+  devices.forEach((raw,i)=>{const d=obj(raw), role=['role.reception','infra.switch','role.records'].includes(d.roleId)?d.roleId:''; if(role&&!roles.has(role)){roles.add(role);s+=device(d,role,i,positions);}});
+  for(const rawRole of arr(obj(bench).emptySlots)){const role=String(rawRole);if((role==='role.reception'||role==='role.records')&&!roles.has(role))s+=`<g class="ap-slot" data-role-id="${role}">${slotFoot(role,positions)}</g>`;}
+  const byId=Object.fromEntries(devices.map(d=>[String(obj(d).id),obj(d)]));
+  for(const raw of arr(obj(bench).cables)){const c=obj(raw),a=byId[String(c.fromDeviceId)],b=byId[String(c.toDeviceId)];if(!a||!b)continue;const pa=positions[a.roleId],pb=positions[b.roleId];if(!pa||!pb)continue;const A=I.P(pa[0],pa[1],pa[2]+.1),D=I.P(pb[0],pb[1],pb[2]+.1),st=STATE_STYLE[c.state]||STATE_STYLE.installed,mx=r1((A[0]+D[0])/2),my=r1(Math.max(A[1],D[1])+28);s+=`<g class="ap-cable" data-cable-id="${esc(c.id)}" data-state="${esc(c.state||'installed')}"><path d="M${r1(A[0])},${r1(A[1])} Q${mx},${my} ${r1(D[0])},${r1(D[1])}" fill="none" stroke="#fff" stroke-width="9" opacity=".6"/><path d="M${r1(A[0])},${r1(A[1])} Q${mx},${my} ${r1(D[0])},${r1(D[1])}" fill="none" stroke="${st.c}" stroke-width="5" stroke-linecap="${st.cap}"${st.dash?` stroke-dasharray="${st.dash}"`:''}/>${badge(mx,my-5,c.state)}</g>`;}
+  return s;
 }
 function networkRack(bench) {
   let s = sh(7.15,3.45,1.45,.65) + B(5.45,3.05,0,.1,.1,1,'#5d666e') + B(8.75,3.05,0,.1,.1,1,'#5d666e') + B(5.4,3,1,3.5,1.05,.09,PAL.wood,{top:'#d8ad72'});
   s += wallY(5.5,1.55,3.2,1.25,'<rect width="1" height="1" rx=".02" fill="#f6f2e8" stroke="#8d979e" stroke-width=".02"/><path d="M.12,.25 Q.3,.1 .48,.28 T.84,.22 M.14,.48 H.42 M.55,.5 H.86 M.22,.72 Q.48,.58 .76,.75" fill="none" stroke="#77a3aa" stroke-width=".025"/>');
-  const devices = arr(obj(bench).devices); if (bench) {
-    const roles = new Set(); devices.forEach((d,i)=>{ d=obj(d); const role=['role.reception','infra.switch','role.records'].includes(d.roleId)?d.roleId:''; if(role && !roles.has(role)){roles.add(role); s+=device(d,role,i);} });
-    const byId = Object.fromEntries(devices.map(d=>[String(obj(d).id),obj(d)]));
-    for (const raw of arr(obj(bench).cables)) { const c=obj(raw), a=byId[String(c.fromDeviceId)], b=byId[String(c.toDeviceId)]; if(!a||!b) continue; const pa=DEV[a.roleId], pb=DEV[b.roleId]; if(!pa||!pb) continue; const A=I.P(pa[0],pa[1],pa[2]+.1), D=I.P(pb[0],pb[1],pb[2]+.1), st=STATE_STYLE[c.state]||STATE_STYLE.installed; const mx=r1((A[0]+D[0])/2), my=r1(Math.max(A[1],D[1])+28); s += `<g class="ap-cable" data-cable-id="${esc(c.id)}" data-state="${esc(c.state||'installed')}"><path d="M${r1(A[0])},${r1(A[1])} Q${mx},${my} ${r1(D[0])},${r1(D[1])}" fill="none" stroke="#fff" stroke-width="9" opacity=".6"/><path d="M${r1(A[0])},${r1(A[1])} Q${mx},${my} ${r1(D[0])},${r1(D[1])}" fill="none" stroke="${st.c}" stroke-width="5" stroke-linecap="${st.cap}"${st.dash?` stroke-dasharray="${st.dash}"`:''}/>${badge(mx,my-5,c.state)}</g>`; }
-  } else {
+  if (bench) s+=benchContents(bench,DEV); else {
     s += device({id:'default.pc',powered:false},'role.reception',0)+device({id:'default.switch',kind:'switch4',powered:false},'infra.switch',1)+device({id:'default.server',powered:false},'role.records',2);
   }
   return s;
 }
 function badge(x,y,state){ const ok=state==='tested-ok', fail=state==='tested-fail', stale=state==='stale'; if(!ok&&!fail&&!stale)return ''; const c=ok?PAL.okG:fail?PAL.failR:PAL.staleA; const mark=ok?'M-6,0 l4,5 9,-11':fail?'M-5,-5 l10,10 M5,-5 l-10,10':'M0,-7 V1 M0,6 v1'; return `<g transform="translate(${r1(x)} ${r1(y)})"><circle r="12" fill="#fff" stroke="${c}" stroke-width="3"/><path d="${mark}" fill="none" stroke="${c}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>`; }
 
-function parts(){ let s=sh(11.8,3.6,1.2,.55)+B(10.5,3.05,0,.1,.1,.92,'#5d666e')+B(13.1,3.05,0,.1,.1,.92,'#5d666e')+B(10.4,3, .92,2.9,1,.1,PAL.wood,{top:'#d8ad72'}); s+=B(10.7,3.2,1.02,1.15,.65,.65,'#626d73')+I.poly([[10.74,3.24,1.69],[11.8,3.24,1.69],[11.8,3.75,1.69],[10.74,3.75,1.69]],'#243239'); s+=B(12.05,3.2,1.03,1,.62,.12,'#c99a62'); for(let i=0;i<2;i++)s+=B(12.15+i*.28,3.35,1.16,.08,.34,.06,'#3c8b55'); s+=B(12.72,3.3,1.16,.24,.32,.09,'#7d878f')+B(10.88,3.35,1.7,.52,.3,.35,'#4b5660'); return s; }
-function devicesShelf(){ let s=sh(2.5,8.1,1.1,.5); for(const x of [1.25,3.75])s+=B(x,7.2,0,.09,.09,2.5,'#5d666e'); for(const z of [.45,1.25,2.15])s+=B(1.2,7.15,z,2.7,.8,.07,'#7d878f'); s+=B(1.45,7.4,.52,.24,.12,.4,'#303941')+B(1.95,7.35,.52,.48,.16,.65,'#3f5964')+B(2.7,7.35,.52,.75,.18,.46,'#4b5660')+B(1.55,7.35,1.32,.24,.12,.34,'#2c343b')+B(2.15,7.35,1.32,.75,.55,.72,'#53616a'); return s; }
+const PARTS=['part.keyboard','part.cpu','part.ram','part.ssd','part.screen','part.psu'];
+function partGlyph(id,x,y,z){let s='';if(id==='part.keyboard'){s+=B(x-.3,y-.18,z,.6,.36,.06,'#d9dcdc');for(let i=0;i<5;i++)s+=I.line([[x-.23+i*.11,y+.17,z+.065],[x-.23+i*.11,y-.12,z+.065]],'#68747c',.55);}else if(id==='part.cpu'){s+=B(x-.19,y-.19,z,.38,.38,.06,'#3c8b55')+B(x-.1,y-.1,z+.06,.2,.2,.035,'#c8b777');}else if(id==='part.ram'){s+=B(x-.34,y-.1,z,.68,.2,.07,'#3c8b55');for(let i=0;i<5;i++)s+=B(x-.27+i*.12,y-.07,z+.07,.07,.14,.035,'#243239');}else if(id==='part.ssd'){s+=B(x-.28,y-.17,z,.56,.34,.09,'#68747c')+B(x-.12,y-.14,z+.09,.24,.2,.025,'#f4ead4');}else if(id==='part.screen'){s+=B(x-.28,y-.08,z,.56,.08,.4,'#303941')+B(x-.05,y-.02,z,.1,.13,.15,'#68747c');}else{s+=B(x-.29,y-.2,z,.58,.4,.36,'#4b5660');const p=I.P(x+.29,y+.18,z+.18);s+=`<circle cx="${r1(p[0])}" cy="${r1(p[1])}" r="10" fill="none" stroke="#9aa6ae" stroke-width="2"/><path d="M${r1(p[0]-7)},${r1(p[1]-7)} l14,14 M${r1(p[0]+7)},${r1(p[1]-7)} l-14,14" stroke="#9aa6ae"/>`; }return s;}
+function compartmentCue(i,x,y,z){const marks=[`M-13,4 h26 M-10,-3 h20`,`M-10,-10 h20 v20 h-20Z`,`M-14,0 h28 M-10,-7 v14 M0,-7 v14 M10,-7 v14`,`M-13,-8 h26 v16 h-26Z`,`M-12,-9 h24 v15 h-24Z M-4,9 h8`,`M0,-11 a11,11 0 1,0 .1,0 M-8,-8 l16,16 M8,-8 l-16,16`][i];const p=I.P(x,y,z);return `<path d="${marks}" transform="translate(${r1(p[0])} ${r1(p[1])}) scale(.62)" fill="none" stroke="#66553f" stroke-width="2.2" opacity=".78"/>`;}
+function parts(scene){const sorted=obj(obj(scene).sorted);let s=sh(11.75,3.6,1.85,.7)+B(9.55,3.03,0,.1,.1,.92,'#5d666e')+B(13.75,3.03,0,.1,.1,.92,'#5d666e')+B(9.4,2.98,.92,4.55,1.18,.1,PAL.wood,{top:'#d8ad72'});
+  // Three deliberately separate work zones: open case, loose-parts tray, sorting board.
+  s+=B(9.65,3.12,1.02,1.05,.78,.6,'#626d73')+I.poly([[9.7,3.16,1.63],[10.63,3.16,1.63],[10.63,3.82,1.63],[9.7,3.82,1.63]],'#243239')+I.line([[9.75,3.21,1.65],[10.55,3.21,1.65]],'#9aa6ae',2);
+  s+=B(10.85,3.1,1.03,1.12,.82,.07,'#d5b780');
+  s+=B(12.05,3.05,1.03,1.82,1.02,.07,'#ead8ad');
+  for(let i=0;i<PARTS.length;i++){const col=i%2,row=Math.floor(i/2),x0=12.08+col*.88,y0=3.07+row*.32,cx=x0+.41,cy=y0+.14;s+=I.poly([[x0,y0,1.105],[x0+.82,y0,1.105],[x0+.82,y0+.28,1.105],[x0,y0+.28,1.105]],'none',' stroke="#8f7654" stroke-width="1.25" opacity=".82"')+compartmentCue(i,cx,cy,1.11);}
+  PARTS.forEach((id,i)=>{const isSorted=sorted[id]===true,col=i%2,row=Math.floor(i/2),x=isSorted?12.49+col*.88:11.05+(i%2)*.55,y=isSorted?3.21+row*.32:3.28+Math.floor(i/2)*.25,z=1.13+(isSorted?0:i*.008);s+=`<g class="ap-part" data-part-id="${id}" data-state="${isSorted?'sorted':'loose'}">${partGlyph(id,x,y,z)}</g>`;});return s;}
+const LOCKER_KINDS=['desktop','laptop','tablet','server','wearable'];
+function matchTag(x,y,z){const p=I.P(x,y,z);return `<g transform="translate(${r1(p[0])} ${r1(p[1])})"><path d="M-8,-8 h16 l5,8 -5,8 h-16Z" fill="#f4ead4" stroke="#2f8f5b" stroke-width="2"/><path d="M-4,0 l3,3 6,-7" fill="none" stroke="#2f8f5b" stroke-width="2.5"/></g>`;}
+function devicesShelf(locker, showBench=false, bench=null){const matched=obj(obj(locker).matched);let s=sh(2.5,8.1,1.25,.55);for(const x of [1.1,3.9])s+=B(x,7.05,0,.09,.09,2.65,'#5d666e');for(const z of [.45,1.25,2.15])s+=B(1.05,7,z,3,.8,.07,'#7d878f');const positions=[[1.35,7.32,.52],[2.02,7.28,.52],[2.68,7.27,.52],[3.35,7.25,.52],[1.65,7.3,1.34]];
+  LOCKER_KINDS.forEach((kind,i)=>{const [x,y,z]=positions[i];let a='';if(kind==='wearable'){a+=B(x-.06,y-.05,z,.12,.1,.45,'#343a40')+B(x-.15,y-.08,z+.14,.3,.14,.18,'#2c343b');const p=I.P(x,y+.02,z+.23);a+=`<circle cx="${r1(p[0])}" cy="${r1(p[1])}" r="5" fill="#9fc6d6"/>`;}else a+=device({id:'',kind,powered:false},'role.reception',i,{'role.reception':[x,y,z]},false);a+=matched[kind]===true?matchTag(x+.3,y+.2,z+.45):'';s+=`<g class="ap-lockeritem" data-kind="${kind}" data-state="${matched[kind]===true?'matched':'unmatched'}">${a}</g>`;});
+  if(showBench){s+=sh(3.7,8.92,1.9,.5)+B(1.25,8.38,0,.1,.1,.92,'#5d666e')+B(5.95,8.38,0,.1,.1,.92,'#5d666e')+B(1.1,8.32,.92,5.05,1.02,.11,PAL.wood,{top:'#d8ad72'})+benchContents(obj(bench),DEVICE_BENCH);}return s;}
 function speed(){ let s=sh(7.35,8.3,1,.48)+B(6.35,7.8,0,.09,.09,.82,'#5d666e')+B(8.3,7.8,0,.09,.09,.82,'#5d666e')+B(6.2,7.65,.82,2.35,.9,.09,PAL.wood,{top:'#d8ad72'})+B(6.75,7.9,.93,1.1,.52,.22,'#e9ecec'); for(let i=0;i<3;i++)s+=`<path d="${curve(I.P(7.2,8.1,1.15),I.P(6.5+i*.4,8.35,.93),18+i*4)}" fill="none" stroke="${['#397fb4',PAL.orange,'#343a40'][i]}" stroke-width="4"/>`; s+=wallY(6.8,1.65,1.4,1.1,'<rect width="1" height="1" rx=".5" fill="#f4ead4" stroke="#5d666e" stroke-width=".04"/><path d="M.18,.72 A.34,.34 0 0 1 .82,.72" fill="none" stroke="#9aa6ae" stroke-width=".06"/><path d="M.5,.72 L.72,.32" stroke="#e07a3a" stroke-width=".06"/><circle cx=".5" cy=".72" r=".06" fill="#2c343b"/>'); return s; }
 const curve=(a,b,d)=>`M${r1(a[0])},${r1(a[1])} Q${r1((a[0]+b[0])/2)},${r1(Math.max(a[1],b[1])+d)} ${r1(b[0])},${r1(b[1])}`;
 function security(){ let s=sh(12,8.2,1,.5)+B(11,7.7,0,.09,.09,.82,'#5d666e')+B(13,7.7,0,.09,.09,.82,'#5d666e')+B(10.85,7.55,.82,2.4,.9,.09,PAL.wood,{top:'#d8ad72'})+B(11.65,7.75,.93,.8,.14,.62,'#3b454d'); const p=I.P(12.05,7.9,1.3); s+=`<g transform="translate(${r1(p[0])} ${r1(p[1])}) scale(.38)">${screenArt('login')}</g>`; s+=wallY(11.4,1.55,1.4,1.25,'<rect width="1" height="1" rx=".03" fill="#17675f" stroke="#f4ead4" stroke-width=".035"/><path d="M.5,.18 C.76,.28 .82,.3 .78,.58 C.75,.78 .61,.88 .5,.93 C.39,.88 .25,.78 .22,.58 C.18,.3 .24,.28 .5,.18Z" fill="#f4ead4"/><rect x=".4" y=".52" width=".2" height=".2" rx=".03" fill="#e07a3a"/><path d="M.43,.52 v-.09 a.07,.07 0 0 1 .14,0 v.09" fill="none" stroke="#e07a3a" stroke-width=".035"/>'); return s; }
 
-function stationArt(id, scene) { if(id==='station.cables')return cableWall(obj(obj(scene.cableWall).sorted)); if(id==='station.addressing')return networkRack(scene.bench==null?null:obj(scene.bench)); if(id==='station.parts')return parts(); if(id==='station.devices')return devicesShelf(); if(id==='station.speed')return speed(); return security(); }
+function benchStation(scene){return obj(scene.bench).stationId==='station.devices'?'station.devices':'station.addressing';}
+function stationArt(id, scene) {const target=scene.bench==null?'':benchStation(scene);if(id==='station.cables')return cableWall(obj(obj(scene.cableWall).sorted));if(id==='station.addressing')return networkRack(target==='station.addressing'?obj(scene.bench):null);if(id==='station.parts')return parts(scene.partsBench);if(id==='station.devices')return devicesShelf(scene.locker,target==='station.devices',scene.bench);if(id==='station.speed')return speed();return security();}
 
 export function renderTraining(input) {
   const scene=obj(input); setUid('training', scene);
@@ -124,7 +161,7 @@ export function renderTraining(input) {
   body+=wallY(13.75,2.75,1.05,.62,`<rect width="1" height="1" rx=".05" fill="${PAL.teal}"/><g transform="translate(.5 .5) scale(.0026)">${lantern(PAL.cream,PAL.teal,PAL.orange)}</g>`);
   for(const id of STATION_IDS) body+=floorCue(id,supplied.get(id)||'locked',scene.focus===id);
   for(const id of STATION_IDS){const state=supplied.get(id)||'locked', q=ST[id]; let art=stationArt(id,scene); if(state==='locked')art=dimSvg(art)+rope(q.bx,q.by,q.bw); if(state==='done')art+=rosette(q.mx,q.my,q.mz); body+=`<g class="ap-station" data-station-id="${id}" data-state="${state}">${art}</g>`;}
-  const mentor=obj(scene.mentor), player=obj(scene.player); if(ST[mentor.stationId]){const q=ST[mentor.stationId], benchOffset=mentor.stationId==='station.addressing'&&scene.bench!=null; const pose=['idle','pointing','thumbs','thinking'].includes(mentor.pose)?mentor.pose:'idle'; body+=`<g class="ap-person" data-person="mentor">${place(benchOffset?4.85:q.px-.8,benchOffset?4.75:q.py+1.2,figMags(pose),1.38)}</g>`;} if(ST[player.stationId]){const q=ST[player.stationId]; body+=`<g class="ap-person" data-person="player">${place(q.px+.8,q.py+1.1,figPlayer(),1.32)}</g>`;}
+  const mentor=obj(scene.mentor), player=obj(scene.player), target=scene.bench==null?'':benchStation(scene); if(ST[mentor.stationId]){const q=ST[mentor.stationId], rack=mentor.stationId==='station.addressing'&&target==='station.addressing', locker=mentor.stationId==='station.devices'&&target==='station.devices'; const pose=['idle','pointing','thumbs','thinking'].includes(mentor.pose)?mentor.pose:'idle'; body+=`<g class="ap-person" data-person="mentor">${place(rack?4.85:locker?6.45:q.px-.8,rack?4.75:locker?8.0:q.py+1.2,figMags(pose),1.38)}</g>`;} if(ST[player.stationId]){const q=ST[player.stationId],locker=player.stationId==='station.devices'&&target==='station.devices'; body+=`<g class="ap-person" data-person="player">${place(locker ? .75 : q.px+.8,locker?8.05:q.py+1.1,figPlayer(),1.32)}</g>`;}
   body+=B(0,9.35,0,14,.2,.58,'#d9b48c',{top:'#655d51'})+B(13.85,0,0,.2,9.5,.58,'#d9b48c',{top:'#655d51'})+`<rect width="1600" height="1000" fill="#ffcf8a" opacity=".035" pointer-events="none"/>`;
   return svgRoot(1600,1000,'Lantern Line Training Centre',body,'ap-training');
 }
