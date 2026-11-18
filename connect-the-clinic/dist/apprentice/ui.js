@@ -2,7 +2,7 @@
  * Lantern Line apprenticeship interface. The scene is the workspace; panels open when needed.
  * Every state shown here comes from the derived engine view. The UI never decides success.
  */
-import {mentorLine,staffLines,MENTOR} from './mentor.js';
+import {mentorLine,staffLines,MENTOR,GOALS} from './mentor.js';
 
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
 const ROLE_LABEL={'role.reception':'Desk computer','role.records':'Service host','infra.switch':'Network switch','infra.ap':'Wireless access point','role.nurse':'Ana’s tablet'};
@@ -16,6 +16,11 @@ const CABLES=[
   {type:'phone',label:'Phone cord',hint:'RJ11'}];
 const TESTS={reception:'Test from the desk computer',nurse:'Test from Ana’s tablet',access:'Check who can access what'};
 const CODE_TEXT={SERVICE_AVAILABLE:'Service available',ACCESS_DENIED:'Access denied',PORT_DISCONNECTED:'Cable path incomplete',DEVICE_OFF:'Device has no power',SWITCH_OFF:'Switch has no power',ADDRESS_WRONG_SUBNET:'Address on the wrong network',ADDRESS_DUPLICATE:'Address already in use',ADDRESS_RESERVED:'Reserved address',ADDRESS_INVALID:'Invalid address',ADDRESS_OFF_LINK:'Masks disagree',WIFI_NOT_ASSOCIATED:'Tablet not joined to Wi-Fi',AP_OFF:'Access point has no power',SERVICE_UNAVAILABLE:'Service not running',CAPABILITY_MISSING:'Wrong kind of device',DEVICE_MISSING:'Device missing',OUTSIDE_COVERAGE:'Outside Wi-Fi coverage'};
+function outcome(o){
+  if(o.expectedDenied)return o.code==='ACCESS_DENIED'?'denied, as required':o.code==='SERVICE_AVAILABLE'?'allowed, but should be restricted':CODE_TEXT[o.code]||o.code;
+  if(o.code==='ACCESS_DENIED')return 'denied, but this person needs it';
+  return CODE_TEXT[o.code]||o.code;
+}
 const reduceMotion=()=>window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
 let art=null;
@@ -107,8 +112,11 @@ export function mountApprenticeUI(root,handlers){
     }).join('');
   }
   function bubbles(){
-    if(view.at!=='site'||!art?.SITE_SLOTS)return '';
-    const pos={reception:art.siteAnchor?.('role.reception')||art.SITE_SLOTS['role.reception'],nurse:art.siteAnchor?.('role.nurse',view.staff.nurse.locationId)||art.SITE_SLOTS['role.nurse'],manager:art.SITE_SLOTS.manager||art.SITE_SLOTS['role.reception']};
+    if(view.at!=='site')return '';
+    const slots=art?.SITE_SLOTS||{'role.reception':{x:420,y:620},'role.nurse':{x:1150,y:420}};
+    const anchor=(r,l)=>art?.siteAnchor?.(r,l)||slots[r]||{x:800,y:500};
+    const desk=anchor('role.reception');
+    const pos={reception:desk,nurse:anchor('role.nurse',view.staff.nurse.locationId),manager:slots.manager||{x:desk.x+170,y:desk.y+60}};
     return staffLines(view).map(s=>{const p=pos[s.person];if(!p)return '';return `<div class="ll-bubble mood-${s.mood} who-${s.person}" style="${anchorPct(p.x,p.y-(s.person==='manager'?40:110))}"><b>${esc(s.name)}</b> ${esc(s.text)}</div>`;}).join('');
   }
   function bag(){
@@ -184,10 +192,10 @@ export function mountApprenticeUI(root,handlers){
   }
   function testerPanel(){
     const t=view.latestTest,routeNames=(t?.pathIds||[]).filter((_,i)=>i%2===0).map(id=>ROLE_LABEL[byId(id)?.roleId]||'device');
-    const history=view.observations.slice(0,8).map(o=>`<li class="${o.pass?'ok':'bad'} ${o.stale?'stale':''}"><b>${esc(o.label)}</b> ${esc(CODE_TEXT[o.code]||o.code)}${o.locationId&&o.testId==='nurse'?` · ${esc(ROOM_LABEL[o.locationId])}`:''}${o.stale?' · out of date':''}</li>`).join('');
+    const history=view.observations.slice(0,8).map(o=>`<li class="${o.pass?'ok':'bad'} ${o.stale?'stale':''}"><b>${esc(o.label)}</b> ${esc(outcome(o))}${o.locationId&&o.testId==='nurse'?` · ${esc(ROOM_LABEL[o.locationId])}`:''}${o.stale?' · out of date':''}</li>`).join('');
     return `<header class="ll-panel-head"><h2>Service tester</h2><p>Runs a real check through the current network and shows the route it used.</p>${btn('close-panel','Close','aria-label="Close panel"','ll-btn ll-text')}</header>
       <div class="ll-testbtns">${view.allowedTests.map(id=>btn('test',esc(TESTS[id]),`data-test="${id}" ${view.visit.finished?'disabled':''} ${dis()}`,'ll-btn ll-primary')).join('')}</div>
-      ${t?`<div class="ll-result ${t.pass?'ok':'bad'} ${t.stale?'stale':''}" role="status"><strong>${t.pass?'✓':'✕'} ${esc(CODE_TEXT[t.code]||t.code)}</strong><p>${esc(t.message)}</p>${routeNames.length?`<p class="ll-route">Route: ${routeNames.map(esc).join(' → ')}</p>`:'<p class="ll-route">No complete route was found.</p>'}${t.stale?'<p class="ll-warn">Something changed since this test. Test again.</p>':''}</div>`:'<p class="ll-note">No tests yet. A test is proof; a link light is not.</p>'}
+      ${t?(view.lastRun.length>1?`<div class="ll-result ${view.lastRun.every(o=>o.pass)?'ok':'bad'} ${t.stale?'stale':''}" role="status"><strong>${view.lastRun.filter(o=>o.pass).length} of ${view.lastRun.length} checks as required</strong><ul class="ll-runlist">${view.lastRun.map(o=>`<li class="${o.pass?'ok':'bad'}"><b>${esc(o.label)}</b> — ${esc(outcome(o))}</li>`).join('')}</ul>${t.stale?'<p class="ll-warn">Something changed since this check. Run it again.</p>':''}</div>`:`<div class="ll-result ${t.pass?'ok':'bad'} ${t.stale?'stale':''}" role="status"><strong>${t.pass?'✓':'✕'} ${esc(outcome(t))}</strong><p>${esc(t.message)}</p>${routeNames.length?`<p class="ll-route">Route: ${routeNames.map(esc).join(' → ')}</p>`:'<p class="ll-route">No complete route was found.</p>'}${t.stale?'<p class="ll-warn">Something changed since this test. Test again.</p>':''}</div>`):'<p class="ll-note">No tests yet. Lights and cables are clues; a test is proof.</p>'}
       ${history?`<h3>Recent tests</h3><ul class="ll-history">${history}</ul>`:''}`;
   }
   function cardPanel(){
@@ -202,7 +210,7 @@ export function mountApprenticeUI(root,handlers){
     const x=view.explanation;
     const explain=v.id==='visit.3'?`<form class="ll-form" data-form="explain"><h3>Explain the job</h3><label>What was wrong, what you changed, and who it helps or restricts<textarea name="text" rows="5" maxlength="2000" ${v.finished?'disabled':''} ${dis()}>${esc(draft??x?.text??'')}</textarea></label><label class="ll-check"><input type="checkbox" name="oral" ${x?.oral?'checked':''} ${v.finished?'disabled':''} ${dis()}> I will explain this aloud to my teacher</label>${x?.submitted?`<p class="ll-note">${x.stale?'Saved before your last change — save again.':'Saved exactly as written.'}</p>`:''}<button class="ll-btn" ${v.finished?'disabled':''} ${dis()}>Save explanation</button></form>`:'';
     const access=v.id==='visit.3'?btn('panel','Open access rules','data-panel="access"','ll-btn ll-quiet'):'';
-    return `<header class="ll-panel-head"><h2>Job sheet · Visit ${v.number}</h2><p>${esc(v.brief)}</p>${btn('close-panel','Close','aria-label="Close panel"','ll-btn ll-text')}</header><p class="ll-goal"><b>Goal:</b> ${esc(v.goal)}</p><ul class="ll-checks">${checks}</ul>${access}${explain}
+    return `<header class="ll-panel-head"><h2>Job sheet · Visit ${v.number}</h2><p>${esc(v.brief)}</p>${btn('close-panel','Close','aria-label="Close panel"','ll-btn ll-text')}</header><p class="ll-goal"><b>Goal:</b> ${esc(v.goal)}</p><details class="ll-details ll-ican"><summary>Today’s I-can goals</summary><ul>${(GOALS[v.id]||[]).map(([,t])=>`<li>${esc(t)}</li>`).join('')}</ul><p class="ll-fine">Goals for reflection with your teacher. Finishing the visit is not a grade.</p></details><ul class="ll-checks">${checks}</ul>${access}${explain}
       ${v.finished?`<p class="ll-done">Visit recorded.</p>${btn('yard','Back to the depot →',dis(),'ll-btn ll-primary')}`:btn('finish','Sign off the job',`${view.canFinish?'':'aria-describedby="ll-finish-note"'} ${dis()}`,'ll-btn ll-primary')+(view.canFinish?'':'<p id="ll-finish-note" class="ll-fine">Mags signs only when the checks above are met by your own work.</p>')}
       ${btn('restart','Start this visit over',dis(),'ll-btn ll-text')}`;
   }

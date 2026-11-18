@@ -121,6 +121,8 @@ function createAttempt(s,visitId){
     }
   }
   a.setupFingerprint=fingerprint(a);
+  // Services already working when we arrive (measured by the model, not assumed).
+  a.setupWorking=deriveNetwork(a.networkState).currentResults.filter(o=>o.pass&&['reception','nurse'].includes(o.testId)).map(o=>o.testId);
   event(a,'VISIT_SETUP',{visitId,network:clone(net(a).network),learnerEvidence:false},'setup');
   return a;
 }
@@ -389,12 +391,14 @@ export function dispatchApprenticeship(state,action){
   }catch(error){if(error.code)return{state,accepted:false,code:error.code,message:error.message};throw error;}
 }
 
+/** Staff use the service once the learner's own latest test showed it working and the model still agrees. */
 function staffState(current,learner){
   if(!current)return 'absent';
   if(current.code==='ACCESS_DENIED'&&!current.expectedDenied)return 'denied';
   if(current.pass&&learner?.pass)return 'working';
   return 'waiting';
 }
+const lastLearner=(a,testId)=>[...a.observations].reverse().find(o=>o.origin==='learner'&&o.testId===testId)||null;
 
 export function deriveApprenticeship(state){
   const a=state.current,v=a?visit(a.visitId):null,done=completedVisitIds(state);
@@ -419,11 +423,12 @@ export function deriveApprenticeship(state){
     network:clone(n?.network||SITE_NETWORK),devices:clone(child?.devices||[]),cables:(child?.cables||[]).map(c=>({...clone(c),state:cableState(c)})),
     policy:clone(child?.policy||POLICIES['policy.roles-separated']),policies:Object.values(POLICIES).map(p=>({id:p.id,label:p.label,description:p.description,acceptable:ACCEPTABLE_POLICIES.includes(p.id)})),
     held:a?.held||null,pendingEnd:clone(a?.pendingEnd||null),highlight:clone(a?.highlight||null),lastResult:clone(a?.lastResult||null),
+    lastRun:a?(()=>{const id=[...a.observations].reverse().find(o=>o.origin==='learner')?.eventId;return id?a.observations.filter(o=>o.eventId===id).map(o=>({...clone(o),stale:o.testedTechnicalRevision!==a.technicalRevision})):[];})():[],
     observations,latestTest:latest?{...clone(latest),stale:latest.testedTechnicalRevision!==a.technicalRevision}:null,currentResults:clone(current),
     inspections:(a?.inspections||[]).slice().reverse().map(i=>({...clone(i),stale:i.technicalRevision!==a.technicalRevision})),
     checks,canFinish:!!a&&!a.finished&&checks.length>0&&checks.every(c=>c.met),
-    staff:{reception:a?staffState(cur('reception'),fresh(a,'reception')):'absent',
-      nurse:{state:a&&nurse?staffState(cur('nurse'),fresh(a,'nurse')):'absent',locationId:nurse?.locationId||null},
+    staff:{reception:a?staffState(cur('reception'),lastLearner(a,'reception')||(a.setupWorking?.includes('reception')?{pass:true}:null)):'absent',receptionCode:cur('reception')?.code||null,
+      nurse:{state:a&&nurse?staffState(cur('nurse'),lastLearner(a,'nurse')||(a.setupWorking?.includes('nurse')?{pass:true}:null)):'absent',locationId:nurse?.locationId||null,code:cur('nurse')?.code||null},
       manager:a?.visitId==='visit.3'?'present':'absent'},
     mistakes:clone(a?.mistakes||[]),support:clone(a?.support||[]),history:clone((a?.history||[]).slice(-60)),
     addressChange:clone(a?.addressChange||null),policyDecision:clone(a?.policyDecision||null),fault:{observed:clone(a?.faultObservation||null),repair:clone(a?.repairChange||null),uplinkMissing:a?apUplinkMissing(a):false},
@@ -448,7 +453,8 @@ export function createApprenticeshipEvidence(state){
     if(r.addressChange)lines.push(`  Address change: ${r.addressChange.from} → ${r.addressChange.to} mask ${r.addressChange.mask} on the ${names[r.addressChange.roleId]}.`);
     if(r.fault.observed)lines.push(`  Fault observed by ${r.fault.observed.kind==='inspection'?'inspecting the access point':'a failed tablet test'} (${r.fault.observed.reason}); repaired with a new uplink cable.`);
     if(r.policyDecision)lines.push(`  Access decision: ${POLICIES[r.policyDecision.policyId]?.label||r.policyDecision.policyId}.`);
-    lines.push(`  ${learnerTests.length} learner tests recorded; ${learnerTests.filter(o=>o.pass).length} passed. Mistakes noticed: ${r.mistakes.length}. Questions asked: ${r.support.length}.`);
+    lines.push(`  Learner tests in order: ${learnerTests.map(o=>`${o.testId}${o.testId==='nurse'&&o.locationId?`@${o.locationId.replace('location.','')}`:''}=${o.code}`).join(', ')||'none'}.`);
+    lines.push(`  Plugging mistakes noticed: ${r.mistakes.map(m=>m.kind).join(', ')||'none'}. Questions asked: ${r.support.length}${r.support.length?` (${r.support.map(x=>x.topic).join(', ')})`:''}.`);
     if(v.id==='visit.3')lines.push('  EXACT EXPLANATION:',r.explanation.text||'[No written explanation]',r.explanation.oral?'  Oral explanation pending teacher conversation.':'  Quality pending teacher judgement.');
   }
   lines.push('','Game progression only: not an IB grade or professional credential. No names, patient information or accounts are used.');

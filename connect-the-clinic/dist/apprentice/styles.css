@@ -119,3 +119,4 @@
 @media (max-width:640px){.ll-hud{flex-wrap:wrap;padding:10px 12px}.ll-stage{padding:10px}.ll-hot{width:44px;height:44px}.ll-hot::before{inset:12px}.ll-bubble{display:none}.ll-hud-actions{width:100%}}
 @media (prefers-reduced-motion:reduce){.ll-game *,.ll-game *::before,.ll-game *::after{animation:none!important;transition:none!important}}
 @media (forced-colors:active){.ll-hot::before{forced-color-adjust:none;background:Canvas;box-shadow:0 0 0 3px CanvasText}}
+.ll-runlist{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:4px;font-size:.88rem}.ll-runlist li{padding-left:20px;position:relative}.ll-runlist li::before{position:absolute;left:0;font-weight:800}.ll-runlist li.ok::before{content:"✓";color:var(--ok)}.ll-runlist li.bad::before{content:"✕";color:var(--bad)}
