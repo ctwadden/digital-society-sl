@@ -49,6 +49,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
+      actions: read
       contents: write
       pages: write
       id-token: write
@@ -83,8 +84,25 @@ jobs:
         run: python3 tools/package_site.py
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
+        id: upload
         with:
           path: _site
+          name: github-pages-${{ github.run_attempt }}
+      - name: Wait for the uploaded Pages artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ARTIFACT_ID: ${{ steps.upload.outputs.artifact_id }}
+        run: |
+          for attempt in {1..24}; do
+            if gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts" --jq '.artifacts[].id' | grep -Fxq "$ARTIFACT_ID"; then
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "Uploaded Pages artifact did not become available." >&2
+          exit 1
       - name: Deploy student site
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages-${{ github.run_attempt }}
